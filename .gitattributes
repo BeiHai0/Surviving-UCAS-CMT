@@ -1,0 +1,18 @@
+# Automatically detect text and binary files
+* text=auto
+
+# Cross-platform text files use LF
+*.md   text eol=lf
+*.txt  text eol=lf
+*.json text eol=lf
+*.yaml text eol=lf
+*.yml  text eol=lf
+*.css  text eol=lf
+*.js   text eol=lf
+*.py   text eol=lf
+*.jl   text eol=lf
+*.sh   text eol=lf
+
+# Windows command scripts use CRLF
+*.bat  text eol=crlf
+*.cmd  text eol=crlf
