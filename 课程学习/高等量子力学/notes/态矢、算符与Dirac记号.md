@@ -6,14 +6,14 @@
 
 $$
 (a|\psi\rangle+b|\phi\rangle)^\dagger
-=a^*\langle\psi|+b^*\langle\phi|. \tag{1.1.1}
+=a^*\langle\psi|+b^*\langle\phi|.
 $$
 
 内积满足共轭对称性与正定性：
 
 $$
 \langle\phi|\psi\rangle=\langle\psi|\phi\rangle^*,
-\qquad \|\psi\|^2=\langle\psi|\psi\rangle\ge0, \tag{1.1.2}
+\qquad \|\psi\|^2=\langle\psi|\psi\rangle\ge0,
 $$
 
 且范数为零当且仅当向量为零。在正交归一基中，若两态分量分别为 $d_n,c_n$，则 $\langle\phi|\psi\rangle=\sum_n d_n^*c_n$。归一化纯态间的跃迁概率是 $|\langle\phi|\psi\rangle|^2$。
@@ -24,26 +24,26 @@ $$
 
 $$
 (|u\rangle\langle v|)|w\rangle
-=|u\rangle\langle v|w\rangle. \tag{1.2.1}
+=|u\rangle\langle v|w\rangle.
 $$
 
 因此，外积乘法只需收缩中间的内积：
 
 $$
 (|u\rangle\langle v|)(|s\rangle\langle t|)
-=\langle v|s\rangle|u\rangle\langle t|. \tag{1.2.2}
+=\langle v|s\rangle|u\rangle\langle t|.
 $$
 
 对非零 $|u\rangle$，沿其方向的正交投影为
 
 $$
 P_u=\frac{|u\rangle\langle u|}{\langle u|u\rangle},
-\qquad P_u^2=P_u=P_u^\dagger. \tag{1.2.3}
+\qquad P_u^2=P_u=P_u^\dagger. 
 $$
 
 一般外积不一定是投影。对于完备正交归一基 $\{|n\rangle\}$，$\sum_n|n\rangle\langle n|=I$；只对部分基矢求和，得到的是子空间投影。完备关系将抽象态与具体表象连接起来，详见第3节。
 
-## 2.3 线性与反线性算符
+## 2.3 线性算符与反线性算符
 
 线性算符 $A$ 与反线性算符 $C$ 的区别在于复系数是否共轭：
 
@@ -53,34 +53,36 @@ A(a|\psi\rangle+b|\phi\rangle)
 &=aA|\psi\rangle+bA|\phi\rangle,\\
 C(a|\psi\rangle+b|\phi\rangle)
 &=a^*C|\psi\rangle+b^*C|\phi\rangle.
-\end{aligned} \tag{1.3.1}
+\end{aligned} 
 $$
 
 固定一个正交归一基，定义分量复共轭算符 $K$：
 
 $$
 K\sum_n c_n|n\rangle=\sum_n c_n^*|n\rangle,
-\qquad K^2=I. \tag{1.3.2}
+\qquad K^2=I. 
 $$
 
 任意反线性算符可写为 $C=MK$，其中 $M=CK$ 线性。两次反线性复合为线性；线性与反线性复合仍为反线性。$K$ 的定义依赖基底。
+
+## 2.4 反幺正算符
 
 可逆反线性算符 $\Theta$ 若满足
 
 $$
 \langle\Theta\phi|\Theta\psi\rangle
-=\langle\phi|\psi\rangle^*, \tag{1.3.3}
+=\langle\phi|\psi\rangle^*, 
 $$
 
 则称为反幺正算符，可写成 $\Theta=UK$，其中 $U$ 幺正。它保持跃迁概率，但共轭内积。时间反演的重要特征正是 $\Theta\mathrm{i}\Theta^{-1}=-\mathrm{i}$。反线性本身不保证保持范数；“反线性”也不同于“反厄米”。
 
-## 2.4 伴随与厄米性
+## 2.5 伴随与厄米性
 
 **定义。** 对线性算符 $A$，伴随算符 $A^\dagger$ 由
 
 $$
 \langle\phi|A\psi\rangle
-=\langle A^\dagger\phi|\psi\rangle \tag{1.4.1}
+=\langle A^\dagger\phi|\psi\rangle 
 $$
 
 定义。因此
@@ -89,7 +91,7 @@ $$
 \langle\phi|A|\psi\rangle^*
 =\langle\psi|A^\dagger|\phi\rangle,
 \qquad
-(A|\psi\rangle)^\dagger=\langle\psi|A^\dagger. \tag{1.4.2}
+(A|\psi\rangle)^\dagger=\langle\psi|A^\dagger. 
 $$
 
 在正交归一基中，$(A^\dagger)_{jk}=A_{kj}^*$，即转置并复共轭。常用规则为
@@ -99,7 +101,7 @@ $$
 (aA+bB)^\dagger&=a^*A^\dagger+b^*B^\dagger,\\
 (AB)^\dagger&=B^\dagger A^\dagger,\\
 (|u\rangle\langle v|)^\dagger&=|v\rangle\langle u|.
-\end{aligned} \tag{1.4.3}
+\end{aligned} 
 $$
 
 乘积倒序来自连续两次移动算符：$\langle\phi|AB\psi\rangle=\langle A^\dagger\phi|B\psi\rangle=\langle B^\dagger A^\dagger\phi|\psi\rangle$。无界乘积的伴随等式还须满足相应定义域条件。上述规则按线性算符使用，不能不加区分地套给反线性算符。
@@ -109,19 +111,19 @@ $$
 $$
 X=\frac{M+M^\dagger}{2},
 \qquad Y=\frac{M-M^\dagger}{2\mathrm{i}},
-\qquad X^\dagger=X,\quad Y^\dagger=Y. \tag{1.4.4}
+\qquad X^\dagger=X,\quad Y^\dagger=Y. 
 $$
 
 无穷维中，“对称”只要求在 $D(A)$ 上有 $\langle\phi|A\psi\rangle=\langle A\phi|\psi\rangle$；“自伴”还要求 $D(A)=D(A^\dagger)$，其中 $D$ 表示定义域。对微分算符，边界条件属于算符定义的一部分。
 
-## 2.5 厄米算符的主要性质
+## 2.6 厄米算符的主要性质
 
 设 $A|a\rangle=a|a\rangle$，$|a\rangle\ne0$。由于
 
 $$
 a\langle a|a\rangle
 =\langle a|A|a\rangle
-=a^*\langle a|a\rangle, \tag{1.5.1}
+=a^*\langle a|a\rangle, 
 $$
 
 故 $a$ 为实数。对两个本征态，同理有 $(a-b)\langle a|b\rangle=0$，因此不同本征值对应的本征态正交。简并子空间内部可另选正交归一基。
@@ -130,7 +132,7 @@ $$
 
 $$
 A=\sum_a aP_a,
-\qquad f(A)=\sum_a f(a)P_a, \tag{1.5.2}
+\qquad f(A)=\sum_a f(a)P_a, 
 $$
 
 其中 $P_a$ 是本征子空间投影，$f$ 是定义在谱上的函数。连续谱应使用谱测度，不应理解成总有一组可归一化的普通本征矢。
@@ -140,7 +142,7 @@ $$
 $$
 (\Delta A)^2
 =\langle A^2\rangle-\langle A\rangle^2
-=\|\delta A|\psi\rangle\|^2\ge0. \tag{1.5.3}
+=\|\delta A|\psi\rangle\|^2\ge0. 
 $$
 
 因此 $\Delta A=0$ 当且仅当该纯态属于 $A$ 的某个本征子空间。几何上，$A|\psi\rangle=\langle A\rangle|\psi\rangle+\delta A|\psi\rangle$，第二项与原态正交，其长度就是涨落大小。
@@ -150,44 +152,44 @@ $$
 $$
 (AB)^\dagger=BA,
 \qquad [A,B]^\dagger=-[A,B],
-\qquad \{A,B\}^\dagger=\{A,B\}, \tag{1.5.4}
+\qquad \{A,B\}^\dagger=\{A,B\}, 
 $$
 
 其中 $[A,B]=AB-BA$、$\{A,B\}=AB+BA$。所以对易子的期望值为纯虚数或零。
 
 有限维中，$[A,B]=0$ 当且仅当存在完备共同本征基：对易保证 $B$ 保持 $A$ 的每个本征子空间，再在这些子空间内对角化 $B$ 即可。无穷维自伴算符应使用谱投影彼此对易的强对易条件。
 
-## 2.6 Schwarz 不等式
+## 2.7 Schwarz 不等式
 
 对任意 $|u\rangle,|v\rangle$，
 
 $$
-|\langle u|v\rangle|^2\le\|u\|^2\|v\|^2. \tag{1.6.1}
+|\langle u|v\rangle|^2\le\|u\|^2\|v\|^2. 
 $$
 
 证明只需减去投影。若 $v\ne0$，令 $|w\rangle=|u\rangle-|v\rangle\langle v|u\rangle/\langle v|v\rangle$，则
 
 $$
 0\le\|w\|^2
-=\|u\|^2-\frac{|\langle v|u\rangle|^2}{\|v\|^2}. \tag{1.6.2}
+=\|u\|^2-\frac{|\langle v|u\rangle|^2}{\|v\|^2}. 
 $$
 
 乘以 $\|v\|^2$ 即得结论；$v=0$ 时直接成立。取等当且仅当两向量线性相关，包括某一向量为零的情形。
 
-## 2.7 不确定性关系及取等条件
+## 2.8 不确定性关系及取等条件
 
 设 $A,B$ 自伴，态归一化且所需二阶矩、算符乘积有定义。取涨落向量
 
 $$
 |f\rangle=\delta A|\psi\rangle,
-\qquad |g\rangle=\delta B|\psi\rangle. \tag{1.7.1}
+\qquad |g\rangle=\delta B|\psi\rangle. 
 $$
 
 其范数平方分别为两个方差，故 Schwarz 不等式给出
 
 $$
 (\Delta A)^2(\Delta B)^2
-\ge|\langle\delta A\,\delta B\rangle|^2. \tag{1.7.2}
+\ge|\langle\delta A\,\delta B\rangle|^2. 
 $$
 
 利用 $\langle\delta A\delta B\rangle^*=\langle\delta B\delta A\rangle$，定义实的对称协方差 $C_{AB}$，并分解复重叠：
@@ -198,7 +200,7 @@ $$
 &=C_{AB}:=\frac12\langle\{\delta A,\delta B\}\rangle,\\
 \operatorname{Im}\langle\delta A\delta B\rangle
 &=\frac1{2\mathrm{i}}\langle[A,B]\rangle.
-\end{aligned} \tag{1.7.3}
+\end{aligned} 
 $$
 
 由复数模平方等于实部、虚部平方之和，得到 Schrödinger–Robertson 关系：
@@ -207,13 +209,13 @@ $$
 \boxed{
 (\Delta A)^2(\Delta B)^2
 \ge C_{AB}^2+\frac14|\langle[A,B]\rangle|^2.
-} \tag{1.7.4}
+} 
 $$
 
 舍去非负协方差项，再开平方，得到 Robertson 关系：
 
 $$
-\boxed{\Delta A\Delta B\ge\frac12|\langle[A,B]\rangle|.} \tag{1.7.5}
+\boxed{\Delta A\Delta B\ge\frac12|\langle[A,B]\rangle|.} 
 $$
 
 强关系取等要求两个涨落向量线性相关；弱关系取等还要求 $C_{AB}=0$。若 $\Delta A>0$，弱关系取等可写为 $\delta B|\psi\rangle=\mathrm{i}\lambda\delta A|\psi\rangle$，其中 $\lambda$ 为实数。某个涨落为零时应单独处理，不能除以零。
@@ -222,4 +224,142 @@ $$
 
 这里的标准差描述同一制备态的测量分布宽度，不是仪器误差，也不是直接描述先后两次测量的扰动。关系也适用于混合态，只需用 $\langle A\rangle=\operatorname{Tr}(\rho A)$；证明可对 $\delta A\sqrt\rho$、$\delta B\sqrt\rho$ 使用 Hilbert–Schmidt 内积下的 Schwarz 不等式。
 
-> 反幺正、正规算符
+## 反幺正算符与正规算符
+
+若算符 $\Theta$ 满足
+
+$$
+\Theta\left(c_1|\psi\rangle+c_2|\phi\rangle\right)
+=
+c_1^*\Theta|\psi\rangle+c_2^*\Theta|\phi\rangle,
+$$
+
+则称 $\Theta$ 为**反线性算符**。特别地，
+
+$$
+\Theta\mathrm{i}\Theta^{-1}=-\mathrm{i}.
+$$
+
+若反线性算符 $\Theta$ 还满足
+
+$$
+\langle\Theta\phi|\Theta\psi\rangle
+=
+\langle\psi|\phi\rangle
+=\braket{\phi|\psi}^*,
+$$
+
+则称 $\Theta$ 为**反幺正算符**。
+
+令 $|\phi\rangle=|\psi\rangle$，可得
+
+$$
+\langle\Theta\psi|\Theta\psi\rangle
+=
+\langle\psi|\psi\rangle.
+$$
+
+因此，反幺正算符保持态的范数和跃迁概率。
+
+任意反幺正算符都可以写成
+
+$$
+\Theta=UK,
+$$
+
+其中 $U$ 是幺正算符，$K$ 是在某组基下定义的复共轭算符。
+
+#### 时间反演
+
+时间反演由反幺正算符表示，因为它需要实现
+
+$$
+\mathrm{i}\longrightarrow-\mathrm{i}.
+$$
+
+若系统具有时间反演对称性，则
+
+$$
+\Theta H\Theta^{-1}=H.
+$$
+
+在时间反演下，
+
+$$
+\Theta\boldsymbol{x}\Theta^{-1}=\boldsymbol{x},
+\qquad
+\Theta\boldsymbol{p}\Theta^{-1}=-\boldsymbol{p},
+\qquad
+\Theta\boldsymbol{J}\Theta^{-1}=-\boldsymbol{J}.
+$$
+
+对于无自旋粒子，可以取 $\Theta=K$。对于自旋 $1/2$ 粒子，可以取
+
+$$
+\Theta=-\mathrm{i}\sigma_yK,
+\qquad
+\Theta^2=-I.
+$$
+
+当系统具有时间反演对称性且 $\Theta^2=-I$ 时，每个能级至少二重简并，这称为 **Kramers 简并**。
+
+---
+
+### 2. 正规算符
+
+#### 2.1 定义
+
+若线性算符 $A$ 满足
+
+$$
+[A,A^\dagger]=0,
+$$
+
+即
+
+$$
+AA^\dagger=A^\dagger A,
+$$
+
+则称 $A$ 为**正规算符**。
+
+自伴算符、反自伴算符和幺正算符都是正规算符。
+
+#### 2.2 基本性质
+
+若 $A$ 是正规算符，并且
+
+$$
+A|a\rangle=a|a\rangle,
+$$
+
+则
+
+$$
+A^\dagger|a\rangle=a^*|a\rangle.
+$$
+
+正规算符属于不同本征值的本征态彼此正交。
+
+在有限维复希尔伯特空间中，以下两个命题等价：
+
+1. $A$ 是正规算符；
+2. $A$ 可以被幺正对角化。
+
+因此，正规算符具有一组完备的正交归一本征基，并可写成谱分解
+
+$$
+A=\sum_a aP_a,
+$$
+
+其中
+
+$$
+P_a=\sum_r|a,r\rangle\langle a,r|
+$$
+
+是本征值 $a$ 对应的本征子空间上的投影算符。
+
+> [!note]
+> 正规算符通常指线性算符。反幺正算符是反线性的，不能直接套用正规算符的谱定理。
+> 厄米算符、反厄米算符、幺正算符一定是正规算符。
