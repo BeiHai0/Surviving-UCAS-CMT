@@ -1,0 +1,163 @@
+% !TeX program = xelatex
+\documentclass[11pt,a4paper]{ctexart}
+
+\usepackage[left=2.4cm,right=2.4cm,top=2.1cm,bottom=2.1cm]{geometry}
+\usepackage{amsmath,amssymb,mathtools,braket}
+\usepackage{xcolor}
+\usepackage[inline]{enumitem}
+\usepackage{fancyhdr}
+
+% ============================================================
+% 基本信息：只需修改下面几项
+% ============================================================
+\newcommand{\coursename}{高等量子力学}
+\newcommand{\assignmentnumber}{第 1 次作业}
+\newcommand{\teachername}{\underline{\hspace{2.8cm}}}
+\newcommand{\studentname}{\underline{\hspace{2.8cm}}}
+\newcommand{\studentid}{\underline{\hspace{3.0cm}}}
+
+% ============================================================
+% 数学公式书写规范
+% ============================================================
+% 1. 行内公式使用一对美元符号。
+% 2. 独立成行的公式统一使用 equation 环境，不使用反斜杠方括号形式。
+% 3. 虚数单位 i、自然常数 e 和微分符号 d 均使用直立体 \mathrm。
+
+% ============================================================
+% 页面样式
+% ============================================================
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0.25em}
+\setlength{\headheight}{14pt}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\coursename}
+\rhead{\assignmentnumber}
+\cfoot{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% ============================================================
+% 列表参数
+% ============================================================
+\setlist[enumerate,1]{
+  label=(\alph*),
+  leftmargin=3.2em,
+  itemsep=0.55em,
+  topsep=0.45em
+}
+
+\newlist{inlineenum}{enumerate*}{1}
+\setlist[inlineenum,1]{
+  label=(\alph*),
+  labelsep=0.5em,
+  itemjoin={；\quad},
+  itemjoin*={；\quad}
+}
+
+% ============================================================
+% 题目与回答环境
+% ============================================================
+\newcounter{problem}
+\newenvironment{problem}
+  {\refstepcounter{problem}%
+   \par\medskip\noindent
+   \begingroup
+   \setlength{\fboxsep}{3pt}%
+   \setlength{\fboxrule}{0.8pt}%
+   \fbox{\bfseries 题目\chinese{problem}}%
+   \endgroup
+   \quad\ignorespaces}
+  {\par\medskip}
+
+\newenvironment{answer}
+  {\par\smallskip\noindent
+   \begingroup
+   \setlength{\fboxsep}{4pt}%
+   \colorbox{black}{\textcolor{white}{\bfseries 回答}}%
+   \endgroup
+   \quad\ignorespaces}
+  {\par\smallskip\noindent\rule{\linewidth}{0.4pt}\medskip}
+
+\begin{document}
+
+\begin{center}
+  {\LARGE\bfseries \coursename\quad \assignmentnumber}\par
+  \vspace{0.7em}
+  \small
+  教师：\teachername\qquad
+  姓名：\studentname\qquad
+  学号：\studentid
+\end{center}
+\vspace{0.4em}
+
+\begin{problem}
+设三维希尔伯特空间基矢为 $\lvert a_1\rangle$、$\lvert a_2\rangle$、$\lvert a_3\rangle$。
+\begin{enumerate}
+  \item 写出 $\lvert a_1\rangle$、$\lvert a_3\rangle\langle a_2\rvert$ 的矩阵表示。
+  \item 求
+  \begin{equation}
+    \lvert a_3\rangle\langle a_2\rvert
+    +\lvert a_1\rangle\langle a_1\rvert
+    +\lvert a_2\rangle\langle a_3\rvert
+  \end{equation}
+  的本征值和本征矢。
+\end{enumerate}
+\end{problem}
+
+\begin{answer}
+% 在此处作答
+\end{answer}
+
+\begin{problem}
+根据厄米共轭算符的定义，证明：
+\begin{enumerate}
+  \item $\bigl(\lvert\psi\rangle\langle\phi\rvert\bigr)^\dagger
+        =\lvert\phi\rangle\langle\psi\rvert$；
+  \item $\bigl(\hat A^\dagger\bigr)^\dagger=\hat A$；
+  \item $\bigl(\hat A\hat B\bigr)^\dagger=\hat B^\dagger\hat A^\dagger$。
+\end{enumerate}
+\end{problem}
+
+\begin{answer}
+% 在此处作答
+\end{answer}
+
+\begin{problem}
+导出坐标表象下，下列算符矩阵元的表达式：
+\begin{enumerate}
+  \item $(\hat x\hat p)^2$；
+  \item $\mathrm{e}^{\mathrm{i}a\hat p}$；
+  \item $\mathrm{e}^{\mathrm{i}p\hat x}$。
+\end{enumerate}
+\end{problem}
+
+\begin{answer}
+% 在此处作答
+\end{answer}
+
+\begin{problem}
+证明：
+\begin{enumerate}
+  \item 厄米算符的本征值为实数；
+  \item 反厄米算符的本征值为纯虚数；
+  \item 幺正算符的本征值为模为 $1$ 的复数。
+\end{enumerate}
+\end{problem}
+
+\begin{answer}
+% 在此处作答
+\end{answer}
+
+\begin{problem}
+设
+\begin{equation}
+  F_{x,x'}=-\mathrm{i}x^2\frac{\partial}{\partial x}\delta(x-x'),
+\end{equation}
+求 $F_{p,p'}$。
+\end{problem}
+
+\begin{answer}
+% 在此处作答
+\end{answer}
+
+\end{document}

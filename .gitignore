@@ -1,2 +1,24 @@
 /.obsidian/
 /.trash/
+# LaTeX 编译辅助文件
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.run.xml
+*.synctex.gz
+*.toc
+*.xdv
+*.lof
+*.lot
+*.nav
+*.snm
+*.vrb
+
+# 临时构建目录
+build/
+tmp/
