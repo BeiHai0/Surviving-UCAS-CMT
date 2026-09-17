@@ -43,6 +43,27 @@ $$
 
 一般外积不一定是投影。对于完备正交归一基 $\{|n\rangle\}$，$\sum_n|n\rangle\langle n|=I$；只对部分基矢求和，得到的是子空间投影。完备关系将抽象态与具体表象连接起来，详见第3节。
 
+### 零算符、单位算符与算符相等
+
+两个算符相等的含义是它们对任意右矢作用相同：
+
+$$
+A=B
+\quad\Longleftrightarrow\quad
+A|\alpha\rangle=B|\alpha\rangle
+\quad\text{对任意 }|\alpha\rangle.
+$$
+
+零算符与单位算符分别由
+
+$$
+0|\alpha\rangle=|0\rangle,
+\qquad
+I|\alpha\rangle=|\alpha\rangle
+$$
+
+定义。这里 $|0\rangle$ 是零向量，不是谐振子的真空态；上下文中必须区分。
+
 ## 2.3 线性算符与反线性算符
 
 线性算符 $A$ 与反线性算符 $C$ 的区别在于复系数是否共轭：
@@ -175,6 +196,24 @@ $$
 $$
 
 乘以 $\|v\|^2$ 即得结论；$v=0$ 时直接成立。取等当且仅当两向量线性相关，包括某一向量为零的情形。
+
+由 Schwarz 不等式还可推出课堂讲义列出的三角不等式：
+
+$$
+\boxed{\|\phi+\psi\|\le \|\phi\|+\|\psi\|}.
+$$
+
+因为
+
+$$
+\begin{aligned}
+\|\phi+\psi\|^2
+&=\|\phi\|^2+\|\psi\|^2
++2\operatorname{Re}\langle\phi|\psi\rangle\\
+&\le \|\phi\|^2+\|\psi\|^2+2\|\phi\|\|\psi\|\\
+&=(\|\phi\|+\|\psi\|)^2.
+\end{aligned}
+$$
 
 ## 2.8 不确定性关系及取等条件
 

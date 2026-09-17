@@ -1,0 +1,337 @@
+% !TeX program = xelatex
+\documentclass[11pt,a4paper]{ctexart}
+
+\usepackage[left=2.4cm,right=2.4cm,top=2.1cm,bottom=2.1cm]{geometry}
+\usepackage{amsmath,amssymb,mathtools,braket}
+\usepackage{xcolor}
+\usepackage[inline]{enumitem}
+\usepackage{fancyhdr}
+
+% ============================================================
+% 基本信息：只需修改下面几项
+% ============================================================
+\newcommand{\coursename}{高等量子力学}
+\newcommand{\assignmentnumber}{第 1 次作业}
+\newcommand{\teachername}{\underline{\makebox[2.8cm][c]{金彪}}}
+\newcommand{\studentname}{\underline{\makebox[2.8cm][c]{林照翔}}}
+\newcommand{\studentid}{\underline{\makebox[3.0cm][c]{202628001207046}}}
+
+% ============================================================
+% 数学公式书写规范
+% ============================================================
+% 1. 行内公式使用一对美元符号。
+% 2. 独立成行的公式统一使用 equation 环境，不使用反斜杠方括号形式。
+% 3. 虚数单位 i、自然常数 e 和微分符号 d 均使用直立体 \mathrm。
+
+% ============================================================
+% 页面样式
+% ============================================================
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0.25em}
+\setlength{\headheight}{14pt}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\coursename}
+\rhead{\assignmentnumber}
+\cfoot{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% ============================================================
+% 列表参数
+% ============================================================
+\setlist[enumerate,1]{
+  label=(\alph*),
+  leftmargin=3.2em,
+  itemsep=0.55em,
+  topsep=0.45em
+}
+
+\newlist{inlineenum}{enumerate*}{1}
+\setlist[inlineenum,1]{
+  label=(\alph*),
+  labelsep=0.5em,
+  itemjoin={；\quad},
+  itemjoin*={；\quad}
+}
+
+% ============================================================
+% 题目与回答环境
+% ============================================================
+\newcounter{problem}
+\newenvironment{problem}
+  {\refstepcounter{problem}%
+   \par\medskip\noindent
+   \begingroup
+   \setlength{\fboxsep}{3pt}%
+   \setlength{\fboxrule}{0.8pt}%
+   \fbox{\bfseries 题目\chinese{problem}}%
+   \endgroup
+   \quad\ignorespaces}
+  {\par\medskip}
+
+\newenvironment{answer}
+  {\par\smallskip\noindent
+   \begingroup
+   \setlength{\fboxsep}{4pt}%
+   \colorbox{black}{\textcolor{white}{\bfseries 回答}}%
+   \endgroup
+   \quad\ignorespaces}
+  {\par\smallskip\noindent\rule{\linewidth}{0.4pt}\medskip}
+
+\begin{document}
+
+\begin{center}
+  {\LARGE\bfseries \coursename\quad \assignmentnumber}\par
+  \vspace{0.7em}
+  \small
+  教师：\teachername\qquad
+  姓名：\studentname\qquad
+  学号：\studentid
+\end{center}
+\vspace{0.4em}
+
+\begin{problem}
+设三维希尔伯特空间基矢为 $\lvert a_1\rangle$、$\lvert a_2\rangle$、$\lvert a_3\rangle$。
+\begin{enumerate}
+  \item 写出 $\lvert a_1\rangle$、$\lvert a_3\rangle\langle a_2\rvert$ 的矩阵表示。
+  \item 求
+  \begin{equation}
+    \lvert a_3\rangle\langle a_2\rvert
+    +\lvert a_1\rangle\langle a_1\rvert
+    +\lvert a_2\rangle\langle a_3\rvert
+  \end{equation}
+  的本征值和本征矢。
+\end{enumerate}
+\end{problem}
+
+\begin{answer}
+% 在此处作答
+  \begin{enumerate}
+    \item 
+      \begin{equation}
+        \Ket{a_1 } \to 
+        \begin{pmatrix}
+        1 \\
+        0 \\
+        0
+        \end{pmatrix},\qquad
+        \Ket{a_3 }\Bra{a_2 } \to
+        \begin{pmatrix}
+        0 &0 &0 \\
+        0 &0 &0 \\
+        0 &1 &0
+        \end{pmatrix}.
+      \end{equation}
+    \item 
+      \begin{equation}
+        \hat{A} \equiv 
+        \Ket{a_3 }\Bra{a_2 } + \Ket{a_1 }\Bra{a_1 } + \Ket{a_2 }\Bra{a_3 } \to
+        \begin{pmatrix}
+          1 &0 &0 \\
+          0 &0 &1 \\
+          0 &1 &0
+        \end{pmatrix}
+        \equiv A.
+      \end{equation}
+      矩阵 $A$ 的本征解为
+      \begin{equation}
+        \text{Eigenvals:}\, -1,1,1\qquad
+        \text{Eigenvecs:}\,
+        \begin{pmatrix}
+          0 &-1 &1
+        \end{pmatrix}^\top,
+        \begin{pmatrix}
+          0 &1 &1
+        \end{pmatrix}^\top,
+        \begin{pmatrix}
+          1 &0 &0
+        \end{pmatrix}^\top
+      \end{equation}
+      相应算符 $\hat{A}$ 的本征解为
+      \begin{equation}
+        \text{Eigenvals:}\, -1,1,1\qquad
+        \text{Eigenvecs:}\,
+        \frac{1 }{\sqrt{2} } \left(-\Ket{a_2 } + \Ket{a_3 } \right),\quad
+        \frac{1 }{\sqrt{2} } \left(\Ket{a_2 } + \Ket{a_3 } \right),\quad
+        \Ket{a_1 }.
+      \end{equation}
+  \end{enumerate}
+\end{answer}
+
+\begin{problem}
+根据厄米共轭算符的定义，证明：
+\begin{enumerate}
+  \item $\bigl(\lvert\psi\rangle\langle\phi\rvert\bigr)^\dagger
+        =\lvert\phi\rangle\langle\psi\rvert$；
+  \item $\bigl(\hat A^\dagger\bigr)^\dagger=\hat A$；
+  \item $\bigl(\hat A\hat B\bigr)^\dagger=\hat B^\dagger\hat A^\dagger$。
+\end{enumerate}
+\end{problem}
+
+\begin{answer}
+% 在此处作答
+  \begin{enumerate}
+    \item 由厄米共轭算符的定义，$\forall \Ket{\alpha },\Ket{\beta } $,
+      \begin{equation}
+        \begin{aligned}
+          \Braket{\alpha | \left(\Ket{\psi }\Bra{\phi } \right)^\dag | \beta }
+          &=\Braket{\beta | \left(\Ket{\psi }\Bra{\phi } \right) | \alpha }^*
+          =\Braket{\alpha | \phi } \Braket{\psi | \beta }
+          =\Braket{\alpha | \left(\Ket{\phi }\Bra{\psi } \right) | \beta }, \\
+          &\Longrightarrow \left(\Ket{\psi }\Bra{\phi } \right)^\dag = \Ket{\phi }\Bra{\psi }.
+        \end{aligned}
+      \end{equation}
+    \item 由厄米共轭算符的定义，$\forall \Ket{\alpha },\Ket{\beta } $,
+      \begin{equation}
+        \begin{aligned}
+          \Braket{\alpha | \left(A^\dag \right)^\dag | \beta }
+          &=\Braket{\beta | A^\dag | \alpha }^*
+          =\left(\Braket{\alpha | A | \beta }^* \right)^*
+          =\Braket{\alpha | A | \beta }, \\
+          &\Longrightarrow \left(A^\dag \right)^\dag = A.
+        \end{aligned}
+      \end{equation}
+      \item 由厄米共轭算符的定义，$\forall \Ket{\alpha },\Ket{\beta } $，一方面
+        \begin{equation}
+          \Braket{\alpha | \left(A B \right)^\dag | \beta }
+          =\Braket{\beta | AB | \alpha }^*,
+        \end{equation}
+        另一方面
+        \begin{equation}
+          \Braket{\alpha | B^\dag A^\dag | \beta }
+        =\Bra{\alpha } B^\dag \left(A^\dag \Ket{\beta }\right)
+        =\Braket{\beta | A B | \alpha }^*.
+        \end{equation}
+        对比可知
+        \begin{equation}
+          \left(AB \right)^\dag = B^\dag A^\dag.
+        \end{equation}
+  \end{enumerate}
+\end{answer}
+
+\begin{problem}
+导出坐标表象下，下列算符矩阵元的表达式：
+\begin{inlineenum}
+  \item $(\hat x\hat p)^2$
+  \item $\mathrm{e}^{\mathrm{i}a\hat p}$
+  \item $\mathrm{e}^{\mathrm{i}p\hat x}$。
+\end{inlineenum}
+\end{problem}
+
+\begin{answer}
+% 在此处作答
+  \begin{enumerate}
+    \item 利用 $\Braket{x | \hat{p}^n | x' } = \left(-\mathrm{i}\hbar \partial_x \right)^n \delta(x-x') , \left[\hat{x} , \hat{p}\right] = \mathrm{i} \hbar $，有
+      \begin{equation}
+        \begin{aligned}
+          \left(\hat{x} \hat{p} \right)^2_{xx'}
+          &=\Braket{x | \hat{x} \hat{p} \hat{x} \hat{p} | x' }
+          =x\Braket{x | \hat{p} \hat{x} \hat{p} | x' }
+          =x\Braket{x | \left(\hat{x} \hat{p} - \mathrm{i} \hbar \right) \hat{p} | x' } \\
+          &=x^2 \Braket{x | \hat{p}^2 | x' } - \mathrm{i} \hbar x \Braket{x | \hat{p} | x' }
+          =\left(-\mathrm{i} \hbar \right)^2 x^2 \frac{\partial^2 \delta(x-x') }{\partial x^2 } + \left(-\mathrm{i} \hbar \right)^2 x \frac{\partial \delta(x-x') }{\partial x } \\
+          &=-\hbar^2 \left[ x^2 \frac{\partial^2 \delta(x-x') }{\partial x^2 } + x \frac{\partial \delta(x-x') }{\partial x } \right].
+        \end{aligned}
+      \end{equation}
+    \item 
+      \begin{equation}
+        \begin{aligned}
+          \left(\mathrm{e}^{\mathrm{i} a \hat{p}} \right)_{xx'}
+          &=\Braket{x | \mathrm{e}^{\mathrm{i} a \hat{p}} | x' }
+          =\Braket{x | \sum_{n=0}^{\infty} \frac{\left(\mathrm{i} a \hat{p} \right)^n }{n! } | x' } 
+          =\sum_{n=0}^{\infty} \frac{1 }{n! } \left(\mathrm{i} a \right)^n \Braket{x | \hat{p}^n | x' } \\
+          &=\sum_{n=0}^{\infty} \frac{1 }{n! } \left(\mathrm{i} a \right)^n \left(-\mathrm{i} \hbar \partial_x \right)^n \delta(x-x')
+          =\left[\sum_{n=0}^{\infty} \frac{1 }{n! } \left( a \hbar \partial_x \right)^n \right]\delta(x-x') \\
+          &=\sum_{n=0}^{\infty} \frac{\delta^{(n)}\left(x-x' \right) }{n! } \left(a \hbar \right)^n
+          =\delta(x-x'+a\hbar).
+        \end{aligned}
+      \end{equation}
+    \item 
+      \begin{equation}
+        \begin{aligned}
+          \left(\mathrm{e}^{\mathrm{i}p\hat x} \right)_{xx'}
+          &=\Braket{x | \mathrm{e}^{\mathrm{i}p\hat x} | x' }
+          =\Braket{x | \sum_{n=0}^{\infty} \frac{\left(\mathrm{i} p \hat{x} \right)^n }{n! } | x' }
+          =\left[\sum_{n=0}^{\infty} \frac{\left(\mathrm{i} p x \right)^n }{n! } \right] \delta(x-x') \\
+          &=\mathrm{e}^{\mathrm{i}px} \delta(x-x').
+        \end{aligned}
+      \end{equation}
+  \end{enumerate}
+\end{answer}
+
+\begin{problem}
+证明：
+\begin{enumerate}
+  \item 厄米算符的本征值为实数；
+  \item 反厄米算符的本征值为纯虚数；
+  \item 幺正算符的本征值为模为 $1$ 的复数。
+\end{enumerate}
+\end{problem}
+
+\begin{answer}
+% 在此处作答
+  \begin{enumerate}
+    \item 设厄米算符 $A=A^\dag $ 的本征方程为 $A \Ket{a } = a \Ket{a } $，一方面有
+      \begin{equation}
+        \Braket{a | A | a } = a,\qquad \Braket{a|a } = 1.
+      \end{equation}
+      另一方面，
+      \begin{equation}
+        \Braket{a | A | a }
+        =\Braket{a | A^\dag | a }
+        =\Braket{a | A |a }^*
+        =a^*,
+      \end{equation}
+      于是 $a=a^* \Longrightarrow a \in \mathbb{R}$.
+    \item 设反厄米算符 $A=-A^\dag$ 的本征方程为 $A \Ket{a } = a \Ket{a } $，一方面有
+      \begin{equation}
+        \Braket{a | A | a } = a,
+      \end{equation}
+      另一方面，
+      \begin{equation}
+        \Braket{a | A | a }
+        =\Braket{a | -A^\dag | a }
+        =-\Braket{a | A | a }^*
+        =-a^*,
+      \end{equation}
+      于是 $a=-a^* \Longrightarrow a \in \mathrm{i}\mathbb{R} $   。
+    \item 设幺正算符 $U $ 的本征方程为 $U \Ket{u } = u \Ket{u } $，则
+      \begin{equation}
+        1
+        =\Braket{u|u }
+        =\Braket{u | U^\dag U | u }
+        =\left|u \right|^2 \Braket{u|u }
+        =\left|u \right|^2
+        \Longrightarrow \left|u \right| = 1.
+      \end{equation}
+  \end{enumerate}
+\end{answer}
+
+\begin{problem}
+设
+\begin{equation}
+  F_{x,x'}=-\mathrm{i}x^2\frac{\partial}{\partial x}\delta(x-x'),
+\end{equation}
+求 $F_{p,p'}$。
+\end{problem}
+
+\begin{answer}
+% 在此处作答
+  \begin{equation}
+    \begin{aligned}
+      F_{p,p'}
+      &=\Braket{p | F | p' }
+      =\int \mathrm{d}x\mathrm{d}x' \Braket{p|x } \Braket{x|F|x' } \Braket{x'|p' } \\
+      &=\int \mathrm{d}x \mathrm{d}x' \left(\frac{1 }{\sqrt{2\pi \hbar} } \mathrm{e}^{-\mathrm{i}px/\hbar} \right) \left[-\mathrm{i} x^2 \frac{\partial }{\partial x } \delta(x-x') \right] \left(\frac{1 }{\sqrt{2\pi \hbar} } \mathrm{e}^{\mathrm{i} p'x'/\hbar} \right) \\
+      &=\frac{-\mathrm{i} }{2\pi \hbar } \int \mathrm{d}x x^2 \mathrm{e}^{-\mathrm{i}px/\hbar} \frac{\partial }{\partial x } \int \mathrm{d}x' \delta(x-x') \mathrm{e}^{\mathrm{i} p'x'/\hbar}
+      =\frac{p' }{2\pi \hbar^2 } \int \mathrm{d}x x^2 \mathrm{e}^{\mathrm{i}\left(p'-p \right)x/\hbar} \\
+      &=\frac{p' }{2\pi \hbar^2 } \left(\frac{\hbar }{\mathrm{i} }  \right)^2 \int \mathrm{d}x \frac{\partial^2 }{\partial \left(p'-p \right)^2 } \mathrm{e}^{\mathrm{i}\left(p'-p \right)x/\hbar}
+      =\frac{-p' }{2\pi } \frac{\mathrm{d}^2 }{\mathrm{d}\left(p'-p \right)^2 } \int \mathrm{d}x \mathrm{e}^{\mathrm{i}\left(p'-p \right)x/\hbar} \\
+      &=\frac{-p' }{2\pi } \frac{\mathrm{d}^2 }{\mathrm{d}\left(p'-p \right)^2 } \left[2\pi \delta\left(\frac{p'-p }{\hbar }  \right) \right]
+      =-\hbar p' \frac{\mathrm{d}^2 }{\mathrm{d}\left(p'-p \right)^2 } \delta(p'-p) \\
+      &=-\hbar p' \frac{\partial^2 }{\partial p'^2 } \delta(p'-p).
+    \end{aligned}
+  \end{equation}
+\end{answer}
+
+\end{document}
