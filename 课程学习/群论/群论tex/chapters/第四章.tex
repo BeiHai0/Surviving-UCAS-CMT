@@ -1,0 +1,2462 @@
+% 来源：群论.md 第四章；修正与补充见同目录勘误.md。
+\chapter{李群与李代数}
+
+\section{李群的定义和线性表示}
+
+\subsection{李群的定义}
+
+李群 $G$ 是一种特殊的连续群，群元 $g\in G$ 可以在局部坐标邻域内用 $r$ 个独立实参数 $\alpha\equiv \left(\alpha_1,\alpha_2,\cdots,\alpha_r\right)$ 来标记：
+
+\begin{equation}
+g\left(\alpha\right)
+\equiv g\left(\alpha_1,\alpha_2,\cdots,\alpha_r\right)
+\end{equation}
+
+参数 $\alpha$ 可在有限或无限范围内连续变化。$\alpha$ 的所有取值构成一个参数空间，称为群参数空间。
+
+若 $g\left(\alpha\right)$ 满足以下 $5$ 个条件，则称群 $G=\left\{g\left(\alpha\right) \right\}$ 为 $r$ 维李群：
+
+（1）封闭性：对于任意给定的参数 $\alpha$ 和 $\beta$，总可以在群参数空间中找到 $\gamma$，使得：
+
+\begin{equation}
+g\left(\gamma\right)
+=g\left(\alpha\right)g\left(\beta\right)
+\end{equation}
+
+参数 $\gamma$ 为实参数 $\alpha,\beta$ 的实函数：
+
+\begin{equation}
+\gamma
+=f\left(\alpha,\beta\right)
+\end{equation}
+
+即：
+
+\begin{equation}
+\gamma_i
+=f_i\left(\alpha_1,\cdots,\alpha_r;\beta_1,\cdots,\beta_r\right)
+\end{equation}
+
+\begin{equation}
+g\left(\alpha\right)g\left(\beta\right) = g\left(f\left(\alpha,\beta\right)\right)
+\end{equation}
+
+称为李群的结构函数。
+
+（2）结合律：
+
+\begin{equation}
+\left[g\left(\alpha\right) g\left(\beta\right) \right] g\left(\gamma\right)
+=g\left(\alpha\right)\left[g\left(\beta\right)g\left(\gamma\right) \right]
+\end{equation}
+
+也即：
+
+\begin{equation}
+f\left(f\left(\alpha,\beta\right),\gamma\right)
+=f\left(\alpha,f\left(\beta,\gamma\right)\right)
+\end{equation}
+
+（3）存在恒元 $g\left(\alpha_0\right)$：群参数空间中存在参数 $\alpha_0$，使得对任意群参数 $\alpha$ 都有：
+
+\begin{equation}
+g\left(\alpha\right)
+=g\left(\alpha_0\right)g\left(\alpha\right)=g\left(\alpha\right)g\left(\alpha_0\right)
+\end{equation}
+
+另一方面，
+
+\begin{equation}
+g\left(\alpha_0\right)g\left(\alpha\right)=g\left(f\left(\alpha_0,\alpha\right)\right)
+\end{equation}
+
+\begin{equation}
+g\left(\alpha\right)g\left(\alpha_0\right)=g\left(f\left(\alpha,\alpha_0\right)\right)
+\end{equation}
+
+比较可得：
+
+\begin{equation}
+\alpha
+=f\left(\alpha_0,\alpha\right)=f\left(\alpha,\alpha_0\right)
+\end{equation}
+
+（4）存在逆元：对任意群参数 $\alpha$，存在群参数 $\bar{\alpha}$，使得：
+
+\begin{equation}
+g\left(\alpha\right)g\left(\bar{\alpha}\right)
+=g\left(\bar{\alpha}\right)g\left(\alpha\right)
+=g\left(\alpha_0\right)
+\end{equation}
+
+另一方面，
+
+\begin{equation}
+g\left(\alpha\right)g\left(\bar{\alpha}\right)=g\left(f\left(\alpha,\bar{\alpha}\right)\right)
+\end{equation}
+
+\begin{equation}
+g\left(\bar{\alpha}\right)g\left(\alpha\right)=g\left(f\left(\bar{\alpha},\alpha\right)\right)
+\end{equation}
+
+比较可得：
+
+\begin{equation}
+\alpha_0
+=f\left(\alpha,\bar{\alpha}\right)
+=f\left(\bar{\alpha},\alpha\right)
+\end{equation}
+
+（5）在相容的局部坐标中，乘法和取逆映射是光滑的；本章沿用解析坐标的表述，结构函数 $\gamma=f\left(\alpha,\beta\right)$ 和逆元参数函数均为解析函数。
+
+\textbf{补充：}李群本身是一个光滑流形。下面由群元相等推出参数相等的步骤，均在同一个一一对应的局部坐标邻域内进行；多个坐标邻域共同覆盖整个群。 
+
+\begin{itemize}
+\item 很多时候恒元对应的群参数的取值 $\alpha_0=0$，即 $\left(\alpha_{01},\alpha_{02},\cdots,\alpha_{0r}\right)=\left(0,0,\cdots,0\right)$ 作为恒元对应的群参数的取值。
+
+\item 若李群 $G$ 作为拓扑空间是紧致的，则称其为紧致李群。对具有通常矩阵拓扑的矩阵群，可用它在矩阵空间中是否闭且有界来判断；仅凭参数有界不能判断紧致性。
+
+\item 上面的描述中，所有的希腊字母均代表一组参数。
+
+\item 设恒元对应的群参数 $\alpha_0=0$，则当 $\alpha,\beta$ 是小量时，$f\left(\alpha,\beta\right)=\alpha+\beta+O\left(\left(\lVert\alpha\rVert+\lVert\beta\rVert\right)^2\right)$
+
+\item 设恒元对应的群参数 $\alpha_0=0$，则当 $\alpha$ 是小量时，$\bar{\alpha}=-\alpha+O\left(\lVert\alpha\rVert^2\right)$，其中 $g\left(\bar{\alpha}\right)=g^{-1}\left(\alpha\right)$
+
+\item 连通性：若任意群元都能沿群内的一条连续路径变到恒元，则李群是连通的（李群的连通与道路连通等价）。单连通还要求每条闭路都能连续收缩到一点。例如 $\mathrm{SO}\left(3\right)$ 连通但不单连通，而 $\mathrm{SU}\left(2\right)$ 单连通。
+
+\end{itemize}
+\subsection{\texorpdfstring{$n$ 维空间中带 $r$ 个实参数的线性坐标变换}{n 维空间中带 r 个实参数的线性坐标变换}}
+
+考虑 $n$ 维空间中带 $r$ 个实参数的线性坐标变换，变换前的坐标记为 $x_i$，变换后的坐标记为 $x_i'$：
+
+\begin{equation}
+x_i'
+=\varphi_i\left(x_1,x_2,\cdots,x_n;\alpha_1,\alpha_2,\cdots,\alpha_r\right),\quad i=1,2,\cdots,n
+\end{equation}
+
+简写为：
+
+\begin{equation}
+x_i'
+=\varphi_i\left(x;\alpha\right)
+\end{equation}
+
+其中，$\alpha$ 是群 $G$ 的独立参数。
+
+线性坐标变换可写成矩阵形式：
+
+\begin{equation}
+\begin{bmatrix}
+x_1' \\
+x_2' \\
+\vdots \\
+x_n'
+\end{bmatrix}
+=g\left(\alpha\right)
+\begin{bmatrix}
+x_1 \\
+x_2 \\
+\vdots \\
+x_n
+\end{bmatrix}
+\end{equation}
+
+满足前面 $5$ 个条件的 $g\left(\alpha\right)$ 构成 $r$ 维李群 $G=\left\{g\left(\alpha\right) \right\}$
+
+\subsection{李群的线性表示}
+
+李群的线性表示是一种将群元映射到表示矩阵的同态关系：
+
+\begin{equation}
+G=\left\{g\left(\alpha\right) \right\}
+\to 
+D\left(G\right)
+=\left\{D\left(g_\alpha\right)\equiv D\left(\alpha\right) \right\}
+\end{equation}
+
+其中 $D\left(\alpha\right)$ 称为 $\alpha$ 的函数矩阵，满足李群的法则：
+
+\begin{equation}
+D\left(\alpha\right)D\left(\beta\right)
+=D\left(\gamma\right),~~\gamma = f\left(\alpha,\beta\right)
+\end{equation}
+
+\begin{equation}
+D\left(\alpha_0\right)D\left(\alpha\right)
+=E D\left(\alpha\right)
+=D\left(\alpha\right)
+\end{equation}
+
+\begin{equation}
+D\left(\alpha\right)D\left(\bar{\alpha}\right)
+=D\left(\alpha_0\right)
+=E,~~
+D\left(\bar{\alpha}\right)
+=D^{-1}\left(\alpha\right)
+\end{equation}
+
+还要求 $D\left(\alpha\right)$ 是 $2$ 阶光滑的。
+
+在固定群参数坐标后，结构函数不依赖于所选表示，但依赖于坐标选择。两个李群同构时，采用由同构对应起来的坐标，可使其结构函数一致。
+
+\subsection{李群的线性表示的生成元}
+
+在恒元附近（群参数 $\alpha$ 在 $\alpha_0$ 附近），可以将光滑表示 $D\left(\alpha\right)$ 作一阶展开。这里及下文的无穷小变换公式只保留参数的一阶项；若写成有限参数等式，须加上二阶余项。恒元附近表示矩阵与群元的一一对应关系，是随后证明生成元线性无关所需的额外条件。
+
+\begin{equation}
+D\left(\alpha\right)
+=D\left(\alpha_0\right) + \frac{\partial D\left(\alpha\right) }{\partial \alpha_k }\bigg|_{\alpha=\alpha_0} \left(\alpha_k-\alpha_{0k}\right)+O\left(\lVert\alpha-\alpha_0\rVert^2\right)
+\equiv E + \left(\alpha_k-\alpha_{0k}\right) I_k+O\left(\lVert\alpha-\alpha_0\rVert^2\right)
+\end{equation}
+
+其中，
+
+\begin{equation}
+I_k
+\equiv \frac{\partial D\left(\alpha\right) }{\partial \alpha_k }\bigg|_{\alpha=\alpha_0}
+\end{equation}
+
+为李群的线性表示的生成元。
+
+若 $\alpha_0=0$，则上式化简为：
+
+\begin{equation}
+D\left(\alpha\right)
+=E + \frac{\partial D\left(\alpha\right) }{\partial \alpha_k }\bigg|_{\alpha=0} \alpha_k+O\left(\lVert\alpha\rVert^2\right) 
+\equiv E + \alpha_k I_k+O\left(\lVert\alpha\rVert^2\right)
+\end{equation}
+
+引入：
+
+\begin{equation}
+\tilde{I}_k
+\equiv \mathrm{i} I_k
+\end{equation}
+
+则：
+
+\begin{equation}
+D\left(\alpha\right)
+=E-\mathrm{i}\alpha_k \tilde{I}_k+O\left(\lVert\alpha\rVert^2\right)
+\end{equation}
+
+\subsection{生成元的线性无关性}
+
+$r$ 维李群在恒元附近一一对应的光滑线性表示，其 $r$ 个生成元是线性无关的。任意表示不一定满足这个条件，例如平凡表示的所有生成元均为零。
+
+\textbf{证明（修正原稿的一阶截断论证）：}假设存在一组不全为零的实系数 $\left\{C_k\right\}$，使得
+
+\begin{equation}
+C_kI_k=0.
+\end{equation}
+
+在恒元的切空间中，令 $v$ 的坐标为 $C_k$。考察初始切向量为 $v$ 的单参数子群 $g\left(t\right)$，其存在来自光滑不变向量场的积分曲线。它满足 $g\left(t+u\right)=g\left(t\right)g\left(u\right)$，且 $g\left(0\right)$ 为恒元。记 $A\left(t\right)=D\left(g\left(t\right)\right)$，对 $A\left(t+u\right)=A\left(t\right)A\left(u\right)$ 在 $u=0$ 处求导：
+
+\begin{equation}
+\frac{\mathrm{d}A\left(t\right)}{\mathrm{d}t}=A\left(t\right)A'\left(0\right)=A\left(t\right)C_kI_k=0,\qquad A\left(0\right)=E.
+\end{equation}
+
+于是 $A\left(t\right)=E$。由表示在恒元附近的一一对应性，足够小的 $t$ 对应的 $g\left(t\right)$ 都是恒元。因此其初始切向量 $v=0$，即 $C_k=0$，与假设矛盾。
+
+\subsection{几个例子}
+
+\subsubsection*{\texorpdfstring{$\mathrm{SO}\left(2\right)$ 群}{SO(2) 群}}
+
+$\mathrm{SO}\left(2\right)$ 群只有一个独立的群参数，因此是\textbf{一维}李群。
+
+表示矩阵为：
+
+\begin{equation}
+D\left(\omega\right)
+=\begin{bmatrix}
+\cos\omega &-\sin\omega \\
+\sin\omega &\cos\omega
+\end{bmatrix},~~
+\omega\in \left[0,2\pi\right]
+\end{equation}
+
+这些旋转矩阵在矩阵空间中构成闭且有界的集合，因此 $\mathrm{SO}\left(2\right)$ 是\textbf{紧致}的。角度 $0$ 与 $2\pi$ 标记同一个群元。
+
+当 $\omega=0$，$D\left(0\right)=E$，因此 $\omega_0=0$ 是恒元对应的群参数的取值。
+
+生成元的定义：
+
+\begin{equation}
+I
+\equiv \frac{\partial D\left(\omega\right) }{\partial \omega }\bigg|_{\omega=0}
+=\begin{bmatrix}
+-\sin\omega &-\cos\omega \\
+\cos\omega  &-\sin\omega
+\end{bmatrix}
+\bigg|_{\omega=0}
+=\begin{bmatrix}
+0 &-1 \\
+1 &0
+\end{bmatrix}
+\end{equation}
+
+当 $\omega\ll 1$，
+
+\begin{equation}
+D\left(\omega\right)
+=E + \omega I+O\left(\omega^2\right)
+=\begin{bmatrix}
+1 &-\omega \\
+\omega &1
+\end{bmatrix}+O\left(\omega^2\right)
+\end{equation}
+
+\subsubsection*{\texorpdfstring{$\mathrm{GL}\left(2,\mathbb{R}\right)$ 群：$2$ 维空间实线性变换群}{GL(2,R) 群：2 维空间实线性变换群}}
+
+表示矩阵为：
+
+\begin{equation}
+D\left(\alpha\right)
+=\begin{bmatrix}
+\alpha_1 &\alpha_2 \\
+\alpha_3 &\alpha_4
+\end{bmatrix},~~
+\mathrm{det} D\left(\alpha\right)\ne 0
+\end{equation}
+
+确定恒元对应的群参数 $\alpha_0$ 的取值：
+
+\begin{equation}
+\alpha_0
+=\left(\alpha_{01},\alpha_{02},\alpha_{03},\alpha_{04}\right)
+=\left(1,0,0,1\right)
+\end{equation}
+
+生成元：
+
+\begin{equation}
+I_k
+\equiv \frac{\partial D\left(\alpha\right) }{\partial \alpha_k } \bigg|_{\alpha=\alpha_0}
+\end{equation}
+
+\begin{equation}
+I_1
+=\begin{bmatrix}
+1 &0 \\
+0 &0
+\end{bmatrix},~~
+I_2
+=\begin{bmatrix}
+0 &1 \\
+0 &0
+\end{bmatrix},~~
+I_3
+=\begin{bmatrix}
+0 &0 \\
+1 &0 
+\end{bmatrix},~~
+I_4
+=\begin{bmatrix}
+0 &0 \\
+0 &1
+\end{bmatrix}
+\end{equation}
+
+当 $\alpha$ 接近 $\alpha_0=\left(1,0,0,1\right)$ 时，
+
+\begin{equation}
+D\left(\alpha\right)
+=E + \left(\alpha_k-\alpha_{0k}\right) I_k
+=\begin{bmatrix}
+\alpha_1 &\alpha_2 \\
+\alpha_3 &\alpha_4
+\end{bmatrix}
+\end{equation}
+
+\subsubsection*{\texorpdfstring{$\mathrm{GL}\left(n,\mathbb{R}\right)$：$n$ 维空间实线性变换群}{GL(n,R)：n 维空间实线性变换群}}
+
+表示矩阵为：
+
+\begin{equation}
+D\left(\alpha\right)
+=\begin{bmatrix}
+\alpha_{11} &\cdots &\alpha_{1n} \\
+\vdots &\ddots &\vdots \\
+\alpha_{n1} &\cdots &\alpha_{nn}
+\end{bmatrix},~~
+\mathrm{det} D\left(\alpha\right)\ne 0
+\end{equation}
+
+共 $n^2$ 个群参数。
+
+恒元对应的群参数的取值为：
+
+\begin{equation}
+\alpha_0
+=\begin{bmatrix}
+1 & & \\
+ &\ddots & \\
+ & &1
+\end{bmatrix}\qquad\text{或}\qquad
+\alpha_{0ij}
+=\delta_{ij}
+\end{equation}
+
+生成元：
+
+\begin{equation}
+I_{ij}
+\equiv \frac{\partial D\left(\alpha\right) }{\partial \alpha_{ij} }\bigg|_{\alpha=\alpha_0}
+\end{equation}
+
+\begin{equation}
+\left[I_{ij}\right]_{pq}
+=\delta_{ip}\delta_{jq}
+\end{equation}
+
+生成元 $I_{ij}$ 的 $i$ 行 $j$ 列矩阵元为 $1$，其他矩阵元为零。
+
+生成元对易关系：
+
+\begin{equation}
+\left[I_{ij},I_{kl}\right]
+=I_{ij}I_{kl} - I_{kl}I_{ij}
+\end{equation}
+
+\begin{align}
+\left[I_{ij},I_{kl}\right]_{pq}
+&=\left(I_{ij}I_{kl}\right)_{pq} - \left(I_{kl}I_{ij}\right)_{pq} \\
+&=\sum_{m} \left(I_{ij}\right)_{pm} \left(I_{kl}\right)_{mq} - \sum_{n} \left(I_{kl}\right)_{pn}\left(I_{ij}\right)_{nq} \\
+&=\sum_{m} \left(\delta_{ip}\delta_{jm} \cdot \delta_{km}\delta_{lq} \right) - \sum_{n} \left(\delta_{kp}\delta_{ln} \cdot \delta_{in}\delta_{jq} \right) \\
+&=\delta_{ip}\delta_{jk}\delta_{lq} - \delta_{kp}\delta_{li}\delta_{jq} \\
+&=\delta_{jk}\left(\delta_{ip}\delta_{lq}\right) - \delta_{li}\left(\delta_{kp}\delta_{jq}\right) \\
+&=\delta_{jk} \left(I_{il}\right)_{pq} - \delta_{li}\left(I_{kj}\right)_{pq} 
+\end{align}
+
+因此：
+
+\begin{equation}
+\left[I_{ij},I_{kl}\right]
+=\delta_{jk} I_{il} - \delta_{li} I_{kj }
+\end{equation}
+
+
+
+\subsubsection*{\texorpdfstring{二维实特殊线性变换群：$\mathrm{SL}\left(2,\mathbb{R}\right)$（$3$ 维非紧致李群）}{二维实特殊线性变换群：SL(2,R)（3 维非紧致李群）}}
+
+表示矩阵为：
+
+\begin{equation}
+D\left(\alpha\right)
+=\begin{bmatrix}
+\alpha_1 &\alpha_2 \\
+\alpha_3 &\alpha_4
+\end{bmatrix},~~
+\mathrm{det}D\left(\alpha\right) = 1
+\quad \left(\alpha_1\ne0\right)\Longrightarrow
+\alpha_4 = \frac{1+\alpha_2\alpha_3 }{\alpha_1 }
+\end{equation}
+
+\begin{equation}
+D\left(\alpha\right)
+=\begin{bmatrix}
+\alpha_1 &\alpha_2 \\
+\alpha_3 &\frac{1+\alpha_2\alpha_3 }{\alpha_1 }
+\end{bmatrix}
+\end{equation}
+
+恒元对应的群参数：
+
+\begin{equation}
+D\left(\alpha_0\right)
+=E
+=\begin{bmatrix}
+1 &0 \\
+0 &1
+\end{bmatrix}
+\Longrightarrow
+\alpha_0
+=\left(\alpha_{01},\alpha_{02},\alpha_{03}\right)
+=\left(1,0,0\right)
+\end{equation}
+
+生成元：
+
+\begin{equation}
+I_1
+\equiv \frac{\partial D\left(\alpha\right) }{\partial \alpha_1 }\bigg|_{\alpha=\alpha_0}
+=\begin{bmatrix}
+1 &0 \\
+0 &\frac{-\left(1+\alpha_2\alpha_3\right) }{\alpha_1^2 }
+\end{bmatrix} \bigg|_{\alpha=\alpha_0}
+=\begin{bmatrix}
+1 &0 \\
+0 &-1
+\end{bmatrix}
+\end{equation}
+
+\begin{equation}
+I_2
+\equiv \frac{\partial D\left(\alpha\right) }{\partial \alpha_2 }\bigg|_{\alpha=\alpha_0}
+=\begin{bmatrix}
+0 &1 \\
+0 &\frac{\alpha_3 }{\alpha_1 } 
+\end{bmatrix} \bigg|_{\alpha=\alpha_0}
+=\begin{bmatrix}
+0 &1 \\
+0 &0
+\end{bmatrix}
+\end{equation}
+
+\begin{equation}
+I_3
+\equiv \frac{\partial D\left(\alpha\right) }{\partial \alpha_3 }\bigg|_{\alpha=\alpha_0}
+=\begin{bmatrix}
+0 &0 \\
+1 &\frac{\alpha_2 }{\alpha_1 } 
+\end{bmatrix} \bigg|_{\alpha=\alpha_0}
+=\begin{bmatrix}
+0 &0 \\
+1 &0
+\end{bmatrix}
+\end{equation}
+
+生成元对易关系：
+
+\begin{align}
+\left[I_1,I_2\right]
+&=I_1I_2-I_2I_1 \\
+&=\begin{bmatrix}
+1 &0 \\
+0 &-1
+\end{bmatrix}
+\begin{bmatrix}
+0 &1 \\
+0 &0
+\end{bmatrix}
+-\begin{bmatrix}
+0 &1 \\
+0 &0
+\end{bmatrix}
+\begin{bmatrix}
+1 &0 \\
+0 &-1
+\end{bmatrix} \\
+&=\begin{bmatrix}
+0 &1 \\
+0 &0
+\end{bmatrix}
+-\begin{bmatrix}
+0 &-1 \\
+0 &0
+\end{bmatrix} \\
+&=\begin{bmatrix}
+0 &2 \\
+0 &0
+\end{bmatrix} \\
+&=2I_2
+\end{align}
+
+\begin{align}
+\left[I_2,I_3\right]
+&=I_2I_3-I_3I_2 \\
+&=\begin{bmatrix}
+0 &1 \\
+0 &0
+\end{bmatrix}
+\begin{bmatrix}
+0 &0 \\
+1 &0
+\end{bmatrix}
+-\begin{bmatrix}
+0 &0 \\
+1 &0
+\end{bmatrix}
+\begin{bmatrix}
+0 &1 \\
+0 &0
+\end{bmatrix} \\
+&=\begin{bmatrix}
+1 &0 \\
+0 &0
+\end{bmatrix}
+-\begin{bmatrix}
+0 &0 \\
+0 &1
+\end{bmatrix} \\
+&=\begin{bmatrix}
+1 &0 \\
+0 &-1
+\end{bmatrix} \\
+&=I_1
+\end{align}
+
+\begin{align}
+\left[I_3,I_1\right]
+&=I_3I_1-I_1I_3 \\
+&=\begin{bmatrix}
+0 &0 \\
+1 &0
+\end{bmatrix}
+\begin{bmatrix}
+1 &0 \\
+0 &-1
+\end{bmatrix}
+-\begin{bmatrix}
+1 &0 \\
+0 &-1
+\end{bmatrix}
+\begin{bmatrix}
+0 &0 \\
+1 &0
+\end{bmatrix} \\
+&=\begin{bmatrix}
+0 &0 \\
+1 &0
+\end{bmatrix}
+-\begin{bmatrix}
+0 &0 \\
+-1 &0
+\end{bmatrix} \\
+&=\begin{bmatrix}
+0 &0 \\
+2 &0
+\end{bmatrix} \\
+&=2I_3
+\end{align}
+
+\textbf{补充：}上述 $\mathrm{SL}\left(2,\mathbb{R}\right)$ 参数式仅覆盖 $\alpha_1\ne0$ 的坐标区域，足以讨论恒元附近的生成元，并非整个群的全局参数式。
+
+\subsubsection*{\texorpdfstring{$\mathrm{SO}\left(3\right)$ 群（$3$ 维紧致李群）}{SO(3) 群（3 维紧致李群）}}
+
+$\mathrm{SO}\left(3\right)$ 群元可用三个参数 $\varphi,\theta,\omega$ 表示：
+
+\begin{equation}
+C_{\hat{n}\left(\theta,\varphi\right)}\left(\omega\right)
+=S\left(\varphi,\theta\right)C_{\vec{k}}\left(\omega\right)S^{-1}\left(\varphi,\theta\right)
+\end{equation}
+
+对于上式，当 $\omega=0$，任意的 $\theta,\varphi$ 都对应着李群表示矩阵的恒元。也就是说，在恒元 $E$ 附近，参数 $\alpha=\left(\theta,\varphi,\omega\right)$ 与群元不是一一对应的。因此，这组参数不能用于求李群线性表示的生成元。
+
+指数表示：
+
+\begin{equation}
+D\left(\omega\right)
+=C_{\hat{n}\left(\theta,\varphi\right)}\left(\omega\right)
+=\mathrm{e}^{-\mathrm{i}\omega_i T_i}
+\end{equation}
+
+\begin{equation}
+T_1
+=\begin{bmatrix}
+0 &0 &0 \\
+0 &0 &-\mathrm{i} \\
+0 &\mathrm{i} &0
+\end{bmatrix},~~
+T_2
+=\begin{bmatrix}
+0 &0 &\mathrm{i} \\
+0 &0 &0 \\
+-\mathrm{i} &0 &0
+\end{bmatrix},~~
+T_3
+=\begin{bmatrix}
+0 &-\mathrm{i} &0 \\
+\mathrm{i} &0 &0 \\
+0 &0 &0
+\end{bmatrix},~~
+\end{equation}
+
+\begin{equation}
+\left\{
+\begin{aligned}
+&\omega_1 = \omega\sin\theta\cos\varphi \\
+&\omega_2 = \omega\sin\theta\sin\varphi \\
+&\omega_3 = \omega\cos\theta
+\end{aligned}
+\right.
+\end{equation}
+
+在 $\lVert\omega\rVert<\pi$ 的恒元邻域内，只有当 $\left(\omega_1,\omega_2,\omega_3\right)=\left(0,0,0\right)$ 时，$D\left(\omega\right)=\mathrm{e}^{-\mathrm{i}\omega_i T_i}=E$。因此可选择群参数 $\omega=\left(\omega_1,\omega_2,\omega_3\right)$ 对应的指数表示来求生成元。
+
+生成元：
+
+\begin{equation}
+I_1
+\equiv \frac{\partial D\left(\omega\right) }{\partial \omega_1 }\bigg|_{\omega = \omega_0}
+=-\mathrm{i}T_1
+=\begin{bmatrix}
+0 &0 &0 \\
+0 &0 &-1 \\
+0 &1 &0
+\end{bmatrix}
+\end{equation}
+
+\begin{equation}
+I_2
+\equiv \frac{\partial D\left(\omega\right) }{\partial \omega_2 }\bigg|_{\omega = \omega_0}
+=-\mathrm{i}T_2
+=\begin{bmatrix}
+0 &0 &1 \\
+0 &0 &0 \\
+-1 &0 &0
+\end{bmatrix}
+\end{equation}
+
+\begin{equation}
+I_3
+\equiv \frac{\partial D\left(\omega\right) }{\partial \omega_3 }\bigg|_{\omega = \omega_0}
+=-\mathrm{i}T_3
+=\begin{bmatrix}
+0 &-1 &0 \\
+1 &0 &0 \\
+0 &0 &0
+\end{bmatrix}
+\end{equation}
+
+对易关系：
+
+\begin{equation}
+\left[I_i,I_j\right]
+=\varepsilon_{ijk} I_k
+\end{equation}
+
+\subsubsection*{\texorpdfstring{二维特殊幺正变换群 $\mathrm{SU}\left(2\right)$ 群}{二维特殊幺正变换群 SU(2) 群}}
+
+\begin{equation}
+D\left(\alpha\right) 
+=\begin{bmatrix}
+a &b \\
+c &d
+\end{bmatrix},~~
+D^\dagger D = E,~~
+\mathrm{det} D\left(\alpha\right) = 1
+\end{equation}
+
+每个矩阵元均有实部与虚部，共 $8$ 个实参数。
+
+幺正条件和行列式条件分别给出 $2^2$ 和 $1$ 个约束方程。
+
+$\mathrm{SU}\left(2\right)$ 只有 $3$ 个独立实参数，是三维李群。
+
+\begin{equation}
+D^{-1}\left(\alpha\right)
+=\begin{bmatrix}
+d &-b \\
+-c &a
+\end{bmatrix} 
+=\begin{bmatrix}
+a^* &c^* \\
+b^* &d^*
+\end{bmatrix}
+\end{equation}
+
+\begin{equation}
+D\left(\alpha\right)
+=\begin{bmatrix}
+a &b \\
+-b^* &a^*
+\end{bmatrix}
+\end{equation}
+
+
+\begin{equation}
+|a|^2 + |b|^2 = 1
+\end{equation}
+
+若令
+
+\begin{equation}
+a = \cos\alpha_1 \mathrm{e}^{\mathrm{i}\alpha_2},~~
+b = \sin\alpha_1 \mathrm{e}^{\mathrm{i}\alpha_3}
+\end{equation}
+
+\begin{equation}
+D\left(\alpha\right)
+=\begin{bmatrix}
+\mathrm{e}^{\mathrm{i}\alpha_2}\cos\alpha_1 &\mathrm{e}^{\mathrm{i}\alpha_3}\sin\alpha_1 \\
+-\mathrm{e}^{-\mathrm{i}\alpha_3}\sin\alpha_1 &\mathrm{e}^{-\mathrm{i}\alpha_2}\cos\alpha_1
+\end{bmatrix}
+\end{equation}
+
+然而，$\alpha_1=0,\alpha_2 = 0$ 时 $D\left(\alpha\right) = E$，而对 $\alpha_3$ 无任何要求。这样无法求生成元。
+
+\begin{align}
+1
+&=\cos^2\alpha_1 + \sin^2\alpha_1 \\
+&=\cos^2\alpha_1\left(\cos^2\alpha_2 + \sin^2\alpha_2 \right) + \sin^2\alpha_1 \left(\cos^2\alpha_2 + \sin^2\alpha_2 \right)\\
+&=\left(\cos^2\alpha_1 \cos^2\alpha_2 + \sin^2\alpha_1 \sin^2\alpha_2 \right) + \left(\cos^2\alpha_1 \sin^2\alpha_2 + \sin^2\alpha_1 \cos^2\alpha_2 \right) \\
+&=|a|^2 + |b|^2
+\end{align}
+
+令：
+
+\begin{equation}
+\left\{
+\begin{aligned}
+&a = \mathrm{e}^{\mathrm{i}\alpha_3}\left(\cos\alpha_1 \cos\alpha_2 + \mathrm{i}\sin\alpha_1\sin\alpha_2 \right) \\
+&b = \cos\alpha_1 \sin\alpha_2 + \mathrm{i} \sin\alpha_1 \cos\alpha_2
+\end{aligned}
+\right.
+\end{equation}
+
+\begin{equation}
+D\left(\alpha\right)
+=\begin{bmatrix}
+\mathrm{e}^{\mathrm{i}\alpha_3}\left(\cos\alpha_1 \cos\alpha_2 + \mathrm{i}\sin\alpha_1\sin\alpha_2 \right) &\cos\alpha_1 \sin\alpha_2 + \mathrm{i} \sin\alpha_1 \cos\alpha_2 \\
+-\cos\alpha_1 \sin\alpha_2 + \mathrm{i} \sin\alpha_1 \cos\alpha_2 &\mathrm{e}^{-\mathrm{i}\alpha_3}\left(\cos\alpha_1 \cos\alpha_2 - \mathrm{i}\sin\alpha_1\sin\alpha_2 \right)
+\end{bmatrix}
+\end{equation}
+
+在 $\alpha=0$ 的足够小邻域内，这样定义下只有当 $\alpha = \left(0,0,0\right)$ 时，$D\left(\alpha\right) = E$，因此这样定义的 $\left(\alpha_1,\alpha_2,\alpha_3\right)$ 可作为群参数。
+
+生成元：
+
+\begin{equation}
+I_1
+=\frac{\partial D\left(\alpha\right) }{\partial \alpha_1 }\bigg|_{\alpha=\alpha_0}
+=\begin{bmatrix}
+0 &\mathrm{i} \\
+\mathrm{i} &0
+\end{bmatrix}
+=\mathrm{i}\sigma_1
+\end{equation}
+
+\begin{equation}
+I_2
+=\frac{\partial D\left(\alpha\right) }{\partial \alpha_2 }\bigg|_{\alpha=\alpha_0}
+=\begin{bmatrix}
+0 &1 \\
+-1 &0
+\end{bmatrix}
+=\mathrm{i}\sigma_2
+\end{equation}
+
+\begin{equation}
+I_3
+=\frac{\partial D\left(\alpha\right) }{\partial \alpha_3 }\bigg|_{\alpha=\alpha_0}
+=\begin{bmatrix}
+\mathrm{i} &0 \\
+0 &-\mathrm{i}
+\end{bmatrix}
+=\mathrm{i}\sigma_3
+\end{equation}
+
+对易关系：
+
+\begin{equation}
+\left[I_i,I_j\right]
+=-2\varepsilon_{ijk} I_k
+\end{equation}
+
+\textbf{补充：}这里的 $a,b$ 满足 $|a|^2+|b|^2=1$，四个实分量构成三维球面 $S^3$，这也说明 $\mathrm{SU}\left(2\right)$ 是紧致的。上述参数在恒元附近的三个导数线性无关，故由逆函数定理给出局部坐标；周期性使全局一一对应不成立。
+
+\subsection{有限群元的生成}
+
+\subsubsection*{\texorpdfstring{$\mathrm{SO}\left(2\right)$ 群}{SO(2) 群}}
+
+$\mathrm{SO}\left(2\right)$ 群只有一个独立的群参数 $\theta$，与恒元对应的参数的取值为 $\theta=0$
+
+当 $\delta\theta\to 0$，
+
+\begin{equation}
+D\left(\delta \theta\right)
+=E + I \delta \theta+O\left(\delta\theta^2\right)
+\end{equation}
+
+\begin{equation}
+\delta \theta
+=\frac{\theta }{N },~~N\gg 1
+\end{equation}
+
+\begin{equation}
+D\left(\theta\right)
+=D^N\left(\delta\theta\right)
+\approx \left(E + I \delta \theta\right)^N
+\end{equation}
+
+\begin{equation}
+D\left(\theta\right)
+=\lim_{N\to \infty} \left(E + \frac{\theta I }{N }  \right)^{N}
+=\mathrm{e}^{\theta I}
+\end{equation}
+
+当李群有多个独立的群参数，并采用恒元附近的\textbf{指数坐标}时，
+
+\begin{equation}
+D\left(\alpha\right) = \mathrm{e}^{\alpha_i I_i}
+\end{equation}
+
+对于 $\mathrm{SO}\left(2\right)$ 群，有限转动 $D\left(\theta\right)$ 可由无穷小转动变换生成：
+
+\begin{equation}
+D\left(\theta\right)
+=\mathrm{e}^{\theta I}
+=\exp\left(\theta
+\begin{bmatrix}
+0 &-1 \\
+1 &0
+\end{bmatrix}
+\right)
+=\begin{bmatrix}
+\cos\theta &-\sin\theta \\
+\sin\theta &\cos\theta
+\end{bmatrix}
+\end{equation}
+
+\textbf{补充：}这里 $g\left(\alpha\right)=\exp\left(\alpha_k e_k\right)$，$e_k$ 为恒元切空间的一组基，$I_k$ 为其表示矩阵。一般坐标下不能直接写成这个指数式。恒元连通分支中的每个元素都能写成有限个指数的乘积，但对一般连通李群，不保证每个元素都是单个指数；其他连通分支还需要离散群元。
+
+\subsubsection*{\texorpdfstring{$\mathrm{SO}\left(3\right)$ 群}{SO(3) 群}}
+
+\begin{equation}
+D\left(\omega_1,\omega_2,\omega_3\right)
+=\mathrm{e}^{\omega_1 I_1 + \omega_2 I_2 + \omega_3 I_3}
+\end{equation}
+
+$\mathrm{O}\left(3\right)$ 群的生成元与 $\mathrm{SO}\left(3\right)$ 相同，只不过对 $\mathrm{O}\left(3\right)$ 群中行列式为 $-1$ 的群元，还需要乘上空间反演矩阵：
+
+\begin{equation}
+D\left(\omega\right)
+=\begin{bmatrix}
+-1 &0 &0 \\
+0 &-1 &0 \\
+0 &0 &-1
+\end{bmatrix}
+\mathrm{e}^{\omega_i I_i}
+\end{equation}
+
+\section{李群三定理}
+
+\textbf{说明：}本节保留原稿“李群三定理”的标题与顺序，讨论表示的微分方程、生成元对易关系和 Jacobi 恒等式；其编号不等同于现代教材关于李群与李代数对应的三个基本定理。
+
+\subsection{定理一}
+
+给定连通李群及其群结构后，一个已有的光滑线性表示完全由生成元决定。对非连通李群，这一结论只确定恒元连通分支上的表示。
+
+证明：
+
+设李群的表示矩阵为 $D\left(\alpha\right)$，乘法法则：
+
+\begin{equation}
+D\left(\alpha\right)D\left(\beta\right) = D\left(\gamma\right),~~\gamma = f\left(\alpha,\beta\right)
+\end{equation}
+
+上式两端右乘 $D^{-1}\left(\beta\right)$：
+
+\begin{equation}
+D\left(\alpha\right) = D\left(\gamma\right)D^{-1}\left(\beta\right)
+\end{equation}
+
+先固定 $\beta$，上式两端对 $\alpha_i$ 求导：
+
+\begin{equation}
+\frac{\partial D\left(\alpha\right) }{\partial \alpha_i }
+=\frac{\partial D\left(\gamma\right) }{\partial \gamma_j } \frac{\partial f_j\left(\alpha,\beta\right) }{\partial \alpha_i } D^{-1}\left(\beta\right)
+\end{equation}
+
+取 $\beta=\bar{\alpha}$，此时 $\gamma = f\left(\alpha,\bar{\alpha}\right) = \alpha_0,D^{-1}\left(\beta\right) = D^{-1}\left(\bar{\alpha}\right) = D\left(\alpha\right)$
+
+\begin{equation}
+\frac{\partial D\left(\alpha\right) }{\partial \alpha_i }
+=\frac{\partial D\left(\gamma\right) }{\partial \gamma_j }\bigg|_{\gamma=\alpha_0} \frac{\partial f_j\left(\alpha,\beta\right) }{\partial \alpha_i }\bigg|_{\beta=\bar{\alpha}} D\left(\alpha\right)
+\end{equation}
+
+令：
+
+\begin{equation}
+S_{ji}\left(\alpha\right)
+=\frac{\partial f_j\left(\alpha,\beta\right) }{\partial \alpha_i }\bigg|_{\beta=\bar{\alpha}}
+\end{equation}
+
+则：
+
+\begin{equation}
+\left\{
+\begin{aligned}
+&\frac{\partial D\left(\alpha\right) }{\partial \alpha_i } = I_j S_{ji}\left(\alpha\right) D\left(\alpha \right) \\
+&D\left(\alpha_0\right) = E
+\end{aligned}
+\right.
+\end{equation}
+
+\textbf{补充证明：}沿恒元出发的任一分段光滑路径 $\alpha\left(t\right)$，该方程化为线性常微分方程
+
+\begin{equation}
+\frac{\mathrm{d}D}{\mathrm{d}t}=\dot\alpha_i\left(t\right)I_j S_{ji}\left(\alpha\left(t\right)\right)D,\qquad D\left(0\right)=E.
+\end{equation}
+
+解的唯一性说明，两个具有相同生成元的已有表示在路径上相同；连通性使这个结论覆盖整个群。这里证明的是已有表示的唯一性。由李代数表示构造群表示时，它总可积分到单连通覆盖群；要下降到指定的非单连通群，还需覆盖映射的核作用为恒等。
+
+若令 $\alpha=\alpha_0$，可得：
+
+\begin{equation}
+I_i
+=I_j S_{ji}\left(\alpha_0\right) E 
+=I_j S_{ji}\left(\alpha_0\right)
+\end{equation}
+
+另一方面，
+
+\begin{equation}
+I_{i}
+=I_{j}\delta_{ji}
+\end{equation}
+
+由 $f\left(\alpha,\alpha_0\right)=\alpha$ 直接对参数求导可得（因此不必额外假设表示忠实）：
+
+\begin{equation}
+S_{ji}\left(\alpha_0\right)
+=\delta_{ji}
+\end{equation}
+
+\subsection{定理二}
+
+李群的线性表示的生成元满足如下关系：
+
+\begin{equation}
+\left[I_j,I_k\right]
+=C_{jk}^i I_i
+\end{equation}
+
+其中，$C_{jk}^i$ 为结构常数：
+
+\begin{equation}
+C_{jk}^i
+\equiv \left(\frac{\partial S_{ik}\left(\alpha\right) }{\partial \alpha_j } - \frac{\partial S_{ij}\left(\alpha\right) }{\partial\alpha_k }  \right)\bigg|_{\alpha=\alpha_0}
+\end{equation}
+
+\begin{equation}
+S_{ji}\left(\alpha\right)
+=\frac{\partial f_j\left(\alpha,\beta\right) }{\partial \alpha_i }\bigg|_{\beta=\bar{\alpha}}
+\end{equation}
+
+\subsubsection*{一种证明方法}
+
+\begin{equation}
+\frac{\partial D\left(\alpha\right) }{\partial \alpha_i } 
+=I_j S_{ji}\left(\alpha\right)D\left(\alpha\right)
+\end{equation}
+
+上式两端对 $\alpha_k$ 求导，再令 $\alpha=\alpha_0$：
+
+\begin{align}
+\frac{\partial^2 D\left(\alpha\right) }{\partial \alpha_k \partial \alpha_i }\bigg|_{\alpha=\alpha_0}
+&=I_j\frac{\partial S_{ji} }{\partial \alpha_k }\bigg|_{\alpha=\alpha_0} D\left(\alpha_0\right) + I_j S_{ji}\left(\alpha_0\right)\frac{\partial D\left(\alpha\right) }{\partial \alpha_k }\bigg|_{\alpha=\alpha_0} \\
+&=I_j\frac{\partial S_{ji} }{\partial \alpha_k }\bigg|_{\alpha=\alpha_0} + I_j\delta_{ji} I_k \\
+&=I_j\frac{\partial S_{ji} }{\partial \alpha_k }\bigg|_{\alpha=\alpha_0} + I_i I_k
+\end{align}
+
+交换 $i,k$，得：
+
+\begin{equation}
+\frac{\partial^2 D\left(\alpha\right) }{\partial \alpha_i \partial \alpha_k }\bigg|_{\alpha=\alpha_0}
+=I_j \frac{\partial S_{jk} }{\partial \alpha_i }\bigg|_{\alpha=\alpha_0} + I_k I_i
+\end{equation}
+
+相减可得：
+
+\begin{equation}
+I_i I_k - I_k I_i
+=\left(\frac{\partial S_{jk}\left(\alpha\right) }{\partial \alpha_i } - \frac{\partial S_{ji}\left(\alpha\right) }{\partial\alpha_k }  \right)\bigg|_{\alpha=\alpha_0} I_j
+\end{equation}
+
+令：
+
+\begin{equation}
+C_{ik}^j
+=\left(\frac{\partial S_{jk}\left(\alpha\right) }{\partial \alpha_i } - \frac{\partial S_{ji}\left(\alpha\right) }{\partial\alpha_k }  \right)\bigg|_{\alpha=\alpha_0}
+\end{equation}
+
+则得到：
+
+\begin{equation}
+\left[I_i,I_k\right]
+=C_{ik}^j I_j
+\end{equation}
+
+从上式可看出：
+
+\begin{equation}
+C_{ik}^j = -C_{ki}^j
+\end{equation}
+
+\subsection{定理3}
+
+李群的结构常数满足如下关系：
+
+\begin{equation}
+C_{ij}^m C_{km}^n + C_{jk}^m C_{im}^n + C_{ki}^m C_{jm}^n
+=0
+\end{equation}
+
+\textbf{补充证明：}将矩阵对易子的 Jacobi 恒等式展开：
+
+\begin{equation}
+\left[I_k,\left[I_i,I_j\right]\right]+\left[I_i,\left[I_j,I_k\right]\right]+\left[I_j,\left[I_k,I_i\right]\right]=0.
+\end{equation}
+
+代入结构常数即得到上述系数与 $I_n$ 的线性组合为零。在抽象李代数的一组基（或局部忠实表示的独立生成元）下，逐项系数必须为零，得到所述关系。原稿末尾省略缩并指标的简记不再使用。
+
+\section{李群的无穷小算子}
+
+\subsection{李群的无穷小算子}
+
+$r$ 维李群的 $n$ 维表示是行列式不为零的矩阵，因此可看作 $n$ 维空间的线性坐标变换。
+
+考虑 $n$ 维空间中带 $r$ 个实参数的线性坐标变换，变换后的坐标是变换前坐标及实参数的函数，因此可表示为：
+
+\begin{equation}
+x' = \varphi\left(x,\alpha\right)\quad \mathrm{or}\quad
+x'^{\mu} = \varphi^\mu\left(x,\alpha\right)
+\end{equation}
+
+其中，$\mu=1,2,\cdots,n;\quad \alpha=\left(\alpha_1,\alpha_2,\cdots,\alpha_r \right)$
+
+矩阵形式为（补充原稿空缺）：
+
+\begin{equation}
+x'^{\mu}=g\left(\alpha\right)^{\mu}{}_{\nu}x^{\nu}.
+\end{equation}
+
+或：
+
+\begin{equation}
+x' = \varphi\left(x,\alpha\right)=g\left(\alpha\right) x
+\end{equation}
+
+若 $g\left(\alpha\right)$ 满足李群的定义，则所有坐标变换矩阵构成一个 $r$ 维李群。
+
+\textbf{约定：}以下无穷小推导中的等式按一阶精度理解，$\mathrm{d}x$、$\mathrm{d}F$ 表示一阶变化；有限差值还含二阶余项。重复指标求和。
+
+假设恒元对应的群参数 $\alpha_0=0$，考虑无穷小坐标变换 $g\left(\alpha\right),\left|\alpha \right|\ll 1$，在 $g\left(\alpha\right)$ 作用下，坐标 $x$ 变为 $x'$：
+
+\begin{align}
+g\left(\alpha\right):x^\mu
+&\to x'^\mu \\
+&=\varphi^\mu\left(x,\alpha\right) \\
+&=\varphi^\mu\left(x,0\right) + \frac{\partial \varphi^\mu\left(x,\alpha\right) }{\partial \alpha_k } \bigg|_{\alpha=0} \alpha_k \\
+&=x^\mu + \frac{\partial \varphi^\mu\left(x,\alpha\right) }{\partial \alpha_k } \bigg|_{\alpha=0} \alpha_k
+\end{align}
+
+由于坐标变换 $g\left(\alpha\right)$ 无穷小，因此变换前后坐标 $x^\mu$ 和 $x'^\mu$ 很接近，由无穷小坐标变换导致的无穷小坐标之差 $\mathrm{d}x^\mu$ 为：
+
+\begin{equation}
+\mathrm{d}x^\mu
+\equiv x'^\mu - x^\mu
+=\frac{\partial \varphi^\mu\left(x,\alpha\right) }{\partial \alpha_k } \bigg|_{\alpha=0} \alpha_k
+\end{equation}
+
+在无穷小坐标变换的作用下，坐标有了无穷小变动 $\mathrm{d}x^\mu$，$n$ 维空间的标量函数 $F\left(x\right)$ 有相应变化 $\mathrm{d} F\left(x\right)$ ：
+
+\begin{equation}
+S\left(\alpha\right):F\left(x\right)\to F\left(x'\right)=F\left(x+\mathrm{d}x\right)=F\left(x\right)+\mathrm{d}F\left(x\right)
+\end{equation}
+
+其中，
+
+\begin{align}
+\mathrm{d}F\left(x\right)
+&\equiv F\left(x+\mathrm{d}x\right) - F\left(x\right) \\
+&=\frac{\partial F\left(x\right) }{\partial x^\mu } \mathrm{d}x^\mu \\
+&=\frac{\partial F\left(x\right) }{\partial x^\mu } \frac{\partial \varphi^\mu\left(x,\alpha\right) }{\partial \alpha_k } \bigg|_{\alpha=0} \alpha_k \\
+&=\frac{\partial \varphi^\mu\left(x,\alpha\right) }{\partial\alpha_k } \bigg|_{\alpha=0} \alpha_k \frac{\partial F\left(x\right) }{\partial 
+x^\mu } 
+\end{align}
+
+把对坐标求偏导简记为：
+
+\begin{equation}
+\partial_\mu \equiv\frac{\partial }{\partial x^\mu }
+\end{equation}
+
+定义李群的无穷小算子（一个群参数对应一个无穷小算子）：
+
+\begin{equation}
+X_k
+\equiv \frac{\partial \varphi^\mu\left(x,\alpha\right) }{\partial \alpha_k } \bigg|_{\alpha=0}\partial_\mu
+\end{equation}
+
+则由无穷小坐标变换 $g\left(\alpha\right)$  导致的无穷小坐标变化 $\mathrm{d}x$ ，再引起的无穷小标量函数变化 $\mathrm{d}F$ 可写为：
+
+\begin{equation}
+\mathrm{d}F = \alpha_k X_k F
+\end{equation}
+
+\begin{equation}
+S:F\left(x\right)\to F'\left(x\right)
+=SF\left(x\right)
+=F\left(x\right)+\mathrm{d}F\left(x\right)
+=F\left(x\right)+\alpha_kX_kF\left(x\right)
+\end{equation}
+
+故无穷小坐标变换诱导出的标量函数的无穷小变换算符为：
+
+\begin{equation}
+S
+=1+\alpha_k X_k
+\end{equation}
+
+对李群的线性表示，
+
+无穷小群元：
+
+\begin{equation}
+D\left(\alpha\right) = E+\alpha_k I_k
+\end{equation}
+
+有限群元（采用指数坐标）：
+
+\begin{equation}
+D\left(\alpha\right) = \mathrm{e}^{\alpha_k I_k}
+\end{equation}
+
+对坐标变换，有：
+
+\begin{equation}
+S\left(\alpha\right) = 1+\alpha_k X_k
+\end{equation}
+
+\begin{equation}
+S\left(\alpha\right) = \mathrm{e}^{\alpha_k X_k}
+\end{equation}
+
+生成元满足：
+
+\begin{equation}
+\left[I_i,I_j \right] = C_{ij}^k I_k
+\end{equation}
+
+李群的无穷小算子满足的对易关系：
+
+\begin{equation}
+\left[X_i,X_j \right] = -C_{ij}^k X_k
+\end{equation}
+
+李群无穷小算子与生成元的关系：
+
+\begin{equation}
+x'
+=g\left(\alpha\right) x
+=\left(E+\alpha_k I_k \right) x
+=x + \alpha_k I_k x
+\end{equation}
+
+\begin{equation}
+\varphi^\mu
+=x^\mu + \alpha_k \left(I_k x \right)^\mu
+=x^\mu + \alpha_k \left(I_k \right)^{\mu}_{~~\nu} x^{\nu}
+\end{equation}
+
+\begin{align}
+X_i
+&=\frac{\partial \varphi^\mu }{\partial \alpha_i } \bigg|_{\alpha=0} \partial_\mu \\
+&=\left(I_i \right)^\mu_{~~\nu} x^{\nu} \partial_\mu
+\end{align}
+
+\begin{equation}
+X_i = \left(I_i \right)^{\mu}_{~~\nu} x^{\nu} \partial_\mu
+\end{equation}
+
+若李群的线性表示的生成元满足如下对易关系：
+
+\begin{equation}
+\left[I_i,I_j \right] = C_{ij}^k I_k
+\end{equation}
+
+则该李群的无穷小算子满足对易关系：
+
+\begin{equation}
+\left[X_i,X_j \right] = -C_{ij}^k X_k
+\end{equation}
+
+\textbf{补充：负号的来源。}这里沿用原稿 $S\left(g\right)F\left(x\right)=F\left(gx\right)$ 的定义。它满足
+
+\begin{equation}
+S\left(g\right)S\left(h\right)F\left(x\right)=F\left(hgx\right)=S\left(hg\right)F\left(x\right),
+\end{equation}
+
+所以 $S$ 是反表示。若采用前文常见的 $P\left(g\right)F\left(x\right)=F\left(g^{-1}x\right)$，则 $P$ 才是表示，生成元为 $-X_i$。直接计算也能看出这个符号：对光滑函数 $F$，二阶偏导项相消，剩下
+
+\begin{equation}
+\left[X_i,X_j\right]F=\left(\left(I_jI_i-I_iI_j\right)x\right)^\mu\partial_\mu F=-C_{ij}^kX_kF.
+\end{equation}
+
+有限公式 $S\left(\alpha\right)=\mathrm{e}^{\alpha_kX_k}$ 同样采用指数坐标，并按相应向量场的流来理解。
+
+\subsection{一些例子}
+
+\subsubsection*{\texorpdfstring{$\mathrm{SO}\left(2\right)$ 群的无穷小算子}{SO(2) 群的无穷小算子}}
+
+\begin{equation}
+\varphi\left(x,\theta\right)
+=\begin{bmatrix}
+x_1' \\
+x_2'
+\end{bmatrix}
+=\begin{bmatrix}
+\cos\theta &-\sin\theta \\
+\sin\theta &\cos\theta
+\end{bmatrix}
+\begin{bmatrix}
+x_1 \\
+x_2
+\end{bmatrix}
+=\begin{bmatrix}
+\cos\theta x_1 - \sin\theta x_2 \\
+\sin\theta x_1 + \cos\theta x_2
+\end{bmatrix}
+=\begin{bmatrix}
+\varphi_1 \\
+\varphi_2
+\end{bmatrix}
+\end{equation}
+
+无穷小算子:
+
+\begin{equation}
+X_\theta
+=\frac{\partial \varphi^\mu }{\partial \theta } \bigg|_{\theta=0} \partial_\mu
+=\frac{\partial \varphi^1}{\partial \theta}\bigg|_{\theta=0 }\partial_1 +\frac{\partial\varphi^2 }{\partial \theta } \bigg|_{\theta=0} \partial_2
+=-x_2\partial_1 + x_1\partial_2
+\end{equation}
+
+
+或：
+
+\begin{equation}
+X_{12} = x_1\partial_2-x_2\partial_1
+\end{equation}
+
+量子力学中，
+
+\begin{equation}
+J_z=J_{12}=-\mathrm{i}\hbar\left(x\partial_y-y\partial_x \right)=-\mathrm{i}\hbar X_{12}
+\end{equation}
+
+也可利用 $X_i=\left(I_i \right)_{\mu\nu} x^{\nu} \partial_\mu$ 来计算无穷小算子。
+
+$\mathrm{SO}\left(2\right)$ 群的生成元：
+
+\begin{equation}
+I_{12}=\begin{bmatrix}0&-1\\1&0\end{bmatrix}.
+\end{equation}
+
+\subsubsection*{\texorpdfstring{$3$ 维紧致李群 $\mathrm{SO}\left(3\right)$ 群的无穷小算子}{3 维紧致李群 SO(3) 群的无穷小算子}}
+
+可以通过生成元来计算无穷小算子：
+
+\begin{equation}
+X_1
+=\left(I_{23} \right)_{\mu\nu}x_\nu\partial_\mu
+=x_2\partial_3-x_3\partial_2
+\end{equation}
+
+\begin{equation}
+X_2
+=x_3\partial_1-x_1\partial_3
+\end{equation}
+
+\begin{equation}
+X_3
+=x_1\partial_2-x_2\partial_1
+\end{equation}
+
+还可以：
+
+\begin{equation}
+\left(I_k \right)_{\mu\nu}
+=-\varepsilon_{k\mu\nu}
+\end{equation}
+
+\begin{equation}
+X_k
+=-\varepsilon_{k\mu\nu} x^{\nu} \partial_\mu
+=\mathrm{i}J_k/\hbar
+\end{equation}
+
+\textbf{补充：}本章保留 $\hbar$，采用 $\hat p_k=-\mathrm{i}\hbar\partial_k$、$\hat J_k=-\mathrm{i}\hbar X_k$；因此 $X_k=\mathrm{i}\hat J_k/\hbar$。
+
+\subsubsection*{\texorpdfstring{$\mathrm{SO}\left(4\right)$ 群的无穷小算子}{SO(4) 群的无穷小算子}}
+
+$6$ 个独立的群参数。
+
+群元变换的对象是四维欧式空间中的矢量（此处 $t=x_0$ 只是欧氏坐标名称，并非洛伦兹度规下的时间）：
+
+\begin{equation}
+\vec{r}
+=\begin{bmatrix}
+t \\
+x \\
+y \\
+z
+\end{bmatrix}
+\equiv\begin{bmatrix}
+x_0 \\
+x_1 \\
+x_2 \\
+x_3
+\end{bmatrix}
+\end{equation}
+
+三维空间 $\left\{x_1,x_2,x_3 \right\}$ 部分：
+
+\begin{equation}
+M_k
+=\varepsilon_{k\mu\nu} x_\mu \partial_\nu
+\end{equation}
+
+\begin{equation}
+\left\{
+\begin{aligned}
+M_1 = y\partial_z-z\partial_y \\
+M_2 = z\partial_x-x\partial_z \\
+M_3 = x\partial_y-y\partial_x
+\end{aligned}
+\right.
+\end{equation}
+
+另外 $3$ 个为 $x_0,x_i$ 平面转动对应的算符：
+
+\begin{equation}
+N_k
+=t\partial_k-x_k\partial_t
+\end{equation}
+
+\begin{equation}
+\left\{
+\begin{aligned}
+N_1 = t\partial_x-x\partial_t \\
+N_2 = t\partial_y-y\partial_t \\
+N_3 = t\partial_z-z\partial_t
+\end{aligned}
+\right.
+\end{equation}
+
+无穷小算子对易关系：
+
+\begin{equation}
+\left[M_i,M_j \right] = -\varepsilon_{ijk}M_k
+\end{equation}
+
+\begin{equation}
+\left[N_i,N_j \right] = -\varepsilon_{ijk}M_k
+\end{equation}
+
+\begin{equation}
+\left[M_i,N_j \right] = -\varepsilon_{ijk}N_k
+\end{equation}
+
+把 $\left(M_k,N_k \right)$ 看作一组基矢，做如下线性变换：
+
+\begin{equation}
+P_k
+\equiv \frac{M_k+N_k }{2 }
+\end{equation}
+
+\begin{equation}
+Q_k
+\equiv \frac{M_k-N_k }{2 }
+\end{equation}
+
+新得到的无穷小算符的对易关系：
+
+\begin{equation}
+\left[P_i,P_j \right] = -\varepsilon_{ijk}P_k
+\end{equation}
+
+\begin{equation}
+\left[Q_i,Q_j \right] = -\varepsilon_{ijk}Q_k
+\end{equation}
+
+\begin{equation}
+\left[P_i,Q_j \right] = 0
+\end{equation}
+
+$\mathrm{SO}\left(4\right)$ 群的无穷小算符相当于两个不同的 $\mathrm{SO}\left(3\right)$ 群的无穷小算符。
+
+上述结论是李代数的直和分解：
+
+\begin{equation}
+\mathfrak{so}\left(4\right)\cong\mathfrak{so}\left(3\right)\oplus\mathfrak{so}\left(3\right).
+\end{equation}
+
+\textbf{补充：}不能据此认定群本身是两个 $\mathrm{SO}\left(3\right)$ 的直积。全局上有
+
+\begin{equation}
+\mathrm{SO}\left(4\right)\cong\left(\mathrm{SU}\left(2\right)\times\mathrm{SU}\left(2\right)\right)/\left\{\left(E,E\right),\left(-E,-E\right)\right\}.
+\end{equation}
+
+直和的对易关系只反映局部结构，不能消除覆盖群之间的全局拓扑区别。
+
+\subsubsection*{\texorpdfstring{$\mathrm{SO}\left(n\right)$ 群的无穷小算子}{SO(n) 群的无穷小算子}}
+
+$\mathrm{SO}\left(n\right)$ 群维数 $r=n\left(n-1\right)/2$
+
+类比 $\mathrm{SO}\left(3\right),\mathrm{SO}\left(4\right)$ 群，可得：
+
+\begin{equation}
+X_{ij}
+=x_i\partial_j-x_j\partial_i
+\end{equation}
+
+对易关系：
+
+\begin{equation}
+\left[X_{ij} , X_{kl} \right]
+=\delta_{jk}X_{il} + \delta_{il}X_{jk} - \delta_{ik}X_{jl} - \delta_{jl}X_{ik}
+\end{equation}
+
+推导：
+
+\begin{align}
+\left[X_{ij} , X_{kl} \right]
+&=X_{ij}X_{kl} - X_{kl}X_{ij} \\
+&=\left(x_i\partial_j-x_j\partial_i \right)\left(x_k\partial_l-x_l\partial_k \right) - \left(x_k\partial_l-x_l\partial_k \right)\left(x_i\partial_j-x_j\partial_i \right) \\
+&=\delta_{jk}\left(x_i\partial_l-x_l\partial_i \right) + \delta_{il}\left(x_j\partial_k-x_k\partial_j \right) -\delta_{ik}\left(x_j\partial_l-x_l\partial_j \right) - \delta_{jl}\left(x_i\partial_k-x_k\partial_i \right) \\
+&=\delta_{jk}X_{il} + \delta_{il}X_{jk} - \delta_{ik}X_{jl} - \delta_{jl}X_{ik}
+\end{align}
+
+\subsubsection*{\texorpdfstring{$\mathrm{E}_n$ 群（$n$ 维空间转动平移群）}{En 群（n 维空间转动平移群）}}
+
+\textbf{约定补充：}这里沿用原稿 $\mathrm{E}_n$ 表示由转动和平移组成的恒元连通分支，即通常的 $\mathrm{SE}\left(n\right)=\mathbb{R}^n\rtimes\mathrm{SO}\left(n\right)$，维数为 $n\left(n+1\right)/2$。通常完整欧氏群还包含反射；下述生成元只描述其恒元分支。
+
+$E_1$ 群，一维表示 $D\left(a\right)=\mathrm{e}^a$
+
+\begin{equation}
+I
+=\frac{\mathrm{d}\mathrm{e}^a }{\mathrm{d} a }\bigg|_{a=0} 
+=1
+\end{equation}
+
+二维表示：
+
+\begin{equation}
+D\left(a\right)=\begin{bmatrix}
+1 &a \\
+0 &1
+\end{bmatrix},\quad
+I'=\begin{bmatrix}
+0 &1 \\
+0 &0
+\end{bmatrix}
+\end{equation}
+
+无穷小算子：
+
+\begin{equation}
+x' = x+a
+\end{equation}
+
+\begin{equation}
+X
+=\frac{\partial x' }{\partial a } \bigg|_{a=0} \partial_x 
+=\mathrm{i}\hat{p}_x/\hbar
+\end{equation}
+
+量子力学中，动量算符对应空间中的无穷小平移变换。
+
+$E_2$ 群，
+
+\begin{equation}
+\begin{bmatrix}
+x_1' \\
+x_2' \\
+1
+\end{bmatrix}
+=\begin{bmatrix}
+\cos\theta &-\sin\theta &a \\
+\sin\theta &\cos\theta &b \\
+0 &0 &1
+\end{bmatrix}
+\begin{bmatrix}
+x_1 \\
+x_2 \\
+1
+\end{bmatrix}
+\end{equation}
+
+$3$ 个独立群参数，对应三个生成元：
+
+\begin{equation}
+I_z
+=\begin{bmatrix}
+0 &-1 &0 \\
+1 &0 &0 \\
+0 &0 &0
+\end{bmatrix},\quad
+L_x
+=\begin{bmatrix}
+0 &0 &1 \\
+0 &0 &0 \\
+0 &0 &0
+\end{bmatrix},\quad
+L_y
+=\begin{bmatrix}
+0 &0 &0 \\
+0 &0 &1 \\
+0 &0 &0
+\end{bmatrix}
+\end{equation}
+
+对易关系：
+
+\begin{equation}
+\left[I_z , L_x \right] = L_y,\quad
+\left[L_x , L_y \right] = 0,\quad
+\left[L_y , I_z \right] = L_x
+\end{equation}
+
+无穷小算子：
+
+\begin{equation}
+X_z
+=x\partial_y-y\partial_x
+=\mathrm{i}\hat{J}_z/\hbar,\quad
+Q_x
+=\partial_x
+=\mathrm{i}\hat{p}_x/\hbar,\quad
+Q_y
+=\partial_y
+=\mathrm{i}\hat{p}_y/\hbar
+\end{equation}
+
+$E_3$ 群，$6$ 个独立群参数。
+
+\begin{equation}
+\begin{bmatrix}
+x_1' \\
+x_2' \\
+x_3' \\
+1
+\end{bmatrix}
+=\begin{bmatrix}
+R_{11} &R_{12} &R_{13} &a \\
+ R_{21} &R_{22} &R_{23} &b \\
+ R_{31} &R_{32} &R_{33} &c \\
+ 0 &0 &0 &1
+\end{bmatrix}
+\begin{bmatrix}
+x_1 \\
+x_2 \\
+x_3 \\
+1
+\end{bmatrix}
+\end{equation}
+
+其中 $R\in\mathrm{SO}\left(3\right)$。
+
+转动变换生成元：
+
+\begin{gather}
+I_1
+=\begin{bmatrix}
+0 &0 &0 &0 \\
+0 &0 &-1 &0 \\
+0 &1 &0 &0 \\
+0 &0 &0 &0
+\end{bmatrix},\\
+I_2
+=\begin{bmatrix}
+0 &0 &1 &0 \\
+0 &0 &0 &0 \\
+-1 &0 &0 &0 \\
+0 &0 &0 &0
+\end{bmatrix},\\
+I_3
+=\begin{bmatrix}
+0 &-1 &0 &0 \\
+1 &0 &0 &0 \\
+0 &0 &0 &0 \\
+0 &0 &0 &0
+\end{bmatrix}
+\end{gather}
+
+平移变换生成元：
+
+\begin{gather}
+L_1
+=\begin{bmatrix}
+0 &0 &0 &1 \\
+0 &0 &0 &0 \\
+0 &0 &0 &0 \\
+0 &0 &0 &0
+\end{bmatrix},\\
+L_2
+=\begin{bmatrix}
+0 &0 &0 &0 \\
+0 &0 &0 &1 \\
+0 &0 &0 &0 \\
+0 &0 &0 &0
+\end{bmatrix},\\
+L_3
+=\begin{bmatrix}
+0 &0 &0 &0 \\
+0 &0 &0 &0 \\
+0 &0 &0 &1 \\
+0 &0 &0 &0
+\end{bmatrix}
+\end{gather}
+
+生成元对易关系：
+
+\begin{equation}
+\left[I_i , I_j \right] = \varepsilon_{ijk} I_k,\quad
+\left[L_i , L_j \right] = 0,\quad
+\left[I_i , L_j \right] = \varepsilon_{ijk} L_k
+\end{equation}
+
+无穷小算子：
+
+\begin{equation}
+\mathrm{SO}\left(3\right):X_i=\varepsilon_{ijk} x_j\partial_k,\quad i=1,2,3
+\end{equation}
+
+\begin{equation}
+\mathrm{T}\left(3\right):Q_k=\partial_k=\mathrm{i}\hat{p}_k/\hbar,\quad k=1,2,3
+\end{equation}
+
+以下小结取恒元参数为零；有限式使用指数坐标，后面的两个一阶展开式补齐原稿空缺。
+
+\subsection{小结}
+
+\begin{equation}
+I_k
+\equiv \frac{\partial D\left(\alpha\right) }{\partial\alpha_k } \bigg|_{\alpha=\alpha_0}
+=\frac{\partial D\left(0,0,\cdots,0,\alpha_k,0,\cdots\right) }{\partial \alpha_k }\bigg|_{\alpha_k=0}
+\end{equation}
+
+\begin{equation}
+D\left(\alpha\right)
+=\mathrm{e}^{\alpha_k I_k}
+\end{equation}
+
+\begin{equation}
+D\left(\alpha\right)
+=E+\alpha_kI_k+O\left(\lVert\alpha\rVert^2\right).
+\end{equation}
+
+令：
+
+\begin{equation}
+T_k
+\equiv \mathrm{i}I_k
+\end{equation}
+
+\begin{equation}
+D\left(\alpha\right)
+=\mathrm{e}^{-\mathrm{i}\alpha_k T_k}
+\end{equation}
+
+\begin{equation}
+D\left(\alpha\right)
+=E-\mathrm{i}\alpha_kT_k+O\left(\lVert\alpha\rVert^2\right).
+\end{equation}
+
+\begin{equation}
+\left[I_i,I_j \right] = C_{ij}^k I_k
+\end{equation}
+
+\begin{equation}
+\left[T_i,T_j \right] = \mathrm{i}C_{ij}^k T_k
+\end{equation}
+
+\section{李代数}
+
+\subsection{李代数}
+
+设 $A$ 为数域 $\mathbb{F}$ 上的一个 $m$ 维线性空间（本章取 $\mathbb{F}=\mathbb{R}$ 或 $\mathbb{C}$，均为特征零），若 $A$ 上有一个运算：
+
+\begin{equation}
+A\times A\to A,\quad 
+\left(x,y\right)\mapsto \left[x,y \right]
+\end{equation}
+
+并满足以下三个条件，则称 $A$ 是一个李代数：
+
+（1）双线性性（写出第一个变量的线性性，第二个变量的线性性可由反对称性推出）：
+
+\begin{equation}
+\left[ax+by,z \right]
+=a\left[x,z \right]+b\left[y,z \right]
+\end{equation}
+
+（2）反对称性：
+
+\begin{equation}
+\left[x,y \right]=-\left[y,x \right]
+\end{equation}
+
+（3）雅可比恒等式：
+
+\begin{equation}
+\left[x,\left[y,z \right] \right] + \left[y,\left[z,x \right]  \right] + \left[z,\left[x,y \right] \right]
+=0
+\end{equation}
+
+其中，$a,b$ 是域 $\mathbb{F}$ 中的任意数，$x,y,z$ 是 $A$ 中的任意矢量。
+
+通过李括号将 $A$ 中的一对矢量 $I_i,I_j$ 映射到 $A$ 中的一个矢量 $\left[I_i,I_j \right]$，该矢量可用基矢的线性组合给出。对易关系相当于定义了这个线性空间的矢量乘积，这种乘积称为李乘积。
+
+\subsection{李群对应的李代数}
+
+设群 $G$ 是 $r$ 维李群，其恒元切空间是 $r$ 维的。取局部忠实表示时，$r$ 个独立生成元 $I_i$ 可作为基矢张成同构的线性空间 $g$；采用原稿的函数拉回约定时，应使用 $-X_i$ 才与 $I_i$ 具有相同的结构常数。定义矢量之间的运算为对易关系，若：
+
+\begin{equation}
+\left[I_i,I_j \right] = C_{ij}^k I_k
+\end{equation}
+
+则称 $g$ 是群 $G$ 对应的李代数。
+
+通过对易关系将 $g$ 中的一对矢量 $I_i,I_j$ 映射到 $g$ 中的一个矢量 $\left[I_i,I_j \right]$，该矢量可用基矢的线性组合给出。对易关系相当于定义了这个线性空间的矢量乘积，这种乘积称为李乘积。
+
+\subsection{子代数}
+
+设 $A$ 为一个李代数，若它的子空间 $B$ 满足：
+
+\begin{equation}
+\left[\bar{I}_i , \bar{I}_j \right] = C_{ij}^k \bar{I}_k,\quad \left(\left[B,B \right]\subseteq B \right)
+\end{equation}
+
+其中 $\left\{\bar{I}_i \right\}$ 为 $B$ 的基矢，则称 $B$ 为 $A$ 的子代数。
+
+$\mathrm{SO}\left(2\right)$ 群是一维李群，其李代数中只有一个生成元作为基矢，其自身就是它的子代数。
+
+$\mathrm{SO}\left(3\right)$ 群共有三个线性无关的生成元，其李代数 $\mathfrak{so}\left(3\right)$ 为三维的线性空间，三个生成元自身分别构成三个子代数，这三个子代数正好是三个不同坐标平面上 $\mathrm{SO}\left(2\right)$ 群的李代数 $\mathfrak{so}\left(2\right)$
+
+注意，$\mathrm{SO}\left(3\right)$ 群的生成元 $\left[I_1,I_2 \right]=I_3$，因此 $I_1,I_2$ 不能作为基矢张成一个保持李乘积封闭的子代数。
+
+一般来说，$r\geqslant1$ 时，零子代数和各个基矢分别张成的一维子空间，就给出至少 $r+1$ 个子代数。实或复李代数在 $r\geqslant2$ 时有无穷多个一维子代数。
+
+\subsubsection*{\texorpdfstring{$\mathfrak{so}\left(4\right)$ 李代数}{so(4) 李代数}}
+
+$\mathrm{SO}\left(4\right)$ 群共有 $6$ 个 线性生成元，其李代数是 $6$ 维的线性空间。
+
+基矢线性变换：
+
+\begin{equation}
+P_k = \frac{M_k+N_k }{2 } ,\quad
+Q_k = \frac{M_k-N_k }{2 }
+\end{equation}
+
+新基矢满足的对易关系：
+
+\begin{equation}
+\left[P_i,P_j \right]=-\varepsilon_{ijk} P_k,\quad
+\left[Q_i,Q_j \right]=-\varepsilon_{ijk} Q_k,\quad
+\left[P_i,Q_j \right]=0
+\end{equation}
+
+新基矢 $\left\{P_i \right\}$ 和 $\left\{Q_i \right\}$ 分别构成封闭的线性空间，这两个线性空间都是 $\mathfrak{so}\left(4\right)$李代数的子代数，分别将基矢取负后，这两个子代数的对易关系就是 $\mathfrak{so}\left(3\right)$ 的标准关系。
+
+\subsection{不变子代数（理想）}
+
+设 $B$ 为 $A$ 的子代数，且满足：
+
+\begin{equation}
+\left[\bar{I}_i,I_j \right] = C_{ij}^k \bar{I}_k,\quad \forall \bar{I}_i \in B,\forall I_j\in A,\quad\left(\left[B,A \right]\subseteq B \right)
+\end{equation}
+
+则称 $B$ 为 $A$ 的不变子代数或理想。
+
+\begin{equation}
+B\times A\to B
+\end{equation}
+
+例：$\mathfrak{so}\left(4\right)$ 李代数有两个非平庸的理想 $\mathfrak{so}\left(3\right)$ 
+
+\begin{equation}
+\left[P_i,P_j \right]=-\varepsilon_{ijk}P_k,\quad
+\left[Q_i,Q_j \right]=-\varepsilon_{ijk}Q_k,\quad
+\left[P_i,Q_j \right]=0
+\end{equation}
+
+$\mathrm{E}_3$ 群的李代数有一个非平庸的理想 $\mathfrak{t}_3$（平移生成元张成的子空间）
+
+\begin{equation}
+\left[I_i,I_j \right]=\varepsilon_{ijk}I_k,\quad
+\left[L_i,L_j \right]=0,\quad
+\left[I_i,L_j \right]=\varepsilon_{ijk}L_k
+\end{equation}
+
+$\mathfrak{so}\left(3\right)$ 李代数没有非平庸理想：
+
+\begin{equation}
+\left[I_i,I_j \right]=\varepsilon_{ijk}I_k
+\end{equation}
+
+\textbf{补充证明：}将 $\mathfrak{so}\left(3\right)$ 与 $\mathbb{R}^3$ 对应，李括号就是叉积。若理想包含一个非零矢量 $v$，则它还包含所有 $w\times v$；这些矢量张成 $v$ 的垂直平面。加上 $v$ 本身就张成整个空间，所以非零理想只能是整个代数。
+
+\subsection{中心}
+
+李代数 $A$ 的中心由与所有元素对易的全部元素组成：
+
+\begin{equation}
+Z\left(A\right)=\left\{z\in A:\left[z,x\right]=0,\ \forall x\in A\right\}.
+\end{equation}
+
+若子代数 $B$ 满足 $\left[B,A\right]=0$，只能推出 $B\subseteq Z\left(A\right)$；当它包含所有这样的元素时，才是中心本身。
+
+中心是理想的一种特殊情况。$n$ 维平移群的李代数是 Abel 代数，整个代数就是它的中心。
+
+\subsection{直和}
+
+设李代数 $A$ 有两个理想 $A_1$ 和 $A_2$，若它们满足：
+
+\begin{equation}
+A = A_1+A_2,\quad A_1\cap A_2 = 0,\quad \left[A_1,A_2 \right]=0
+\end{equation}
+
+则称 $A$ 为 $A_1$ 和 $A_2$ 的直和，记为：
+
+\begin{equation}
+A = A_1\oplus A_2
+\end{equation}
+
+\subsubsection*{直和的性质}
+
+（1） $A_1$ 和 $A_2$ 为 $A$ 的理想
+
+\begin{equation}
+\left[A_1,A \right]\subseteq A_1,\quad
+\left[A_2,A \right]\subseteq A_2
+\end{equation}
+
+\begin{equation}
+A_1\times A \to A_1,\quad
+A_2\times A \to A_2
+\end{equation}
+
+（2）$A_1\cap A_2=0$
+
+（3）$A_1$ 和 $A_2$ 无公共基矢；
+
+（4）$A$ 的基矢为 $A_1$ 和 $A_2$ 的基矢之并。
+
+\subsection{半直和}
+
+设 $A_1$ 为李代数 $A$ 的理想，$A_2$ 为 $A$ 的子代数，并满足：
+
+\begin{equation}
+A=A_1+A_2,\quad
+A_1\cap A_2=0
+\end{equation}
+
+则称 $A$ 为 $A_1$ 和 $A_2$ 的半直和，记为：
+
+\begin{equation}
+A = A_1\oplus_{\mathrm{S}} A_2
+\end{equation}
+
+$E_3$ 群生成元对易关系：
+
+\begin{equation}
+\left[I_i,I_j \right]=\varepsilon_{ijk}I_k,\quad
+\left[L_i,L_j \right]=0,\quad
+\left[I_i,L_j \right]=\varepsilon_{ijk}L_k
+\end{equation}
+
+记 $\mathfrak{e}_n$、$\mathfrak{t}_n$ 分别为转动平移群和平移群的李代数。$\mathfrak{t}_3$ 是 $\mathfrak{e}_3$ 的理想，$\mathfrak{so}\left(3\right)$ 是其子代数，因此：
+
+\begin{equation}
+\mathfrak{e}_3=\mathfrak{t}_3\oplus_{\mathrm{S}} \mathfrak{so}\left(3\right)
+\end{equation}
+
+\begin{equation}
+\mathfrak{e}_n=\mathfrak{t}_n\oplus_{\mathrm{S}} \mathfrak{so}\left(n\right)
+\end{equation}
+
+\subsection{单纯李代数和半单纯李代数}
+
+\subsubsection*{单纯李代数}
+
+非 Abel 且不含非平庸理想的李代数称为单纯李代数。
+
+$\mathfrak{so}\left(3\right)$、$\mathfrak{so}\left(2,1\right)$ 是单纯李代数；$\mathfrak{so}\left(2\right)$ 是一维 Abel 代数，不是单纯李代数。
+
+\subsubsection*{半单纯李代数}
+
+在本章有限维、特征零的条件下，不含非零 Abel 理想的李代数称为半单纯李代数；这等价于不含非零可解理想。
+
+\begin{equation}
+\mathfrak{so}\left(4\right) = \mathfrak{so}\left(3\right)\oplus\mathfrak{so}\left(3\right)
+\end{equation}
+
+$\mathfrak{so}\left(4\right)$ 是两个单纯理想的直和，因此是半单纯的。这里需要两个因子为单纯代数，不能仅凭两个已知理想非 Abel 就推出半单纯性；后面的 Killing 型计算也会直接验证这一结论。
+
+$\mathfrak{e}_3$ 含有非零 Abel 理想 $\mathfrak{t}_3$，因此不是半单纯的。
+
+\begin{equation}
+\left[I_i,I_j \right]=\varepsilon_{ijk}I_k,\quad
+\left[L_i,L_j \right]=0,\quad
+\left[I_i,L_j \right]=\varepsilon_{ijk}L_k
+\end{equation}
+
+\subsection{度规}
+
+这里的度规是李代数的 Killing 型，用结构常数定义（不一定正定，也可能退化）：
+
+\begin{equation}
+g_{\mu\nu}
+\equiv C_{\mu\lambda}^\rho C_{\nu\rho}^\lambda
+\end{equation}
+
+置换 $\rho,\lambda$ 哑标：
+
+\begin{equation}
+C_{\mu\rho}^\lambda C_{\nu \lambda}^\rho
+=C_{\nu \lambda}^\rho C_{\mu\rho}^\lambda
+\end{equation}
+
+即：
+
+\begin{equation}
+g_{\mu\nu} = g_{\nu\mu}
+\end{equation}
+
+\textbf{补充：}令 $\operatorname{ad}_x\left(y\right)=\left[x,y\right]$，则
+
+\begin{equation}
+g\left(x,y\right)=\operatorname{Tr}\left(\operatorname{ad}_x\operatorname{ad}_y\right),\qquad
+g\left(\left[z,x\right],y\right)+g\left(x,\left[z,y\right]\right)=0.
+\end{equation}
+
+后一个等式是伴随不变性：用 Jacobi 恒等式写出 $\operatorname{ad}_{\left[z,x\right]}=\left[\operatorname{ad}_z,\operatorname{ad}_x\right]$，再使用迹的循环性即可得到。
+
+\subsection{Cartan 准则（判据定理）}
+
+有限维、特征零的李代数是半单纯的当且仅当 $\mathrm{det}\left(g_{\mu\nu} \right)\ne 0$
+
+例子：
+
+通过生成元对易关系得到 $\mathfrak{so}\left(3\right)$ 李代数的结构常数：
+
+\begin{equation}
+\left[I_i,I_j \right]=\varepsilon_{ijk}I_k=C_{ij}^k I_k
+\end{equation}
+
+\begin{equation}
+C_{12}^1=C_{12}^2=0,C_{12}^3=1,C_{13}^2=-1
+\end{equation}
+
+$\mathfrak{so}\left(3\right)$ 度规张量：
+
+\begin{equation}
+g_{11}
+=C_{1\lambda}^\rho C_{1\rho}^\lambda
+=-2
+\end{equation}
+
+其他对角元：
+
+\begin{equation}
+g_{22}=g_{33}=-2
+\end{equation}
+
+非对角元：
+
+\begin{equation}
+g_{12}
+=C_{1\lambda}^\rho C_{2\rho}^\lambda
+=0
+\end{equation}
+
+$\mathfrak{so}\left(3\right)$ 李代数的度规：
+
+\begin{equation}
+g_{ij}
+=\begin{bmatrix}
+-2 &0 &0 \\
+0 &-2 &0 \\
+0 &0 &-2
+\end{bmatrix}
+\end{equation}
+
+事实上，
+
+\begin{equation}
+C_{ij}^k
+=\varepsilon_{ijk}
+\end{equation}
+
+由度规定义：
+
+\begin{equation}
+g_{ij}
+=C_{ik}^l C_{jl}^k
+=\varepsilon_{ikl}\varepsilon_{jlk}
+=\varepsilon_{kli}\varepsilon_{kjl}
+=\left(\delta_{lj}\delta_{il}-\delta_{ll}\delta_{ij} \right)
+=\left(\delta_{ij}-3\delta_{ij} \right)
+=-2\delta_{ij}
+\end{equation}
+
+由于
+
+\begin{equation}
+\mathrm{det}\left(g_{\mu\nu} \right)\ne 0
+\end{equation}
+
+所以 $\mathfrak{so}\left(3\right)$ 是半单纯的。
+
+$\mathfrak{so}\left(4\right)$ 李代数：沿用前面无穷小算子的基，
+
+\begin{equation}
+\left[P_i,P_j\right]=-\varepsilon_{ijk}P_k,\quad
+\left[Q_i,Q_j\right]=-\varepsilon_{ijk}Q_k,\quad \left[P_i,Q_j\right]=0.
+\end{equation}
+
+为避免两组三维指标混淆，取六维基 $e_i=P_i$、$e_{i+3}=Q_i$，其中 $i=1,2,3$。非零结构常数为
+
+\begin{equation}
+C_{ij}^{k}=-\varepsilon_{ijk},\qquad
+C_{i+3,j+3}^{k+3}=-\varepsilon_{ijk}.
+\end{equation}
+
+两个块分别与前面的三维计算相同；结构常数的两个负号相乘，Killing 型仍为
+
+\begin{equation}
+g_{ij}=-2\delta_{ij},\qquad g_{i+3,j+3}=-2\delta_{ij}.
+\end{equation}
+
+考察混合分量，第一因子非零时缩并指标都必须属于第一块，而第二因子要求它们属于第二块，因此
+
+\begin{equation}
+g_{i,j+3}=C_{iA}^{B}C_{j+3,B}^{A}=0.
+\end{equation}
+
+于是六维度规矩阵为
+
+\begin{equation}
+\left(g_{AB}\right)=\begin{bmatrix}-2E_3&0\\0&-2E_3\end{bmatrix},\qquad \det\left(g_{AB}\right)=64\ne0.
+\end{equation}
+
+这里 $E_3$ 为三阶单位矩阵，故该代数半单纯。
+
+\subsection{\texorpdfstring{Casimir 算子 $C$}{Casimir 算子 C}}
+
+设 $\mathrm{det}\left(g_{\mu\nu} \right)\ne 0$
+
+引入逆变度规张量 $g^{\mu\nu}$，其定义是矩阵求逆（补充）：
+
+\begin{equation}
+g_{\mu\lambda}g^{\lambda\nu}=\delta_\mu{}^\nu.
+\end{equation}
+
+由此才有下面的完全缩并式：
+
+\begin{equation}
+g_{\mu\nu} g^{\mu\nu} 
+=\delta_\mu^\mu
+=r
+\end{equation}
+
+其中，$r$ 为李代数的维数。
+
+定义算子 $C$：
+
+\begin{equation}
+C
+\equiv g^{\mu\nu} X_\mu X_\nu
+\end{equation}
+
+其中，$X_\mu$ 和 $X_\nu$ 对应李群的无穷小算子。
+
+$C$ 称为半单纯李代数的 Casimir 算子。
+
+\begin{equation}
+\left[C,X_\mu \right]=0
+\end{equation}
+
+\textbf{补充证明：}记 $\left[X_a,X_b\right]=f_{ab}^{c}X_c$，在本章约定下 $f_{ab}^{c}=-C_{ab}^{c}$。Killing 型的伴随不变性及可逆性给出
+
+\begin{equation}
+f_{a\lambda}^{\rho}g^{\lambda\sigma}+f_{a\lambda}^{\sigma}g^{\rho\lambda}=0.
+\end{equation}
+
+使用对易子的乘积法则并重命名哑指标，
+
+\begin{equation}
+\left[X_a,C\right]=g^{\mu\nu}\left(\left[X_a,X_\mu\right]X_\nu+X_\mu\left[X_a,X_\nu\right]\right)
+=\left(f_{a\lambda}^{\rho}g^{\lambda\sigma}+f_{a\lambda}^{\sigma}g^{\rho\lambda}\right)X_\rho X_\sigma=0.
+\end{equation}
+
+因而 $\left[C,X_a\right]=0$。在不可约复有限维表示上，Schur 引理进一步说明 $C$ 是常数乘单位算子。
+
+例：$\mathfrak{so}\left(3\right)$ 李代数的 Casimir 算子
+
+$\mathfrak{so}\left(3\right)$ 群的生成元和这里 $x_\mu=\eta_{\mu\nu}x^\nu$，$\partial_\mu=\partial/\partial x^\mu$，故 $\partial_\rho x_\mu=\eta_{\mu\rho}$。
+
+无穷小算子的对易关系：
+
+\begin{equation}
+\left[I_i,I_j \right]=\varepsilon_{ijk} I_k,\quad 
+\left[X_i,X_j \right]=-\varepsilon_{ijk} X_k
+\end{equation}
+
+度规张量：
+
+\begin{equation}
+g_{\mu\nu} = -2\delta_{\mu\nu},\quad
+g^{\mu\nu} = -\frac{1 }{2 } \delta^{\mu\nu}
+\end{equation}
+
+Casimir 算子：
+
+\begin{equation}
+C
+=g^{\mu\nu} X_\mu X_\nu
+=-\frac{1 }{2 } X_\mu X_\mu
+\end{equation}
+
+由 $X_i=\mathrm{i}\hat{J}_i/\hbar$ 可得：
+
+\begin{equation}
+C
+=\frac{1}{2\hbar^2}\left(\hat{J}_1^2+\hat{J}_2^2+\hat{J}_3^2\right)
+=\frac{1}{2\hbar^2}\hat{J}^2
+\end{equation}
+
+\subsection{\texorpdfstring{$\mathrm{SO}\left(1,3\right)$ 李群}{SO(1,3) 李群}}
+
+考虑 $1+3$ 维闵可夫斯基时空，取光速 $c=1$、$x^0=t$，度规：
+
+\begin{equation}
+\eta_{\mu\nu}
+=\mathrm{diag}\left(+1,-1,-1,-1\right)
+\end{equation}
+
+时空的等距变换满足间隔不变：
+
+\begin{equation}
+S^2
+=x^\mu x^\nu \eta_{\mu\nu}
+=x'^{\mu} x'^{\nu} \eta_{\mu\nu}
+\end{equation}
+
+设坐标变换为：
+
+\begin{equation}
+\Lambda:x\to x',\quad
+x'^{\mu} = \Lambda^{\mu}_{~~\nu} x^\nu
+\end{equation}
+
+则有：
+
+\begin{equation}
+x^\alpha x^\beta \eta_{\alpha\beta}
+=x'^{\mu} x'^{\nu} \eta_{\mu\nu}
+=\Lambda^\mu_{~~\alpha} x^\alpha \Lambda^\nu_{~~\beta} x^\beta \eta_{\mu\nu}
+\end{equation}
+
+可得：
+
+\begin{equation}
+\eta_{\alpha\beta}
+=\Lambda^\mu_{~~\alpha}\Lambda^\nu_{~~\beta}\eta_{\mu\nu}
+\end{equation}
+
+\begin{equation}
+\eta_{\alpha\beta}
+=\left(\Lambda^{\mathrm{T}} \right)_\alpha^{~~\mu} \eta_{\mu\nu}\Lambda^\nu_{~~\beta}
+\end{equation}
+
+\begin{equation}
+\eta
+=\Lambda^{\mathrm{T}} \eta \Lambda
+\end{equation}
+
+满足上式的矩阵 $\Lambda$ 称为洛伦兹变换。所有的洛伦兹变换构成洛伦兹群。
+
+由 $\eta=\Lambda^{\mathrm{T}} \eta \Lambda$ 可知：
+
+\begin{equation}
+\mathrm{det}\left(\Lambda\right) = \pm 1
+\end{equation}
+
+取 $\eta=\Lambda^{\mathrm{T}} \eta \Lambda$ 的 $00$ 分量：
+
+\begin{equation}
+1=\eta_{00}=\Lambda^\mu_{~~0}\Lambda^\nu_{~~0}\eta_{\mu\nu}
+=\left(\Lambda^0_{~~0} \right)^2 - \sum_{i=1}^{3} \left(\Lambda^i_{~~0} \right)^2
+\end{equation}
+
+可得：
+
+\begin{equation}
+\Lambda^0_{~~0} 
+=\pm \sqrt{1+\sum_{i=1}^{3} \left(\Lambda^i_{~~0} \right)^2}
+\end{equation}
+
+可得：
+
+\begin{equation}
+\left|\Lambda^0_{~~0} \right|\geqslant 1
+\end{equation}
+
+可将洛伦兹群的变换按照行列式的符号和时间的符号分为四类：
+
+\begin{itemize}
+\item 正规正时 $\Lambda_+^\uparrow$，即 $\mathrm{SO}^{+}\left(1,3\right)$：$\mathrm{det}\Lambda=+1,\Lambda^0_{~~0}\geqslant +1$
+
+\item 正规非正时 $\Lambda_+^\downarrow$：$\mathrm{det}\Lambda=+1,\Lambda^0_{~~0}\leqslant -1$
+
+\item 非正规正时 $\Lambda_-^\uparrow$：$\mathrm{det}\Lambda=-1,\Lambda^0_{~~0}\geqslant +1$
+
+\item 非正规非正时 $\Lambda_-^\downarrow$：$\mathrm{det}\Lambda=-1,\Lambda^0_{~~0}\leqslant -1$
+
+\end{itemize}
+\textbf{修正与补充：}正规正时分支 $H=\mathrm{SO}^{+}\left(1,3\right)$ 是恒元连通分支。通常 $\mathrm{SO}\left(1,3\right)$ 只规定行列式为正，还包括正规非正时分支。其余三个分支不是子群，而是 $H$ 的陪集。
+
+\begin{itemize}
+\item 正规正时与正规非正时用全反演 $\Lambda_T\Lambda_P$ 联系；
+\item 正规正时与非正规正时用空间反演 $\Lambda_P$ 联系；
+\item 正规正时与非正规非正时用时间反演 $\Lambda_T$ 联系。
+
+\end{itemize}
+因此，给定恒元分支和这两个离散反演即可描述整个洛伦兹群，其不交并分解为
+
+\begin{equation}
+\mathrm{O}\left(1,3\right)=H\sqcup\Lambda_TH\sqcup\Lambda_PH\sqcup\Lambda_T\Lambda_PH,
+\qquad \mathrm{SO}\left(1,3\right)=H\sqcup\Lambda_T\Lambda_PH.
+\end{equation}
+
+特殊的洛伦兹变换：
+
+转动：
+
+\begin{equation}
+\Lambda_R
+=\begin{bmatrix}
+1 &0 \\
+0 &R
+\end{bmatrix} \in \Lambda_+^\uparrow
+\end{equation}
+
+其中 $R\in\mathrm{SO}\left(3\right)$。
+
+Boosts：
+
+\begin{equation}
+\Lambda_{B_x}
+=\begin{bmatrix}
+\cosh \lambda &-\sinh \lambda &0 &0 \\
+-\sinh \lambda &\cosh\lambda &0 &0 \\
+0 &0 &1 &0 \\
+0 &0 &0 &1
+\end{bmatrix}\in \Lambda_+^\uparrow
+\end{equation}
+
+其中，$\lambda=\operatorname{artanh}v$、$|v|<1$；因此 $\tanh\lambda=v$，$\cosh\lambda=1/\sqrt{1-v^2}$。原稿的反双曲正割只给出非负快度，不能保留速度的正负号
+
+时间反演：
+
+\begin{equation}
+\Lambda_T=\operatorname{diag}\left(-1,1,1,1\right)\in \Lambda_-^\downarrow
+\end{equation}
+
+空间反演：
+
+\begin{equation}
+\Lambda_P=\operatorname{diag}\left(1,-1,-1,-1\right)\in \Lambda_-^\uparrow
+\end{equation}
+
+全反演：
+
+\begin{equation}
+\Lambda_{TP}=\Lambda_T\Lambda_P=-E_4\in \Lambda_+^\downarrow
+\end{equation}
+
+$\mathrm{SO}\left(1,3\right)$ 群的线性表示有 $6$ 个生成元，$3$ 个对应转动，$3$ 个对应 Boost：
+
+\begin{gather}
+R_1
+=\begin{bmatrix}
+0 &0 &0 &0 \\
+0 &0 &0 &0 \\
+0 &0 &0 &-1 \\
+0 &0 &1 &0
+\end{bmatrix},\\
+R_2
+=\begin{bmatrix}
+0 &0 &0 &0 \\
+0 &0 &0 &1 \\
+0 &0 &0 &0 \\
+0 &-1 &0 &0
+\end{bmatrix},\\
+R_3
+=\begin{bmatrix}
+0 &0 &0 &0 \\
+0 &0 &-1 &0 \\
+0 &1 &0 &0 \\
+0 &0 &0 &0
+\end{bmatrix}
+\end{gather}
+
+\begin{gather}
+B_1
+=\begin{bmatrix}
+0 &1 &0 &0 \\
+1 &0 &0 &0 \\
+0 &0 &0 &0 \\
+0 &0 &0 &0
+\end{bmatrix},\\
+B_2
+=\begin{bmatrix}
+0 &0 &1 &0 \\
+0 &0 &0 &0 \\
+1 &0 &0 &0 \\
+0 &0 &0 &0
+\end{bmatrix},\\
+B_3
+=\begin{bmatrix}
+0 &0 &0 &1 \\
+0 &0 &0 &0 \\
+0 &0 &0 &0 \\
+1 &0 &0 &0
+\end{bmatrix}
+\end{gather}
+
+生成元对易关系：
+
+\begin{equation}
+\left[R_i,R_j \right]=\varepsilon_{ijk}R_k,\quad
+\left[B_i,B_j \right]=-\varepsilon_{ijk}R_k,\quad
+\left[R_i,B_j \right]=\varepsilon_{ijk}B_k
+\end{equation}
+
+\textbf{补充：}这里保持原稿 $B_i$ 的正非对角元约定，因此上面写出的 Boost 满足 $\Lambda_{B_x}=\exp\left(-\lambda B_1\right)$；$B_1$ 是对参数 $-\lambda$ 求导得到的生成元。由 $\Lambda^{\mathrm T}\eta\Lambda=\eta$ 在恒元处求导，得到 $A^{\mathrm T}\eta+\eta A=0$，可直接检查上述六个矩阵均满足这个条件。
+
+对生成元做线性变换：
+
+\begin{equation}
+P_i = \frac{1 }{2 } \left(R_i+\mathrm{i}B_i \right),\quad
+Q_i = \frac{1 }{2 } \left(R_i-\mathrm{i}B_i \right)
+\end{equation}
+
+对易关系：
+
+\begin{equation}
+\left[P_i,P_j \right]=\varepsilon_{ijk}P_k,\quad
+\left[Q_i,Q_j \right]=\varepsilon_{ijk}Q_k,\quad
+\left[P_i,Q_j \right]=0
+\end{equation}
+
+\textbf{补充：}这里使用了复系数，$P_i,Q_i$ 属于实洛伦兹李代数的复化。它们给出
+
+\begin{equation}
+\mathfrak{so}\left(1,3\right)\otimes_{\mathbb{R}}\mathbb{C}
+\cong\mathfrak{sl}\left(2,\mathbb{C}\right)\oplus\mathfrak{sl}\left(2,\mathbb{C}\right).
+\end{equation}
+
+这不是实李代数分解成两个 $\mathfrak{so}\left(3\right)$；复共轭交换 $P_i$ 与 $Q_i$。
+
+$\mathrm{SO}\left(1,3\right)$ 的无穷小算子：
+
+\begin{equation}
+L_{\mu\nu}
+=\mathrm{i}\left(x_\mu\partial_\nu-x_\nu\partial_\mu \right)
+\end{equation}
+
+这里 $x_\mu=\eta_{\mu\nu}x^\nu$，$\partial_\mu=\partial/\partial x^\mu$，故 $\partial_\rho x_\mu=\eta_{\mu\rho}$。
+
+无穷小算子的对易关系：
+
+\begin{equation}
+\left[L_{\mu\nu} , L_{\rho\sigma} \right]
+=\mathrm{i}\left(\eta_{\mu\sigma} L_{\nu\rho} + \eta_{\nu\rho} L_{\mu\sigma} - \eta_{\mu\rho} L_{\nu\sigma} - \eta_{\nu\sigma} L_{\mu\rho} \right)
+\end{equation}

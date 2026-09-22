@@ -1,0 +1,145 @@
+\section{Dirac 记号与算符的基本性质}
+\subsection{右矢、左矢与内积}
+右矢 $\Ket{\psi}$ 属于 $\mathcal H$；对应的左矢 $\Bra{\psi}$ 是作用在右矢上的连续线性泛函。右矢与左矢的对应是反线性的：
+\begin{equation}
+\left(c\Ket{\psi}+d\Ket{\phi}\right)^\dagger
+=c^*\Bra{\psi}+d^*\Bra{\phi}.
+\end{equation}
+内积 $\Braket{\phi|\psi}\in\C$ 对右边的态线性、对左边的态反线性，满足
+\begin{align}
+\Braket{\phi|\psi}&=\Braket{\psi|\phi}^*,\\
+\Braket{\psi|\psi}&\geq0,\qquad
+\Braket{\psi|\psi}=0\ \Longleftrightarrow\ \Ket{\psi}=0.
+\end{align}
+范数为 $\left\|\psi\right\|=\sqrt{\Braket{\psi|\psi}}$。两个非零态正交是指内积为零；归一化是指范数为一。
+
+\begin{theorem}[Schwarz 不等式]
+任意两个态矢量满足
+\begin{equation}
+\left|\Braket{\phi|\psi}\right|^2\leq
+\Braket{\phi|\phi}\Braket{\psi|\psi}.
+\label{eq:schwarz}
+\end{equation}
+对于非零态，等号成立当且仅当两态线性相关。
+\end{theorem}
+\begin{proof}
+若 $\Ket{\phi}=0$ 则结论成立。否则令
+\begin{equation}
+\Ket{\eta}=\Ket{\psi}-\frac{\Braket{\phi|\psi}}{\Braket{\phi|\phi}}\Ket{\phi}.
+\end{equation}
+展开非负数 $\Braket{\eta|\eta}$，得到
+\begin{equation}
+0\leq\Braket{\eta|\eta}
+=\Braket{\psi|\psi}-\frac{\left|\Braket{\phi|\psi}\right|^2}{\Braket{\phi|\phi}}.
+\end{equation}
+乘以正数 $\Braket{\phi|\phi}$ 即得结论；等号对应 $\Ket{\eta}=0$。
+\end{proof}
+由此还得到三角不等式：
+\begin{align}
+\left\|\phi+\psi\right\|^2
+&=\left\|\phi\right\|^2+\left\|\psi\right\|^2+2\operatorname{Re}\Braket{\phi|\psi}\\
+&\leq\left(\left\|\phi\right\|+\left\|\psi\right\|\right)^2.
+\end{align}
+
+\subsection{外积、投影与算符相等}
+内积是复数，外积 $\Ket{\phi}\Bra{\psi}$ 是算符，其定义由作用方式确定：
+\begin{equation}
+\left(\Ket{\phi}\Bra{\psi}\right)\Ket{u}
+=\Braket{\psi|u}\Ket{\phi}.
+\end{equation}
+所以
+\begin{equation}
+\left(\Ket{\phi}\Bra{\psi}\right)\left(\Ket{u}\Bra{v}\right)
+=\Braket{\psi|u}\Ket{\phi}\Bra{v}.
+\end{equation}
+若 $\Braket{\phi|\phi}=1$，则
+\begin{equation}
+\hat P_\phi=\Ket{\phi}\Bra{\phi},\qquad
+\hat P_\phi^2=\hat P_\phi=\hat P_\phi^\dagger
+\end{equation}
+是向 $\Ket{\phi}$ 所张成的一维子空间的正交投影。若未归一化，应改为
+$\hat P_\phi=\Ket{\phi}\Bra{\phi}/\Braket{\phi|\phi}$。一般外积不一定是投影算符。
+
+两个算符相等，是指它们具有相同定义域，且对该定义域中所有态的作用相同。零算符将任意态映到零向量，单位算符满足 $\hat I\Ket{\psi}=\Ket{\psi}$。
+
+\subsection{线性、反线性与厄米共轭}
+线性算符 $\hat A$ 与反线性算符 $\hat C$ 分别满足
+\begin{align}
+\hat A\left(c\Ket{\psi}+d\Ket{\phi}\right)&=c\hat A\Ket{\psi}+d\hat A\Ket{\phi},\\
+\hat C\left(c\Ket{\psi}+d\Ket{\phi}\right)&=c^*\hat C\Ket{\psi}+d^*\hat C\Ket{\phi}.
+\end{align}
+对于线性算符，其伴随（厄米共轭）由
+\begin{equation}
+\Braket{\psi|\hat A^\dagger|\phi}
+=\Braket{\phi|\hat A|\psi}^*
+\label{eq:adjoint}
+\end{equation}
+定义；因此 $\Ket{\psi'}=\hat A\Ket{\psi}$ 对应
+$\Bra{\psi'}=\Bra{\psi}\hat A^\dagger$。有限维或相关运算均有定义时，
+\begin{align}
+\left(c\hat A+d\hat B\right)^\dagger&=c^*\hat A^\dagger+d^*\hat B^\dagger,\\
+\left(\hat A\hat B\right)^\dagger&=\hat B^\dagger\hat A^\dagger,\qquad
+\left(\hat A^\dagger\right)^\dagger=\hat A,\\
+\left(\Ket{\psi}\Bra{\phi}\right)^\dagger&=\Ket{\phi}\Bra{\psi}.
+\end{align}
+例如，乘积伴随的次序反转来自
+$\left(\hat A\hat B\Ket{\psi}\right)^\dagger=\Bra{\psi}\hat B^\dagger\hat A^\dagger$。
+
+\subsection{厄米算符、反厄米算符与正规算符}
+\begin{definition}
+满足 $\hat A^\dagger=\hat A$ 的算符称为厄米（本章按自伴理解）算符；满足 $\hat C^\dagger=-\hat C$ 的算符称为反厄米算符。满足
+\begin{equation}
+\left[\hat N,\hat N^\dagger\right]=0
+\end{equation}
+的算符称为正规算符。无穷维时这些等式还包含定义域要求。
+\end{definition}
+任意有限维线性算符可唯一分解为厄米部分与反厄米部分之和：
+\begin{equation}
+\hat A=\frac{\hat A+\hat A^\dagger}{2}
++\frac{\hat A-\hat A^\dagger}{2}.
+\end{equation}
+
+厄米算符的本征值为实数。设 $\hat A\Ket{a}=a\Ket{a}$ 且 $\Ket{a}\neq0$，则
+\begin{equation}
+a\Braket{a|a}=\Braket{a|\hat A|a}=a^*\Braket{a|a},
+\end{equation}
+所以 $a=a^*$。若 $a\neq b$，则
+\begin{equation}
+b\Braket{a|b}=\Braket{a|\hat A|b}=a\Braket{a|b},
+\end{equation}
+从而 $\Braket{a|b}=0$。简并子空间内部可以选取正交归一基，但任意选取的简并本征矢并不自动正交。
+
+有限维谱定理保证正规矩阵具有完备正交归一本征基。若已选定这样的基，则
+\begin{equation}
+\hat N=\sum_n\lambda_n\Ket{\lambda_n}\Bra{\lambda_n},\qquad
+\sum_n\Ket{\lambda_n}\Bra{\lambda_n}=\hat I.
+\end{equation}
+厄米、反厄米与幺正算符都是正规算符；其本征值分别为实数、纯虚数（含零）与模为一的复数。无穷维自伴算符可能具有连续谱，不能无条件使用仅含可归一化本征矢的离散求和式。
+
+\subsection{幺正算符与反幺正算符}
+\begin{definition}
+线性算符 $\hat U$ 若满足
+\begin{equation}
+\hat U^\dagger\hat U=\hat U\hat U^\dagger=\hat I,
+\qquad\hat U^{-1}=\hat U^\dagger,
+\end{equation}
+则称为幺正算符。
+\end{definition}
+令 $\Ket{\psi'}=\hat U\Ket{\psi}$、$\Ket{\phi'}=\hat U\Ket{\phi}$，有
+\begin{equation}
+\Braket{\phi'|\psi'}=\Braket{\phi|\hat U^\dagger\hat U|\psi}
+=\Braket{\phi|\psi}.
+\end{equation}
+因此幺正变换保持内积、范数、正交关系和跃迁概率。若
+$\hat U\Ket{u}=u\Ket{u}$，范数不变给出 $\left|u\right|=1$，故可写成 $u=\mathrm{e}^{\mathrm{i}\theta}$。
+
+反幺正算符 $\hat\Theta$ 是满射的反线性映射，并满足
+\begin{equation}
+\Braket{\Theta\phi|\Theta\psi}
+=\Braket{\phi|\psi}^*=\Braket{\psi|\phi}.
+\end{equation}
+它使内积复共轭，但仍保持范数及跃迁概率。在固定正交归一基中定义复共轭算符
+\begin{equation}
+\hat K\sum_n c_n\Ket{n}=\sum_n c_n^*\Ket{n},
+\end{equation}
+则反幺正算符可写成 $\hat\Theta=\hat U\hat K$，其中 $\hat U=\hat\Theta\hat K$ 为幺正算符。此处 $\hat K$ 依赖所选基底。

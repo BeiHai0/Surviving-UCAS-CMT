@@ -1,0 +1,385 @@
+\section{表象与表象变换}
+\subsection{分立谱：基矢与完备性}
+设 $\hat A$ 具有完备正交归一本征基 $\left\{\Ket{a_n}\right\}$。简并情形下把必要的附加指标包括在 $n$ 中。展开
+\begin{equation}
+\Ket{\psi}=\sum_n c_n\Ket{a_n}
+\end{equation}
+并左乘 $\Bra{a_m}$，由正交性得到
+\begin{equation}
+\Braket{a_m|\psi}=\sum_n c_n\delta_{mn}=c_m.
+\end{equation}
+于是
+\begin{equation}
+\Ket{\psi}=\left(\sum_n\Ket{a_n}\Bra{a_n}\right)\Ket{\psi}.
+\end{equation}
+该式对任意态成立，故
+\begin{equation}
+\boxed{\sum_n\Ket{a_n}\Bra{a_n}=\hat I.}
+\label{eq:discrete-complete}
+\end{equation}
+这就是完备关系。基矢的正交性保证展开系数可直接由内积求出，完备性保证展开能够覆盖整个空间。
+
+在 $N$ 维情况下，态和左矢的 $A$ 表象分别为列矩阵与共轭转置行矩阵：
+\begin{equation}
+\psi_A=\left(\begin{matrix}c_1\\c_2\\\vdots\\c_N\end{matrix}\right),\qquad
+\psi_A^\dagger=\left(c_1^*,c_2^*,\ldots,c_N^*\right).
+\end{equation}
+第 $j$ 个基矢 $\Ket{a_j}$ 的分量为 $\left(\Braket{a_i|a_j}\right)_i=\left(\delta_{ij}\right)_i$。
+若 $d_n=\Braket{a_n|\phi}$，则插入完备关系给出
+\begin{equation}
+\Braket{\phi|\psi}=\sum_n d_n^*c_n=\phi_A^\dagger\psi_A.
+\end{equation}
+
+\subsection{算符矩阵、外积与本征方程}
+在算符两侧插入式\eqref{eq:discrete-complete}，可得
+\begin{align}
+\hat F&=\hat I\hat F\hat I
+=\sum_{m,n}\Ket{a_m}\Braket{a_m|\hat F|a_n}\Bra{a_n}\\
+&=\sum_{m,n}\left(F_A\right)_{mn}\Ket{a_m}\Bra{a_n},\qquad
+\left(F_A\right)_{mn}\equiv\Braket{a_m|\hat F|a_n}.
+\label{eq:matrix-outer}
+\end{align}
+矩阵元的第一个指标标记行，第二个指标标记列。若 $\Ket{\chi}=\hat F\Ket{\psi}$，则
+\begin{equation}
+\chi_m=\sum_n\left(F_A\right)_{mn}c_n,\qquad \chi_A=F_A\psi_A.
+\end{equation}
+因此算符乘积对应矩阵乘积：
+\begin{equation}
+\left(\hat F\hat G\right)_A=F_AG_A,\qquad
+\Braket{a_m|\hat F\hat G|a_n}=\sum_k\left(F_A\right)_{mk}\left(G_A\right)_{kn}.
+\end{equation}
+由伴随定义有
+\begin{equation}
+\left(\hat F^\dagger\right)_A=\left(F_A\right)^\dagger,\qquad
+\Braket{a_m|\hat F^\dagger|a_n}=\left(F_A\right)_{nm}^*.
+\end{equation}
+所以厄米算符对应厄米矩阵；矩阵元为实数时，它进一步是实对称矩阵。幺正算符对应幺正矩阵，实幺正矩阵就是正交矩阵。矩阵 $U$ 的幺正条件具体为
+\begin{equation}
+\sum_k U_{km}^*U_{kn}=\delta_{mn},\qquad
+\sum_k U_{mk}U_{nk}^*=\delta_{mn}.
+\end{equation}
+
+外积与期望值分别表示为
+\begin{align}
+\left(\Ket{\phi}\Bra{\psi}\right)_A&=\phi_A\psi_A^\dagger,
+\qquad \left(\phi_A\psi_A^\dagger\right)_{mn}=d_mc_n^*,\\
+\Braket{\psi|\hat F|\psi}&=\sum_{m,n}c_m^*\left(F_A\right)_{mn}c_n
+=\psi_A^\dagger F_A\psi_A.
+\end{align}
+这里期望值公式假定 $\Ket{\psi}$ 已归一化；否则应除以 $\Braket{\psi|\psi}$。
+
+本征方程 $\hat F\Ket{f}=f\Ket{f}$ 在此基中为
+\begin{equation}
+F_Av=fv,\qquad v_n=\Braket{a_n|f}.
+\end{equation}
+有限维时，存在非零 $v$ 的条件为
+\begin{equation}
+\det\left(F_A-fI\right)=0.
+\end{equation}
+对于 $\hat A$ 自身，$\left(A_A\right)_{mn}=a_n\delta_{mn}$，从而
+\begin{equation}
+A_A=\operatorname{diag}\left(a_1,\ldots,a_N\right),\qquad
+\hat A=\sum_n a_n\Ket{a_n}\Bra{a_n}.
+\end{equation}
+非对角矩阵不代表算符没有确定本征值，只说明当前基底未必是它的本征基。
+
+\begin{example}[课堂矩阵性质辨认]
+照片中列出的矩阵为
+\begin{equation}
+\sigma_2=\left(\begin{matrix}0&-\mathrm{i}\\\mathrm{i}&0\end{matrix}\right),\quad
+-\mathrm{i}\sigma_2=\left(\begin{matrix}0&-1\\1&0\end{matrix}\right),\quad
+\sigma_3=\left(\begin{matrix}1&0\\0&-1\end{matrix}\right),\quad
+\sigma_1=\left(\begin{matrix}0&1\\1&0\end{matrix}\right).
+\end{equation}
+三个 $\sigma_j$ 都是厄米、幺正矩阵。其中 $\sigma_1,\sigma_3$ 还是实对称、正交矩阵；$\sigma_2^{\mathsf T}=-\sigma_2$，不是对称或正交矩阵。$-\mathrm{i}\sigma_2$ 为反厄米、幺正、实正交矩阵，并满足转置等于其负值。以上结论分别由共轭转置、转置及矩阵乘积直接验证。
+\end{example}
+
+\subsection{连续谱与 Dirac delta 分布}
+一维位置算符的广义本征矢满足
+\begin{equation}
+\hat x\Ket{x}=x\Ket{x},\quad x\in\R,\qquad
+\Braket{x|x'}=\delta\left(x-x'\right),\qquad
+\int_{-\infty}^{\infty}\Ket{x}\Bra{x}\,\mathrm{d}x=\hat I.
+\label{eq:xcomplete}
+\end{equation}
+$\Ket{x}$ 不是 Hilbert 空间中范数为一的向量，以上关系在分布意义下理解。
+
+\begin{definition}
+Dirac $\delta$ 分布由对适当光滑测试函数 $f$ 的抽样作用定义：
+\begin{equation}
+\int_{-\infty}^{\infty}\delta\left(x-a\right)f\left(x\right)\,\mathrm{d}x=f\left(a\right).
+\end{equation}
+它不是在一点取无穷大、其余处取零的普通函数。
+\end{definition}
+照片中用到的恒等式为
+\begin{gather}
+\delta\left(-x\right)=\delta\left(x\right),\quad x\delta\left(x\right)=0,\quad
+x\delta'\left(x\right)=-\delta\left(x\right),\\
+\delta\left(cx\right)=\frac{1}{\left|c\right|}\delta\left(x\right)\quad\left(c\neq0\right),\qquad
+\int_{-\infty}^{\infty}\delta\left(x\right)\,\mathrm{d}x=1,\\
+\int_{-\infty}^{\infty}\delta\left(x-a\right)\delta\left(x-b\right)\,\mathrm{d}x=\delta\left(a-b\right).
+\end{gather}
+最后一式作为参数 $a,b$ 的分布恒等式使用，不能由此定义 $\delta\left(x\right)^2$。导数的定义为
+\begin{equation}
+\int\delta'\left(x\right)f\left(x\right)\,\mathrm{d}x=-f'\left(0\right).
+\end{equation}
+因此
+\begin{equation}
+\int x\delta'\left(x\right)f\left(x\right)\,\mathrm{d}x
+=-\left.\frac{\mathrm{d}}{\mathrm{d}x}\left[xf\left(x\right)\right]\right|_{x=0}=-f\left(0\right),
+\end{equation}
+这说明 $x\delta'=-\delta$ 的由来。
+
+常用表示式（极限均取分布意义）为
+\begin{align}
+\delta\left(x\right)&=\lim_{\epsilon\to0^+}\frac{1}{\pi}\frac{\epsilon}{x^2+\epsilon^2},\\
+\delta\left(x\right)&=\lim_{\epsilon\to0^+}\frac{1}{\sqrt{\pi}\epsilon}
+\mathrm{e}^{-x^2/\epsilon^2},\\
+\delta\left(x\right)&=\frac{1}{2\pi}\int_{-\infty}^{\infty}\mathrm{e}^{\mathrm{i}kx}\,\mathrm{d}k.
+\label{eq:delta-fourier}
+\end{align}
+
+由位置算符的自伴性可以推出
+\begin{equation}
+\left(x-x'\right)\Braket{x'|x}=0.
+\end{equation}
+这约束内积支撑在 $x=x'$ 上；$\delta$ 前的归一化系数还需由广义基矢的归一化约定确定，不能只由该等式唯一推出。
+
+\subsection{坐标波函数与算符的积分核}
+在式\eqref{eq:xcomplete}中插入态 $\Ket{\psi\left(t\right)}$，得到
+\begin{equation}
+\Ket{\psi\left(t\right)}=\int\Ket{x}\psi\left(x,t\right)\,\mathrm{d}x,\qquad
+\psi\left(x,t\right)\equiv\Braket{x|\psi\left(t\right)}.
+\end{equation}
+本章未标上下限的一维连续变量积分均遍及 $\R$。$\psi\left(x,t\right)$ 是态的坐标表象，满足
+\begin{equation}
+\Braket{\phi|\psi}=\int\phi^*\left(x,t\right)\psi\left(x,t\right)\,\mathrm{d}x,
+\qquad\int\left|\psi\left(x,t\right)\right|^2\,\mathrm{d}x=1.
+\end{equation}
+其中 $\left|\psi\left(x,t\right)\right|^2$ 是位置概率密度；粒子落在 $\left[a,b\right]$ 内的概率是
+$\int_a^b\left|\psi\left(x,t\right)\right|^2\,\mathrm{d}x$。
+
+定义算符积分核 $F\left(x,x'\right)=\Braket{x|\hat F|x'}$。两侧插入完备关系可得
+\begin{align}
+\hat F&=\iint F\left(x,x'\right)\Ket{x}\Bra{x'}\,\mathrm{d}x\,\mathrm{d}x',\\
+\Braket{x|\hat F|\psi}&=\int F\left(x,x'\right)\psi\left(x'\right)\,\mathrm{d}x',\\
+\Braket{\psi|\hat F|\psi}&=\iint\psi^*\left(x\right)F\left(x,x'\right)\psi\left(x'\right)\,\mathrm{d}x\,\mathrm{d}x'.
+\end{align}
+因此连续指标下的矩阵乘法对应核的积分复合。
+
+位置的幂对应乘法算符：
+\begin{equation}
+\Braket{x|\hat x^n|x'}=\left(x'\right)^n\delta\left(x-x'\right)=x^n\delta\left(x-x'\right),\qquad
+\Braket{x|\hat x^n|\psi}=x^n\psi\left(x\right).
+\end{equation}
+在通常的坐标基相位约定下，正则动量的核为
+\begin{equation}
+\Braket{x|\hat p|x'}=-\mathrm{i}\hbar\partial_x\delta\left(x-x'\right),\qquad
+\Braket{x|\hat p|\psi}=-\mathrm{i}\hbar\partial_x\psi\left(x\right).
+\label{eq:p-kernel}
+\end{equation}
+微分作用于未加撇的变量 $x$。利用核的复合，
+\begin{align}
+\Braket{x|\hat p^2|x'}
+&=\int\left(-\mathrm{i}\hbar\partial_x\delta\left(x-y\right)\right)
+\left(-\mathrm{i}\hbar\partial_y\delta\left(y-x'\right)\right)\,\mathrm{d}y\\
+&=\left(-\mathrm{i}\hbar\right)^2\partial_x^2\delta\left(x-x'\right),
+\end{align}
+从而对非负整数 $n$，
+\begin{equation}
+\Braket{x|\hat p^n|x'}=\left(-\mathrm{i}\hbar\partial_x\right)^n\delta\left(x-x'\right),\qquad
+\Braket{x|\hat p^n|\psi}=\left(-\mathrm{i}\hbar\partial_x\right)^n\psi\left(x\right).
+\end{equation}
+
+\begin{remark}
+由正则对易关系只能得到
+$\left(x-x'\right)\Braket{x|\hat p|x'}=\mathrm{i}\hbar\delta\left(x-x'\right)$。
+除了式\eqref{eq:p-kernel}，加上 $g\left(x\right)\delta\left(x-x'\right)$ 仍满足此式。因此还需选择坐标基的相位约定；本章采用 $g=0$ 的标准表示。对无界微分算符，还应要求波函数在所用定义域内足够光滑并满足适当边界条件。
+\end{remark}
+
+算符次序不能交换。对非负整数 $m,n$，
+\begin{align}
+\Braket{\psi|\hat x^n\hat p^m|\psi}
+&=\int\psi^*\left(x\right)x^n\left(-\mathrm{i}\hbar\partial_x\right)^m\psi\left(x\right)\,\mathrm{d}x,\\
+\Braket{\psi|\hat p^m\hat x^n|\psi}
+&=\int\psi^*\left(x\right)\left(-\mathrm{i}\hbar\partial_x\right)^m\left[x^n\psi\left(x\right)\right]\,\mathrm{d}x.
+\end{align}
+直接作用于测试波函数，
+\begin{equation}
+\left[x,-\mathrm{i}\hbar\partial_x\right]\psi
+=-\mathrm{i}\hbar x\psi'+\mathrm{i}\hbar\left(x\psi\right)'=\mathrm{i}\hbar\psi,
+\end{equation}
+验证了正则对易关系。三维中相应地有
+$\hat{\bm p}\leftrightarrow-\mathrm{i}\hbar\nabla$。
+
+若 $u_n\left(x\right)=\Braket{x|a_n}$ 是离散正交归一本征态的坐标波函数，则
+\begin{align}
+\int u_m^*\left(x\right)u_n\left(x\right)\,\mathrm{d}x&=\delta_{mn},\\
+\sum_n u_n\left(x\right)u_n^*\left(x'\right)&=\delta\left(x-x'\right).
+\end{align}
+第一式来自插入坐标完备关系，第二式来自对离散完备关系取坐标矩阵元。
+
+\subsection{动量表象与 Fourier 变换}
+动量广义本征矢满足
+\begin{equation}
+\hat p\Ket{p}=p\Ket{p},\qquad
+\Braket{p|p'}=\delta\left(p-p'\right),\qquad
+\int\Ket{p}\Bra{p}\,\mathrm{d}p=\hat I.
+\end{equation}
+定义 $\widetilde\psi\left(p,t\right)=\Braket{p|\psi\left(t\right)}$，则
+\begin{equation}
+\Ket{\psi\left(t\right)}=\int\Ket{p}\widetilde\psi\left(p,t\right)\,\mathrm{d}p,
+\qquad\int\left|\widetilde\psi\left(p,t\right)\right|^2\,\mathrm{d}p=1.
+\end{equation}
+$\left|\widetilde\psi\left(p,t\right)\right|^2$ 是动量概率密度。
+
+为求两个表象间的变换核，对 $\hat p\Ket{p}=p\Ket{p}$ 左乘 $\Bra{x}$，由式\eqref{eq:p-kernel}得到
+\begin{equation}
+-\mathrm{i}\hbar\partial_x\Braket{x|p}=p\Braket{x|p},
+\qquad \Braket{x|p}=C\left(p\right)\mathrm{e}^{\mathrm{i}px/\hbar}.
+\end{equation}
+再要求动量基的 $\delta$ 归一化：
+\begin{align}
+\delta\left(p-p'\right)&=\int\Braket{p'|x}\Braket{x|p}\,\mathrm{d}x\\
+&=C\left(p'\right)^*C\left(p\right)\,2\pi\hbar\delta\left(p-p'\right),
+\end{align}
+所以 $\left|C\left(p\right)\right|=\left(2\pi\hbar\right)^{-1/2}$。选择其相位为零，得到
+\begin{equation}
+\boxed{\Braket{x|p}=\frac{1}{\sqrt{2\pi\hbar}}\mathrm{e}^{\mathrm{i}px/\hbar}.}
+\end{equation}
+于是
+\begin{align}
+\psi\left(x,t\right)&=\frac{1}{\sqrt{2\pi\hbar}}\int
+\mathrm{e}^{\mathrm{i}px/\hbar}\widetilde\psi\left(p,t\right)\,\mathrm{d}p,\\
+\widetilde\psi\left(p,t\right)&=\frac{1}{\sqrt{2\pi\hbar}}\int
+\mathrm{e}^{-\mathrm{i}px/\hbar}\psi\left(x,t\right)\,\mathrm{d}x.
+\label{eq:fourier-pair}
+\end{align}
+这是一对互逆的 Fourier 变换，其归一化保证两个表象中的总概率相同。
+
+在动量表象中，
+\begin{align}
+\Braket{p|\hat p^n|p'}&=p^n\delta\left(p-p'\right),\\
+\Braket{p|\hat x|p'}&=\frac{1}{2\pi\hbar}\int
+x\mathrm{e}^{\mathrm{i}\left(p'-p\right)x/\hbar}\,\mathrm{d}x
+=\mathrm{i}\hbar\partial_p\delta\left(p-p'\right),\\
+\Braket{p|\hat x^n|p'}&=\left(\mathrm{i}\hbar\partial_p\right)^n\delta\left(p-p'\right).
+\end{align}
+所以 $\hat p\leftrightarrow p$、$\hat x\leftrightarrow\mathrm{i}\hbar\partial_p$，并且
+$\left[\mathrm{i}\hbar\partial_p,p\right]\widetilde\psi=\mathrm{i}\hbar\widetilde\psi$。
+
+\subsection{一维谐振子的表象方程}
+设 $m>0$ 为质量，$\omega>0$ 为角频率，一维谐振子的 Hamilton 算符为
+\begin{equation}
+\hat H=\frac{\hat p^2}{2m}+\frac{m\omega^2}{2}\hat x^2.
+\label{eq:ho-hamiltonian}
+\end{equation}
+对抽象 Schrödinger 方程左乘 $\Bra{x}$，将两项分别按上面的微分、乘法规则表示，得到
+\begin{equation}
+\mathrm{i}\hbar\partial_t\psi\left(x,t\right)
+=\left(-\frac{\hbar^2}{2m}\partial_x^2+\frac{m\omega^2x^2}{2}\right)\psi\left(x,t\right).
+\end{equation}
+同样，本征方程 $\hat H\Ket{E}=E\Ket{E}$ 给出
+\begin{equation}
+\left(-\frac{\hbar^2}{2m}\frac{\mathrm{d}^2}{\mathrm{d}x^2}
++\frac{m\omega^2x^2}{2}\right)\psi_E\left(x\right)=E\psi_E\left(x\right).
+\end{equation}
+在动量表象中，同一个本征方程为
+\begin{equation}
+\left(\frac{p^2}{2m}-\frac{m\omega^2\hbar^2}{2}
+\frac{\mathrm{d}^2}{\mathrm{d}p^2}\right)\widetilde\psi_E\left(p\right)
+=E\widetilde\psi_E\left(p\right).
+\end{equation}
+这些方程是同一抽象算符方程在不同基底下的表达。能谱及归一化坐标本征函数将在下一节由升降算符推出。
+
+\subsection{分立基之间的幺正变换}
+设 $\left\{\Ket{a_i}\right\}$ 与 $\left\{\Ket{b_i}\right\}$ 是同一空间的两组完备正交归一基。沿用照片的方向约定，定义
+\begin{equation}
+\hat S=\sum_i\Ket{a_i}\Bra{b_i},\qquad
+S_{ij}=\Braket{b_i|a_j}.
+\label{eq:S-definition}
+\end{equation}
+抽象算符满足 $\hat S\Ket{b_j}=\Ket{a_j}$，且
+\begin{equation}
+\hat S\hat S^\dagger
+=\sum_{i,j}\Ket{a_i}\Braket{b_i|b_j}\Bra{a_j}=\hat I.
+\end{equation}
+交换两组基可得 $\hat S^\dagger\hat S=\hat I$。它在两组基中的矩阵恰好都等于 $S$：
+\begin{equation}
+\Braket{a_i|\hat S|a_j}=\Braket{b_i|a_j}
+=\Braket{b_i|\hat S|b_j}.
+\end{equation}
+这里需要区分：$\hat S$ 把第 $i$ 个 $B$ 基矢映到第 $i$ 个 $A$ 基矢，而重叠矩阵 $S$ 把同一态的 $A$ 分量换成 $B$ 分量。
+
+插入 $A$ 基的完备关系，有
+\begin{equation}
+\Braket{b_i|\psi}=\sum_j\Braket{b_i|a_j}\Braket{a_j|\psi},
+\end{equation}
+故
+\begin{equation}
+\boxed{\psi_B=S\psi_A,\qquad\psi_A=S^\dagger\psi_B.}
+\end{equation}
+算符矩阵的变换由两次插入完备关系得到：
+\begin{align}
+\left(F_B\right)_{ij}
+&=\sum_{k,l}\Braket{b_i|a_k}\left(F_A\right)_{kl}\Braket{a_l|b_j}\\
+&=\sum_{k,l}S_{ik}\left(F_A\right)_{kl}S_{jl}^*.
+\end{align}
+即
+\begin{equation}
+\boxed{F_B=SF_AS^\dagger,\qquad F_A=S^\dagger F_BS.}
+\label{eq:unitary-change}
+\end{equation}
+
+此变换保持以下性质：
+\begin{enumerate}
+\item 本征值：若 $F_Av_A=fv_A$，则 $F_B\left(Sv_A\right)=f\left(Sv_A\right)$。
+\item 厄米性：$\left(SF_AS^\dagger\right)^\dagger=SF_A^\dagger S^\dagger$。
+\item 算符乘积及对易关系：$F_BG_B=SF_AG_AS^\dagger$，因而
+$\left[F_B,G_B\right]=S\left[F_A,G_A\right]S^\dagger$；反对易子亦同，其中 $\left\{F,G\right\}=FG+GF$。
+\item 矩阵元、内积和期望值：
+\begin{equation}
+\phi_B^\dagger F_B\psi_B
+=\phi_A^\dagger S^\dagger SF_AS^\dagger S\psi_A
+=\phi_A^\dagger F_A\psi_A.
+\end{equation}
+取 $F=I$ 即得内积不变，进一步取 $\phi=\psi$ 得到归一化不变。
+\item 有限维时，迹与行列式不变：
+\begin{equation}
+\mathrm{Tr}\,F_B=\mathrm{Tr}\left(F_AS^\dagger S\right)=\mathrm{Tr}\,F_A,
+\qquad \det F_B=\det F_A.
+\end{equation}
+其中使用了迹的循环性及行列式的乘法性质。无穷维时，迹公式须在迹存在等相应条件下使用，普通有限维行列式不直接适用。
+\end{enumerate}
+另由完备性直接得到
+\begin{equation}
+\mathrm{Tr}\left(\Ket{u}\Bra{v}\right)
+=\sum_n\Braket{a_n|u}\Braket{v|a_n}=\Braket{v|u}.
+\end{equation}
+
+\subsection{连续表象与能量表象间的变换}
+定义 $F_x\left(x,x'\right)=\Braket{x|\hat F|x'}$、$F_p\left(p,p'\right)=\Braket{p|\hat F|p'}$，则插入两次动量或坐标完备关系给出
+\begin{align}
+F_x\left(x,x'\right)&=\frac{1}{2\pi\hbar}\iint
+\mathrm{e}^{\mathrm{i}\left(px-p'x'\right)/\hbar}F_p\left(p,p'\right)\,\mathrm{d}p\,\mathrm{d}p',\\
+F_p\left(p,p'\right)&=\frac{1}{2\pi\hbar}\iint
+\mathrm{e}^{-\mathrm{i}\left(px-p'x'\right)/\hbar}F_x\left(x,x'\right)\,\mathrm{d}x\,\mathrm{d}x'.
+\end{align}
+两边各有一个变换核，所以指数的两个项具有相反符号。
+
+对谐振子的能量本征基 $\left\{\Ket{E_n}\right\}$，定义
+\begin{equation}
+c_n\left(t\right)=\Braket{E_n|\psi\left(t\right)},\quad
+u_n\left(p\right)=\Braket{p|E_n},\quad F_{nm}=\Braket{E_n|\hat F|E_m}.
+\end{equation}
+态的变换为
+\begin{equation}
+c_n\left(t\right)=\int u_n^*\left(p\right)\widetilde\psi\left(p,t\right)\,\mathrm{d}p,
+\qquad\widetilde\psi\left(p,t\right)=\sum_n u_n\left(p\right)c_n\left(t\right).
+\end{equation}
+算符的变换为
+\begin{align}
+F_{nm}&=\iint u_n^*\left(p\right)F_p\left(p,p'\right)u_m\left(p'\right)\,\mathrm{d}p\,\mathrm{d}p',\\
+F_p\left(p,p'\right)&=\sum_{n,m}u_n\left(p\right)F_{nm}u_m^*\left(p'\right).
+\end{align}
+用 $\Braket{x|E_n}$ 替换 $u_n\left(p\right)$ 并把积分变量换成 $x$，即得到能量表象与坐标表象之间的关系。

@@ -1,0 +1,73 @@
+\chapter{数学与物理记号}
+\label{chap:physics}
+
+\section{公式、微分与自然常数}
+自然常数采用正体 $\mathrm{e}$，例如
+\begin{equation}
+  \label{eq:exponential}
+  f(x)\coloneqq \mathrm{e}^{x},\qquad
+  \frac{\dd f}{\dd x}=\mathrm{e}^{x},\qquad
+  \int_0^1 \mathrm{e}^{x}\dd x=\mathrm{e}-1.
+\end{equation}
+多行推导可以使用 \texttt{align} 环境：
+\begin{align}
+  (a+b)^2 &= (a+b)(a+b)\\
+          &= a^2+2ab+b^2.
+\end{align}
+分段函数与矩阵示例：
+\[
+  |x|=\begin{cases}
+    x, & x\geq 0,\\
+    -x, & x<0,
+  \end{cases}
+  \qquad
+  I_2=\begin{pmatrix}1&0\\0&1\end{pmatrix}.
+\]
+向量可写为 $\bm{r}=(x,y,z)$，偏微分可写为
+$\partial f/\partial x$。
+
+\section{Dirac 记号}
+使用 \texttt{braket} 宏包提供的大写命令，括号可自动调整大小：
+\[
+  \Bra{\psi},\qquad
+  \Ket{\psi},\qquad
+  \Braket{\phi|\psi},\qquad
+  \Braket{\psi|\hat{A}|\psi}.
+\]
+归一化态满足 $\Braket{\psi|\psi}=1$。以二能级系统为例，
+\begin{equation}
+  \Ket{\psi}=\frac{\Ket{0}+\Ket{1}}{\sqrt{2}},\qquad
+  \hat{\rho}=\Ket{\psi}\Bra{\psi},\qquad
+  \Tr(\hat{\rho})=1.
+\end{equation}
+当哈密顿算符 $\hat{H}$ 不显含时间时，薛定谔方程及形式解为
+\begin{align}
+  \mathrm{i}\hbar\frac{\partial}{\partial t}\Ket{\psi(t)}
+    &=\hat{H}\Ket{\psi(t)},\\
+  \Ket{\psi(t)}
+    &=\mathrm{e}^{-\mathrm{i}\hat{H}t/\hbar}\Ket{\psi(0)}.
+\end{align}
+
+\section{交叉引用与表格}
+使用标签引用第~\ref{chap:environments}~章或公式~\eqref{eq:exponential}，
+避免手动填写编号。
+\begin{table}[htbp]
+  \centering
+  \caption{常用物理量的记号示例}
+  \label{tab:notation}
+  \begin{tabular}{lll}
+    \toprule
+    物理量 & 记号 & SI 单位\\
+    \midrule
+    时间 & $t$ & $\mathrm{s}$\\
+    能量 & $E$ & $\mathrm{J}$\\
+    约化普朗克常数 & $\hbar$ & $\mathrm{J}\,\mathrm{s}$\\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\section{链接颜色示例}
+
+文档内部链接：参见第~\ref{chap:environments}~章。 % linkcolor
+文献引用：参见文献~\cite{griffiths2018}。    % citecolor
+网址链接：\url{https://www.ctan.org/}。       % urlcolor

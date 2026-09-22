@@ -1,0 +1,23 @@
+% !TeX program = xelatex
+% 编译：在本目录运行 xelatex main.tex 两次。
+% 模板：版式集中于“群论模板.sty”；各章通过 \input 引入。
+% 来源：群论.md 第一至四章；各章保留原稿术语与记号，修正明显笔误。
+\documentclass[UTF8,zihao=-4,oneside,openany,fontset=fandol]{ctexbook}
+\usepackage{group-theory-template}
+\title{群论}
+% 作者与单位用换行分隔，例如：\author{姓名\\单位}
+\author{小昭}
+% 在花括号中填写日期；也可使用 \date{\today}。
+\date{\today}
+\hypersetup{pdftitle={群论}}
+\begin{document}
+\frontmatter
+\maketitle
+\tableofcontents
+\mainmatter
+% 后续章节在此依次添加 \input。
+\input{chapters/第一章}
+\input{chapters/第二章}
+\input{chapters/第三章}
+\input{chapters/第四章}
+\end{document}

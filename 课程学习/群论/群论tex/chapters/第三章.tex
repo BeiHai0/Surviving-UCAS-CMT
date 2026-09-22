@@ -1,0 +1,491 @@
+% !TeX root = ../main.tex
+% 来源：群论.md 第三章。保留原稿记号，修正明显错误并补齐未完成内容。
+% 晶体点群分类核对：IUCr, https://journals.iucr.org/j/issues/2010/05/02/kk5061/index.html
+\chapter{点群}
+
+本章先讨论三维正交变换与转动，再介绍有限点群和晶体点群。
+沿用 $E$ 表示单位矩阵，$I=-E$ 表示空间反演，$\otimes$ 表示群直积。
+所有空间变换的乘积都按右侧先作用理解；转动方向遵循右手定则。
+
+\section{\texorpdfstring{实正交群 $\mathrm{O}\left(3\right)$}{实正交群 O(3)}}
+\subsection{实正交矩阵群}
+在 $\mathbb{R}^3$ 中取标准正交基 $\vec{\mathrm{e}}_1,\vec{\mathrm{e}}_2,\vec{\mathrm{e}}_3$，令
+\begin{equation}
+\vec r=x_1\vec{\mathrm{e}}_1+x_2\vec{\mathrm{e}}_2+x_3\vec{\mathrm{e}}_3,
+\qquad x=\left(x_1,x_2,x_3\right)^{\mathrm{T}}.
+\end{equation}
+实线性变换 $g:\vec r\mapsto\vec r'$ 在此基下写为 $x'=gx$。
+要求它保持任意矢量的模长，即
+\begin{equation}
+x'^{\mathrm{T}}x'=x^{\mathrm{T}}x,
+\qquad x^{\mathrm{T}}\left(g^{\mathrm{T}}g-E\right)x=0\quad\left(\forall x\in\mathbb{R}^3\right).
+\end{equation}
+矩阵 $g^{\mathrm{T}}g-E$ 为实对称矩阵。依次取 $x$ 为各坐标基矢及两基矢之和，
+可知其对角元和非对角元均为零，故保持模长等价于 $g^{\mathrm{T}}g=E$。
+
+\begin{definition}[实正交矩阵群]
+\begin{equation}
+\mathrm{O}\left(3\right)=\left\{g\in M_3\left(\mathbb{R}\right)\mid g^{\mathrm{T}}g=E\right\}.
+\end{equation}
+其中 $M_3\left(\mathbb{R}\right)$ 为三阶实矩阵全体，群运算为矩阵乘法。
+\end{definition}
+正交矩阵满足 $g^{-1}=g^{\mathrm{T}}$。两边取行列式得
+\begin{equation}
+\left(\det g\right)^2=1,\qquad\det g=\pm1.
+\end{equation}
+前者保持空间定向，后者改变空间定向。
+
+\subsection{实特殊（幺模）正交群}
+\begin{definition}
+\begin{equation}
+\mathrm{SO}\left(3\right)=\left\{g\in\mathrm{O}\left(3\right)\mid\det g=1\right\}.
+\end{equation}
+\end{definition}
+若 $g\in\mathrm{SO}\left(3\right)$、$f\in\mathrm{O}\left(3\right)$，则 $fgf^{-1}$ 仍为正交矩阵，且
+\begin{equation}
+\det\left(fgf^{-1}\right)=\det f\det g\det\left(f^{-1}\right)=\det g=1.
+\end{equation}
+所以 $\mathrm{SO}\left(3\right)$ 是 $\mathrm{O}\left(3\right)$ 的不变子群。
+空间反演变换群 $\mathrm{V}_2=\left\{E,I\right\}$ 也是不变子群，其中
+\begin{equation}
+E=\begin{bmatrix}1&0&0\\0&1&0\\0&0&1\end{bmatrix},\qquad
+I=\begin{bmatrix}-1&0&0\\0&-1&0\\0&0&-1\end{bmatrix}.
+\end{equation}
+事实上，$I$ 与所有矩阵对易。任何 $\det g=-1$ 的正交矩阵均可唯一写为 $IR$，
+其中 $R=Ig\in\mathrm{SO}\left(3\right)$。因此
+\begin{align}
+\mathrm{O}\left(3\right)&=\mathrm{SO}\left(3\right)\sqcup I\mathrm{SO}\left(3\right),\\
+\mathrm{O}\left(3\right)/\mathrm{SO}\left(3\right)&=\left\{\mathrm{SO}\left(3\right),I\mathrm{SO}\left(3\right)\right\}\cong\left\{E,I\right\}.
+\end{align}
+映射 $g\mapsto E$（$\det g=1$）或 $I$（$\det g=-1$）为满同态，核为 $\mathrm{SO}\left(3\right)$。
+由于两个因子相互对易且交仅为恒元，还可写成
+\begin{equation}
+\mathrm{O}\left(3\right)=\mathrm{SO}\left(3\right)\otimes\mathrm{V}_2.
+\end{equation}
+
+\begin{theorem}[三维转动轴的存在]
+任意 $g\in\mathrm{SO}\left(3\right)$ 都存在非零实矢量 $\vec n$，使 $g\vec n=\vec n$。
+\end{theorem}
+\begin{proof}
+只需证明 $\det\left(g-E\right)=0$。利用 $gg^{\mathrm{T}}=E$ 和 $\det g=1$，有
+\begin{align}
+\det\left(g-E\right)&=\det\left(g-gg^{\mathrm{T}}\right)
+=\det g\det\left(E-g^{\mathrm{T}}\right)\\
+&=\det\left(E-g\right)=-\det\left(g-E\right).
+\end{align}
+最后一个负号来自三维空间中 $\det\left(-A\right)=\left(-1\right)^3\det A$，故行列式为零。
+\end{proof}
+将 $\vec n$ 归一化，并在其垂直平面内选取两个正交基矢。
+该平面不变，因为 $g$ 保持内积，且 $g\vec n=\vec n$。
+在这组基下，$g$ 由一个二维正交块和轴向的 $1$ 组成；二维块行列式也为 $1$，
+故为平面转动。因此
+\begin{equation}
+g=C_{\vec n}\left(\omega\right).
+\end{equation}
+沿用球坐标表示单位转轴，可取 $0\leqslant\theta\leqslant\pi$、$0\leqslant\varphi<2\pi$、
+$0\leqslant\omega\leqslant\pi$。角度为 $0$ 时轴任意；角度为 $\pi$ 时轴的正负方向等价。
+“绕一根轴转动”是三维的特殊描述；高维转动通常按不变二维平面讨论。
+
+\subsection{\texorpdfstring{$\mathrm{SO}\left(3\right)$ 群的共轭类}{SO(3) 群的共轭类}}
+设 $\vec k$ 为单位转轴，$g\in\mathrm{SO}\left(3\right)$。由于
+\begin{equation}
+\left(gC_{\vec k}\left(\omega\right)g^{-1}\right)\left(g\vec k\right)=g\vec k,
+\end{equation}
+共轭后的轴为 $g\vec k$。共轭相当于先用 $g^{-1}$ 将轴移回 $\vec k$，
+再绕 $\vec k$ 转动，最后用 $g$ 将轴移到 $g\vec k$。
+$g$ 保持定向，因此有
+\begin{equation}
+gC_{\vec k}\left(\omega\right)g^{-1}=C_{g\vec k}\left(\omega\right).
+\end{equation}
+转动角的主值也可由迹检验：$\mathrm{Tr}\,C_{\vec k}\left(\omega\right)=1+2\cos\omega$，
+而相似矩阵迹相同。在 $0\leqslant\omega\leqslant\pi$ 内，迹唯一确定 $\omega$。
+任意两单位轴之间都有一个正常转动，因此 $\mathrm{SO}\left(3\right)$ 的共轭类由主转角 $\omega$ 标记。
+
+对于有限子群 $G\subset\mathrm{SO}\left(3\right)$，还需共轭所用的 $g$ 属于 $G$。
+当 $0<\omega<\pi$ 时，两个转动共轭的充要条件是角度相同且存在 $g\in G$
+将第一根有向轴变为第二根有向轴；当 $\omega=\pi$ 时，只需把轴变为同一条无向直线，
+即允许 $g\vec k_1=\pm\vec k_2$。恒元则自成一类。
+
+\begin{example}[循环群与二面体群]
+设 $c_n=C_{\vec k}\left(2\pi/n\right)$，则
+$c_n^{n-1}=C_{-\vec k}\left(2\pi/n\right)$。
+当 $n>2$ 时，$\mathrm{C}_n$ 中没有元素将 $\vec k$ 变为 $-\vec k$，
+故这两个不同元素在该子群中不共轭。更一般地，$\mathrm{C}_n$ 为 Abel 群，每个群元自成一类。
+
+在 $\mathrm{D}_3$ 中，$d=C_{\vec k}\left(2\pi/3\right)$，
+$f=C_{\vec k}\left(4\pi/3\right)=C_{-\vec k}\left(2\pi/3\right)$。
+此处将 $a,b,c$ 实现为绕三角形平面内各对称轴的半周转动，
+它们都把法向 $\vec k$ 变为 $-\vec k$，所以 $d,f$ 同类。
+这与第二章把平面反射延拓为保持 $z$ 不变的实现不同；两者的抽象群相同，三维矩阵实现不同。
+\end{example}
+
+\begin{remark}[补充原稿中的 $\mathrm{D}_4$ 例子及奇偶规律]
+写 $\mathrm{D}_n=\left\{r^j,sr^j\mid0\leqslant j<n\right\}$，其中 $r^n=s^2=e$、$srs=r^{-1}$，
+$s$ 在本章为面内轴的半周转动。
+共轭关系 $sr^js^{-1}=r^{-j}$ 将非中心转动配成对，且
+$r\left(sr^j\right)r^{-1}=sr^{j-2}$。
+当 $n$ 为奇数时，所有 $sr^j$ 同类，总类数为 $\left(n+3\right)/2$；
+当 $n$ 为偶数时，$e,r^{n/2}$ 各自成类，$sr^j$ 按 $j$ 的奇偶分成两类，
+总类数为 $n/2+3$。
+特别地，$\mathrm{D}_4$ 的五个类为
+\begin{equation}
+\left\{e\right\},\quad\left\{r^2\right\},\quad\left\{r,r^3\right\},\quad\left\{s,sr^2\right\},\quad\left\{sr,sr^3\right\}.
+\end{equation}
+\end{remark}
+
+\subsection{三维欧式空间中绕任意轴的转动}
+取坐标轴单位矢量 $\vec i,\vec j,\vec k$，令
+\begin{equation}
+\hat n\left(\theta,\varphi\right)=\left(\sin\theta\cos\varphi,\sin\theta\sin\varphi,\cos\theta\right)^{\mathrm{T}}.
+\end{equation}
+先绕 $\vec j$ 转 $\theta$，再绕 $\vec k$ 转 $\varphi$，可将 $\vec k$ 变到 $\hat n$，故取
+\begin{align}
+g=S\left(\varphi,\theta\right)&=C_{\vec k}\left(\varphi\right)C_{\vec j}\left(\theta\right)\\
+&=\begin{bmatrix}\cos\varphi&-\sin\varphi&0\\\sin\varphi&\cos\varphi&0\\0&0&1\end{bmatrix}
+\begin{bmatrix}\cos\theta&0&\sin\theta\\0&1&0\\-\sin\theta&0&\cos\theta\end{bmatrix}.
+\end{align}
+直接作用于 $\vec k=\left(0,0,1\right)^{\mathrm{T}}$ 即得 $S\vec k=\hat n$。
+因此任意轴转动写为
+\begin{equation}
+C_{\hat n\left(\theta,\varphi\right)}\left(\omega\right)
+=S\left(\varphi,\theta\right)C_{\vec k}\left(\omega\right)S^{-1}\left(\varphi,\theta\right).
+\end{equation}
+这里第二个因子中的角度是 $\theta$，而不是 $\varphi$。
+
+\subsection{转动的指数表示}
+先引入 Pauli 矩阵
+\begin{equation}
+\sigma_1=\begin{bmatrix}0&1\\1&0\end{bmatrix},\quad
+\sigma_2=\begin{bmatrix}0&-\mathrm{i}\\\mathrm{i}&0\end{bmatrix},\quad
+\sigma_3=\begin{bmatrix}1&0\\0&-1\end{bmatrix},\quad
+E=\begin{bmatrix}1&0\\0&1\end{bmatrix}.
+\end{equation}
+此处 $E$ 为二阶单位矩阵。它们满足
+\begin{align}
+\mathrm{Tr}\,\sigma_i&=0,&\det\sigma_i&=-1,\\
+\sigma_i\sigma_j&=E\delta_{ij}+\mathrm{i}\sum_{k=1}^3\varepsilon_{ijk}\sigma_k,&
+\mathrm{Tr}\left(\sigma_i\sigma_j\right)&=2\delta_{ij}.
+\end{align}
+其中 $\varepsilon_{ijk}$ 为 Levi-Civita 符号，$\varepsilon_{123}=1$。
+利用矩阵指数 $\mathrm{e}^A=\sum_{p=0}^\infty A^p/p!$ 和 $\sigma_2^2=E$，将奇偶次幂分开：
+\begin{align}
+\mathrm{e}^{-\mathrm{i}\omega\sigma_2}
+&=E\sum_{p=0}^{\infty}\frac{\left(-1\right)^p\omega^{2p}}{\left(2p\right)!}
+-\mathrm{i}\sigma_2\sum_{p=0}^{\infty}\frac{\left(-1\right)^p\omega^{2p+1}}{\left(2p+1\right)!}\\
+&=E\cos\omega-\mathrm{i}\sigma_2\sin\omega
+=\begin{bmatrix}\cos\omega&-\sin\omega\\\sin\omega&\cos\omega\end{bmatrix}.
+\end{align}
+这一步用于表示二维实转动，并未引入自旋表示。
+
+三维转动生成元沿用 $T_1,T_2,T_3$：
+\begin{align}
+T_1&=\begin{bmatrix}0&0&0\\0&0&-\mathrm{i}\\0&\mathrm{i}&0\end{bmatrix},&
+T_2&=\begin{bmatrix}0&0&\mathrm{i}\\0&0&0\\-\mathrm{i}&0&0\end{bmatrix},&
+T_3&=\begin{bmatrix}0&-\mathrm{i}&0\\\mathrm{i}&0&0\\0&0&0\end{bmatrix}.
+\end{align}
+在各自垂直于转轴的二维块内，指数求和与上式相同，轴向指数为 $1$，所以
+\begin{align}
+\mathrm{e}^{-\mathrm{i}\omega T_3}&=\begin{bmatrix}\cos\omega&-\sin\omega&0\\\sin\omega&\cos\omega&0\\0&0&1\end{bmatrix}=C_{\vec k}\left(\omega\right),\\
+\mathrm{e}^{-\mathrm{i}\omega T_2}&=\begin{bmatrix}\cos\omega&0&\sin\omega\\0&1&0\\-\sin\omega&0&\cos\omega\end{bmatrix}=C_{\vec j}\left(\omega\right),\\
+\mathrm{e}^{-\mathrm{i}\omega T_1}&=\begin{bmatrix}1&0&0\\0&\cos\omega&-\sin\omega\\0&\sin\omega&\cos\omega\end{bmatrix}=C_{\vec i}\left(\omega\right).
+\end{align}
+
+令 $T\left(\hat n\right)=n_1T_1+n_2T_2+n_3T_3$。由矩阵元可验证
+$-\mathrm{i}T\left(\hat n\right)x=\hat n\times x$。
+正常转动保持叉积，故对任意 $x$，
+\begin{equation}
+-\mathrm{i}ST_3S^{-1}x=S\left(\vec k\times S^{-1}x\right)
+=\left(S\vec k\right)\times x=-\mathrm{i}T\left(\hat n\right)x.
+\end{equation}
+于是 $ST_3S^{-1}=n_iT_i$，此处及以下重复指标 $i$ 表示从 $1$ 到 $3$ 求和。
+再利用 $\left(STS^{-1}\right)^p=ST^pS^{-1}$，有
+\begin{align}
+C_{\hat n}\left(\omega\right)&=S\mathrm{e}^{-\mathrm{i}\omega T_3}S^{-1}\\
+&=\sum_{p=0}^{\infty}\frac{S\left(-\mathrm{i}\omega T_3\right)^pS^{-1}}{p!}
+=\sum_{p=0}^{\infty}\frac{\left(-\mathrm{i}\omega ST_3S^{-1}\right)^p}{p!}\\
+&=\mathrm{e}^{-\mathrm{i}\omega n_iT_i}.
+\end{align}
+定义 $\omega_i=\omega n_i$，得到
+\begin{equation}
+C_{\hat n\left(\theta,\varphi\right)}\left(\omega\right)=\mathrm{e}^{-\mathrm{i}\omega_iT_i},\qquad
+\begin{bmatrix}\omega_1\\\omega_2\\\omega_3\end{bmatrix}
+=\begin{bmatrix}\omega\sin\theta\cos\varphi\\\omega\sin\theta\sin\varphi\\\omega\cos\theta\end{bmatrix}.
+\end{equation}
+参数矢量 $\bm\omega$ 可取在半径为 $\pi$ 的闭球中。
+球内不同点对应不同转动；球面上的对径点表示同一半周转动。
+球心对应恒等转动，球坐标中该点的 $\theta,\varphi$ 不再有独立意义。
+
+\section{点群}
+\subsection{点群的定义}
+\begin{definition}
+本章将 $\mathrm{O}\left(3\right)$ 的有限子群称为点群。所有操作都固定同一个点，取其为坐标原点。
+\end{definition}
+第一类点群只包含正常转动，即所有元素的行列式均为 $1$。
+第二类点群还包含行列式为 $-1$ 的操作，如反射或转动反演；
+它不一定包含单独的空间反演 $I$。
+
+\subsection{对称操作和对称元素}
+使系统保持不变的空间操作称为对称操作；与之对应的点、轴或平面等几何对象称为对称元素。
+\begin{enumerate}
+\item \textbf{反演操作。} $I=-E$，$I\vec r=-\vec r$，对称元素为反演中心 $O$。
+\item \textbf{反射操作。} 例如关于 $xy$ 平面反射为
+\begin{equation}
+\sigma_{\vec k}=\diag\left(1,1,-1\right),
+\end{equation}
+对称元素为 $xy$ 平面，$\vec k$ 为该平面的法向。
+\item \textbf{转动操作。} $C_{\hat m}\left(2\pi/n\right)$ 的对称元素为 $n$ 重转动轴 $\hat m$。
+\item \textbf{转动反演操作。} $IC_{\hat m}\left(2\pi/n\right)$ 为先转动再反演，
+对称元素称为转动反演轴；反演中心取在轴上的原点。
+\end{enumerate}
+转动反演 $IC_{\hat m}\left(\omega\right)$ 与转动反射 $\sigma_hC_{\hat m}\left(\omega\right)$ 要区分，
+其中 $\sigma_h$ 是垂直于转轴的镜面反射。
+因为 $\sigma_h=IC_{\hat m}\left(\pi\right)$，两种操作对应的转角相差 $\pi$。
+
+\subsection{第一类点群}
+三维有限正常转动群分为循环群、二面体群和三种多面体转动群。
+以下 $\mathrm{T},\mathrm{O},\mathrm{Y}$ 只包含正常转动，不包含所有反射对称操作。
+
+\subsubsection*{（1）循环群 $\mathrm{C}_n$}
+令 $c_n=C_{\hat m}\left(2\pi/n\right)$，则 $\mathrm{C}_n=\left\{e,c_n,\ldots,c_n^{n-1}\right\}$。
+它是 $n$ 阶 Abel 群，每个元素自成一类，有 $n$ 个不等价不可约复表示。
+补齐原稿留空的公式：
+\begin{equation}
+D^{\left(k\right)}\left(c_n^j\right)=\mathrm{e}^{\mathrm{i}2\pi kj/n},\qquad k=1,\ldots,n.
+\end{equation}
+
+\subsubsection*{（2）二面体群 $\mathrm{D}_n$}
+该群由一个 $n$ 重主轴转动和垂直于主轴的一个二重轴转动生成，群阶为 $2n$。
+例如 $\mathrm{D}_2=\left\{e,c_{2z},c_{2x},c_{2y}\right\}$。
+补齐原稿的 $\mathrm{D}_6$：取 $c_6=C_{\vec k}\left(\pi/3\right)$、$c_{2x}=C_{\vec i}\left(\pi\right)$，则
+\begin{equation}
+\mathrm{D}_6=\left\{c_6^j,c_{2x}c_6^j\mid j=0,1,\ldots,5\right\}.
+\end{equation}
+其中包含六个绕主轴的转动和六个绕面内二重轴的半周转动。
+
+\subsubsection*{（3）正四面体转动群 $\mathrm{T}$}
+正四面体有三条二重轴（连接对边中点）和四条三重轴（连接顶点与对面中心）。
+每条三重轴提供两个非恒等转动，故共有 $1+3+4\cdot2=12$ 个元素。
+$c_3$ 与 $c_3^2$ 是同一条轴上的不同操作，不应计作两条不同的轴。
+
+沿用原稿的上标编号，三种二重转动记为 $c_2^{\left(2\right)},c_2^{\left(3\right)},c_2^{\left(4\right)}$。
+选择四条三重轴的有向生成元 $c_3^{\left(j\right)}$ 使它们彼此共轭，则四个类为
+\begin{align}
+&\left\{e\right\},\qquad\left\{c_2^{\left(2\right)},c_2^{\left(3\right)},c_2^{\left(4\right)}\right\},\\
+&\left\{c_3^{\left(1\right)},c_3^{\left(2\right)},c_3^{\left(3\right)},c_3^{\left(4\right)}\right\},\\
+&\left\{\left(c_3^{\left(1\right)}\right)^2,\left(c_3^{\left(2\right)}\right)^2,\left(c_3^{\left(3\right)}\right)^2,\left(c_3^{\left(4\right)}\right)^2\right\}.
+\end{align}
+这些类也可用顶点的偶置换验证：恒元一个，双换位三个，三循环八个在偶置换群中分成各四个的两类。
+子群 $\mathrm{D}_2=\left\{e,c_2^{\left(2\right)},c_2^{\left(3\right)},c_2^{\left(4\right)}\right\}$ 是完整共轭类之并，因而是不变子群。
+商群为
+\begin{equation}
+\mathrm{T}/\mathrm{D}_2=\left\{\mathrm{D}_2,c_3^{\left(1\right)}\mathrm{D}_2,\left(c_3^{\left(1\right)}\right)^2\mathrm{D}_2\right\}
+\cong\mathrm{C}_3.
+\end{equation}
+记 $\zeta=\mathrm{e}^{\mathrm{i}2\pi/3}$，有 $\zeta^*=\zeta^2$。
+商群特征标表沿用原稿的表示标签 $E,E',E''$；表中 $E$ 是表示名称，不是单位矩阵：
+\begin{center}
+\begin{tabular}{c|ccc}
+\toprule
+ & $\mathrm{D}_2$ & $c_3^{\left(1\right)}\mathrm{D}_2$ & $\left(c_3^{\left(1\right)}\right)^2\mathrm{D}_2$\\\midrule
+$E$ & 1 & 1 & 1\\
+$E'$ & 1 & $\zeta$ & $\zeta^*$\\
+$E''$ & 1 & $\zeta^*$ & $\zeta$\\\bottomrule
+\end{tabular}
+\end{center}
+提升到原群后得到三个一维不可约表示。第四个表示的维数由
+$12=1^2+1^2+1^2+3^2$ 决定。
+三维空间的自然转动表示具有特征标 $1+2\cos\omega$，在四个类上的值为 $3,-1,0,0$。
+其加权模方为 $9+3=12$，故不可约。完整特征标表为
+\begin{center}
+\begin{tabular}{c|cccc}
+\toprule
+ & $e$ & $3c_2^{\left(2\right)}$ & $4c_3^{\left(1\right)}$ & $4\left(c_3^{\left(1\right)}\right)^2$\\\midrule
+$D_1$ & 1 & 1 & 1 & 1\\
+$D_2$ & 1 & 1 & $\zeta$ & $\zeta^*$\\
+$D_3$ & 1 & 1 & $\zeta^*$ & $\zeta$\\
+$D_4$ & 3 & $-1$ & 0 & 0\\\bottomrule
+\end{tabular}
+\end{center}
+表头的数字表示类大小，$D_2$ 在此为表示标签，不是二面体群 $\mathrm{D}_2$。
+
+\subsubsection*{（4）正八面体转动群 $\mathrm{O}$}
+正八面体与其对偶立方体有相同的正常转动群，阶为 $24$。
+按立方体几何，其五个共轭类可列为
+\begin{center}
+\begin{tabular}{clc}
+\toprule
+类 & 转动轴与转角 & 元素数\\\midrule
+$\left\{e\right\}$ & 恒等操作 & 1\\
+$8c_3$ & 四条体对角线，转角 $\pm2\pi/3$ & 8\\
+$6c_4$ & 三条对面中心轴，转角 $\pm\pi/2$ & 6\\
+$3c_4^2$ & 同上三条轴，转角 $\pi$ & 3\\
+$6c_2$ & 六条对边中点轴，转角 $\pi$ & 6\\\bottomrule
+\end{tabular}
+\end{center}
+原稿所述由 $c_4$ 或 $c_3$ 联系的六条二重轴即最后一类。
+三条 $c_4^2$ 轴与这六条轴虽转角相同，但在有限群中不共轭。
+由五个类和维数平方和得到五个不可约表示的维数为 $1,1,2,3,3$：
+\begin{equation}
+24=1^2+1^2+2^2+3^2+3^2.
+\end{equation}
+其中 $\mathrm{T}$ 是指数为 $2$ 的不变子群；
+$\left\{e\right\}\cup3c_4^2$ 构成另一个不变子群 $\mathrm{D}_2$。
+
+\subsubsection*{（5）正十二面体（二十面体）转动群 $\mathrm{Y}$}
+两种互为对偶的正多面体具有相同的正常转动群，阶为 $60$。
+以正十二面体描述，有六条连接对面中心的五重轴、十条连接对顶点的三重轴、
+十五条连接对边中点的二重轴。各类轴上的非恒等转动数分别为 $4,2,1$，所以
+\begin{equation}
+1+6\cdot4+10\cdot2+15\cdot1=60.
+\end{equation}
+它含有五重转动，因此不属于三维周期晶体的点群。
+
+\section{晶体点群}
+\subsection{理想晶体与晶体点群}
+理想周期晶体由相同结构单元在三个独立方向上重复排列而成。
+取三个线性无关的原始平移矢量 $\vec v_1,\vec v_2,\vec v_3$，晶格为
+\begin{equation}
+L=\left\{x_1\vec v_1+x_2\vec v_2+x_3\vec v_3\mid x_1,x_2,x_3\in\mathbb{Z}\right\}.
+\end{equation}
+本章称保持某个三维晶格的有限点群为晶体点群。
+具体晶体结构还包含晶胞内的原子排列，因此其实际对称性可以低于仅由晶格决定的对称性。
+
+群元对晶格基矢的作用可写为
+\begin{equation}
+g:\vec v_i\mapsto\vec v_i'=\sum_{k=1}^{3}\vec v_k g_{ki},\qquad g_{ki}\in\mathbb{Z}.
+\end{equation}
+沿用原稿的基矢行数组记号，
+\begin{equation}
+\vec v'=\vec v g,\qquad
+\left(\vec v_1',\vec v_2',\vec v_3'\right)=\left(\vec v_1,\vec v_2,\vec v_3\right)g.
+\end{equation}
+这里 $g_{ki}$ 是在晶格基下的矩阵元。晶格基一般不正交，因此该整数矩阵
+本身未必满足 $g^{\mathrm{T}}g=E$，但它与正交坐标基下的正交矩阵相似，二者迹相同。
+此外 $g^{-1}$ 也保持晶格，故其逆矩阵也为整数矩阵。
+
+\subsection{晶体制约定理}
+\begin{theorem}
+三维周期晶体的正常转动只能有 $1,2,3,4,6$ 重轴。
+转动反演操作可写为 $I$ 与这些允许转动的乘积。
+\end{theorem}
+\begin{proof}
+在晶格基下 $g$ 的矩阵元为整数，所以
+\begin{equation}
+\mathrm{Tr}\,g=\sum_{i=1}^{3}g_{ii}\in\mathbb{Z}.
+\end{equation}
+在正交坐标基下，该操作可写为 $fC_{\vec k}\left(\omega\right)f^{-1}$ 或
+$fIC_{\vec k}\left(\omega\right)f^{-1}$。利用迹在相似变换下不变，得到
+\begin{equation}
+\mathrm{Tr}\,g=\pm\left(1+2\cos\omega\right)\in\mathbb{Z}.
+\end{equation}
+因 $-2\leq2\cos\omega\leq2$，只能有
+\begin{equation}
+2\cos\omega\in\left\{-2,-1,0,1,2\right\}.
+\end{equation}
+将转角取在 $\left[0,\pi\right]$，对应为
+\begin{center}
+\begin{tabular}{c|ccccc}
+\toprule
+$\omega$ & $0$ & $\pi$ & $2\pi/3$ & $\pi/2$ & $\pi/3$\\
+转动的阶 & 1 & 2 & 3 & 4 & 6\\\bottomrule
+\end{tabular}
+\end{center}
+这补齐了原稿中由整数迹推出允许转角的步骤。
+对非正常操作，写成 $IC_{\hat n}\left(\omega\right)$ 后同样得到上述转角限制。
+\end{proof}
+对晶格而言 $I$ 总满足 $IL=L$；但具体晶体的原子排列不一定具有反演对称性。
+制约定理是必要条件，完整点群分类还需考虑不同对称操作能否共同保持一个晶格。
+
+\subsection{32 种晶体点群}
+本节采用原稿的 Schoenflies 记号。分类与转动反射记号的含义可参照
+\href{https://journals.iucr.org/j/issues/2010/05/02/kk5061/index.html}{IUCr 的晶体学国际表入门资料}。
+
+第一类共有 $11$ 种：
+\begin{equation}
+\mathrm{C}_1,\mathrm{C}_2,\mathrm{C}_3,\mathrm{C}_4,\mathrm{C}_6,
+\mathrm{D}_2,\mathrm{D}_3,\mathrm{D}_4,\mathrm{D}_6,\mathrm{T},\mathrm{O}.
+\end{equation}
+原稿列表中重复的 $\mathrm{C}_2$ 应为 $\mathrm{D}_2$。
+第二类共有 $21$ 种，下面按原稿的群族逐一列出。
+
+\subsubsection*{（1）$\mathrm{C}_{nh}$：5 种}
+取 $n=1,2,3,4,6$，由主轴转动 $c_n$ 与垂直主轴的水平镜面 $\sigma_h$ 生成。
+两者对易，所以
+\begin{equation}
+\mathrm{C}_{nh}=\mathrm{C}_n\otimes\mathrm{C}_{1h},\qquad
+\mathrm{C}_{1h}=\left\{E,\sigma_h\right\}=\left\{E,Ic_2\right\}.
+\end{equation}
+它为 $2n$ 阶 Abel 群，含 $n$ 个正常与 $n$ 个非正常操作。
+沿用 $\mathrm{C}_i=\left\{E,I\right\}$，具体有
+\begin{align}
+\mathrm{C}_{2h}&=\left\{E,c_2,\sigma_h,c_2\sigma_h\right\}
+=\left\{E,c_2,Ic_2,I\right\}=\mathrm{C}_2\otimes\mathrm{C}_i,\\
+\mathrm{C}_{3h}&=\left\{E,c_3,c_3^2,\sigma_h,c_3\sigma_h,c_3^2\sigma_h\right\}
+=\mathrm{C}_3\otimes\mathrm{C}_{1h},\\
+\mathrm{C}_{4h}&=\mathrm{C}_4\otimes\mathrm{C}_{1h}=\mathrm{C}_4\otimes\mathrm{C}_i,\\
+\mathrm{C}_{6h}&=\mathrm{C}_6\otimes\mathrm{C}_{1h}=\mathrm{C}_6\otimes\mathrm{C}_i.
+\end{align}
+以 $\mathrm{C}_i$ 为因子的等式要求偶数 $n$，此时 $c_n^{n/2}=c_2$，
+由 $c_2\sigma_h=I$ 得到反演。$\mathrm{C}_{1h}$ 也常记作 $\mathrm{C}_s$。
+
+\subsubsection*{（2）$\mathrm{C}_{nv}$：4 种}
+取 $n=2,3,4,6$，由 $c_n$ 与包含主轴的垂直镜面 $\sigma_v$ 生成。
+关系为 $\sigma_vc_n\sigma_v=c_n^{-1}$，群阶为 $2n$。例如
+\begin{equation}
+\mathrm{C}_{2v}=\left\{E,c_2,\sigma_v,c_2\sigma_v\right\}.
+\end{equation}
+$n=1$ 时只得到一个镜面群，已计入 $\mathrm{C}_{1h}$，故不重复列出。
+
+\subsubsection*{（3）$\mathrm{S}_{2n}$：3 种}
+取 $n=1,2,3$。Schoenflies 记号中的 $s_m$ 是\textbf{转动反射}生成元，定义为
+\begin{equation}
+s_m=\sigma_hc_m=Ic_2c_m=IC_{\vec k}\left(\pi+2\pi/m\right).
+\end{equation}
+它可改写为一个转动反演，但角度不是原来的 $2\pi/m$。
+偶数 $m=2n$ 时，$s_{2n}=Ic_{2n}^{n+1}$，其生成的循环群阶为 $2n$。
+群中既有正常操作，也有非正常操作，并非所有元素都是转动反演。
+具体为
+\begin{align}
+s_2&=I,&\mathrm{S}_2&=\left\{E,I\right\}=\mathrm{C}_i,\\
+s_4&=Ic_4^3,&\mathrm{S}_4&=\left\{E,Ic_4^3,c_4^2,Ic_4\right\},\\
+s_6&=Ic_6^4=Ic_3^2,&\mathrm{S}_6&=\left\{E,c_3,c_3^2,I,Ic_3,Ic_3^2\right\}
+=\mathrm{C}_3\otimes\mathrm{C}_i.
+\end{align}
+其中 $s_4^2=c_4^2$、$s_4^3=Ic_4$，所以 $\mathrm{S}_4$ 不含 $I$；
+$s_6^3=I$，所以 $\mathrm{S}_6$ 含反演。
+
+\subsubsection*{（4）$\mathrm{D}_{nh}$：4 种}
+取 $n=2,3,4,6$，由第一类点群 $\mathrm{D}_n$ 和水平镜面 $\sigma_h$ 生成，阶为 $4n$。
+水平镜面与 $\mathrm{D}_n$ 的所有转动对易，且不属于 $\mathrm{D}_n$，故
+\begin{equation}
+\mathrm{D}_{nh}=\mathrm{D}_n\otimes\mathrm{C}_{1h}.
+\end{equation}
+当 $n$ 为偶数时，群内含主轴半周转动，因而也可写成
+$\mathrm{D}_{nh}=\mathrm{D}_n\otimes\mathrm{C}_i$。
+当 $n=3$ 时，$\mathrm{D}_{3h}$ 不含反演，不能将第二个因子直接换成 $\mathrm{C}_i$。
+
+\subsubsection*{（5）$\mathrm{D}_{nd}$：2 种}
+取 $n=2,3$，在 $\mathrm{D}_n$ 基础上加入包含主轴、并平分相邻面内二重轴夹角的
+对角镜面 $\sigma_d$，得到 $4n$ 阶群。
+镜面的具体方向很重要，不能将任意垂直镜面都视为这一构造。
+两种群为八阶的 $\mathrm{D}_{2d}$ 和十二阶的 $\mathrm{D}_{3d}$。
+
+\subsubsection*{（6）多面体第二类点群：3 种}
+\begin{center}
+\begin{tabular}{cclc}
+\toprule
+群 & 阶 $n_G$ & 构造或几何意义 & 类数 $r$\\\midrule
+$\mathrm{T}_h$ & 24 & $\mathrm{T}\otimes\mathrm{C}_i$ & 8\\
+$\mathrm{T}_d$ & 24 & 正四面体的完整点对称群 & 5\\
+$\mathrm{O}_h$ & 48 & $\mathrm{O}\otimes\mathrm{C}_i$ & 10\\\bottomrule
+\end{tabular}
+\end{center}
+直积的类数相乘，故 $\mathrm{T}_h$、$\mathrm{O}_h$ 的类数分别为 $4\cdot2$、$5\cdot2$。
+$\mathrm{T}_d$ 通过对四个顶点的置换同构于四阶置换群 $\mathrm{S}_4$；
+后者按循环类型分成五类。此处的置换群 $\mathrm{S}_4$ 与上文 Schoenflies 记号的
+四阶转动反射点群 $\mathrm{S}_4$ 同名，含义须由上下文区分。
+原稿 $\mathrm{T}_h$ 的阶数“4”应为 $24$。
+
+上述第二类群的数量为 $5+4+3+4+2+3=21$，加上第一类的 $11$ 种，合计 $32$ 种。
+这里按空间中的点群类型计数，而不是仅按抽象群的同构类型计数；
+不同的空间对称实现可能具有相同的抽象乘法结构。

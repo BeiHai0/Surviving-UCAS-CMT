@@ -1,0 +1,62 @@
+% !TeX program = xelatex
+\documentclass[UTF8,12pt,a4paper,fontset=fandol]{ctexart}
+\usepackage{lecturemath}
+\title{高等量子力学讲义勘误：0921-5}
+\author{小昭}
+\date{2026 年 9 月 21 日}
+\hypersetup{pdftitle={高等量子力学讲义勘误：0921-5},pdfauthor={}}
+\begin{document}
+\maketitle
+
+本文记录将照片文件 \texttt{0921-5.pdf} 整理进讲义时发现并修正的错误或容易引起误解之处。页码按该照片 PDF 的顺序计。
+
+\section*{一、一般压缩角下的不确定度乘积}
+\textbf{照片位置：}第 36--37 页。
+
+\textbf{原记录：}由位置、动量方差公式直接写出
+\begin{equation}
+\left(\Delta x\right)^2\left(\Delta p\right)^2=\frac{\hbar^2}{4}.
+\end{equation}
+
+\textbf{问题：}该等式只在 $\sin\theta=0$ 时成立。一般压缩角下，$x$ 与 $p$ 存在非零协方差，故 Heisenberg 乘积会大于 $\hbar^2/4$。
+
+\textbf{修正：}
+\begin{align}
+\left(\Delta x\right)^2\left(\Delta p\right)^2
+&=\frac{\hbar^2}{4}\left[1+\sinh^2\left(2r\right)\sin^2\theta\right],\\
+C_{xp}&=\frac12\Braket{\delta\hat x\,\delta\hat p+\delta\hat p\,\delta\hat x}
+=-\frac{\hbar}{2}\sinh\left(2r\right)\sin\theta,\\
+\left(\Delta x\right)^2\left(\Delta p\right)^2-C_{xp}^2
+&=\frac{\hbar^2}{4}.
+\end{align}
+因此一般情形下取等号的是 Schr\"odinger--Robertson 不等式；当 $\theta=0$ 或 $\theta=\pi$ 时，协方差为零，照片中的 Heisenberg 乘积等式才成立。
+
+\section*{二、相干态表象内积的积分测度}
+\textbf{照片位置：}第 8 页。
+
+\textbf{原记录：}内积公式中的积分测度字迹容易辨作 $\mathrm{d}\alpha/\pi$。
+
+\textbf{修正：}相干态标签 $\alpha$ 是复数，积分覆盖整个复平面，故必须使用二维测度
+\begin{equation}
+\Braket{\phi|\psi}=\int_{\C}\frac{\mathrm{d}^2\alpha}{\pi}
+\mathrm{e}^{-\left|\alpha\right|^2}
+\left[\phi_{\mathrm{B}}\left(\alpha^*\right)\right]^*
+\psi_{\mathrm{B}}\left(\alpha^*\right).
+\end{equation}
+其中 $\mathrm{d}^2\alpha=\mathrm{d}\left(\operatorname{Re}\alpha\right)\,
+\mathrm{d}\left(\operatorname{Im}\alpha\right)$。
+
+\section*{三、归一化常数的整体相位}
+\textbf{照片位置：}第 16 页。
+
+\textbf{原记录：}归一化后直接写 $C=1/\sqrt{n!}$。
+
+\textbf{说明：}归一化只确定 $\left|C\right|=1/\sqrt{n!}$；还需选取整体相位约定，才能令
+$C=1/\sqrt{n!}$。正文已明确补上这一相位约定。这不影响任何可观测量，但可避免把归一化误解为同时固定整体相位。
+
+\section*{四、产生算符本征态的结论}
+\textbf{照片位置：}第 1 页。
+
+\textbf{说明：}照片通过数态展开讨论 $\hat a^\dagger$ 的本征态。正文将论证补全：无论本征值是否为零，逐项比较都只允许零向量，因此 $\hat a^\dagger$ 在 Fock 空间中不存在非零本征矢。这里不是仅仅“没有归一化解”，而是本征方程在该空间内没有非零解。
+
+\end{document}

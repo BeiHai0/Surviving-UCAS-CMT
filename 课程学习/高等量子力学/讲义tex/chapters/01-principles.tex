@@ -1,0 +1,62 @@
+\section{量子力学基本原理}
+本章讨论非相对论量子力学。以 $\mathcal H$ 表示复 Hilbert 空间，$\hat I$ 表示单位算符，$\hbar$ 表示约化 Planck 常数。算符加帽，选定基底后的矩阵不加帽；零向量写作 $0$，以区别于后文归一化的谐振子真空态 $\Ket{0}$。
+
+\subsection{态的描述与测量}
+\begin{description}
+\item[原理一：量子态。] 系统的纯态用 $\mathcal H$ 中的非零态矢量 $\Ket{\psi\left(t\right)}$ 描述。Hilbert 空间是关于内积诱导的范数完备的复线性空间。归一化后有
+\begin{equation}
+\Braket{\psi\left(t\right)|\psi\left(t\right)}=1.
+\end{equation}
+相差整体相位的态矢量 $\Ket{\psi}$ 与 $\mathrm{e}^{\mathrm{i}\theta}\Ket{\psi}$ 描述同一物理纯态。态矢量的线性组合给出叠加态，非零叠加态需要重新归一化。
+
+\item[原理二：力学量与测量。] 可观测量由自伴算符表示，课堂中通常称为厄米算符。有限维时自伴等价于矩阵满足 $A^\dagger=A$；无穷维时还要指定算符的定义域及边界条件。
+先考虑具有完备离散非简并本征态的情形：
+\begin{equation}
+\hat A\Ket{a_n}=a_n\Ket{a_n},\qquad
+\Braket{a_m|a_n}=\delta_{mn},\qquad
+\Ket{\psi}=\sum_n c_n\Ket{a_n}.
+\end{equation}
+其中 $a_n\in\R$，$c_n=\Braket{a_n|\psi}$。测量结果属于 $\hat A$ 的谱；上述离散情形下，得到 $a_n$ 的概率为
+\begin{equation}
+P\left(a_n\right)=\left|c_n\right|^2,\qquad \sum_n\left|c_n\right|^2=1.
+\end{equation}
+理想投影测量得到 $a_n$ 后，系统进入相应本征态。若本征值简并，以 $\hat P_a$ 表示整个本征子空间上的正交投影，则
+\begin{equation}
+P\left(a\right)=\Braket{\psi|\hat P_a|\psi},\qquad
+\Ket{\psi}\longmapsto \frac{\hat P_a\Ket{\psi}}{\sqrt{P\left(a\right)}}\quad\left(P\left(a\right)>0\right).
+\end{equation}
+连续谱的概率需用区间上的概率密度积分表示，不能把连续谱本征矢当作通常的归一化态。
+\end{description}
+
+\subsection{正则对易关系、时间演化与全同性}
+\begin{description}
+\item[原理三：正则对易关系。] 在 Cartesian 坐标下，位置与其共轭正则动量满足
+\begin{equation}
+\left[\hat r_i,\hat p_j\right]=\mathrm{i}\hbar\delta_{ij}\hat I,
+\qquad \left[\hat r_i,\hat r_j\right]=\left[\hat p_i,\hat p_j\right]=0,
+\end{equation}
+其中 $\left[\hat A,\hat B\right]\equiv\hat A\hat B-\hat B\hat A$，$i,j\in\left\{x,y,z\right\}$，$\delta_{ij}$ 为 Kronecker 符号。这些等式在各乘积有定义的共同定义域上理解。
+
+\item[原理四：Schrödinger 方程。] 封闭系统的态随时间满足
+\begin{equation}
+\mathrm{i}\hbar\frac{\mathrm{d}}{\mathrm{d}t}\Ket{\psi\left(t\right)}
+=\hat H\left(t\right)\Ket{\psi\left(t\right)}.
+\end{equation}
+$\hat H\left(t\right)$ 是系统的 Hamilton 算符。给定初态和适当的定义域条件后，方程决定后续演化。由自伴性可验证
+\begin{equation}
+\frac{\mathrm{d}}{\mathrm{d}t}\Braket{\psi|\psi}
+=\frac{\mathrm{i}}{\hbar}\Braket{\psi|\hat H|\psi}
+-\frac{\mathrm{i}}{\hbar}\Braket{\psi|\hat H|\psi}=0,
+\end{equation}
+故归一化保持不变。
+
+\item[原理五：全同性。] 在通常三维空间的全同粒子体系中，交换任意两个粒子的全部坐标（包括自旋指标），总波函数具有确定的交换对称性：
+\begin{equation}
+\psi\left(\ldots,q_i,\ldots,q_j,\ldots\right)
+=\begin{cases}
++\psi\left(\ldots,q_j,\ldots,q_i,\ldots\right),&\text{玻色子},\\
+-\psi\left(\ldots,q_j,\ldots,q_i,\ldots\right),&\text{费米子}.
+\end{cases}
+\end{equation}
+整数自旋粒子为玻色子，服从 Bose--Einstein 统计；半整数自旋粒子为费米子，服从 Fermi--Dirac 统计。这里交换的是粒子的全部自由度，不能只对空间部分单独作此断言。
+\end{description}

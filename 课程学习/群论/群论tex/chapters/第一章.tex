@@ -1,0 +1,857 @@
+% !TeX root = ../main.tex
+% 来源：群论.md 第一章。保留原稿术语与记号，明显笔误除外。
+\chapter{群的基本知识}
+
+本章以乘法记号表示一般群运算；它既可以是数或矩阵的乘法，
+也可以是加法或变换的复合。恒元记为 $e$，群的阶记为 $n_G=|G|$。
+变换的乘积约定为\textbf{右侧先作用}。
+
+\section{群的定义}
+\subsection{群公理}
+\begin{definition}[群]
+设 $G$ 为非空集合，在 $G$ 上规定一个二元运算，记作 $\left(f,g\right)\mapsto fg$。
+若满足以下四个条件，则称 $G$ 为群：
+\begin{enumerate}
+  \item \textbf{封闭性：}对任意 $f,g\in G$，有 $fg\in G$；
+  \item \textbf{结合律：}对任意 $f,g,h\in G$，有 $\left(fg\right)h=f\left(gh\right)$；
+  \item \textbf{存在恒元：}存在 $e\in G$，使任意 $f\in G$ 都满足 $ef=fe=f$；
+  \item \textbf{存在逆元：}对任意 $g\in G$，存在 $g^{-1}\in G$，使
+  $gg^{-1}=g^{-1}g=e$。
+\end{enumerate}
+\end{definition}
+
+群元可以是任意数学对象，关键在于运算满足这些公理。
+只要求封闭性和结合律的非空集合称为\textbf{半群}；若还有恒元，
+则称为\textbf{幺半群}。幺半群不一定有逆元，群是每个元素均可逆的幺半群。
+
+\subsection{五个基本结论}
+\begin{enumerate}
+\item \textbf{恒元唯一。}若 $e'$ 也是恒元，则
+\begin{equation}
+e'=e'e=e.
+\end{equation}
+第一个等号用到 $e$ 是右恒元，第二个等号用到 $e'$ 是左恒元。
+
+\item \textbf{每个元素的逆元唯一。}若 $g'$ 也满足 $g'g=gg'=e$，则
+\begin{equation}
+g'=g'e=g'\left(gg^{-1}\right)=\left(g'g\right)g^{-1}=eg^{-1}=g^{-1}.
+\end{equation}
+
+\item \textbf{恒元的逆元是自身。}
+\begin{equation}
+  e^{-1}=e^{-1}e=e.
+\end{equation}
+
+\item \textbf{逆元的逆元是原元素。}
+\begin{equation}
+\left(g^{-1}\right)^{-1}
+=\left(g^{-1}\right)^{-1} e
+=\left(g^{-1}\right)^{-1} g^{-1} g
+=g.
+\end{equation}
+
+\item \textbf{乘积取逆时次序反转：}$\left(fg \right)^{-1}=g^{-1} f^{-1} $.
+\begin{equation}
+  g^{-1} f^{-1}=g^{-1} f^{-1} e = g^{-1} f^{-1} (fg) (fg)^{-1}=g^{-1} g (fg)^{-1}=(fg)^{-1}.
+\end{equation}
+反复使用这一结论，得到
+\begin{equation}
+\left(g_1g_2\cdots g_N\right)^{-1}=g_N^{-1}\cdots g_2^{-1}g_1^{-1}.
+\end{equation}
+也可从 $\left(g_1\cdots g_N\right)\left(g_1\cdots g_N\right)^{-1}=e$ 出发，
+依次左乘 $g_1^{-1},g_2^{-1},\ldots,g_N^{-1}$ 得到同一结果。
+\end{enumerate}
+
+\subsection{七个相关概念}
+\begin{enumerate}
+\item 群元个数有限的群称为\textbf{有限群}。
+\item 有限群的元素个数 $n_G=|G|$ 称为群的\textbf{阶}。
+\item 群元个数无限的群称为\textbf{无限群}。
+\item 配备离散拓扑的无限群称为\textbf{离散无限群}，整数加法群是典型例子。
+\item 物理中常称由连续参数描述的群为\textbf{连续群}。
+若群本身是光滑流形，且乘法、取逆均为光滑映射，则称为\textbf{李群}。
+离散或连续涉及额外的拓扑结构，不能仅凭抽象群公理判断。
+\item 若使 $g^m=e$ 成立的最小正整数为 $m$，则称 $g$ 的\textbf{阶}为 $m$，
+记作 $n_g=m$；若不存在这样的正整数，则称 $g$ 为无限阶元素。
+\item 若任意 $f,g\in G$ 均满足 $fg=gf$，则称 $G$ 为\textbf{可交换群}或 \textbf{Abel 群}。
+\end{enumerate}
+
+\subsection{九个基本例子}
+\begin{example}[四次单位根群]
+取 $G=\left\{g_1,g_2,g_3,g_4\right\}=\left\{1,-1,\mathrm{i},-\mathrm{i}\right\}$，运算为复数乘法。
+任意两个四次单位根相乘仍为四次单位根；结合律继承自复数乘法，恒元为 $1$，
+逆元分别为 $1,-1,-\mathrm{i},\mathrm{i}$。因此它是四阶 Abel 群。
+\end{example}
+
+\begin{example}[四阶矩阵群]
+取 $G=\left\{g_1,g_2,g_3,g_4\right\}$，其中
+\begin{align}
+g_1&=\begin{bmatrix}1&0\\0&1\end{bmatrix},&
+g_2&=\begin{bmatrix}-1&0\\0&-1\end{bmatrix},\\
+g_3&=\begin{bmatrix}0&-1\\1&0\end{bmatrix},&
+g_4&=\begin{bmatrix}0&1\\-1&0\end{bmatrix}.
+\end{align}
+运算为矩阵乘法。令 $J=g_3$，则 $J^2=g_2$、$J^3=g_4$、$J^4=g_1$，
+故 $G=\left\{I,J,J^2,J^3\right\}$ 构成群。这与上一例具有相同的乘法结构。
+\end{example}
+
+\begin{example}[整数加法群]
+$\mathbb{Z}_+=\left(\mathbb{Z},+\right)$ 的群元为所有整数，群运算为加法，恒元为 $0$，
+整数 $a$ 的逆元为 $-a$。它是离散无限 Abel 群。
+\end{example}
+
+\begin{example}[实数加法群]
+$\mathbb{R}_+=\left(\mathbb{R},+\right)$ 的群元为所有实数，恒元为 $0$，$a$ 的逆元为 $-a$。
+在通常拓扑下，它是一维 Abel 李群。
+\end{example}
+
+\begin{example}[非零实数乘法群]
+$\overline{\mathbb{R}}_{\times}=\left(\mathbb{R}\setminus\left\{0\right\},\times\right)$ 的运算为实数乘法，
+恒元为 $1$，$a$ 的逆元为 $1/a$。排除零正是为了保证逆元存在。
+\end{example}
+
+\begin{example}[有限循环群]
+设生成元 $C_n$ 的阶为 $n$，定义
+\begin{equation}
+\mathrm{C}_n=\left\{C_n^1,C_n^2,\ldots,C_n^{n-1},C_n^n=e\right\},
+\qquad C_n^pC_n^q=C_n^{p+q}.
+\end{equation}
+幂指数按模 $n$ 理解，因而 $\left(C_n^p\right)^{-1}=C_n^{n-p}$。
+由于 $p+q=q+p$，$\mathrm{C}_n$ 是 $n$ 阶 Abel 群。
+
+例 1.1.1 就是 $\mathrm{C}_4$。保持该例的群元编号，有
+\begin{align}
+C_4^1&=\mathrm{e}^{\mathrm{i}\pi/2}=\mathrm{i}=g_3,&
+C_4^2&=\mathrm{e}^{\mathrm{i}\pi}=-1=g_2,\\
+C_4^3&=\mathrm{e}^{3\mathrm{i}\pi/2}=-\mathrm{i}=g_4,&
+C_4^4&=\mathrm{e}^{2\mathrm{i}\pi}=1=g_1.
+\end{align}
+几何上，乘以这些复数分别表示将复平面中的矢量逆时针转过
+$\pi/2,\pi,3\pi/2,2\pi$。
+\end{example}
+
+\begin{example}[二维转动群 $\mathrm{SO}\left(2\right)$]
+平面矢量逆时针转过 $\alpha$ 后，其坐标满足
+\begin{equation}
+\begin{bmatrix}x'\\y'\end{bmatrix}
+=g\left(\alpha\right)\begin{bmatrix}x\\y\end{bmatrix},\qquad
+g\left(\alpha\right)=\begin{bmatrix}\cos\alpha&-\sin\alpha\\\sin\alpha&\cos\alpha\end{bmatrix}.
+\end{equation}
+这些矩阵构成
+\begin{equation}
+\mathrm{SO}\left(2\right)=\left\{g\left(\alpha\right)\mid 0\leqslant\alpha<2\pi\right\},
+\end{equation}
+运算为矩阵乘法，角度按模 $2\pi$ 理解。群公理依次由
+\begin{equation}
+g\left(\alpha\right)g\left(\beta\right)=g\left(\alpha+\beta\right),\qquad
+e=g\left(0\right)=I,\qquad g\left(\alpha\right)^{-1}=g\left(-\alpha\right)
+\end{equation}
+及矩阵乘法的结合律保证。这里 $g\left(-\alpha\right)=g\left(2\pi-\alpha\right)$。
+它是 Abel 群，也是一\textbf{维}李群；此处的维数不是有限群的阶。
+
+旋转矩阵也可从复数乘法推导。设 $z=x+\mathrm{i}y$，则
+\begin{align}
+z'&=\mathrm{e}^{\mathrm{i}\alpha}z
+=\left(\cos\alpha+\mathrm{i}\sin\alpha\right)\left(x+\mathrm{i}y\right)\\
+&=\left(x\cos\alpha-y\sin\alpha\right)
++\mathrm{i}\left(x\sin\alpha+y\cos\alpha\right).
+\end{align}
+比较实部与虚部，得到
+\begin{equation}
+\begin{cases}
+x'=x\cos\alpha-y\sin\alpha,\\
+y'=x\sin\alpha+y\cos\alpha,
+\end{cases}
+\end{equation}
+恰好恢复上述矩阵形式。
+\end{example}
+
+\begin{example}[正三角形对称群 $\mathrm{D}_3$]
+正三角形有三条对称轴和一个三重旋转中心 $O$。
+将三角形映回自身的六个对称操作构成
+\begin{equation}
+\mathrm{D}_3=\left\{e,d,f,a,b,c\right\}.
+\end{equation}
+固定顶点标记 $\left(A,B,C\right)$，用操作后各顶点的像描述变换：
+\begin{center}
+\begin{tabular}{clcc}
+\toprule
+群元 & 几何操作 & $\left(A,B,C\right)$ 的像 & 阶 $n_g$\\
+\midrule
+$e$ & 恒等操作（或转动 $360^\circ$） & $\left(A,B,C\right)$ & 1\\
+$d$ & 绕 $O$ 逆时针转动 $120^\circ$ & $\left(C,A,B\right)$ & 3\\
+$f$ & 绕 $O$ 逆时针转动 $240^\circ$ & $\left(B,C,A\right)$ & 3\\
+$a$ & 关于经过 $A$ 的对称轴反射 & $\left(A,C,B\right)$ & 2\\
+$b$ & 关于经过 $B$ 的对称轴反射 & $\left(C,B,A\right)$ & 2\\
+$c$ & 关于经过 $C$ 的对称轴反射 & $\left(B,A,C\right)$ & 2\\
+\bottomrule
+\end{tabular}
+\end{center}
+这里选取与表中转动方向一致的顶点标记。若将三角形嵌入三维空间，
+这三种反射也可由绕相应面内对称轴转动 $180^\circ$ 实现。
+
+两个操作相等当且仅当它们对三个顶点的作用完全相同。
+复合按右侧先作用，故
+\begin{align}
+\left(ab\right)\left(ABC\right)&=a\left(CBA\right)=\left(BCA\right)=f\left(ABC\right),\\
+\left(ba\right)\left(ABC\right)&=b\left(ACB\right)=\left(CAB\right)=d\left(ABC\right).
+\end{align}
+因此 $ab=f\ne d=ba$，$\mathrm{D}_3$ 不是 Abel 群。
+注意这里的 $a\left(CBA\right)$ 表示分别对顶点 $C,B,A$ 取像。
+生成元可取 $\left\{a,d\right\}$、$\left\{a,f\right\}$ 或 $\left\{b,d\right\}$；例如
+$f=d^2$、$b=da$、$c=d^2a$，由 $a,d$ 可以生成全部六个元素。
+\end{example}
+
+\begin{example}[连续平移群]
+一维平移操作 $T\left(a\right):x\mapsto x+a$ 构成
+\begin{equation}
+\mathrm{T}_1=\left\{T\left(a\right)\mid a\in\mathbb{R}\right\}.
+\end{equation}
+因为 $T\left(a\right)T\left(b\right)=T\left(a+b\right)$，它满足封闭性；又有
+\begin{equation}
+T\left(a\right)\left[T\left(b\right)T\left(c\right)\right]x=x+a+b+c=\left[T\left(a\right)T\left(b\right)\right]T\left(c\right)x.
+\end{equation}
+恒元为 $T\left(0\right)$，逆元为 $T\left(-a\right)$。因此 $\mathrm{T}_1$ 是一维 Abel 李群。
+
+平移在 $x$ 上是仿射变换；引入齐次坐标 $\left(x,1\right)^{\mathrm{T}}$ 后，可表示为
+\begin{equation}
+\begin{bmatrix}1&a\\0&1\end{bmatrix}
+\begin{bmatrix}x\\1\end{bmatrix}
+=\begin{bmatrix}x+a\\1\end{bmatrix}.
+\end{equation}
+推广到 $n$ 维，令 $\bm{a}=\left(a_1,\ldots,a_n\right)^{\mathrm{T}}$，则矩阵表示为
+\begin{equation}
+T_n\left(\bm{a}\right)\ \longleftrightarrow\
+\begin{bmatrix}I_n&\bm{a}\\0&1\end{bmatrix},\qquad
+\begin{bmatrix}I_n&\bm{a}\\0&1\end{bmatrix}
+\begin{bmatrix}\bm{x}\\1\end{bmatrix}
+=\begin{bmatrix}\bm{x}+\bm{a}\\1\end{bmatrix}.
+\end{equation}
+它与逐坐标写出的 $\left(n+1\right)\times\left(n+1\right)$ 矩阵相同：最后一列为
+$\left(a_1,\ldots,a_n,1\right)^{\mathrm{T}}$，其余部分为单位矩阵。
+\end{example}
+
+\section{群的重排定理}
+\begin{theorem}[重排定理]
+设 $G=\left\{g_\alpha\right\}$ 为群，$f$ 为 $G$ 中一个确定的元素。
+当 $\alpha$ 取遍所有可能的取值时，$fg_\alpha$ 给出且仅仅一次给出 $G$ 的所有元素。
+\begin{equation}
+G=\left\{g_\alpha\right\}=\left\{fg_\alpha\right\}.
+\end{equation}
+\end{theorem}
+\begin{quote}
+证明思路：先证明 $fg_\alpha$ 无重复元素，再证明
+$\left\{fg_\alpha\right\}\subseteq G$，最后证明 $G\subseteq\left\{fg_\alpha\right\}$。
+\end{quote}
+\begin{proof}
+假设 $fg_\alpha$ 有重复元素，即存在 $\alpha\ne\alpha'$、$g_\alpha\ne g_{\alpha'}$，
+使得 $fg_\alpha=fg_{\alpha'}$，两边左乘 $f^{-1}$ 得 $g_\alpha=g_{\alpha'}$，
+这与假设矛盾。故 $fg_\alpha$ 无重复元素。
+
+$\forall fg_\alpha\in\left\{fg_\alpha\right\}$，由于 $f,g_\alpha\in G$，
+再结合群的封闭性可知 $fg_\alpha\in G$，于是 $\left\{fg_\alpha\right\}\subseteq G$。
+
+$\forall g_\beta\in G$，由于 $f\in G$，于是存在 $f^{-1}\in G$，
+群的封闭性给出 $f^{-1}g_\beta=g_\alpha\in G$，两边左乘 $f$ 得
+$g_\beta=fg_\alpha\in\left\{fg_\alpha\right\}$，于是 $G\subseteq\left\{fg_\alpha\right\}$。
+\end{proof}
+
+\begin{itemize}
+\item 群乘法表中的每行、每列都是 $G$ 的元素的重新排列。
+\item 乘法表每个元素在每行每列中只出现一次。
+\item 乘法表的任意两行、两列都不会相同。
+\end{itemize}
+
+\section{子群和陪集}
+\subsection{子群及其判定}
+\begin{definition}[子群]
+若 $G$ 的非空子集 $H$ 在与 $G$ 相同的运算下也构成群，则称 $H$ 为 $G$ 的子群，
+记为 $H\leq G$。
+\end{definition}
+判定一个非空子集 $H$ 是否为子群，只需验证：
+\begin{enumerate}
+\item \textbf{封闭性}：对任意 $h_\alpha,h_\beta\in H$，有 $h_\alpha h_\beta\in H$；
+\item \textbf{存在逆元}：对任意 $h\in H$，有 $h^{-1}\in H$。
+\end{enumerate}
+结合律由 $G$ 继承；取 $h\in H$，由上述两条得 $e=hh^{-1}\in H$，
+因此恒元也存在。子群的恒元就是 $G$ 的恒元：若 $e_H$ 为子群恒元，则
+$e_Hh=h$，在 $G$ 中右乘 $h^{-1}$ 得 $e_H=e$。
+
+定义集合乘积 $AB=\left\{ab\mid a\in A,b\in B\right\}$。
+对子群 $H$，封闭性给出 $HH\subseteq H$，而 $h=he\in HH$，所以 $HH=H$。
+
+非平庸群总有子群 $\left\{e\right\}$ 与 $G$，称为平庸子群。
+除此之外的子群称为固有子群。
+
+\subsection{左陪集与右陪集}
+\begin{definition}[陪集]
+设 $H\leq G$。对任意 $f\in G$，定义
+\begin{equation}
+fH=\left\{fh\mid h\in H\right\},\qquad Hf=\left\{hf\mid h\in H\right\},
+\end{equation}
+分别称为 $H$ 关于 $f$ 的左陪集与右陪集。
+\end{definition}
+当 $f\in H$ 时，重排定理给出 $fH=Hf=H$，因此 $H$ 本身也是陪集。
+映射 $h\mapsto fh$ 和 $h\mapsto hf$ 均为双射；有限情形下
+$n_{fH}=n_{Hf}=n_H$。
+
+当 $f\notin H$ 时，$e\notin fH$：否则 $e=fh$ 将推出 $f=h^{-1}\in H$，矛盾。
+右陪集也同样不含恒元，所以这些陪集在原运算下不是子群。
+另一方面，$f=fe=ef$，故 $f\in fH\cap Hf$；这并不意味着左右陪集相等。
+
+
+\begin{theorem}
+       设群 $H $ 为群 $G $ 的子群，$f\notin H, f\in G $，则 $fH\cap H = \varnothing .$
+\end{theorem}
+
+\begin{proof}
+       若 $fh_\alpha=h_\beta$，则 $f=h_\beta h_\alpha^{-1}\in H$，与假设矛盾。
+\end{proof}
+
+\begin{theorem}[陪集定理]
+子群的任意两个左陪集要么相同，要么不相交；右陪集也有相同性质。
+\end{theorem}
+\begin{proof}
+若 $f_1H\cap f_2H\ne\varnothing$，则存在 $h_\alpha,h_\beta\in H$ 使
+$f_1h_\alpha=f_2h_\beta$，于是
+\begin{equation}
+f_2^{-1}f_1=h_\beta h_\alpha^{-1}\in H.
+\end{equation}
+由子群的重排定理，
+\begin{equation}
+f_2^{-1}f_1H=h_\beta h_\alpha^{-1}H=H.
+\end{equation}
+左乘 $f_2$ 得 $f_1H=f_2H$。若两个右陪集相交，取公共元素
+$h_\alpha f_1=h_\beta f_2$，则 $f_1f_2^{-1}\in H$，从而 $Hf_1=Hf_2$。
+\end{proof}
+
+\begin{example}[$\mathrm{D}_3$ 的陪集]
+对 $H_1=\left\{e,d,f\right\}$，有
+\begin{equation}
+aH_1=bH_1=cH_1=\left\{a,b,c\right\}.
+\end{equation}
+对 $H_2=\left\{e,a\right\}$，按前述右侧先作用的约定，有
+\begin{align}
+dH_2&=\left\{d,b\right\},& H_2d&=\left\{d,c\right\},\\
+fH_2&=\left\{f,c\right\},& H_2f&=\left\{f,b\right\}.
+\end{align}
+这给出了左右陪集不相同的具体例子。
+\end{example}
+
+\subsection{拉格朗日定理及其推论}
+\begin{theorem}[拉格朗日定理]
+若 $G$ 为有限群、$H\leq G$，则 $n_H$ 整除 $n_G$，且
+\begin{equation}
+n_G=\left[G:H\right]n_H.
+\end{equation}
+其中 $\left[G:H\right]$ 称为 $H$ 在 $G$ 中的\textbf{指数}，等于不同左陪集的个数。
+\end{theorem}
+\begin{proof}
+先取陪集 $H$。若尚未覆盖 $G$，选 $f_1\notin H$，加入 $f_1H$；
+若仍未覆盖，选一个不在已有陪集中的元素 $f_2$，加入 $f_2H$。
+由陪集定理，新陪集与已有陪集均不相交。
+因为 $G$ 有限，此过程必终止，得到不交并
+\begin{equation}
+G=H\sqcup f_1H\sqcup\cdots\sqcup f_{k-1}H.
+\end{equation}
+每个陪集均含 $n_H$ 个元素，故 $n_G=kn_H$，且 $k=\left[G:H\right]$。
+若 $H=G$，上式直接取 $k=1$ 即可。
+\end{proof}
+
+由此得到以下结论。
+\begin{enumerate}
+\item \textbf{有限群中元素的阶整除群阶。}
+对 $g\in G$，有限性保证其幂出现重复，消去相同因子可得某个正幂等于 $e$。
+若 $n_g=m$，则循环子群
+\begin{equation}
+\langle g\rangle=\left\{e,g,\ldots,g^{m-1}\right\}
+\end{equation}
+有 $m$ 个元素，故 $m\mid n_G$。
+\item \textbf{素数阶群必为循环群。}
+若 $n_G=p$ 为素数，任取 $g\ne e$，其阶大于 $1$ 且整除 $p$，因此只能为 $p$。
+故 $\langle g\rangle=G$，并且没有非平庸真子群。
+\item \textbf{循环群可以有非平庸真子群。}
+例如 $\mathrm{C}_4$ 有二阶子群 $\left\{e,C_4^2\right\}$。
+\item \textbf{合数阶有限群总有非平庸真子群。}
+任取 $g\ne e$，设其阶为 $m$。若 $m<n_G$，则 $\langle g\rangle$ 即为所求。
+若 $m=n_G$，写 $n_G=rs$，其中 $r,s>1$，则 $g^r$ 的阶为 $s$：
+$\left(g^r\right)^s=e$，而 $\left(g^r\right)^t=e$ 意味着 $rs\mid rt$，所以 $s\mid t$。
+因此 $\langle g^r\rangle$ 为非平庸真子群。
+\end{enumerate}
+
+\subsection{经典矩阵群}
+以下群均以矩阵乘法为运算，$I_n$ 表示 $n$ 阶单位矩阵。
+设 $\mathbb{F}=\mathbb{R}$ 或 $\mathbb{C}$，$M_n\left(\mathbb{F}\right)$ 表示该数域上的 $n\times n$ 矩阵全体。
+\begin{align}
+\mathrm{GL}\left(n,\mathbb{F}\right)&=\left\{A\in M_n\left(\mathbb{F}\right)\mid\det A\ne0\right\},\\
+\mathrm{SL}\left(n,\mathbb{F}\right)&=\left\{A\in\mathrm{GL}\left(n,\mathbb{F}\right)\mid\det A=1\right\}.
+\end{align}
+它们分别称为\textbf{一般线性群}与\textbf{特殊线性群}，同时涵盖实数和复数两种情形。
+再定义
+\begin{align}
+\mathrm{U}\left(n\right)&=\left\{A\in\mathrm{GL}\left(n,\mathbb{C}\right)\mid A^\dagger A=AA^\dagger=I_n\right\},\\
+\mathrm{SU}\left(n\right)&=\left\{A\in\mathrm{U}\left(n\right)\mid\det A=1\right\},\\
+\mathrm{O}\left(n\right)&=\left\{A\in\mathrm{GL}\left(n,\mathbb{R}\right)\mid A^{\mathrm{T}}A=AA^{\mathrm{T}}=I_n\right\},\\
+\mathrm{SO}\left(n\right)&=\left\{A\in\mathrm{O}\left(n\right)\mid\det A=1\right\}.
+\end{align}
+它们依次称为\textbf{幺正群、特殊幺正群、正交群、特殊正交群}。
+这里 $A^{\mathrm{T}}$ 为转置，$A^\dagger$ 为 Hermitian 共轭。
+
+这些集合确实构成群。例如，若 $A,B$ 幺正，则
+$\left(AB\right)^\dagger\left(AB\right)=B^\dagger A^\dagger AB=I_n$，且 $A^{-1}=A^\dagger$ 仍幺正。
+正交矩阵的验证将 $\dagger$ 换为 $\mathrm{T}$ 即得。
+特殊群的封闭性与逆元性质则来自
+$\det\left(AB\right)=\det A\det B$ 及 $\det\left(A^{-1}\right)=\left(\det A\right)^{-1}$。
+
+原稿中的包含关系可清楚写成两组链：
+\begin{align}
+\mathrm{SU}\left(n\right)&\subseteq\mathrm{U}\left(n\right)\subseteq\mathrm{GL}\left(n,\mathbb{C}\right),&
+\mathrm{SU}\left(n\right)&\subseteq\mathrm{SL}\left(n,\mathbb{C}\right)\subseteq\mathrm{GL}\left(n,\mathbb{C}\right),\\
+\mathrm{SO}\left(n\right)&\subseteq\mathrm{O}\left(n\right)\subseteq\mathrm{GL}\left(n,\mathbb{R}\right),&
+\mathrm{SO}\left(n\right)&\subseteq\mathrm{SL}\left(n,\mathbb{R}\right)\subseteq\mathrm{GL}\left(n,\mathbb{R}\right).
+\end{align}
+将实矩阵视为复矩阵后，还有
+\begin{equation}
+\mathrm{SO}\left(n\right)\subseteq\mathrm{SU}\left(n\right),\quad \mathrm{O}\left(n\right)\subseteq\mathrm{U}\left(n\right),\quad
+\mathrm{SL}\left(n,\mathbb{R}\right)\subseteq\mathrm{SL}\left(n,\mathbb{C}\right),\quad \mathrm{GL}\left(n,\mathbb{R}\right)\subseteq\mathrm{GL}\left(n,\mathbb{C}\right).
+\end{equation}
+
+\section{共轭元素和类}
+\subsection{共轭关系}
+\begin{definition}[共轭元素]
+若 $g_\alpha,g_\beta\in G$，且存在 $f\in G$ 使
+$g_\alpha=fg_\beta f^{-1}$，则称两者共轭，记为 $g_\alpha\sim g_\beta$。
+\end{definition}
+共轭是等价关系，因为它具有以下性质。
+\begin{enumerate}
+\item \textbf{自反性：}$g=ege^{-1}$，故 $g\sim g$。
+\item \textbf{对称性：}若 $a=fbf^{-1}$，则 $b=f^{-1}af$，故 $b\sim a$。
+\item \textbf{传递性：}若 $a=fbf^{-1}$、$b=hch^{-1}$，则
+\begin{equation}
+a=\left(fh\right)c\left(fh\right)^{-1},
+\end{equation}
+故 $a\sim c$。
+\end{enumerate}
+原稿所说的“传染性”是这三条的推论：若 $a\sim c$ 且 $b\sim c$，
+由对称性得 $c\sim b$，再由传递性得 $a\sim b$。
+
+\subsection{共轭类及其性质}
+\begin{definition}[共轭类]
+元素 $a\in G$ 的共轭类定义为
+\begin{equation}
+C_a=\left\{gag^{-1}\mid g\in G\right\}.
+\end{equation}
+其中任意两个元素都相互共轭。
+\end{definition}
+$\mathrm{D}_3$ 的三个共轭类是 $\left\{e\right\}$、$\left\{d,f\right\}$、$\left\{a,b,c\right\}$。
+例如 $ada^{-1}=f$，而用 $d$ 共轭会在三个反射之间循环置换。
+
+一般共轭类具有以下性质。
+\begin{enumerate}
+\item \textbf{恒元自成一类：}$geg^{-1}=e$。
+\item \textbf{Abel 群每个元素自成一类：}$gag^{-1}=agg^{-1}=a$。
+因此 $n$ 阶循环群恰有 $n$ 个共轭类。
+\item \textbf{$g_\alpha g_\beta$ 与 $g_\beta g_\alpha$ 共轭：}
+\begin{equation}
+g_\alpha g_\beta=g_\alpha\left(g_\beta g_\alpha\right)g_\alpha^{-1}.
+\end{equation}
+\item \textbf{同类元素的阶相同。}若 $b=gag^{-1}$，则对任意正整数 $m$，
+\begin{equation}
+b^m=ga^mg^{-1}.
+\end{equation}
+因此 $a^m=e$ 当且仅当 $b^m=e$；这既保证最小正整数相同，也保证无限阶性质相同。
+\item \textbf{不同共轭类不相交。}若两类有公共元素，由共轭关系的对称性和传递性，
+两类中的所有元素都相互共轭，故两类相同。
+\item \textbf{有限群中，共轭类的大小整除群阶。}下面给出所需证明。
+\end{enumerate}
+
+定义 $a$ 的\textbf{中心化子}
+\begin{equation}
+Z_G\left(a\right)=\left\{g\in G\mid ga=ag\right\}.
+\end{equation}
+它包含恒元；与 $a$ 对易的元素之积及其逆元仍与 $a$ 对易，故 $Z_G\left(a\right)\leq G$。
+考虑左陪集到共轭类的映射
+\begin{equation}
+gZ_G\left(a\right)\longmapsto gag^{-1}.
+\end{equation}
+若 $g'=gz$，其中 $z\in Z_G\left(a\right)$，则 $g'ag'^{-1}=gag^{-1}$，所以映射良定义。
+反过来，$g_1ag_1^{-1}=g_2ag_2^{-1}$ 等价于
+$g_2^{-1}g_1\in Z_G\left(a\right)$，也就等价于两个陪集相同。
+由共轭类定义，映射还是满射，因此为双射。拉格朗日定理遂给出
+\begin{equation}
+|C_a|=\left[G:Z_G\left(a\right)\right]=\frac{|G|}{|Z_G\left(a\right)|}.
+\end{equation}
+
+\section{不变子群和商群}
+\subsection{不变子群的等价定义}
+\begin{definition}[不变子群]
+设 $H$ 为群 $G$ 的子群，若任意 $g_\alpha\in G$ 都有 $g_\alpha H=Hg_\alpha$，
+则称 $H$ 为 $G$ 的不变子群。
+\end{definition}
+等价地，$gHg^{-1}=H$ 对所有 $g\in G$ 成立；还等价于
+\begin{equation}
+ghg^{-1}\in H\qquad\left(\forall g\in G,\ h\in H\right).
+\end{equation}
+前两个条件通过右乘 $g^{-1}$ 或 $g$ 相互转化。
+最后一个条件先给出 $gHg^{-1}\subseteq H$；将 $g$ 换成 $g^{-1}$，得到
+$g^{-1}Hg\subseteq H$，再左右分别乘 $g,g^{-1}$ 得 $H\subseteq gHg^{-1}$，故二者相等。
+
+$\left\{e\right\}$ 和 $G$ 本身总是不变子群。
+若 $G$ 为 Abel 群，则它的每个子群都是不变子群。
+更一般地，若 $H$ 中每个元素都与 $G$ 中所有元素对易，则 $H$ 为不变子群。
+\textbf{仅要求 $H$ 自身为 Abel 群并不足够}：
+$\mathrm{D}_3$ 的子群 $\left\{e,a\right\}$ 为 Abel 群，但其左右陪集不同，因而不是不变子群。
+
+例如 Abel 群 $\mathrm{C}_6$ 的两个非平庸子群
+$\left\{e,C_6^3\right\}$ 和 $\left\{e,C_6^2,C_6^4\right\}$ 都是不变子群。
+
+\subsection{两个重要性质}
+\begin{proposition}
+子群 $H$ 为不变子群，当且仅当 $H$ 是若干个完整的 $G$ 的共轭类之并。
+\end{proposition}
+\begin{proof}
+若 $H$ 为不变子群，则每个 $h\in H$ 的所有共轭元素仍属于 $H$，所以 $C_h\subseteq H$。
+反之，若 $H$ 是完整共轭类之并，则 $h\in H$ 蕴含 $ghg^{-1}\in H$，故 $H$ 为不变子群。
+\end{proof}
+
+\begin{proposition}
+指数为 $2$ 的子群必为不变子群。
+\end{proposition}
+\begin{proof}
+设 $\left[G:H\right]=2$。当 $g\in H$ 时，$gH=Hg=H$。
+当 $g\notin H$ 时，唯一的另一个左陪集是 $G\setminus H$。
+取逆给出左右陪集集合之间的双射 $xH\mapsto Hx^{-1}$，
+所以右陪集也恰有两个，因而 $Hg=G\setminus H=gH$。
+\end{proof}
+这里的指数 $\left[G:H\right]$ 与子群的阶 $n_H$ 不同；有限群中 $\left[G:H\right]=n_G/n_H$。
+
+\subsection{商群的构造}
+\begin{definition}[商群]
+设 $H$ 为 $G$ 的不变子群，将所有不同陪集组成集合
+\begin{equation}
+G/H=\left\{gH\mid g\in G\right\},
+\end{equation}
+并规定 $\left(s_iH\right)\left(s_jH\right)=\left(s_is_j\right)H$，所得群称为商群。
+\end{definition}
+若用集合乘积计算，则不变性及 $HH=H$ 保证
+\begin{equation}
+\left(s_iH\right)\left(s_jH\right)=s_iHs_jH=s_is_jHH=s_is_jH.
+\end{equation}
+定义必须与代表元的选择无关。若 $s_i'=s_ih_1$、$s_j'=s_jh_2$，则
+\begin{equation}
+s_i's_j'=s_ih_1s_jh_2
+=s_is_j\left(s_j^{-1}h_1s_j\right)h_2\in s_is_jH,
+\end{equation}
+因为不变性给出 $s_j^{-1}h_1s_j\in H$。所以乘法良定义。
+
+下面验证群公理。
+\begin{enumerate}
+\item \textbf{封闭性：}$\left(s_iH\right)\left(s_jH\right)=\left(s_is_j\right)H\in G/H$。
+\item \textbf{结合律：}利用 $G$ 的结合律，
+\begin{equation}
+\left(\left(s_iH\right)\left(s_jH\right)\right)\left(s_kH\right)=\left(\left(s_is_j\right)s_k\right)H
+=\left(s_i\left(s_js_k\right)\right)H=\left(s_iH\right)\left(\left(s_jH\right)\left(s_kH\right)\right).
+\end{equation}
+\item \textbf{恒元：}$H=eH$，满足 $H\left(s_iH\right)=\left(s_iH\right)H=s_iH$。
+\item \textbf{逆元：}$\left(s_iH\right)^{-1}=s_i^{-1}H$，两种次序的乘积均为 $H$。
+\end{enumerate}
+有限情形可记 $G/H=\left\{\phi_0=H,\phi_1=s_1H,\ldots,\phi_{k-1}=s_{k-1}H\right\}$，
+其阶为 $k=\left[G:H\right]$。商群的元素是\textbf{陪集}，而不是任选的代表元本身。
+
+\begin{example}[$\mathrm{C}_6$ 的两个商群]
+$\mathrm{C}_6$ 有两个非平庸不变子群
+\begin{equation}
+\mathrm{C}_3=\left\{e,C_6^2,C_6^4\right\},\qquad
+\mathrm{C}_2=\left\{e,C_6^3\right\}.
+\end{equation}
+第一个商群为 $\mathrm{C}_6/\mathrm{C}_3=\left\{\phi_0,\phi_1\right\}$，其中
+\begin{align}
+\phi_0&=\mathrm{C}_3=\left\{e,C_6^2,C_6^4\right\},\\
+\phi_1&=C_6^1\mathrm{C}_3=\left\{C_6^1,C_6^3,C_6^5\right\}.
+\end{align}
+第二个商群为 $\mathrm{C}_6/\mathrm{C}_2=\left\{\phi_0,\phi_1,\phi_2\right\}$，其中
+\begin{align}
+\phi_0&=\mathrm{C}_2=\left\{e,C_6^3\right\},\\
+\phi_1&=C_6^1\mathrm{C}_2=\left\{C_6^1,C_6^4\right\},\\
+\phi_2&=C_6^2\mathrm{C}_2=\left\{C_6^2,C_6^5\right\}.
+\end{align}
+前一个商群满足 $\phi_1^2=\phi_0$；后一个满足
+$\phi_1^2=\phi_2$、$\phi_1^3=\phi_0$。
+\end{example}
+
+\section{同态与同构}
+\subsection{同构}
+\begin{definition}[群同构]
+若存在双射 $\varphi:G\to G'$，满足
+\begin{equation}
+\varphi\left(g_\alpha g_\beta\right)=\varphi\left(g_\alpha\right)\varphi\left(g_\beta\right),
+\end{equation}
+则称 $G$ 与 $G'$ 同构，记作 $G\cong G'$。
+\end{definition}
+同构表示群元虽然可能是不同对象，但乘法结构完全相同。
+对有限群，同构等价于可以通过一致的群元重标记，使两个乘法表完全相同。
+阶为同一素数 $p$ 的两个群都为循环群，故均同构于 $\mathrm{C}_p$。
+
+\begin{example}[$\mathrm{SO}\left(2\right)\cong\mathrm{U}\left(1\right)$]
+令 $g'\left(\theta\right)=\mathrm{e}^{\mathrm{i}\theta}$，建立 $g\left(\theta\right)\longleftrightarrow g'\left(\theta\right)$ 的对应。
+证明中将此对应记为 $\varphi$，即 $\varphi\left(g\left(\theta\right)\right)=g'\left(\theta\right)$。其中
+\begin{equation}
+g\left(\theta\right)=\begin{bmatrix}\cos\theta&-\sin\theta\\\sin\theta&\cos\theta\end{bmatrix},
+\qquad \mathrm{U}\left(1\right)=\left\{\mathrm{e}^{\mathrm{i}\theta}\mid\theta\in\mathbb{R}\right\}.
+\end{equation}
+两侧参数均按模 $2\pi$ 识别，因此对应关系良定义且为双射。又有
+\begin{equation}
+\varphi\left(g\left(\theta_1\right)g\left(\theta_2\right)\right)
+=\mathrm{e}^{\mathrm{i}\left(\theta_1+\theta_2\right)}
+=\varphi\left(g\left(\theta_1\right)\right)\varphi\left(g\left(\theta_2\right)\right).
+\end{equation}
+所以这两个无限群同构。将 $\mathrm{e}^{\mathrm{i}\theta}$ 视为 $1\times1$ 复矩阵，
+也得到 $\mathrm{SO}\left(2\right)$ 的一维复表示；表示理论将在后续章节讨论。
+\end{example}
+
+\begin{example}[$\mathrm{D}_3$ 的商群]
+取不变子群 $H=\left\{e,d,f\right\}$，则
+\begin{equation}
+\mathrm{D}_3/H=\left\{H,aH\right\},\qquad aH=\left\{a,b,c\right\}.
+\end{equation}
+建立 $H\longleftrightarrow e$、$aH\longleftrightarrow C_2^1$ 的双射。
+由于 $H\left(aH\right)=\left(aH\right)H=aH$、$\left(aH\right)^2=H$，乘法关系分别对应于
+$eC_2^1=C_2^1e=C_2^1$、$\left(C_2^1\right)^2=e$，所以 $\mathrm{D}_3/H\cong\mathrm{C}_2$。
+\end{example}
+
+\begin{example}[同阶不保证同构]
+四阶循环群 $\mathrm{C}_4$ 与时空反演群
+$\mathrm{V}_4=\left\{e,\tau,\sigma,\rho\right\}$ 不同构。
+在时空坐标基 $\left(t,x,y,z\right)$ 下，后者的矩阵为
+\begin{align}
+e&=\diag\left(1,1,1,1\right),&\tau&=\diag\left(-1,1,1,1\right),\\
+\sigma&=\diag\left(1,-1,-1,-1\right),&\rho&=\diag\left(-1,-1,-1,-1\right).
+\end{align}
+这里 $\tau$ 反演时间，$\sigma$ 反演空间，$\rho=\tau\sigma$ 同时反演时空。
+这是坐标变换群的例子，未涉及量子态上的时间反演算符。
+$\mathrm{V}_4$ 中所有非恒元均为二阶，而 $\mathrm{C}_4$ 含四阶元素。
+同构保持元素的阶：$\varphi\left(g^m\right)=\varphi\left(g\right)^m$，再用双射的单射性即可反向推出
+$g^m=e$。因此这两个群不可能同构。
+\end{example}
+
+\subsection{同态}
+\begin{definition}[同态]
+设 $G=\left\{g_{im}\right\}$ 与 $G'=\left\{g_i'\right\}$ 之间有一个满射对应关系
+$g_{im}\mapsto g_i'$，允许不同群元对应于同一个群元。若
+\begin{equation}
+g_{im}\mapsto g_i',\quad g_{jn}\mapsto g_j'
+\quad\Longrightarrow\quad g_{im}g_{jn}\mapsto g_i'g_j',
+\end{equation}
+则称 $G$ 与 $G'$ 同态，沿用本讲义的记号
+\begin{equation}
+G\simeq G'.
+\end{equation}
+\end{definition}
+这里的 $G\simeq G'$ 表示存在从 $G$ 到 $G'$ 的满同态，方向由前述对应关系确定。
+一般定义中的同态不必满射；本节沿用原稿讨论满射情形的约定。
+
+若 $G\simeq G'$，则恒元与逆元分别满足 $e\mapsto e'$、$g^{-1}\mapsto g'^{-1}$。
+设 $g_{im}\mapsto g_i'$、$e\mapsto f'$。一方面，保持乘法给出
+$g_{im}e\mapsto g_i'f'$；另一方面，$g_{im}e=g_{im}\mapsto g_i'$。
+因此 $g_i'f'=g_i'$，消去 $g_i'$ 得 $f'=e'$。
+再设 $g\mapsto g'$、$g^{-1}\mapsto h'$，则
+\begin{equation}
+gg^{-1}=e\mapsto e'=g'h',\qquad h'=g'^{-1}.
+\end{equation}
+
+\subsection{同态核}
+\begin{definition}[同态核]
+设 $G\simeq G'$，所有对应于 $G'$ 的恒元 $e'$ 的群元构成同态核，记为
+\begin{equation}
+I=\left\{i_l\in G\mid i_l\mapsto e'\right\}.
+\end{equation}
+\end{definition}
+
+\begin{theorem}[同态核定理]
+若 $G\simeq G'$，$I$ 为同态核，则 $I$ 为 $G$ 的不变子群。
+\end{theorem}
+\begin{proof}
+由于 $e\mapsto e'$，$I$ 非空。对任意 $i_l,i_k\in I$，有
+\begin{equation}
+i_li_k\mapsto e'e'=e',\qquad i_l^{-1}\mapsto e'^{-1}=e',
+\end{equation}
+故 $I$ 对乘积和取逆封闭，是 $G$ 的子群。
+再取 $g_{im}\mapsto g_i'$，则
+\begin{equation}
+g_{im}i_lg_{im}^{-1}\mapsto g_i'e'g_i'^{-1}=e'.
+\end{equation}
+因此 $g_{im}i_lg_{im}^{-1}\in I$，即 $I$ 为 $G$ 的不变子群。
+\end{proof}
+
+\begin{theorem}
+若 $H$ 为群 $G$ 的不变子群，则 $G\simeq G/H$。
+\end{theorem}
+\begin{proof}
+建立对应关系：若 $g_{im}=s_ih_m\in s_iH$，则 $g_{im}\mapsto s_iH$。
+陪集彼此不交且覆盖 $G$，故每个元素恰有一个像；每个陪集有代表元，故该对应为满射。
+若 $g_{im}\in s_iH$、$g_{jn}\in s_jH$，则
+\begin{equation}
+g_{im}g_{jn}\in\left(s_iH\right)\left(s_jH\right),\qquad
+g_{im}g_{jn}\mapsto\left(s_iH\right)\left(s_jH\right).
+\end{equation}
+所以该对应保持乘法，$G\simeq G/H$。对应于恒元陪集 $H$ 的元素恰为 $H$ 中的元素。
+\end{proof}
+
+\begin{theorem}
+若 $G\simeq G'$，则 $G/I\cong G'$，其中 $I$ 为同态核。
+\end{theorem}
+\begin{proof}
+建立对应 $gI\mapsto g'$，其中 $g\mapsto g'$。
+若 $gI=hI$，则 $h^{-1}g\in I$，于是 $h'^{-1}g'=e'$，即 $g'=h'$，故对应与代表元选择无关。
+反之，若 $g'=h'$，则 $h^{-1}g\mapsto e'$，所以 $h^{-1}g\in I$，从而 $gI=hI$。
+这证明对应为单射；原对应为满射，故陪集对应也是满射。
+最后，$\left(gI\right)\left(hI\right)=\left(gh\right)I$ 对应于 $g'h'$，因此它保持乘法，给出所需同构。
+\end{proof}
+商群将同态核的每个陪集视为一个元素，恰好保留同态对应后的乘法结构。
+
+\section{直积群}
+\subsection{内直积及唯一分解}
+本节沿用原稿的 $H\gprod F$ 表示\textbf{群直积}，通常也记作 $H\times F$；
+这里的 $\otimes$ 不表示向量空间的张量积。
+
+\begin{definition}[内直积]
+设 $H,F\leq G$ 满足
+\begin{equation}
+H\cap F=\left\{e\right\},\qquad hf=fh\quad\left(\forall h\in H,\ f\in F\right).
+\end{equation}
+则 $K=HF=\left\{hf\mid h\in H,f\in F\right\}$ 是 $G$ 的子群，称为 $H,F$ 的内直积，
+记为 $K=H\gprod F$。$H,F$ 称为直积因子。
+\end{definition}
+先验证群结构：$e=ee\in K$，且由两个因子之间的对易性，
+\begin{equation}
+\left(h_1f_1\right)\left(h_2f_2\right)=\left(h_1h_2\right)\left(f_1f_2\right)\in K,\qquad
+\left(hf\right)^{-1}=f^{-1}h^{-1}=h^{-1}f^{-1}\in K.
+\end{equation}
+因此 $K$ 为子群；这里不要求 $H$、$F$ 或 $G$ 自身为 Abel 群。
+
+每个 $k\in K$ 的分解 $k=hf$ 是唯一的。
+事实上，若 $hf=h'f'$，则
+\begin{equation}
+h'^{-1}h=f'f^{-1}\in H\cap F=\left\{e\right\},
+\end{equation}
+所以 $h=h'$、$f=f'$。这就是原稿“无重复元素”的准确含义。
+有限情形因而有 $n_K=n_Hn_F$。
+只有另有 $G=HF$ 时，才能称整个 $G$ 为这两个子群的内直积。
+
+\begin{example}[$\mathrm{C}_6$ 的直积分解]
+$\mathrm{C}_6$ 的两个子群
+\begin{equation}
+\mathrm{C}_2=\left\{e,C_6^3\right\},\qquad \mathrm{C}_3=\left\{e,C_6^2,C_6^4\right\}
+\end{equation}
+除恒元外没有公共元素，且元素相互对易。因此
+\begin{equation}
+\mathrm{C}_2\gprod\mathrm{C}_3
+=\left\{e,C_6^1,C_6^2,C_6^3,C_6^4,C_6^5\right\}=\mathrm{C}_6.
+\end{equation}
+\end{example}
+
+\begin{proposition}
+若 $K=H\gprod F$，则两个直积因子均为 $K$ 的不变子群。
+\end{proposition}
+\begin{proof}
+对 $h_\alpha f_\gamma\in K$、$f_\beta\in F$，
+\begin{align}
+\left(h_\alpha f_\gamma\right)f_\beta\left(h_\alpha f_\gamma\right)^{-1}
+&=h_\alpha f_\gamma f_\beta f_\gamma^{-1}h_\alpha^{-1}\\
+&=f_\gamma f_\beta f_\gamma^{-1}\in F.
+\end{align}
+第二步使用 $h_\alpha$ 与所有 $F$ 中元素对易。对任意 $h_\beta\in H$，也有
+\begin{equation}
+\left(h_\alpha f_\gamma\right)h_\beta\left(h_\alpha f_\gamma\right)^{-1}
+=h_\alpha h_\beta h_\alpha^{-1}\in H.
+\end{equation}
+故两个因子均为不变子群。
+\end{proof}
+
+\subsection{连续群的例子与共轭类}
+\begin{example}[$\mathrm{O}\left(3\right)$ 的分解]
+令 $E=I_3=\diag\left(1,1,1\right)$，$I=-I_3=\diag\left(-1,-1,-1\right)$。
+这里沿用 $E$ 表示恒等变换、$I$ 表示空间反演的记号；$I_3$ 专指三阶单位矩阵。
+$\left\{E,I\right\}$ 为二阶子群；$I$ 与所有矩阵对易，且 $\det I=-1$，
+所以它与 $\mathrm{SO}\left(3\right)$ 的交仅为 $E$。
+若 $A\in\mathrm{O}\left(3\right)$，则 $\det A=\pm1$。当行列式为 $1$ 时，$A\in\mathrm{SO}\left(3\right)$；
+当行列式为 $-1$ 时，$R=AI\in\mathrm{SO}\left(3\right)$，且 $A=RI$。
+因此所有元素都被这两个因子的乘积覆盖，从而
+\begin{equation}
+\mathrm{O}\left(3\right)=\mathrm{SO}\left(3\right)\gprod\left\{E,I\right\}.
+\end{equation}
+这说明任意三维正交变换都能唯一写为一个正常转动与可选的空间反演之积。
+\end{example}
+
+对内直积 $K=H\gprod F$，记 $C_h^H$ 为 $h$ 在 $H$ 中的共轭类，
+$C_f^F$ 为 $f$ 在 $F$ 中的共轭类。由因子间对易性，
+\begin{align}
+C_{hf}^{K}
+&=\left\{\left(h_\alpha f_\beta\right)hf\left(h_\alpha f_\beta\right)^{-1}
+       \mid h_\alpha\in H,f_\beta\in F\right\}\\
+&=\left\{\left(h_\alpha h h_\alpha^{-1}\right)\left(f_\beta f f_\beta^{-1}\right)
+       \mid h_\alpha\in H,f_\beta\in F\right\}\\
+&=\left\{xy\mid x\in C_h^H,y\in C_f^F\right\}.
+\end{align}
+沿用原稿，将此集合记为 $C_h^H\gprod C_f^F$。
+这里共轭类一般不是子群，$\otimes$ 表示集合的乘积结构；在外直积中表示有序对的集合。
+
+\subsection{外直积及其推广}
+\begin{definition}[外直积]
+对任意两个群 $H,F$，在有序对集合
+\begin{equation}
+H\gprod F=\left\{\left(h,f\right)\mid h\in H,f\in F\right\}
+\end{equation}
+上定义逐分量乘法 $\left(h,f\right)\left(h',f'\right)=\left(hh',ff'\right)$，所得群称为外直积。
+\end{definition}
+封闭性由两个因子的封闭性保证；结合律逐分量成立，例如
+\begin{equation}
+\left(\left(h,f\right)\left(h',f'\right)\right)\left(h'',f''\right)
+=\left(\left(hh'\right)h'',\left(ff'\right)f''\right)=\left(h\left(h'h''\right),f\left(f'f''\right)\right).
+\end{equation}
+恒元为 $\left(e_H,e_F\right)$，逆元为 $\left(h,f\right)^{-1}=\left(h^{-1},f^{-1}\right)$。
+外直积中有两个自然嵌入的子群
+\begin{equation}
+\bar H=\left\{\left(h,e_F\right)\mid h\in H\right\},\qquad
+\bar F=\left\{\left(e_H,f\right)\mid f\in F\right\}.
+\end{equation}
+它们交于恒元、相互对易，且每个 $\left(h,f\right)$ 都等于 $\left(h,e_F\right)\left(e_H,f\right)$，
+所以整个外直积又是 $\bar H,\bar F$ 的内直积；两者均为不变子群。
+若 $H,F$ 本来就是内直积因子，则 $\left(h,f\right)\mapsto hf$ 是外直积到内直积的同构。
+
+逐分量共轭给出
+\begin{align}
+C_{\left(h,f\right)}
+&=\left\{\left(h_\alpha,f_\beta\right)\left(h,f\right)\left(h_\alpha,f_\beta\right)^{-1}
+          \mid h_\alpha\in H,f_\beta\in F\right\}\\
+&=\left\{\left(h_\alpha h h_\alpha^{-1},f_\beta f f_\beta^{-1}\right)
+          \mid h_\alpha\in H,f_\beta\in F\right\}\\
+&=C_h^H\gprod C_f^F.
+\end{align}
+
+\Needspace{20\baselineskip}
+对任意有限个群 $H,F,\ldots,K$，定义
+\begin{equation}
+G=H\gprod F\gprod\cdots\gprod K
+=\left\{\left(h,f,\ldots,k\right)\mid h\in H,f\in F,\ldots,k\in K\right\},
+\end{equation}
+乘法为
+\begin{equation}
+\left(h,f,\ldots,k\right)\left(h',f',\ldots,k'\right)=\left(hh',ff',\ldots,kk'\right).
+\end{equation}
+封闭性与结合律逐分量继承，恒元为 $\left(e_H,e_F,\ldots,e_K\right)$，
+逆元逐分量取逆，因此这也是群。
+各坐标因子
+\begin{align}
+\bar H&=\left\{\left(h,e_F,\ldots,e_K\right)\mid h\in H\right\},\\
+\bar F&=\left\{\left(e_H,f,\ldots,e_K\right)\mid f\in F\right\},\\
+&\ \vdots\\
+\bar K&=\left\{\left(e_H,e_F,\ldots,k\right)\mid k\in K\right\}
+\end{align}
+均为不变子群，因为共轭不会改变其他坐标上的恒元。
+共轭类相应分解为
+\begin{equation}
+C_{\left(h,f,\ldots,k\right)}=C_h^H\gprod C_f^F\gprod\cdots\gprod C_k^K.
+\end{equation}
+直积结构由此将群元的运算与共轭分类分解到各个独立因子中。
+

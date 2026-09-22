@@ -1,0 +1,478 @@
+\section{谐振子相干态}
+\subsection{定义与数态展开}
+\begin{definition}
+谐振子湮灭算符的归一化本征态称为相干态：
+\begin{equation}
+\hat a\Ket{\alpha}=\alpha\Ket{\alpha},\qquad
+\Braket{\alpha|\alpha}=1,\qquad\alpha\in\C.
+\end{equation}
+$\hat a$ 非厄米，其本征值不要求为实数；实际由下述构造可知任意有限复数 $\alpha$ 都给出相干态。
+\end{definition}
+利用数态完备性与 $\Bra{n}=\Bra{0}\hat a^n/\sqrt{n!}$，
+\begin{equation}
+\Braket{n|\alpha}=\frac{\alpha^n}{\sqrt{n!}}\Braket{0|\alpha},\qquad
+\Ket{\alpha}=\Braket{0|\alpha}\sum_{n=0}^{\infty}\frac{\alpha^n}{\sqrt{n!}}\Ket{n}.
+\end{equation}
+归一化给出
+\begin{equation}
+1=\left|\Braket{0|\alpha}\right|^2\sum_{n=0}^{\infty}\frac{\left|\alpha\right|^{2n}}{n!}
+=\left|\Braket{0|\alpha}\right|^2\mathrm{e}^{\left|\alpha\right|^2}.
+\end{equation}
+从此固定相位，使 $\Braket{0|\alpha}$ 为正实数，便有
+\begin{equation}
+\boxed{\Ket{\alpha}=\mathrm{e}^{-\left|\alpha\right|^2/2}
+\sum_{n=0}^{\infty}\frac{\alpha^n}{\sqrt{n!}}\Ket{n}
+=\mathrm{e}^{-\left|\alpha\right|^2/2}\mathrm{e}^{\alpha\hat a^\dagger}\Ket{0}.}
+\label{eq:coherent-expansion}
+\end{equation}
+归一化本身只确定整体因子的模，不能单独确定其相位。
+
+\subsection{位移算符及其性质}
+定义
+\begin{equation}
+\hat D\left(\alpha\right)=\mathrm{e}^{\alpha\hat a^\dagger-\alpha^*\hat a}.
+\end{equation}
+其指数是反厄米算符，所以
+\begin{equation}
+\hat D^\dagger\left(\alpha\right)=\hat D\left(-\alpha\right)=\hat D^{-1}\left(\alpha\right),\qquad
+\hat D\left(0\right)=\hat I.
+\end{equation}
+为了与式\eqref{eq:coherent-expansion}联系，使用照片中的指数拆分公式：若
+$\left[\hat A,\left[\hat A,\hat B\right]\right]=\left[\hat B,\left[\hat A,\hat B\right]\right]=0$，则
+\begin{equation}
+\mathrm{e}^{\hat A+\hat B}
+=\mathrm{e}^{\hat A}\mathrm{e}^{\hat B}\mathrm{e}^{-\left[\hat A,\hat B\right]/2}.
+\end{equation}
+该式可由对 $\mathrm{e}^{t\hat A}\mathrm{e}^{t\hat B}$ 求导验证：其对数导数为
+$\hat A+\hat B+t\left[\hat A,\hat B\right]$，而对易子的嵌套项为零，积分即得此结果。
+取 $\hat A=\alpha\hat a^\dagger$、$\hat B=-\alpha^*\hat a$，则
+$\left[\hat A,\hat B\right]=\left|\alpha\right|^2\hat I$，故
+\begin{equation}
+\hat D\left(\alpha\right)=\mathrm{e}^{-\left|\alpha\right|^2/2}
+\mathrm{e}^{\alpha\hat a^\dagger}\mathrm{e}^{-\alpha^*\hat a}.
+\end{equation}
+由 $\mathrm{e}^{-\alpha^*\hat a}\Ket{0}=\Ket{0}$，得到
+\begin{equation}
+\boxed{\Ket{\alpha}=\hat D\left(\alpha\right)\Ket{0}.}
+\end{equation}
+因此基态是 $\alpha=0$ 的相干态。
+
+设 $\hat G=\alpha\hat a^\dagger-\alpha^*\hat a$。因为
+$\left[\hat G,\hat a\right]=-\alpha\hat I$，更高阶嵌套对易子为零，故
+\begin{equation}
+\hat D\left(\alpha\right)\hat a\hat D^\dagger\left(\alpha\right)=\hat a-\alpha\hat I,\qquad
+\hat D^\dagger\left(\alpha\right)\hat a\hat D\left(\alpha\right)=\hat a+\alpha\hat I.
+\end{equation}
+定义实数
+\begin{equation}
+\bar x_\alpha=\sqrt{\frac{2\hbar}{m\omega}}\operatorname{Re}\alpha,
+\qquad
+\bar p_\alpha=\sqrt{2m\hbar\omega}\operatorname{Im}\alpha.
+\label{eq:coherent-centers}
+\end{equation}
+由式\eqref{eq:xp-ladder}可得
+\begin{equation}
+\hat D\hat x\hat D^\dagger=\hat x-\bar x_\alpha\hat I,\qquad
+\hat D\hat p\hat D^\dagger=\hat p-\bar p_\alpha\hat I.
+\end{equation}
+反向共轭的位移为正号。特别是 $\Ket{\alpha}=\hat D\Ket{0}$ 中的位置、动量期望值正是 $\bar x_\alpha,\bar p_\alpha$。
+
+\subsection{坐标波函数与相位约定}
+对定义方程取坐标表象，得到
+\begin{equation}
+\left(x+x_0^2\frac{\mathrm{d}}{\mathrm{d}x}-\sqrt2x_0\alpha\right)\psi_\alpha\left(x\right)=0.
+\end{equation}
+其一般解为 $C_\alpha\exp\left[-x^2/\left(2x_0^2\right)+\sqrt2\alpha x/x_0\right]$。
+为与式\eqref{eq:coherent-expansion}的相位一致，把式\eqref{eq:hermite-wavefunction}代入数态展开，并在式\eqref{eq:hermite-generating}中取 $s=\alpha/\sqrt2$，得到
+\begin{align}
+\psi_\alpha\left(x\right)
+&=\frac{\mathrm{e}^{-\xi^2/2-\left|\alpha\right|^2/2}}{\pi^{1/4}\sqrt{x_0}}
+\sum_{n=0}^{\infty}\frac{\left(\alpha/\sqrt2\right)^n}{n!}H_n\left(\xi\right)\\
+&=\frac{1}{\pi^{1/4}\sqrt{x_0}}
+\mathrm{e}^{-\xi^2/2+\sqrt2\alpha\xi-\alpha^2/2-\left|\alpha\right|^2/2}.
+\end{align}
+用式\eqref{eq:coherent-centers}完成平方，得到
+\begin{equation}
+\boxed{\psi_\alpha\left(x\right)=\frac{1}{\pi^{1/4}\sqrt{x_0}}
+\mathrm{e}^{-\left(x-\bar x_\alpha\right)^2/\left(2x_0^2\right)
++\mathrm{i}\bar p_\alpha x/\hbar-\mathrm{i}\bar x_\alpha\bar p_\alpha/\left(2\hbar\right)}.}
+\label{eq:coherent-wavefunction}
+\end{equation}
+最后一项是与相干态标签有关的整体相位。省去它不改变单个态的概率密度，但会改变此前约定的态矢量相位，故本章保留它。
+概率密度为
+\begin{equation}
+\left|\psi_\alpha\left(x\right)\right|^2=\frac{1}{\sqrt\pi x_0}
+\mathrm{e}^{-\left(x-\bar x_\alpha\right)^2/x_0^2}.
+\end{equation}
+它是中心在 $\bar x_\alpha$、宽度与基态相同的 Gaussian 波包。
+
+\subsection{相干态的时间演化}
+设 $t=0$ 时的初态为 $\Ket{\alpha}$，Hamilton 算符不含时。逐项演化数态展开可得
+\begin{align}
+\Ket{\alpha;t}
+&=\mathrm{e}^{-\mathrm{i}\hat Ht/\hbar}\Ket{\alpha}\\
+&=\mathrm{e}^{-\mathrm{i}\omega t/2}\mathrm{e}^{-\left|\alpha\right|^2/2}
+\sum_{n=0}^{\infty}\frac{\left(\alpha\mathrm{e}^{-\mathrm{i}\omega t}\right)^n}{\sqrt{n!}}\Ket{n}\\
+&=\boxed{\mathrm{e}^{-\mathrm{i}\omega t/2}\Ket{\alpha\left(t\right)},\qquad
+\alpha\left(t\right)=\alpha\mathrm{e}^{-\mathrm{i}\omega t}.}
+\label{eq:coherent-time}
+\end{align}
+因此 $\hat a\Ket{\alpha;t}=\alpha\left(t\right)\Ket{\alpha;t}$：演化后的态仍为相干态，且保留零点能产生的整体相位。
+
+写 $\alpha=\left|\alpha\right|\mathrm{e}^{\mathrm{i}\varphi}$，则
+\begin{align}
+\bar x\left(t\right)&=\sqrt{\frac{2\hbar}{m\omega}}\operatorname{Re}\alpha\left(t\right)
+=\sqrt{\frac{2\hbar}{m\omega}}\left|\alpha\right|\cos\left(\omega t-\varphi\right),\\
+\bar p\left(t\right)&=\sqrt{2m\hbar\omega}\operatorname{Im}\alpha\left(t\right)
+=-\sqrt{2m\hbar\omega}\left|\alpha\right|\sin\left(\omega t-\varphi\right).
+\end{align}
+概率密度保持
+\begin{equation}
+\left|\psi_\alpha\left(x,t\right)\right|^2=\frac{1}{\sqrt\pi x_0}
+\mathrm{e}^{-\left[x-\bar x\left(t\right)\right]^2/x_0^2}.
+\end{equation}
+波包宽度不变、中心作简谐振动，并满足
+$\dot{\bar x}=\bar p/m$、$\dot{\bar p}=-m\omega^2\bar x$。
+
+\subsection{数分布与涨落}
+由数态展开直接得到，在相干态中测得激发数 $n$ 的概率为
+\begin{equation}
+P_n=\left|\Braket{n|\alpha;t}\right|^2
+=\mathrm{e}^{-\left|\alpha\right|^2}\frac{\left|\alpha\right|^{2n}}{n!}.
+\end{equation}
+这与时间无关，是均值 $\bar n=\left|\alpha\right|^2$ 的 Poisson 分布。
+也可以利用本征态定义计算
+\begin{equation}
+\Braket{\hat N}=\Braket{\alpha|\hat a^\dagger\hat a|\alpha}=\left|\alpha\right|^2.
+\end{equation}
+其中 $\Braket{\hat F}$ 表示当前归一化态的期望值。由
+\begin{equation}
+\hat N^2=\hat a^\dagger\hat a\hat a^\dagger\hat a
+=\left(\hat a^\dagger\right)^2\hat a^2+\hat N,
+\end{equation}
+得到
+\begin{equation}
+\Braket{\hat N^2}=\left|\alpha\right|^4+\left|\alpha\right|^2,\qquad
+\left(\Delta N\right)^2=\Braket{\hat N^2}-\Braket{\hat N}^2=\left|\alpha\right|^2.
+\end{equation}
+对 $\alpha\neq0$，相对涨落为
+\begin{equation}
+\frac{\Delta N}{\bar n}=\frac{1}{\left|\alpha\right|}=\frac{1}{\sqrt{\bar n}}.
+\end{equation}
+在真空态 $\alpha=0$ 中，数目均值与方差都为零，相对涨落这一比值不定义。
+
+\subsection{最小不确定度与经典对应}
+先说明照片所用不确定性关系的依据。对归一化态，定义中心化算符
+$\delta\hat F=\hat F-\Braket{\hat F}\hat I$ 及
+$\delta\hat G=\hat G-\Braket{\hat G}\hat I$，方差为
+$\left(\Delta F\right)^2=\Braket{\left(\delta\hat F\right)^2}$。
+假设 $\hat F,\hat G$ 自伴且所需乘积在该态上有定义，对
+$\delta\hat F\Ket{\psi}$、$\delta\hat G\Ket{\psi}$ 使用 Schwarz 不等式：
+\begin{equation}
+\left(\Delta F\right)^2\left(\Delta G\right)^2
+\geq\left|\Braket{\delta\hat F\,\delta\hat G}\right|^2.
+\end{equation}
+由于 $\Braket{\delta\hat G\,\delta\hat F}$
+是 $\Braket{\delta\hat F\,\delta\hat G}$ 的复共轭，后者的虚部等于
+$\Braket{\left[\hat F,\hat G\right]}/\left(2\mathrm{i}\right)$。复数模平方不小于虚部平方，故
+\begin{equation}
+\left(\Delta F\right)^2\left(\Delta G\right)^2\geq
+\frac14\left|\Braket{\left[\hat F,\hat G\right]}\right|^2.
+\end{equation}
+特别地，若 $\left[\hat F,\hat G\right]=\mathrm{i}\kappa\hat I$，$\kappa\in\R$，右侧为 $\kappa^2/4$；位置和动量满足
+\begin{equation}
+\Delta x\,\Delta p\geq\frac{\hbar}{2}.
+\end{equation}
+
+令 $\beta=\alpha\left(t\right)$。相干态中
+$\Braket{\hat a}=\beta$、$\Braket{\hat a^2}=\beta^2$、
+$\Braket{\hat a^\dagger\hat a}=\left|\beta\right|^2$、
+$\Braket{\hat a\hat a^\dagger}=\left|\beta\right|^2+1$。
+将它们代入式\eqref{eq:xp-ladder}，得到
+\begin{align}
+\Braket{\hat x}&=\sqrt{\frac{\hbar}{2m\omega}}\left(\beta+\beta^*\right),\\
+\Braket{\hat x^2}&=\frac{\hbar}{2m\omega}
+\left(\beta^2+\beta^{*2}+2\left|\beta\right|^2+1\right)
+=\frac{\hbar}{2m\omega}\left[4\left(\operatorname{Re}\beta\right)^2+1\right],\\
+\Braket{\hat p}&=\sqrt{2m\hbar\omega}\operatorname{Im}\beta,\\
+\Braket{\hat p^2}&=\frac{m\hbar\omega}{2}
+\left(-\beta^2-\beta^{*2}+2\left|\beta\right|^2+1\right)
+=\frac{m\hbar\omega}{2}\left[4\left(\operatorname{Im}\beta\right)^2+1\right].
+\end{align}
+减去均值平方后，
+\begin{equation}
+\boxed{\left(\Delta x\right)^2=\frac{\hbar}{2m\omega},\qquad
+\left(\Delta p\right)^2=\frac{m\hbar\omega}{2},\qquad
+\Delta x\,\Delta p=\frac{\hbar}{2}.}
+\end{equation}
+所以相干态是达到位置--动量不确定性下界的态，其涨落与真空态相同，且不随时间改变。
+
+为比较经典运动，设振幅
+$X_\alpha=\sqrt{2\hbar/\left(m\omega\right)}\left|\alpha\right|$。经典方程为
+\begin{equation}
+\ddot x+\omega^2x=0,
+\qquad x\left(t\right)=X_\alpha\cos\left(\omega t-\varphi\right),
+\end{equation}
+与相干态中心的运动完全一致。能量期望值则为
+\begin{equation}
+\Braket{\hat H}
+=\hbar\omega\left(\left|\alpha\right|^2+\frac12\right)
+=\frac12m\omega^2X_\alpha^2+\frac12\hbar\omega.
+\end{equation}
+它等于同振幅经典振子的能量加零点能。只有明确减去零点能，或在 $\left|\alpha\right|^2\gg1$ 时忽略其相对贡献，才能写成纯经典能量形式。
+
+\subsection{产生算符没有归一化本征态}
+与湮灭算符不同，产生算符 $\hat a^\dagger$ 在 Fock 空间中没有非零的归一化本征态。为证明这一点，反设
+\begin{equation}
+\hat a^\dagger\Ket{\psi}=\lambda\Ket{\psi},\qquad
+\Ket{\psi}=\sum_{n=0}^{\infty}c_n\Ket{n}.
+\end{equation}
+比较 $\Ket{0}$ 的系数立即得到 $\lambda c_0=0$。若 $\lambda\neq0$，则 $c_0=0$；再逐次比较 $\Ket{n}$ 的系数可得所有 $c_n=0$，只剩零向量。若 $\lambda=0$，由
+$\hat a^\dagger\Ket{\psi}=0$ 同样逐项得到所有 $c_n=0$。因此不存在非零本征矢，更不存在归一化本征态。
+
+\subsection{相干态表象}
+\subsubsection{非正交性与完备性}
+由数态展开可得两个相干态的内积
+\begin{align}
+\Braket{\alpha'|\alpha}
+&=\mathrm{e}^{-\left|\alpha'\right|^2/2-\left|\alpha\right|^2/2}
+\sum_{n=0}^{\infty}\frac{\left(\alpha'^*\alpha\right)^n}{n!}\notag\\
+&=\mathrm{e}^{-\left(\left|\alpha'\right|^2+\left|\alpha\right|^2-2\alpha'^*\alpha\right)/2},
+\end{align}
+从而
+\begin{equation}
+\left|\Braket{\alpha'|\alpha}\right|^2
+=\mathrm{e}^{-\left|\alpha-\alpha'\right|^2}.
+\end{equation}
+有限距离的两个相干态永不正交；只有当相空间距离很大时，重叠才指数衰减。
+
+尽管不正交，相干态仍满足单位分解
+\begin{equation}
+\boxed{\int_{\C}\frac{\mathrm{d}^2\alpha}{\pi}\Ket{\alpha}\Bra{\alpha}=\hat I,}
+\qquad \mathrm{d}^2\alpha=\mathrm{d}\left(\operatorname{Re}\alpha\right)\,
+\mathrm{d}\left(\operatorname{Im}\alpha\right).
+\label{eq:coherent-resolution}
+\end{equation}
+为验证它，令 $\alpha=r\mathrm{e}^{\mathrm{i}\phi}$ 并在数态基中取矩阵元：
+\begin{align}
+\Braket{m|\int_{\C}\frac{\mathrm{d}^2\alpha}{\pi}\Ket{\alpha}\Bra{\alpha}|n}
+&=\frac{1}{\pi\sqrt{m!n!}}
+\int_0^{2\pi}\mathrm{e}^{\mathrm{i}\left(n-m\right)\phi}\,\mathrm{d}\phi
+\int_0^\infty r^{m+n+1}\mathrm{e}^{-r^2}\,\mathrm{d}r\notag\\
+&=\delta_{mn}\frac{2}{n!}\int_0^\infty r^{2n+1}\mathrm{e}^{-r^2}\,\mathrm{d}r
+=\delta_{mn}.
+\end{align}
+这里最后一步使用 $u=r^2$ 与 $\Gamma\left(n+1\right)=n!$。相干态既完备又非正交，因此构成过完备的连续态族；特别地，任一相干态也能由全部相干态连续叠加得到。
+
+\subsubsection{态的解析表示}
+由式\eqref{eq:coherent-resolution}，任意态均可写成
+\begin{equation}
+\Ket{\psi}=\int_{\C}\frac{\mathrm{d}^2\alpha}{\pi}
+\Ket{\alpha}\Braket{\alpha|\psi}.
+\end{equation}
+定义关于 $z=\alpha^*$ 的整函数
+\begin{equation}
+\psi_{\mathrm{B}}\left(z\right)
+=\sum_{n=0}^{\infty}\frac{z^n}{\sqrt{n!}}\Braket{n|\psi},
+\end{equation}
+则
+\begin{equation}
+\Braket{\alpha|\psi}=\mathrm{e}^{-\left|\alpha\right|^2/2}
+\psi_{\mathrm{B}}\left(\alpha^*\right),
+\qquad
+\Ket{\psi}=\int_{\C}\frac{\mathrm{d}^2\alpha}{\pi}
+\mathrm{e}^{-\left|\alpha\right|^2/2}\psi_{\mathrm{B}}\left(\alpha^*\right)\Ket{\alpha}.
+\end{equation}
+数态 $\Ket{n}$ 的解析代表为 $z^n/\sqrt{n!}$，真空态的解析代表为 $1$。内积写成
+\begin{equation}
+\Braket{\phi|\psi}=\int_{\C}\frac{\mathrm{d}^2\alpha}{\pi}
+\mathrm{e}^{-\left|\alpha\right|^2}
+\left[\phi_{\mathrm{B}}\left(\alpha^*\right)\right]^*
+\psi_{\mathrm{B}}\left(\alpha^*\right).
+\end{equation}
+在这一 Bargmann 表示中，算符作用为
+\begin{equation}
+\hat a^\dagger\longleftrightarrow z,
+\qquad
+\hat a\longleftrightarrow\frac{\mathrm{d}}{\mathrm{d}z}.
+\label{eq:bargmann-ladder}
+\end{equation}
+若直接作用在归一化相干态上，则 Gaussian 因子会带来半阶修正：
+\begin{equation}
+\hat a^\dagger\Ket{\alpha}
+=\left(\frac{\partial}{\partial\alpha}+\frac{\alpha^*}{2}\right)\Ket{\alpha},
+\qquad
+\Bra{\alpha}\hat a
+=\left(\frac{\partial}{\partial\alpha^*}+\frac{\alpha}{2}\right)\Bra{\alpha}.
+\end{equation}
+因此对已经正规排序的算符 $\hat A_{\mathrm{N}}\left(\hat a^\dagger,\hat a\right)$，可在解析表示中依次作代换
+$\hat a^\dagger\mapsto z$、$\hat a\mapsto\mathrm{d}/\mathrm{d}z$；微分只作用于其右侧的解析态函数。
+
+对算符 $\hat A$，定义双解析核
+\begin{equation}
+A_{\mathrm{B}}\left(\alpha^*,\alpha'\right)
+=\mathrm{e}^{\left(\left|\alpha\right|^2+\left|\alpha'\right|^2\right)/2}
+\Braket{\alpha|\hat A|\alpha'}
+=\sum_{m,n=0}^{\infty}\frac{\left(\alpha^*\right)^m\left(\alpha'\right)^n}{\sqrt{m!n!}}
+\Braket{m|\hat A|n}.
+\end{equation}
+两次使用单位分解得到
+\begin{equation}
+\hat A=\int_{\C}\frac{\mathrm{d}^2\alpha}{\pi}
+\int_{\C}\frac{\mathrm{d}^2\alpha'}{\pi}
+\mathrm{e}^{-\left(\left|\alpha\right|^2+\left|\alpha'\right|^2\right)/2}
+\Ket{\alpha}A_{\mathrm{B}}\left(\alpha^*,\alpha'\right)\Bra{\alpha'}.
+\end{equation}
+迹则可用对角相干态矩阵元计算：
+\begin{equation}
+\mathrm{Tr}\,\hat A=\int_{\C}\frac{\mathrm{d}^2\alpha}{\pi}\Braket{\alpha|\hat A|\alpha},
+\end{equation}
+其中要求 $\hat A$ 至少为迹类算符，使迹与积分有定义。
+
+\subsubsection{谐振子的相干态表象解}
+把式\eqref{eq:bargmann-ladder}代入
+$\hat H=\hbar\omega\left(\hat a^\dagger\hat a+1/2\right)$，能量本征方程化为
+\begin{equation}
+\hbar\omega\left(z\frac{\mathrm{d}}{\mathrm{d}z}+\frac12\right)
+\psi_{\mathrm{B}}\left(z\right)=E\psi_{\mathrm{B}}\left(z\right).
+\end{equation}
+其非零解为 $\psi_{\mathrm{B}}\left(z\right)=Cz^\nu$，其中
+$\nu=E/\left(\hbar\omega\right)-1/2$。解析性和绕原点一周的单值性要求
+$\nu=n\in\left\{0,1,2,\ldots\right\}$，归一化并选定整体相位后得到
+\begin{equation}
+E_n=\hbar\omega\left(n+\frac12\right),
+\qquad
+\Braket{\alpha|E_n}=\mathrm{e}^{-\left|\alpha\right|^2/2}
+\frac{\left(\alpha^*\right)^n}{\sqrt{n!}}.
+\end{equation}
+
+过完备性意味着同一态的相干态展开系数一般不唯一。式\eqref{eq:coherent-resolution}给出的是自然的标准系数 $\Braket{\alpha|\psi}$，但不能把任意连续展开中的系数都与它等同。解析函数满足再生公式
+\begin{equation}
+\left(\alpha^*\right)^n
+=\int_{\C}\frac{\mathrm{d}^2\alpha'}{\pi}
+\mathrm{e}^{-\left|\alpha'\right|^2+\alpha^*\alpha'}
+\left(\alpha'^*\right)^n,
+\end{equation}
+这正是相干态非正交性与过完备性的一个具体表现。
+
+\subsection{压缩相干态}
+\subsubsection{压缩算符与 Bogoliubov 变换}
+真空态满足
+\begin{equation}
+\left(\Delta x\right)_0^2=\frac{\hbar}{2m\omega},
+\qquad
+\left(\Delta p\right)_0^2=\frac{m\hbar\omega}{2}.
+\end{equation}
+若某一正交相位分量的方差低于相应真空涨落，同时共轭分量的涨落增大，则称该态为压缩态。定义
+\begin{equation}
+\hat S\left(\xi\right)
+=\exp\left[\frac12\left(\xi^*\hat a^2-\xi\left(\hat a^\dagger\right)^2\right)\right],
+\qquad
+\xi=r\mathrm{e}^{\mathrm{i}\theta},\quad r\geq0.
+\end{equation}
+指数是反厄米算符，因此
+\begin{equation}
+\hat S^\dagger\left(\xi\right)=\hat S\left(-\xi\right)=\hat S^{-1}\left(\xi\right).
+\end{equation}
+定义新的阶梯算符
+\begin{align}
+\hat b&=\hat S\hat a\hat S^\dagger
+=\hat a\cosh r+\hat a^\dagger\mathrm{e}^{\mathrm{i}\theta}\sinh r,\\
+\hat b^\dagger&=\hat S\hat a^\dagger\hat S^\dagger
+=\hat a^\dagger\cosh r+\hat a\mathrm{e}^{-\mathrm{i}\theta}\sinh r.
+\end{align}
+它们满足 $\left[\hat b,\hat b^\dagger\right]=\hat I$。相应数算符为
+$\hat N_b=\hat b^\dagger\hat b=\hat S\hat N\hat S^\dagger$，其数态为
+\begin{equation}
+\Ket{n}_b=\hat S\left(\xi\right)\Ket{n},
+\qquad
+\hat b\Ket{0}_b=0,
+\end{equation}
+并具有升降关系
+\begin{equation}
+\hat b\Ket{n}_b=\sqrt{n}\Ket{n-1}_b,
+\qquad
+\hat b^\dagger\Ket{n}_b=\sqrt{n+1}\Ket{n+1}_b.
+\end{equation}
+
+\subsubsection{定义、期望值与涨落}
+本讲义采用先压缩、后位移的次序定义压缩相干态：
+\begin{equation}
+\boxed{\Ket{\alpha,\xi}_{\mathrm{s}}
+=\hat D\left(\alpha\right)\hat S\left(\xi\right)\Ket{0}.}
+\label{eq:squeezed-coherent}
+\end{equation}
+利用
+$\hat a=\hat b\cosh r-\hat b^\dagger\mathrm{e}^{\mathrm{i}\theta}\sinh r$，位移算符也可写成
+\begin{equation}
+\hat D\left(\alpha\right)=\hat D_b\left(\beta\right)
+=\exp\left(\beta\hat b^\dagger-\beta^*\hat b\right),
+\qquad
+\beta=\alpha\cosh r+\alpha^*\mathrm{e}^{\mathrm{i}\theta}\sinh r.
+\end{equation}
+这里
+\begin{equation}
+\hat D_b\left(\beta\right)\hat b\hat D_b^\dagger\left(\beta\right)=\hat b-\beta,
+\qquad
+\hat D_b\left(\beta\right)\hat b^\dagger\hat D_b^\dagger\left(\beta\right)=\hat b^\dagger-\beta^*.
+\end{equation}
+因此 $\Ket{\alpha,\xi}_{\mathrm{s}}$ 是 $\hat b$ 的归一化相干态：
+\begin{equation}
+\hat b\Ket{\alpha,\xi}_{\mathrm{s}}
+=\beta\Ket{\alpha,\xi}_{\mathrm{s}},
+\qquad
+{}_{\mathrm{s}}\Braket{\alpha,\xi|\alpha,\xi}_{\mathrm{s}}=1.
+\end{equation}
+
+由位移与压缩变换可得
+\begin{align}
+\Braket{\hat a}&=\alpha,
+&\Braket{\hat a^\dagger}&=\alpha^*,\\
+\Braket{\hat a^\dagger\hat a}&=\left|\alpha\right|^2+\sinh^2r,
+&\Braket{\hat a^2}&=\alpha^2-\mathrm{e}^{\mathrm{i}\theta}\sinh r\cosh r.
+\end{align}
+这里以及下文的期望值均在式\eqref{eq:squeezed-coherent}的态中计算。位置、动量方差为
+\begin{align}
+\left(\Delta x\right)^2
+&=\frac{\hbar}{2m\omega}\left[
+\mathrm{e}^{-2r}\cos^2\left(\frac{\theta}{2}\right)
++\mathrm{e}^{2r}\sin^2\left(\frac{\theta}{2}\right)\right],\\
+\left(\Delta p\right)^2
+&=\frac{m\hbar\omega}{2}\left[
+\mathrm{e}^{-2r}\sin^2\left(\frac{\theta}{2}\right)
++\mathrm{e}^{2r}\cos^2\left(\frac{\theta}{2}\right)\right].
+\end{align}
+一般 $\theta$ 下，$\hat x$ 与 $\hat p$ 的对称协方差不为零：
+\begin{equation}
+C_{xp}=\frac12\Braket{\delta\hat x\,\delta\hat p+\delta\hat p\,\delta\hat x}
+=-\frac{\hbar}{2}\sinh\left(2r\right)\sin\theta.
+\end{equation}
+因此正确的关系是
+\begin{align}
+\left(\Delta x\right)^2\left(\Delta p\right)^2
+&=\frac{\hbar^2}{4}\left[1+\sinh^2\left(2r\right)\sin^2\theta\right],\\
+\left(\Delta x\right)^2\left(\Delta p\right)^2-C_{xp}^2
+&=\frac{\hbar^2}{4}.
+\end{align}
+也就是说，压缩相干态总是使 Schr\"odinger--Robertson 不等式取等号；只有
+$\sin\theta=0$ 时，固定的 $x,p$ 轴也使 Heisenberg 乘积等于 $\hbar^2/4$。
+当 $\theta=0$ 时 $x$ 被压缩而 $p$ 被反压缩；当 $\theta=\pi$ 时情形相反。一般 $\theta$ 对应压缩椭圆在相空间中旋转。
+
+\subsubsection{数态展开}
+压缩相干态在原数态基中的系数可写成 Hermite 多项式：
+\begin{align}
+\Braket{n|\alpha,\xi}_{\mathrm{s}}
+&=\frac{1}{\sqrt{n!\cosh r}}
+\exp\left[-\frac{\left|\alpha\right|^2}{2}
+-\frac{\alpha^{*2}\mathrm{e}^{\mathrm{i}\theta}}{2}\tanh r\right]
+\left(\frac{\mathrm{e}^{\mathrm{i}\theta}\tanh r}{2}\right)^{n/2}\notag\\
+&\quad\times H_n\left(\frac{\beta}{\sqrt{\mathrm{e}^{\mathrm{i}\theta}\sinh\left(2r\right)}}\right),
+\qquad
+\beta=\alpha\cosh r+\alpha^*\mathrm{e}^{\mathrm{i}\theta}\sinh r.
+\end{align}
+式中平方根与幂须采用一致的分支。取 $r\to0$ 的连续极限可回到通常相干态系数
+\begin{equation}
+\mathrm{e}^{-\left|\alpha\right|^2/2}\frac{\alpha^n}{\sqrt{n!}}.
+\end{equation}
+
+压缩光能够把某一相位分量的量子噪声降到真空噪声以下，因此可用于光学通信、光子探测和引力波干涉测量。课堂照片还提到，非线性光学介质是实验制备压缩态的重要手段，并以 1985 年 Bell Labs 的相关实验为例。

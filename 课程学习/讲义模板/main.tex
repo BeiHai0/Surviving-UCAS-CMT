@@ -1,0 +1,24 @@
+% !TeX program = xelatex
+% 编码：UTF-8。请在项目根目录编译本文件。
+\documentclass[UTF8,12pt,a4paper,openany,fontset=fandol]{ctexbook}
+\usepackage{lecturemath} % 载入可移植的数学讲义样式。
+
+\title{中文数学与物理讲义\\[0.5em]\large 一个可直接编译的模板}
+\author{作者姓名}
+\date{\today}
+\hypersetup{pdftitle={中文数学与物理讲义},pdfauthor={作者姓名}}
+
+\begin{document}
+\frontmatter
+\maketitle
+\tableofcontents
+
+\mainmatter
+\input{chapters/01-environments}
+\input{chapters/02-math-physics}
+\input{chapters/03-new-chapter}
+
+% 从独立的 references.bib 读取参考文献；按正文引用顺序排列。
+\bibliographystyle{unsrt}
+\bibliography{references}
+\end{document}

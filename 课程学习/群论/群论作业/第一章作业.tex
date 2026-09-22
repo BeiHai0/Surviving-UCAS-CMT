@@ -1,0 +1,320 @@
+% !TeX program = xelatex
+\documentclass[11pt,a4paper]{ctexart}
+
+\usepackage[left=2.4cm,right=2.4cm,top=2.1cm,bottom=2.1cm]{geometry}
+\usepackage{amsmath,amssymb,mathtools,braket}
+\usepackage{xcolor}
+\usepackage[inline]{enumitem}
+\usepackage{fancyhdr}
+
+\newcommand{\coursename}{群论}
+\newcommand{\assignmentnumber}{第一章作业}
+\newcommand{\teachername}{\underline{\hspace{2.8cm}}}
+\newcommand{\studentname}{\underline{\hspace{2.8cm}}}
+\newcommand{\studentid}{\underline{\hspace{3.0cm}}}
+
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0.25em}
+\setlength{\headheight}{14pt}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\coursename}
+\rhead{\assignmentnumber}
+\cfoot{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\setlist[enumerate,1]{label=(\arabic*),leftmargin=3.2em,itemsep=0.55em,topsep=0.45em}
+\newlist{inlineenum}{enumerate*}{1}
+\setlist[inlineenum,1]{label=(\arabic*),labelsep=0.5em,itemjoin={；\quad},itemjoin*={；\quad}}
+
+\newcounter{problem}
+\newenvironment{problem}
+  {\refstepcounter{problem}%
+   \par\medskip\noindent
+   \begingroup
+   \setlength{\fboxsep}{3pt}%
+   \setlength{\fboxrule}{0.8pt}%
+   \fbox{\bfseries 题目\arabic{problem}}%
+   \endgroup
+   \quad\ignorespaces}
+  {\par\medskip}
+
+\newenvironment{answer}
+  {\par\smallskip\noindent
+   \begingroup
+   \setlength{\fboxsep}{4pt}%
+   \colorbox{black}{\textcolor{white}{\bfseries 回答}}%
+   \endgroup
+   \quad\ignorespaces}
+  {\par\smallskip\noindent\rule{\linewidth}{0.4pt}\medskip}
+\begin{document}
+
+\begin{center}
+  {\LARGE\bfseries \coursename\quad \assignmentnumber}\par
+  \vspace{0.7em}
+  \small
+  教师：\teachername\qquad
+  姓名：\studentname\qquad
+  学号：\studentid
+\end{center}
+\vspace{0.4em}
+
+\setcounter{problem}{1}
+\begin{problem}
+证明以乘法作为“乘积”的所有正实数构成的群和以“加法”作为乘积的所有实数构成的群同构。
+\end{problem}
+\begin{answer}
+  $\left(\mathbb{R}_+,\times \right)\equiv G,\left(\mathbb{R},+ \right)\equiv H $，构造映射 $f:H\to G $ 如下：
+  \begin{equation}
+    f(x) = \mathrm{e}^x,\qquad x\in H,\qquad f(x) = \mathrm{e}^x \in G.
+  \end{equation}
+  首先证明 $f $ 是群同态：
+  \begin{equation}
+    \forall x_1,x_2\in H,\qquad f(x_1x_2)
+    =\mathrm{e}^{x_1+x_2}
+    =\mathrm{e}^{x_1} \mathrm{e}^{x_2}
+    =f(x_1) f(x_2),
+  \end{equation}
+  因此 $f $ 是群同态。再证明 $f $ 是满射：
+  \begin{equation}
+    \forall y\in G,
+    \exists \ln y\in H,\qquad
+    f(\ln y) = \mathrm{e}^{\ln y} = y,
+  \end{equation}
+  因此 $f $ 是满射。最后证明 $f $ 是单射：设 $x_1,x_2\in H $，若 $f(x_1)=f(x_2) $，则
+  \begin{equation}
+    \mathrm{e}^{x_1}=\mathrm{e}^{x_2} \Longrightarrow
+    x_1=x_2,
+  \end{equation}
+  因此 $f $ 是单射。综上，$H,G $ 同构。
+\end{answer}
+
+\setcounter{problem}{3}
+\begin{problem}
+证明每个元素的平方都等于恒元的群一定是阿贝尔群。
+\end{problem}
+\begin{answer}
+  设群 $G $ 满足 $\forall g\in G,g^2=e$，则
+  \begin{equation}
+    g^{-1} = g,\qquad \forall g\in G.
+  \end{equation}
+  \begin{equation}
+    \forall g_1,g_2\in G,\qquad
+    g_1 g_2 = g_1^{-1} g_2^{-1} = \left(g_2 g_1 \right)^{-1} = g_2 g_1,
+  \end{equation}
+  因此 $G $ 是阿贝尔群。
+\end{answer}
+
+\setcounter{problem}{8}
+\begin{problem}
+设 $H_1$ 和 $H_2$ 是群 $G$ 的两个子群，证明 $H_1$ 和 $H_2$ 的公共元素的集合也构成群 $G$ 的子群。
+\end{problem}
+\begin{answer}
+  设 $H_3=H_1\cap H_2 $，
+  \begin{itemize}
+    \item 存在恒元：由于 $H_1,H_2 $ 是群 $G $ 的子群，因此恒元 $e $ 是 $H_1,H_2 $ 的公共元素，$e\in H_3 $；
+    \item 满足结合律：$H_3 $ 继承群乘法，则一定满足结合律；
+    \item 封闭性：$\forall h_1,h_2\in H_3=H_1\cap H_2,h_1,h_2\in H_1,h_1 h_2 \in H_1 $。同理 $h_1 h_2\in H_2 $，因此 $h_1h_2\in H_3 $；
+    \item 存在逆元：$\forall h\in H_3=H_1\cap H_2,h\in G,\exists h^{-1}\in G $。由于 $H_1,H_2 $ 都是 $G $ 的子群，因此 $h^{-1} \in H_1,H_2 $，于是 $h^{-1} \in H_3=H_1\cap H_2 $。
+  \end{itemize}
+\end{answer}
+
+\begin{problem}
+设集合 $G$ 包含元素数目为 $5$、$6$ 或 $7$，所有元素的平方都是恒元，证明此集合不构成群。
+\end{problem}
+\begin{answer}
+  假设群 $G $ 所有元素的平方都是恒元，任取两个非恒元 $a,b\in G $ 可以生成子群 $H=\left\{e,a,b,ab \right\} $。若 $G $ 的元素数目为 $5 $、$6 $ 或 $7 $，由于子群 $H $ 的阶为 $4 $，不是群 $G $ 的阶的因子，与拉格朗日定理矛盾。
+\end{answer}
+
+\setcounter{problem}{11}
+\begin{problem}
+量子力学中常用的泡利（Pauli）矩阵 $\sigma_a$ 定义如下：
+\begin{equation*}
+\sigma_1=\begin{pmatrix}0&1\\1&0\end{pmatrix},\qquad
+\sigma_2=\begin{pmatrix}0&-\mathrm{i}\\\mathrm{i}&0\end{pmatrix},\qquad
+\sigma_3=\begin{pmatrix}1&0\\0&-1\end{pmatrix},
+\end{equation*}
+\begin{equation*}
+\sigma_a\sigma_b=\delta_{ab}\mathbf{1}
+ +\mathrm{i}\sum_{d=1}^{3}\epsilon_{abd}\sigma_d,
+\qquad \sigma_a^2=\mathbf{1},\qquad
+\sigma_1\sigma_2=\mathrm{i}\sigma_3.
+\end{equation*}
+其中 $\epsilon_{abd}$ 是三阶完全反对称张量。证明由 $\sigma_1$ 和 $\sigma_2$ 的所有可能乘积和幂次的集合构成群，列出此群的乘法表，指出此群的阶数、各元素的阶数、群所包含的类和不变子群、不变子群的商群与什么群同构，建立同构关系，证明此群和正方形固有对称群 $D_4$ 同构。
+\end{problem}
+\begin{answer}
+  由于 $\sigma_1^2=\sigma_2^2=I,\sigma_1\sigma_2=-\sigma_2\sigma_1 $，以 $\sigma_1,\sigma_2 $ 作为生成元，它们的所有可能乘积和幂次得到的元素一般形式可化为
+  \begin{equation}
+    \sigma_{i_1}\sigma_{i_2}\cdots
+    =\pm \sigma_1^{m} \sigma_2^{n},\qquad i_l\in \left\{ 1,2\right\},\qquad m,n\in \left\{0,1 \right\},
+  \end{equation}
+  由此构成的集合 $G=\left\{I,\sigma_1,\sigma_2,\sigma_1\sigma_2,-I,-\sigma_1,-\sigma_2,-\sigma_1\sigma_2 \right\} $ 满足封闭性和结合律，并且由于元素有限，可构成群。
+  \begin{center}
+  \renewcommand{\arraystretch}{1.25}
+  \setlength{\tabcolsep}{5pt}
+  \begin{tabular}{c|*{8}{c}}
+    $\cdot$
+    & $I$
+    & $\sigma_1$
+    & $\sigma_2$
+    & $\sigma_1\sigma_2$
+    & $-I$
+    & $-\sigma_1$
+    & $-\sigma_2$
+    & $-\sigma_1\sigma_2$ \\ \hline
+
+    $I$
+    & $I$
+    & $\sigma_1$
+    & $\sigma_2$
+    & $\sigma_1\sigma_2$
+    & $-I$
+    & $-\sigma_1$
+    & $-\sigma_2$
+    & $-\sigma_1\sigma_2$ \\
+
+    $\sigma_1$
+    & $\sigma_1$
+    & $I$
+    & $\sigma_1\sigma_2$
+    & $\sigma_2$
+    & $-\sigma_1$
+    & $-I$
+    & $-\sigma_1\sigma_2$
+    & $-\sigma_2$ \\
+
+    $\sigma_2$
+    & $\sigma_2$
+    & $-\sigma_1\sigma_2$
+    & $I$
+    & $-\sigma_1$
+    & $-\sigma_2$
+    & $\sigma_1\sigma_2$
+    & $-I$
+    & $\sigma_1$ \\
+
+    $\sigma_1\sigma_2$
+    & $\sigma_1\sigma_2$
+    & $-\sigma_2$
+    & $\sigma_1$
+    & $-I$
+    & $-\sigma_1\sigma_2$
+    & $\sigma_2$
+    & $-\sigma_1$
+    & $I$ \\
+
+    $-I$
+    & $-I$
+    & $-\sigma_1$
+    & $-\sigma_2$
+    & $-\sigma_1\sigma_2$
+    & $I$
+    & $\sigma_1$
+    & $\sigma_2$
+    & $\sigma_1\sigma_2$ \\
+
+    $-\sigma_1$
+    & $-\sigma_1$
+    & $-I$
+    & $-\sigma_1\sigma_2$
+    & $-\sigma_2$
+    & $\sigma_1$
+    & $I$
+    & $\sigma_1\sigma_2$
+    & $\sigma_2$ \\
+
+    $-\sigma_2$
+    & $-\sigma_2$
+    & $\sigma_1\sigma_2$
+    & $-I$
+    & $\sigma_1$
+    & $\sigma_2$
+    & $-\sigma_1\sigma_2$
+    & $I$
+    & $-\sigma_1$ \\
+
+    $-\sigma_1\sigma_2$
+    & $-\sigma_1\sigma_2$
+    & $\sigma_2$
+    & $-\sigma_1$
+    & $I$
+    & $\sigma_1\sigma_2$
+    & $-\sigma_2$
+    & $\sigma_1$
+    & $-I$
+  \end{tabular}
+  \end{center}
+
+  群阶 $n_G=8 $，各元素的阶为 $n\left(I,\sigma_1,\sigma_2,\sigma_1\sigma_2,-I,-\sigma_1,-\sigma_2,-\sigma_1\sigma_2 \right)=\left(1,2,2,4,2,2,2,4 \right) $；
+
+  所有的共轭类为：$\left\{I \right\},\left\{-I \right\},\left\{\sigma_1,-\sigma_1 \right\},\left\{\sigma_2,-\sigma_2 \right\},\left\{\sigma_1\sigma_2,-\sigma_1\sigma_2 \right\} $；
+
+  所有的不变子群为：$\left\{I \right\},N_1=\left\{I,-I \right\},N_2=\left\{I,-I,\sigma_1,-\sigma_1 \right\},N_3=\left\{I,-I,\sigma_2,-\sigma_2 \right\},N_4=\left\{I,-I,\sigma_1\sigma_2,-\sigma_1\sigma_2 \right\},G $；
+
+  商群以及同构关系为：
+  
+  $G/N_1 \cong \mathrm{V}_4;N_1 \mapsto e,\sigma_1 N_1 \mapsto \sigma,\sigma_2 N_1 \mapsto \tau,\sigma_1\sigma_2 N_1 \mapsto \rho $；
+
+  $G/N_2 \cong \mathrm{C}_2;N_2 \mapsto e,\sigma_2 N_2 \mapsto C_2^1 $；
+
+  $G/N_3 \cong \mathrm{C}_2;N_3 \mapsto e,\sigma_1 N_3 \mapsto C_2^1 $；
+  
+  $G/N_4 \cong \mathrm{C}_2;N_4 \mapsto e,\sigma_1 N_4 \mapsto C_2^1 $；
+
+  证明 $G $ 与 $\mathrm{D}_4 $ 同构：
+  
+  构造如下的同构映射：$I\mapsto $
+
+  
+\end{answer}
+
+\begin{problem}
+证明由 $\mathrm{i}\sigma_1$ 和 $\mathrm{i}\sigma_2$ 的所有可能乘积和幂次的集合构成群，列出此群的乘法表，指出此群的阶数、各元素的阶数、群包含的各类和不变子群、不变子群的商群与什么群同构。说明此群与 $D_4$ 群不同构。
+\end{problem}
+\begin{answer}
+\end{answer}
+
+\setcounter{problem}{14}
+\begin{problem}
+准确到同构，证明九阶群 $G$ 只有两种：循环群 $C_9$ 和直乘群 $C_3\otimes C_3$。
+\end{problem}
+\begin{answer}
+\end{answer}
+
+\setcounter{problem}{18}
+\begin{problem}
+群 $G$ 由 $12$ 个元素组成，它的乘法表如下：
+\begin{center}
+\small
+\setlength{\tabcolsep}{3.3pt}
+\begin{tabular}{c|*{12}{c}}
+ & $e$ & $a$ & $b$ & $c$ & $d$ & $f$ & $i$ & $j$ & $k$ & $l$ & $m$ & $n$ \\ \hline
+$e$ & $e$ & $a$ & $b$ & $c$ & $d$ & $f$ & $i$ & $j$ & $k$ & $l$ & $m$ & $n$ \\
+$a$ & $a$ & $e$ & $f$ & $i$ & $j$ & $b$ & $c$ & $d$ & $m$ & $n$ & $k$ & $l$ \\
+$b$ & $b$ & $f$ & $a$ & $k$ & $l$ & $e$ & $m$ & $n$ & $i$ & $j$ & $c$ & $d$ \\
+$c$ & $c$ & $i$ & $l$ & $a$ & $k$ & $n$ & $e$ & $m$ & $j$ & $f$ & $d$ & $b$ \\
+$d$ & $d$ & $j$ & $k$ & $l$ & $a$ & $m$ & $n$ & $e$ & $f$ & $i$ & $b$ & $c$ \\
+$f$ & $f$ & $b$ & $e$ & $m$ & $n$ & $a$ & $k$ & $l$ & $c$ & $d$ & $i$ & $j$ \\
+$i$ & $i$ & $c$ & $n$ & $e$ & $m$ & $l$ & $a$ & $k$ & $d$ & $b$ & $j$ & $f$ \\
+$j$ & $j$ & $d$ & $m$ & $n$ & $e$ & $k$ & $l$ & $a$ & $b$ & $c$ & $f$ & $i$ \\
+$k$ & $k$ & $m$ & $j$ & $f$ & $i$ & $d$ & $b$ & $c$ & $n$ & $e$ & $l$ & $a$ \\
+$l$ & $l$ & $n$ & $i$ & $j$ & $f$ & $c$ & $d$ & $b$ & $e$ & $m$ & $a$ & $k$ \\
+$m$ & $m$ & $k$ & $d$ & $b$ & $c$ & $j$ & $f$ & $i$ & $l$ & $a$ & $n$ & $e$ \\
+$n$ & $n$ & $l$ & $c$ & $d$ & $b$ & $i$ & $j$ & $f$ & $a$ & $k$ & $e$ & $m$ \\ \hline
+\end{tabular}
+\end{center}
+\begin{enumerate}
+\item 找出群 $G$ 各元素的逆元；
+\item 指出哪些元素可与群中任一元素乘积对易；
+\item 列出各元素的周期和阶；
+\item 找出群 $G$ 各类包含的元素；
+\item 找出群 $G$ 包含哪些不变子群，列出它们的陪集，并指出它们的商群与什么群同构；
+\item 判断群 $G$ 是否与正四面体对称群 $T$ 或与正六边形对称群 $D_6$ 同构。
+\end{enumerate}
+\end{problem}
+\begin{answer}
+\end{answer}
+
+\end{document}
+
+

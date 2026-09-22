@@ -1,0 +1,186 @@
+% !TeX program = xelatex
+\documentclass[11pt,a4paper]{ctexart}
+
+\usepackage[left=2.4cm,right=2.4cm,top=2.1cm,bottom=2.1cm]{geometry}
+\usepackage{amsmath,amssymb,mathtools,braket}
+\usepackage{xcolor}
+% inline 选项用于启用 enumerate* 行内列表环境。
+\usepackage[inline]{enumitem}
+\usepackage{fancyhdr}
+
+% ============================================================
+% 基本信息：只需修改下面几项
+% ============================================================
+\newcommand{\coursename}{高等量子力学}
+\newcommand{\assignmentnumber}{第 1 次作业}
+\newcommand{\teachername}{\underline{\hspace{2.8cm}}}
+\newcommand{\studentname}{\underline{\hspace{2.8cm}}}
+\newcommand{\studentid}{\underline{\hspace{3.0cm}}}
+
+% ============================================================
+% 数学公式书写规范
+% ============================================================
+% 1. 行内公式使用一对美元符号。
+% 2. 独立成行的公式统一使用 equation 环境，不使用反斜杠方括号形式。
+% 3. 虚数单位 i、自然常数 e 和微分符号 d 均使用直立体 \mathrm。
+%
+
+% 独立公式的推荐写法：
+% \begin{equation}
+%   ...
+% \end{equation}
+%
+
+% ============================================================
+% 页面样式
+% ============================================================
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0.25em}
+\setlength{\headheight}{14pt}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\coursename}
+\rhead{\assignmentnumber}
+\cfoot{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% ============================================================
+% 列表参数
+% ============================================================
+% enumerate 是每个条目 另起一行 的普通编号列表。
+% label 决定编号格式：\alph* 依次产生 a、b、c，外加括号后显示为 (a)、(b)、(c)。
+\setlist[enumerate,1]{
+  label=(\alph*),
+  leftmargin=3.2em,
+  itemsep=0.55em,
+  topsep=0.45em
+}
+
+% inlineenum 是基于 enumerate* 定义的行内编号列表。
+% 所有格式均在此处统一设置，正文中不必为每一道题重复填写参数。
+% label 决定编号格式；labelsep 决定编号与本项正文之间的距离。
+% itemjoin 决定相邻条目之间插入的内容。
+% itemjoin* 决定最后两个条目之间插入的内容，通常与 itemjoin 保持一致。
+% 内容过长时，行内列表仍会自动换行。
+\newlist{inlineenum}{enumerate*}{1}
+\setlist[inlineenum,1]{
+  label=(\alph*),
+  labelsep=0.5em,
+  itemjoin={；\quad},
+  itemjoin*={；\quad}
+}
+
+% 其他常用 label 写法：
+%   label=\arabic*.     -> 1. 2. 3.
+%   label=(\arabic*)   -> (1) (2) (3)
+%   label=\alph*)      -> a) b) c)
+%   label=(\roman*)    -> (i) (ii) (iii)
+%   label=\Alph*.      -> A. B. C.
+
+% ============================================================
+% 题目与回答环境
+% ============================================================
+% problem 使用独立计数器，每次进入环境时自动加一。
+% \chinese{problem} 将题号显示为“一”“二”“三”等中文数字。
+% \refstepcounter 使题目可以配合 \label 和 \ref 进行交叉引用。
+% “题目一”等题目标识使用白底黑字描边框，与黑底白字的“回答”标签相区分。
+\newcounter{problem}
+\newenvironment{problem}
+  {\refstepcounter{problem}%
+   \par\medskip\noindent
+   \begingroup
+   \setlength{\fboxsep}{3pt}%
+   \setlength{\fboxrule}{0.8pt}%
+   \fbox{\bfseries 题目\chinese{problem}}%
+   \endgroup
+   \quad\ignorespaces}
+  {\par\medskip}
+
+% answer 环境用于书写答案。
+% “回答”使用黑底白字标签，保证黑白打印时仍有醒目的视觉区分；
+% 答案结束处会自动添加一条黑色细分隔线。
+\newenvironment{answer}
+  {\par\smallskip\noindent
+   \begingroup
+   \setlength{\fboxsep}{4pt}%
+   \colorbox{black}{\textcolor{white}{\bfseries 回答}}%
+   \endgroup
+   \quad\ignorespaces}
+  {\par\smallskip\noindent\rule{\linewidth}{0.4pt}\medskip}
+
+\begin{document}
+
+\begin{center}
+  {\LARGE\bfseries \coursename\quad \assignmentnumber}\par
+  \vspace{0.7em}
+  \small
+  教师：\teachername\qquad
+  姓名：\studentname\qquad
+  学号：\studentid
+\end{center}
+\vspace{0.4em}
+
+% ============================================================
+% 从这里开始写正文。
+%
+% 普通分行小问使用 enumerate：
+%   \begin{enumerate}
+%     \item ...
+%     \item ...
+%   \end{enumerate}
+%
+% 同行小问使用已全局配置好的 inlineenum：
+%   \begin{inlineenum}
+%     \item ...
+%     \item ...
+%   \end{inlineenum}
+%
+% 每道题的基本结构：
+%   \begin{problem}
+%     ...
+%   \end{problem}
+%   \begin{answer}
+%     ...
+%   \end{answer}
+%
+% 如需交叉引用，可在题目开头添加标签：
+%   \begin{problem}\label{prob:example}
+% 随后使用“第 \ref{prob:example} 题”引用该题。
+% ============================================================
+
+\begin{problem}
+设函数 $f(x)=\mathrm{e}^{\mathrm{i}x}$。
+\begin{inlineenum}
+  \item 求 $f'(x)$
+  \item 计算 $\displaystyle\int_0^{2\pi}f(x)\,\mathrm{d}x$
+\end{inlineenum}。
+\end{problem}
+
+\begin{answer}
+由指数函数的求导与积分公式，有
+\begin{equation}
+  f'(x)=\mathrm{i}\mathrm{e}^{\mathrm{i}x}.
+\end{equation}
+并且
+\begin{equation}
+  \int_0^{2\pi}f(x)\,\mathrm{d}x
+  =\int_0^{2\pi}\mathrm{e}^{\mathrm{i}x}\,\mathrm{d}x
+  =0.
+\end{equation}
+\end{answer}
+
+\begin{problem}\label{prob:commutator}
+已知正则对易关系 $[\hat{x},\hat{p}]=\mathrm{i}\hbar$，求 $[\hat{x},\hat{p}^{2}]$。
+\end{problem}
+
+\begin{answer}
+利用恒等式 $[\hat{A},\hat{B}\hat{C}]=[\hat{A},\hat{B}]\hat{C}
++\hat{B}[\hat{A},\hat{C}]$，可得
+\begin{equation}
+  [\hat{x},\hat{p}^{\,2}]
+  =[\hat{x},\hat{p}]\hat{p}+\hat{p}[\hat{x},\hat{p}]
+  =2\mathrm{i}\hbar\hat{p}.
+\end{equation}
+\end{answer}
+
+\end{document}

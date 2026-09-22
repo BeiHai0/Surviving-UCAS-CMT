@@ -1,0 +1,55 @@
+% 可复用的中文数学讲义模板。主文件 main.tex 使用 ctexbook，并以 XeLaTeX 编译。
+\NeedsTeXFormat{LaTeX2e} % 声明需要 LaTeX2e 格式。
+\ProvidesPackage{group-theory-template}[2026/09/17 Chinese mathematics lecture notes] % 声明宏包名称、版本日期和简介。
+\RequirePackage[a4paper,left=27mm,right=25mm,top=25mm,bottom=25mm,headheight=16pt]{geometry} % 设置 A4 纸、左右及上下页边距，并预留 16pt 页眉高度。
+\RequirePackage{amsmath,amssymb,amsthm,mathtools} % 提供公式排版、数学符号、定理环境及 AMS 数学扩展。
+\RequirePackage{braket} % 提供 \Bra、\Ket、\Braket 等 Dirac 记号命令。
+\RequirePackage{bm} % 提供 \bm{...}，用于数学符号加粗。
+\RequirePackage{booktabs,array,enumitem} % 分别提供三线表、增强表格列格式和列表样式设置。
+\RequirePackage{xcolor} % 提供颜色定义和文字着色。
+\RequirePackage{fancyhdr} % 自定义页眉、页脚及其分隔线。
+\RequirePackage{microtype} % 启用引擎支持的微排版功能，例如字符边缘悬挂。
+\RequirePackage{needspace} % 提供 \Needspace，在剩余空间不足时提前换页。
+\RequirePackage{hyperref} % 为目录、交叉引用和网址添加 PDF 超链接。
+\RequirePackage{bookmark} % 增强 PDF 书签的生成与层级管理。
+\definecolor{accent}{HTML}{244C65} % 定义深蓝色 accent，用于标题和链接。
+\definecolor{muted}{HTML}{65727A} % 定义灰色 muted，用于页眉等辅助文字。
+\hypersetup{unicode=true,colorlinks=true,linkcolor=accent,urlcolor=accent, % 支持 Unicode 书签，链接以 accent 色文字显示，不使用彩色边框。
+  pdftitle={群论},pdfauthor={}} % 设置 PDF 文档属性中的标题；作者暂留空。
+\ctexset{ % 集中设置 ctex 的各级标题格式。
+  chapter={format=\Huge\bfseries\sffamily\color{accent},name={第,章}, % 章标题用 Huge 字号、粗体、无衬线字体和强调色，章号前后加“第”“章”。
+    number=\arabic{chapter},beforeskip=8pt,afterskip=28pt}, % 章号采用阿拉伯数字，章标题前后间距分别为 8pt 和 28pt。
+  section={format=\Large\bfseries\sffamily\color{accent},beforeskip=22pt,afterskip=10pt}, % 节标题用 Large 字号、粗体和强调色，前后间距为 22pt、10pt。
+  subsection={format=\large\bfseries\sffamily,beforeskip=16pt,afterskip=8pt}, % 小节标题用 large 字号及粗体，前后间距为 16pt、8pt。
+  subsubsection={format=\normalsize\bfseries\sffamily,beforeskip=12pt,afterskip=6pt}} % 次小节标题用正文字号及粗体，前后间距为 12pt、6pt。
+\setcounter{secnumdepth}{2} % 正文标题编号到 subsection（例如 1.1.1），更低层级不编号。
+% 目录显示章、节和小节，涵盖 main.tex 引入的全部章节。
+\setcounter{tocdepth}{2} % 目录列出章、节和小节，不列出 subsubsection。
+\linespread{1.18} % 将基线间距的倍率设为 1.18。
+\setlength{\parskip}{3pt plus 1pt} % 段落间距设为 3pt，分页时允许额外拉伸 1pt。
+\setlist{topsep=5pt,itemsep=3pt,parsep=0pt,leftmargin=2em} % 统一列表前后间距、条目间距、条目内段距及左缩进。
+\setlist[enumerate,1]{label=（\arabic*）,leftmargin=3em} % 一级有序列表使用中文圆括号数字标签，左缩进为 3em。
+\newtheoremstyle{lecture}{8pt}{8pt}{\normalfont}{}{ % 定义 lecture 定理样式：上下间距均为 8pt，正文用直立字体且不额外缩进。
+  \bfseries\color{accent}}{\quad}{0pt}{} % 定理标题用粗体强调色，以 quad 留白分隔正文，其余采用默认标题结构。
+\theoremstyle{lecture} % 让后续定义的定理类环境采用 lecture 样式。
+\newtheorem{definition}{定义}[section] % 定义“定义”环境，按节独立计数。
+\newtheorem{theorem}{定理}[section] % 定义“定理”环境，按节独立计数。
+\newtheorem{proposition}{命题}[section] % 定义“命题”环境，按节独立计数。
+\newtheorem{example}{例}[section] % 定义“例”环境，按节独立计数。
+\newtheorem*{remark}{说明} % 定义不带编号的“说明”环境。
+\renewcommand{\proofname}{证明} % 将 proof 环境的标题改为中文“证明”。
+\numberwithin{equation}{section} % 公式按节重新计数，编号形如（章.节.序号）。
+\allowdisplaybreaks[2] % 允许多行公式在行间分页；级别 2 表示较保守地允许分页。
+\pagestyle{fancy} % 正文页面使用 fancy 页眉页脚样式。
+\fancyhf{} % 清空默认页眉和页脚，随后逐项设置。
+\fancyhead[L]{\small\color{muted}群论} % 所有正文页的页眉左侧只显示“群论”。
+\fancyhead[R]{\small\color{muted}\nouppercase{\leftmark}} % 右侧页眉显示当前章标题。
+\fancyfoot[C]{\small\thepage} % 页脚中央显示小号页码。
+\renewcommand{\headrulewidth}{0.3pt} % 设置正文页眉下方分隔线的粗细为 0.3pt。
+\fancypagestyle{plain}{\fancyhf{}\fancyhead[L]{\small\color{muted}群论}\fancyhead[R]{\small\color{muted}\nouppercase{\leftmark}}\fancyfoot[C]{\small\thepage}\renewcommand{\headrulewidth}{0.3pt}} % 章首页等 plain 页面也显示左右页眉，页码居中。
+\renewcommand{\chaptermark}[1]{\markboth{第\thechapter 章\quad #1}{}} % 为右侧页眉记录当前章号和章标题。
+\DeclareMathOperator{\Img}{Im} % 定义直立数学算符 Im，并使用算符间距。
+\DeclareMathOperator{\diag}{diag} % 定义直立数学算符 diag，用于对角矩阵记号。
+% 群直积沿用原稿的 \otimes；此处不表示向量空间的张量积。
+\newcommand{\gprod}{\otimes} % 将群直积命令展开为原稿采用的 \otimes。
+\endinput % 结束宏包读取。

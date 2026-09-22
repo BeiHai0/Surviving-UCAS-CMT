@@ -1,0 +1,191 @@
+\section{一维谐振子的代数解法与粒子数表象}
+\subsection{升降算符与数算符}
+对式\eqref{eq:ho-hamiltonian}定义无量纲算符
+\begin{equation}
+\hat a=\sqrt{\frac{m\omega}{2\hbar}}\left(\hat x+\frac{\mathrm{i}\hat p}{m\omega}\right),\qquad
+\hat a^\dagger=\sqrt{\frac{m\omega}{2\hbar}}\left(\hat x-\frac{\mathrm{i}\hat p}{m\omega}\right).
+\end{equation}
+它们互为伴随，但都不是厄米算符。由正则对易关系，
+\begin{align}
+\left[\hat a,\hat a^\dagger\right]
+&=\frac{m\omega}{2\hbar}\left(-\frac{\mathrm{i}}{m\omega}\left[\hat x,\hat p\right]
++\frac{\mathrm{i}}{m\omega}\left[\hat p,\hat x\right]\right)=\hat I,\\
+\hat a^\dagger\hat a
+&=\frac{m\omega}{2\hbar}\left(\hat x^2+\frac{\hat p^2}{m^2\omega^2}
++\frac{\mathrm{i}}{m\omega}\left[\hat x,\hat p\right]\right)
+=\frac{\hat H}{\hbar\omega}-\frac12\hat I.
+\end{align}
+定义数算符 $\hat N=\hat a^\dagger\hat a$，便有
+\begin{equation}
+\boxed{\hat H=\hbar\omega\left(\hat N+\frac12\hat I\right).}
+\label{eq:H-N}
+\end{equation}
+逆变换为
+\begin{equation}
+\hat x=\sqrt{\frac{\hbar}{2m\omega}}\left(\hat a+\hat a^\dagger\right),\qquad
+\hat p=\mathrm{i}\sqrt{\frac{m\hbar\omega}{2}}\left(\hat a^\dagger-\hat a\right).
+\label{eq:xp-ladder}
+\end{equation}
+$\hat N$ 是正的自伴算符，且 $\left[\hat N,\hat H\right]=0$，二者具有共同本征态。
+
+\subsection{数算符谱的非负性与整数性}
+先把本征值记为尚未确定的实数 $\nu$：
+\begin{equation}
+\hat N\Ket{\nu}=\nu\Ket{\nu},\qquad\Braket{\nu|\nu}=1.
+\end{equation}
+正性给出
+\begin{equation}
+\nu=\Braket{\nu|\hat a^\dagger\hat a|\nu}
+=\left\|\hat a\Ket{\nu}\right\|^2\geq0.
+\end{equation}
+利用 $\left[\hat A\hat B,\hat C\right]=\hat A\left[\hat B,\hat C\right]+\left[\hat A,\hat C\right]\hat B$，得到
+\begin{equation}
+\left[\hat N,\hat a\right]=-\hat a,\qquad \left[\hat N,\hat a^\dagger\right]=\hat a^\dagger.
+\label{eq:N-ladder}
+\end{equation}
+例如 $\hat N\hat a\Ket{\nu}=\left(\nu-1\right)\hat a\Ket{\nu}$，因此非零的 $\hat a\Ket{\nu}$ 是本征值降低一的态。
+
+照片通过范数的非负性逐步排除非整数谱。其一般形式为
+\begin{equation}
+\left(\hat a^\dagger\right)^k\hat a^k
+=\hat N\left(\hat N-\hat I\right)\cdots\left[\hat N-\left(k-1\right)\hat I\right].
+\label{eq:falling}
+\end{equation}
+这是 $k$ 的归纳式：$k=1$ 成立；由
+$\hat N\hat a^k=\hat a^k\left(\hat N-k\hat I\right)$，有
+\begin{equation}
+\left(\hat a^\dagger\right)^{k+1}\hat a^{k+1}
+=\left(\hat a^\dagger\right)^k\hat N\hat a^k
+=\left(\hat a^\dagger\right)^k\hat a^k\left(\hat N-k\hat I\right),
+\end{equation}
+故归纳完成。在谐振子本征态上上述各次作用有定义，因此
+\begin{equation}
+\left\|\hat a^k\Ket{\nu}\right\|^2=\nu\left(\nu-1\right)\cdots\left(\nu-k+1\right)\geq0.
+\end{equation}
+若 $r<\nu<r+1$，其中 $r$ 是非负整数，取 $k=r+2$，乘积前 $r+1$ 个因子为正、最后一个为负，与范数非负矛盾。因此只能有
+\begin{equation}
+\nu=n,\qquad n=0,1,2,\ldots.
+\end{equation}
+对 $n=0$，$\left\|\hat a\Ket{0}\right\|^2=0$，所以
+\begin{equation}
+\hat a\Ket{0}=0,\qquad \Braket{0|0}=1.
+\label{eq:vacuum}
+\end{equation}
+真空态本身不是零向量。其存在性也可由本节后面给出的归一化 Gaussian 波函数直接验证。
+
+\subsection{数态构造、升降关系与能谱}
+由式\eqref{eq:N-ladder}归纳得到
+\begin{equation}
+\left[\hat N,\left(\hat a^\dagger\right)^n\right]=n\left(\hat a^\dagger\right)^n,
+\end{equation}
+故 $\left(\hat a^\dagger\right)^n\Ket{0}$ 是本征值为 $n$ 的态。由
+\begin{equation}
+\left[\hat a,\left(\hat a^\dagger\right)^n\right]=n\left(\hat a^\dagger\right)^{n-1}
+\label{eq:ladder-power}
+\end{equation}
+及 $\hat a\Ket{0}=0$，可依次把湮灭算符向右移，得到
+\begin{equation}
+\hat a^n\left(\hat a^\dagger\right)^n\Ket{0}=n!\Ket{0}.
+\end{equation}
+因此选择一致的相位后，归一化数态为
+\begin{equation}
+\boxed{\Ket{n}=\frac{\left(\hat a^\dagger\right)^n}{\sqrt{n!}}\Ket{0}.}
+\label{eq:number-state}
+\end{equation}
+直接作用 $\hat a^\dagger$，并利用式\eqref{eq:ladder-power}作用 $\hat a$，得到
+\begin{equation}
+\hat a^\dagger\Ket{n}=\sqrt{n+1}\Ket{n+1},\qquad
+\hat a\Ket{n}=\sqrt n\Ket{n-1}\quad\left(n\geq1\right).
+\end{equation}
+对 $n=0$ 使用式\eqref{eq:vacuum}，而不引入 $\Ket{-1}$。特别地，
+\begin{equation}
+\hat a^n\Ket{n}=\sqrt{n!}\Ket{0}\neq0,\qquad
+\hat a^{n+1}\Ket{n}=0.
+\end{equation}
+数态满足
+\begin{equation}
+\Braket{m|n}=\delta_{mn},\qquad
+\sum_{n=0}^{\infty}\Ket{n}\Bra{n}=\hat I.
+\end{equation}
+这里完备性针对通常的一维谐振子空间 $L^2\left(\R\right)$，对应下文 Hermite 函数的完备性。
+
+由式\eqref{eq:H-N}得到
+\begin{equation}
+\boxed{\hat H\Ket{n}=E_n\Ket{n},\qquad
+E_n=\hbar\omega\left(n+\frac12\right).}
+\end{equation}
+能级等间隔，相邻能级差为 $\hbar\omega$；基态仍有零点能 $E_0=\hbar\omega/2$。
+激发能 $E_n-E_0=n\hbar\omega$ 可解释为 $n$ 个能量为 $\hbar\omega$ 的激发量子。以 $\Ket{n}$ 为基的表示称为粒子数表象，$\hat a^\dagger$ 和 $\hat a$ 分别称为产生与湮灭算符。
+
+\subsection{多个独立模式的粒子数表象}
+照片进一步把单振子推广到由指标 $k$ 标记的独立模式。相应算符满足
+\begin{equation}
+\left[\hat a_k,\hat a_{k'}^\dagger\right]=\delta_{kk'}\hat I,\qquad
+\left[\hat a_k,\hat a_{k'}\right]=\left[\hat a_k^\dagger,\hat a_{k'}^\dagger\right]=0.
+\end{equation}
+令 $\hat N_k=\hat a_k^\dagger\hat a_k$，有
+\begin{equation}
+\left[\hat N_k,\hat N_{k'}\right]=0,\qquad
+\hat H=\sum_k\hbar\omega_k\hat N_k+E_{\mathrm{vac}}\hat I.
+\end{equation}
+对于有限个独立谐振子，$E_{\mathrm{vac}}=\frac12\sum_k\hbar\omega_k$；也可通过选择能量零点把这个常数减去，但需明确约定。
+用 $\Ket{\mathrm{vac}}$ 表示满足所有 $\hat a_k\Ket{\mathrm{vac}}=0$ 的归一化真空态。共同本征态为
+\begin{equation}
+\Ket{\left\{n_k\right\}}=\prod_k\frac{\left(\hat a_k^\dagger\right)^{n_k}}{\sqrt{n_k!}}\Ket{\mathrm{vac}},
+\qquad n_k=0,1,2,\ldots,
+\end{equation}
+并满足
+\begin{align}
+\hat N_j\Ket{\left\{n_k\right\}}&=n_j\Ket{\left\{n_k\right\}},\\
+\hat H\Ket{\left\{n_k\right\}}&=\left(\sum_k\hbar\omega_kn_k+E_{\mathrm{vac}}\right)\Ket{\left\{n_k\right\}},\\
+\Braket{\left\{n_k'\right\}|\left\{n_k\right\}}&=\prod_k\delta_{n_k'n_k},\qquad
+\sum_{\left\{n_k\right\}}\Ket{\left\{n_k\right\}}\Bra{\left\{n_k\right\}}=\hat I.
+\end{align}
+因此任意态可按占据数展开。此处只保留照片中的独立模式形式，不展开场的量子化问题。
+
+\subsection{数态的坐标波函数}
+定义振子长度 $x_0=\sqrt{\hbar/\left(m\omega\right)}$ 与无量纲坐标 $\xi=x/x_0$。
+由 $\hat a\Ket{0}=0$ 取坐标表象，得到
+\begin{equation}
+\frac{1}{\sqrt2}\left(\xi+\frac{\mathrm{d}}{\mathrm{d}\xi}\right)\psi_0\left(x\right)=0.
+\end{equation}
+积分得 $\psi_0\left(x\right)=C\mathrm{e}^{-x^2/\left(2x_0^2\right)}$。由
+\begin{equation}
+1=\left|C\right|^2\int\mathrm{e}^{-x^2/x_0^2}\,\mathrm{d}x
+=\left|C\right|^2\sqrt\pi x_0,
+\end{equation}
+并取 $C$ 为正实数，得到
+\begin{equation}
+\psi_0\left(x\right)=\frac{1}{\pi^{1/4}\sqrt{x_0}}\mathrm{e}^{-\xi^2/2}.
+\end{equation}
+产生算符对应 $\left(\xi-\mathrm{d}/\mathrm{d}\xi\right)/\sqrt2$，于是
+\begin{align}
+\psi_n\left(x\right)&=\frac{1}{\sqrt{2^n n!}}
+\left(\xi-\frac{\mathrm{d}}{\mathrm{d}\xi}\right)^n\psi_0\left(x\right)\\
+&=\boxed{\frac{1}{\pi^{1/4}\sqrt{x_0}}\frac{H_n\left(\xi\right)}{\sqrt{2^n n!}}
+\mathrm{e}^{-\xi^2/2}.}
+\label{eq:hermite-wavefunction}
+\end{align}
+此处 Hermite 多项式采用物理学约定
+\begin{equation}
+H_n\left(\xi\right)=\mathrm{e}^{\xi^2/2}
+\left(\xi-\frac{\mathrm{d}}{\mathrm{d}\xi}\right)^n\mathrm{e}^{-\xi^2/2},
+\end{equation}
+其生成函数为
+\begin{equation}
+\sum_{n=0}^{\infty}\frac{s^n}{n!}H_n\left(\xi\right)=\mathrm{e}^{2\xi s-s^2}.
+\label{eq:hermite-generating}
+\end{equation}
+例如 $H_0=1$、$H_1=2\xi$、$H_2=4\xi^2-2$，给出
+\begin{equation}
+\psi_1\left(x\right)=\sqrt2\xi\psi_0\left(x\right),\qquad
+\psi_2\left(x\right)=\frac{2\xi^2-1}{\sqrt2}\psi_0\left(x\right).
+\end{equation}
+
+照片还使用算符函数的求导记法。对固定次序展开的多项式
+$f=\sum_{r,s}c_{rs}\left(\hat a^\dagger\right)^r\hat a^s$，由乘积对易公式逐项可得
+\begin{equation}
+\left[\hat a,f\right]=\frac{\partial f}{\partial\hat a^\dagger},\qquad
+\left[\hat a^\dagger,f\right]=-\frac{\partial f}{\partial\hat a}.
+\end{equation}
+右侧表示保持所定算符次序的形式求导；幂级数使用时还需保证收敛及定义域条件，不能把任意非交换算符直接当作普通数求导。
