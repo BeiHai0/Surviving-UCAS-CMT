@@ -1,0 +1,97 @@
+\section{时间演化算符}
+\subsection{定义与基本性质}
+把初态到任意时刻的线性映射记为
+\begin{equation}
+\Ket{\psi\left(t\right)}=\hat U\left(t,t_0\right)\Ket{\psi\left(t_0\right)}.
+\label{eq:evolution-definition}
+\end{equation}
+概率守恒要求内积保持不变，故
+\begin{equation}
+\hat U^\dagger\left(t,t_0\right)\hat U\left(t,t_0\right)=\hat I,
+\end{equation}
+即 $\hat U\left(t,t_0\right)$ 是酉算符。唯一性与连续演化还给出
+\begin{align}
+\hat U\left(t_0,t_0\right)&=\hat I,\\
+\hat U\left(t_2,t_0\right)&=\hat U\left(t_2,t_1\right)\hat U\left(t_1,t_0\right),\\
+\hat U^{-1}\left(t,t_0\right)&=\hat U\left(t_0,t\right)=\hat U^\dagger\left(t,t_0\right).
+\end{align}
+把式\eqref{eq:evolution-definition}代入 Schr\"odinger 方程，得到演化算符满足
+\begin{equation}
+\boxed{\mathrm{i}\hbar\frac{\partial}{\partial t}\hat U\left(t,t_0\right)
+=\hat H\left(t\right)\hat U\left(t,t_0\right),
+\qquad \hat U\left(t_0,t_0\right)=\hat I.}
+\label{eq:evolution-equation}
+\end{equation}
+对第二个时间变量求导则有
+\begin{equation}
+\mathrm{i}\hbar\frac{\partial}{\partial t_0}\hat U\left(t,t_0\right)
+=-\hat U\left(t,t_0\right)\hat H\left(t_0\right).
+\end{equation}
+
+\subsection{Dyson 级数与时间排序}
+对式\eqref{eq:evolution-equation}从 $t_0$ 到 $t$ 积分，得到积分方程
+\begin{equation}
+\hat U\left(t,t_0\right)=\hat I-\frac{\mathrm{i}}{\hbar}
+\int_{t_0}^{t}\hat H\left(t_1\right)\hat U\left(t_1,t_0\right)\,\mathrm{d}t_1.
+\end{equation}
+逐次代入右侧的 $\hat U$，得到 Dyson 级数
+\begin{align}
+\hat U\left(t,t_0\right)
+&=\hat I+\sum_{n=1}^{\infty}\left(-\frac{\mathrm{i}}{\hbar}\right)^n
+\int_{t_0}^{t}\mathrm{d}t_1\int_{t_0}^{t_1}\mathrm{d}t_2\cdots
+\int_{t_0}^{t_{n-1}}\mathrm{d}t_n
+\hat H\left(t_1\right)\hat H\left(t_2\right)\cdots\hat H\left(t_n\right).
+\label{eq:dyson-series}
+\end{align}
+积分区域自动满足 $t_1\geq t_2\geq\cdots\geq t_n$，即较晚时刻的算符位于左侧。
+
+定义时间排序算符 $\mathcal T$：对两个算符，
+\begin{equation}
+\mathcal T\left[\hat H\left(t_1\right)\hat H\left(t_2\right)\right]
+=\theta\left(t_1-t_2\right)\hat H\left(t_1\right)\hat H\left(t_2\right)
++\theta\left(t_2-t_1\right)\hat H\left(t_2\right)\hat H\left(t_1\right).
+\end{equation}
+于是式\eqref{eq:dyson-series}可简写为
+\begin{equation}
+\boxed{\hat U\left(t,t_0\right)=
+\mathcal T\exp\left[-\frac{\mathrm{i}}{\hbar}
+\int_{t_0}^{t}\hat H\left(t'\right)\,\mathrm{d}t'\right].}
+\label{eq:time-ordered-U}
+\end{equation}
+时间排序不能一般地省略，因为不同时刻的 Hamilton 算符可能不对易。
+
+\begin{example}
+考虑
+\begin{equation}
+\hat H\left(t\right)=\frac{\hat p^2}{2m}-A\sin\left(\omega t\right)\hat x.
+\end{equation}
+利用 $\left[\hat x,\hat p^2\right]=2\mathrm{i}\hbar\hat p$，可得
+\begin{equation}
+\left[\hat H\left(t_1\right),\hat H\left(t_2\right)\right]
+=\frac{\mathrm{i}\hbar A}{m}
+\left[\sin\left(\omega t_2\right)-\sin\left(\omega t_1\right)\right]\hat p.
+\end{equation}
+一般情形下该对易子不为零，所以不能把 $\hat U$ 当作普通指数直接计算。
+\end{example}
+
+\subsection{可去掉时间排序的情形}
+若任意 $t_1,t_2$ 都满足
+\begin{equation}
+\left[\hat H\left(t_1\right),\hat H\left(t_2\right)\right]=0,
+\end{equation}
+则各时刻算符的次序无关，从而
+\begin{equation}
+\hat U\left(t,t_0\right)=
+\exp\left[-\frac{\mathrm{i}}{\hbar}\int_{t_0}^{t}\hat H\left(t'\right)\,\mathrm{d}t'\right].
+\end{equation}
+特别地，若 $\hat H$ 不含时，
+\begin{equation}
+\boxed{\hat U\left(t,t_0\right)=
+\mathrm{e}^{-\mathrm{i}\hat H\left(t-t_0\right)/\hbar}.}
+\end{equation}
+若 $\hat H=\sum_n E_n\Ket{n}\Bra{n}$，则
+\begin{equation}
+\hat U\left(t,t_0\right)=
+\sum_n\mathrm{e}^{-\mathrm{i}E_n\left(t-t_0\right)/\hbar}\Ket{n}\Bra{n},
+\end{equation}
+连续谱部分应相应改为积分。

@@ -1,0 +1,66 @@
+% !TeX program = xelatex
+\documentclass[UTF8,12pt,a4paper,fontset=fandol]{ctexart}
+\usepackage{lecturemath}
+\title{讲义照片 0922--0929 勘误}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+
+本文件记录整理照片 6、7、8 时发现并已在正文中改正的笔误。页码均指对应 PDF 的页码。
+
+\begin{enumerate}
+\item \textbf{0924-7.pdf，第 1--2 页：连续表象中的算符核缺少 $\hbar$，且变量混用。}
+
+照片在 $\hat p\mapsto-\mathrm{i}\partial_x$、$\hat x\mapsto\mathrm{i}\partial_p$ 的替换中省略了 $\hbar$，但本组讲义其他公式并未采用 $\hbar=1$。此外，
+$\Braket{x|\hat x\hat p\hat x|x'}$ 中左右两个位置算符应分别产生 $x$ 与 $x'$。正确结果为
+\begin{align}
+\Braket{x|\hat x\hat p\hat x|x'}
+&=-\mathrm{i}\hbar xx'\frac{\partial}{\partial x}\delta\left(x-x'\right),\\
+\Braket{p|\hat x^2\hat p|p'}
+&=-\hbar^2p'\frac{\partial^2}{\partial p^2}\delta\left(p-p'\right).
+\end{align}
+
+\item \textbf{0922-6.pdf，第 19 页：不同时刻 Hamilton 算符的对易子。}
+
+照片考虑
+\begin{equation}
+\hat H\left(t\right)=\frac{\hat p^2}{2m}-A\sin\left(\omega t\right)\hat x.
+\end{equation}
+正确结果为
+\begin{equation}
+\left[\hat H\left(t_1\right),\hat H\left(t_2\right)\right]
+=\frac{\mathrm{i}\hbar A}{m}
+\left[\sin\left(\omega t_2\right)-\sin\left(\omega t_1\right)\right]\hat p.
+\end{equation}
+照片末式的正负次序及 $\hbar$ 因子有误。正文已按
+$\left[\hat p^2,\hat x\right]=-2\mathrm{i}\hbar\hat p$ 修正。
+
+\item \textbf{0924-7.pdf，第 5--7 页：相互作用绘景的演化来源与守恒条件。}
+
+照片把相互作用绘景算符的演化 Hamilton 算符记号与总 Hamilton 算符混用。正确的两条方程是
+\begin{align}
+\mathrm{i}\hbar\frac{\mathrm{d}}{\mathrm{d}t}\Ket{\psi_{\mathrm I}\left(t\right)}
+&=\hat V_{\mathrm I}\left(t\right)\Ket{\psi_{\mathrm I}\left(t\right)},\\
+\frac{\mathrm{d}\hat A_{\mathrm I}}{\mathrm{d}t}
+&=\frac{1}{\mathrm{i}\hbar}\left[\hat A_{\mathrm I},\hat H_0\right]
++\left(\frac{\partial\hat A}{\partial t}\right)_{\mathrm I}.
+\end{align}
+也就是说，态由相互作用项 $\hat V_{\mathrm I}$ 驱动，算符的隐含时间依赖由 $\hat H_0$ 驱动。判断完整期望值是否守恒时，仍须考虑二者的共同贡献；对不显含时间的 Schr\"odinger 绘景算符，充分条件是
+$\left[\hat A,\hat H\right]=0$。
+
+\item \textbf{0929-8.pdf，第 21 页：单个短时间传播子的归一化因子。}
+
+照片在从 $N$ 重积分转到单个短时间步时保留了带 $N$ 的归一化幂次。对
+$\varepsilon>0$ 的一个时间片，正确形式是
+\begin{equation}
+K\left(x,t+\varepsilon;x',t\right)
+=\sqrt{\frac{m}{2\pi\mathrm{i}\hbar\varepsilon}}
+\exp\left\{\frac{\mathrm{i}\varepsilon}{\hbar}
+\left[\frac{m}{2}\left(\frac{x-x'}{\varepsilon}\right)^2
+-V\left(x',t\right)\right]\right\}+O\left(\varepsilon^2\right).
+\end{equation}
+只有把 $N$ 个短时间核相乘时，归一化因子才整体升为 $N$ 次幂。
+\end{enumerate}
+
+\end{document}

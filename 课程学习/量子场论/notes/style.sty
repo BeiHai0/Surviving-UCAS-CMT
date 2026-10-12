@@ -1,0 +1,37 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{style}[2026/10/12 Minimal study notes style]
+
+% 中文支持由主文件的 ctex 文档类（或 ctex 宏包）负责。
+% 其他主文件可将本文件放在同一目录，然后使用 \usepackage{style}。
+\RequirePackage[margin=2.5cm]{geometry}
+% 数学排版：mathtools 在 amsmath 基础上扩展，不必重复加载 amsmath。
+\RequirePackage{mathtools} % 对齐公式、矩阵、\coloneqq、\DeclarePairedDelimiter
+\RequirePackage{amssymb}  % AMS 数学符号；同时加载 amsfonts，提供 \mathbb
+\RequirePackage{amsthm}   % proof 环境及 \newtheorem；具体定理环境由主文件定义
+\RequirePackage{bm}       % \bm：粗体希腊字母与其他数学符号
+\RequirePackage{mathrsfs} % \mathscr：花体字母
+\RequirePackage{slashed}  % \slashed{p}：费曼斜线记号
+\RequirePackage{braket}   % Dirac 符号
+\RequirePackage{tocloft}  % 目录条目与页码之间的点线
+% ISO 2145:1978，第 2.1--2.4 条：阿拉伯数字、逐级编号、层级间加点，末尾不加点。
+% 点线、字体及缩进为排版选择，不属于该标准的编号要求。
+\setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{2}
+\ifcsname c@chapter\endcsname
+  \renewcommand{\thechapter}{\arabic{chapter}}
+  \renewcommand{\thesection}{\thechapter.\arabic{section}}
+  \ctexset{chapter={name={,},number=\arabic{chapter}}}
+  \renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
+  % 附录沿用字母编号，避免章标题仍显示阿拉伯数字。
+  \AddToHook{cmd/appendix/after}{%
+    \ctexset{chapter={name={,},number=\thechapter}}%
+  }
+\fi
+\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+\RequirePackage[unicode,hidelinks]{hyperref}
+
+% braket 提供项目统一的 \Bra、\Ket 和 \Braket 命令。
+% 数学常数及微分按项目约定直接写 \mathrm{i}、\mathrm{e}、\mathrm{d}。
+% 保留文档类默认的正文标题、段落、页码和公式编号样式。
+
+\endinput

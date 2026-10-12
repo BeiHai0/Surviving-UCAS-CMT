@@ -1,0 +1,38 @@
+\chapter{序论}
+
+量子场论将场作为描述物理系统的基本对象。与有限个广义坐标描述的力学系统相比，场在空间的每一点都有相应的自由度。本章先约定常用符号，再介绍经典场的基本描述。
+
+\section{单位制与时空记号}
+
+\subsection{自然单位制}
+
+本文采用自然单位制 $\hbar=c=1$，其中 $\hbar$ 为约化普朗克常数，$c$ 为真空光速。在这一约定下，能量、动量和质量具有相同的量纲，而时间与长度具有能量倒数的量纲。
+
+对于质量为 $m$ 的自由粒子，能量 $E$ 与三维动量 $\bm{p}$ 满足
+\begin{equation}
+  E^{2}=\bm{p}^{2}+m^{2}.
+\end{equation}
+这一关系将用于后续讨论自由场的平面波解。
+
+\subsection{度规与指标}
+
+取时空坐标 $x^{\mu}=(t,\bm{x})$，指标 $\mu,\nu$ 遍历 $0,1,2,3$，并采用 Minkowski 度规
+\begin{equation}
+  \eta_{\mu\nu}=\mathrm{diag}(1,-1,-1,-1).
+\end{equation}
+重复的上下指标默认求和。指标通过度规升降，例如 $x_{\mu}=\eta_{\mu\nu}x^{\nu}$，因此
+\begin{equation}
+  x_{\mu}x^{\mu}=t^{2}-\bm{x}^{2}.
+\end{equation}
+
+\section{经典场的基本描述}
+
+\subsection{作用量}
+
+对于实标量场 $\phi(x)$，设拉格朗日密度 $\mathcal{L}$ 仅依赖场及其一阶导数。作用量定义为
+\begin{equation}
+  S[\phi]=\int\mathrm{d}^{4}x\,
+  \mathcal{L}\bigl(\phi,\partial_{\mu}\phi\bigr),
+  \qquad \partial_{\mu}\coloneqq\frac{\partial}{\partial x^{\mu}}.
+\end{equation}
+作用量是场构型的泛函。在边界处固定场的取值后，经典运动方程由驻值条件 $\delta S=0$ 决定；具体推导将在后续正文中展开。

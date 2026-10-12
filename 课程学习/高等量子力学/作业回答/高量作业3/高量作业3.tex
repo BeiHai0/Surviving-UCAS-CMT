@@ -1,0 +1,176 @@
+% !TeX program = xelatex
+\documentclass[11pt,a4paper]{ctexart}
+
+\usepackage[left=2.4cm,right=2.4cm,top=2.1cm,bottom=2.1cm]{geometry}
+\usepackage{amsmath,amssymb,mathtools,braket}
+\usepackage{xcolor}
+\usepackage[inline]{enumitem}
+\usepackage{fancyhdr}
+
+% ============================================================
+% 基本信息
+% ============================================================
+\newcommand{\coursename}{高等量子力学}
+\newcommand{\assignmentnumber}{第 3 次作业}
+\newcommand{\teachername}{\underline{\makebox[2.8cm][c]{金彪}}}
+\newcommand{\studentname}{\underline{\makebox[2.8cm][c]{林照翔}}}
+\newcommand{\studentid}{\underline{\makebox[3.0cm][c]{202628001207046}}}
+
+% ============================================================
+% 页面样式
+% ============================================================
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0.25em}
+\setlength{\headheight}{14pt}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\coursename}
+\rhead{\assignmentnumber}
+\cfoot{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% ============================================================
+% 列表参数
+% ============================================================
+\setlist[enumerate,1]{
+  label=(\alph*),
+  leftmargin=3.2em,
+  itemsep=0.55em,
+  topsep=0.45em
+}
+
+\newlist{inlineenum}{enumerate*}{1}
+\setlist[inlineenum,1]{
+  label=(\alph*),
+  labelsep=0.5em,
+  itemjoin={；\quad},
+  itemjoin*={；\quad}
+}
+
+% ============================================================
+% 题目与回答空间
+% ============================================================
+\newcounter{problem}
+\newenvironment{problem}
+  {\refstepcounter{problem}%
+   \par\medskip\noindent
+   \begingroup
+   \setlength{\fboxsep}{3pt}%
+   \setlength{\fboxrule}{0.8pt}%
+   \fbox{\bfseries 题目\chinese{problem}}%
+   \endgroup
+   \quad\ignorespaces}
+  {\par\medskip}
+
+\newenvironment{answer}
+  {\par\smallskip\noindent
+   \begingroup
+   \setlength{\fboxsep}{4pt}%
+   \colorbox{black}{\textcolor{white}{\bfseries 回答}}%
+   \endgroup
+   \quad\ignorespaces}
+  {\par\smallskip\noindent\rule{\linewidth}{0.4pt}\medskip}
+
+\newcommand{\answerspace}[1]{\par\vspace*{#1}}
+
+\begin{document}
+
+\begin{center}
+  {\LARGE\bfseries \coursename\quad \assignmentnumber}\par
+  \vspace{0.7em}
+  \small
+  教师：\teachername\qquad
+  姓名：\studentname\qquad
+  学号：\studentid
+\end{center}
+\vspace{0.4em}
+
+% 本份作业承接原题前十五题，题号从十六开始。
+\setcounter{problem}{15}
+
+\begin{problem}
+考虑外场作用下的一维谐振子系统：
+\begin{equation}
+  \hat H=\hat H_0+\hat V,
+\end{equation}
+其中
+\begin{equation}
+  \hat H_0=\frac{\hat p^2}{2m}+\frac{m\omega^2\hat x^2}{2},
+  \qquad
+  \hat V=-\lambda\hat x.
+\end{equation}
+设初始体系处于相干态上，求 $t$ 时刻的平均值
+\begin{equation}
+  \overline{x}_t
+  ={}_I\Braket{\alpha,t|\hat x_I(t)|\alpha,t}_I
+\end{equation}
+（准确至 $\lambda^2$ 量级）。
+\end{problem}
+
+\begin{answer}
+\answerspace{13cm}
+\end{answer}
+
+\begin{problem}
+从本征值方程
+\begin{equation}
+  \hat x_H(t)\Ket{x,t}_H=x\Ket{x,t}_H
+\end{equation}
+出发，导出自由粒子和谐振子系统中
+\begin{equation}
+  K^*(xt;x_0t_0)={}_H\Braket{x_0,t_0|x,t}_H
+\end{equation}
+满足的微分方程，进而导出传播子 $K(xt;x_0t_0)$ 的表达式。
+\end{problem}
+
+\begin{answer}
+\answerspace{15cm}
+\end{answer}
+
+\begin{problem}
+设自由粒子的初始态为
+\begin{equation}
+  \psi(x,t_0)
+  =\frac{1}{\left(2\pi a^2\right)^{1/4}}
+  \exp\left[-\frac{(x-x_0)^2}{4a^2}\right].
+\end{equation}
+试通过传播子求 $t$ 时刻的波函数 $\psi(x,t)$，并讨论
+$\left|\psi(x,t)\right|^2$ 在 $t$ 值很大时的渐进行为。
+\end{problem}
+
+\begin{answer}
+\answerspace{13cm}
+\end{answer}
+
+\begin{problem}
+设系统经典拉氏量为
+\begin{equation}
+  L=\frac{m\dot{x}^2}{2}-\lambda x.
+\end{equation}
+求传播子 $K(xt;x_0t_0)$ 的表达式。
+\end{problem}
+
+\begin{answer}
+\answerspace{12cm}
+\end{answer}
+
+\begin{problem}
+动量表象传播子 $k(p,t;p_0,t_0)$ 定义为
+\begin{equation}
+  \varphi(p,t)
+  =\int k(p,t;p_0,t_0)\varphi(p_0,t_0)\,\mathrm{d}p_0.
+\end{equation}
+已知动量表象波函数 $\varphi(p,t)$ 与坐标表象波函数 $\psi(x,t)$ 间的变换关系为
+\begin{equation}
+  \psi(x,t)
+  =\frac{1}{\sqrt{2\pi\hbar}}
+  \int \mathrm{e}^{\mathrm{i}px/\hbar}\varphi(p,t)\,\mathrm{d}p.
+\end{equation}
+试求自由粒子系统的动量表象传播子。
+\end{problem}
+
+\begin{answer}
+\answerspace{11cm}
+\end{answer}
+
+\end{document}

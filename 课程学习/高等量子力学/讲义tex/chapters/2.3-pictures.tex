@@ -1,0 +1,176 @@
+\section{三种动力学绘景}
+\subsection{连续表象中的算符核}
+在进入三种绘景之前，先整理照片中的连续表象例题。算符 $\hat F$ 在坐标表象中的核为
+\begin{equation}
+F\left(x,x'\right)=\Braket{x|\hat F|x'},
+\qquad
+\left(\hat F\psi\right)\left(x\right)
+=\int F\left(x,x'\right)\psi\left(x'\right)\,\mathrm{d}x'.
+\end{equation}
+必须保留算符次序，并明确导数作用于哪个变量。例如
+\begin{equation}
+\Braket{x|\hat x\hat p\hat x|x'}
+=-\mathrm{i}\hbar xx'\frac{\partial}{\partial x}\delta\left(x-x'\right).
+\end{equation}
+这里左侧的 $\hat x$ 给出 $x$，右侧的 $\hat x$ 给出 $x'$；不能在导数尚未说明作用范围时把二者都直接写成同一个 $x$。
+
+再以 $\hat F=\hat x^2\hat p$ 为例。在坐标表象与动量表象中分别有
+\begin{align}
+\Braket{x|\hat F|x'}
+&=-\mathrm{i}\hbar x^2\frac{\partial}{\partial x}\delta\left(x-x'\right),\\
+\Braket{p|\hat F|p'}
+&=-\hbar^2p'\frac{\partial^2}{\partial p^2}\delta\left(p-p'\right).
+\end{align}
+第二式使用 $\Braket{p|\hat x|p'}=\mathrm{i}\hbar\partial_p\delta\left(p-p'\right)$，而最右侧的 $\hat p$ 作用在 $\Ket{p'}$ 上产生本征值 $p'$。这些核应作为分布理解，只有放入对测试波函数的积分后，分部积分等操作才具有明确意义。
+
+\subsection{Schr\"odinger 绘景}
+Schr\"odinger 绘景中，态随时间演化，而没有显含时间的算符保持不变：
+\begin{equation}
+\Ket{\psi_{\mathrm{S}}\left(t\right)}=\hat U\left(t,t_0\right)
+\Ket{\psi_{\mathrm{S}}\left(t_0\right)},
+\qquad \hat A_{\mathrm{S}}=\hat A.
+\end{equation}
+对可能显含时间的 $\hat A_{\mathrm{S}}\left(t\right)$，期望值的导数为
+\begin{equation}
+\frac{\mathrm{d}}{\mathrm{d}t}\Braket{\hat A}_{\mathrm{S}}
+=\frac{1}{\mathrm{i}\hbar}\Braket{\left[\hat A_{\mathrm{S}},\hat H_{\mathrm{S}}\right]}_{\mathrm{S}}
++\Braket{\frac{\partial\hat A_{\mathrm{S}}}{\partial t}}_{\mathrm{S}}.
+\label{eq:expectation-evolution}
+\end{equation}
+因此，若算符不显含时间且与 Hamilton 算符对易，它所代表的物理量守恒。
+
+\subsection{Heisenberg 绘景}
+把全部时间依赖转移到算符，定义
+\begin{align}
+\Ket{\psi_{\mathrm{H}}}&=\Ket{\psi_{\mathrm{S}}\left(t_0\right)},\\
+\hat A_{\mathrm{H}}\left(t\right)
+&=\hat U^\dagger\left(t,t_0\right)\hat A_{\mathrm{S}}\left(t\right)
+\hat U\left(t,t_0\right).
+\end{align}
+两种绘景给出相同的物理预言：
+\begin{equation}
+\Braket{\psi_{\mathrm{S}}\left(t\right)|\hat A_{\mathrm{S}}\left(t\right)|
+\psi_{\mathrm{S}}\left(t\right)}
+=\Braket{\psi_{\mathrm{H}}|\hat A_{\mathrm{H}}\left(t\right)|\psi_{\mathrm{H}}}.
+\end{equation}
+对定义式求导，得到 Heisenberg 运动方程
+\begin{equation}
+\boxed{\frac{\mathrm{d}\hat A_{\mathrm{H}}}{\mathrm{d}t}
+=\frac{1}{\mathrm{i}\hbar}\left[\hat A_{\mathrm{H}},\hat H_{\mathrm{H}}\right]
++\left(\frac{\partial\hat A}{\partial t}\right)_{\mathrm{H}}.}
+\label{eq:heisenberg-equation}
+\end{equation}
+其中
+\begin{equation}
+\hat H_{\mathrm{H}}\left(t\right)=\hat U^\dagger\left(t,t_0\right)
+\hat H_{\mathrm{S}}\left(t\right)\hat U\left(t,t_0\right).
+\end{equation}
+若 $\hat H$ 不含时，则它与自身生成的 $\hat U$ 对易，故 $\hat H_{\mathrm{H}}=\hat H$。
+
+\begin{example}[一维谐振子]
+对
+\begin{equation}
+\hat H=\frac{\hat p^2}{2m}+\frac12m\omega^2\hat x^2,
+\end{equation}
+式\eqref{eq:heisenberg-equation}给出
+\begin{equation}
+\dot{\hat x}_{\mathrm{H}}=\frac{\hat p_{\mathrm{H}}}{m},
+\qquad
+\dot{\hat p}_{\mathrm{H}}=-m\omega^2\hat x_{\mathrm{H}}.
+\end{equation}
+所以算符本身满足经典形式的振动方程，解为
+\begin{align}
+\hat x_{\mathrm{H}}\left(t\right)
+&=\hat x\cos\left[\omega\left(t-t_0\right)\right]
++\frac{\hat p}{m\omega}\sin\left[\omega\left(t-t_0\right)\right],\\
+\hat p_{\mathrm{H}}\left(t\right)
+&=\hat p\cos\left[\omega\left(t-t_0\right)\right]
+-m\omega\hat x\sin\left[\omega\left(t-t_0\right)\right].
+\end{align}
+等价地，利用 $\left[\hat H,\hat a\right]=-\hbar\omega\hat a$，
+\begin{equation}
+\hat a_{\mathrm{H}}\left(t\right)=
+\mathrm{e}^{-\mathrm{i}\omega\left(t-t_0\right)}\hat a,
+\qquad
+\hat a_{\mathrm{H}}^\dagger\left(t\right)=
+\mathrm{e}^{\mathrm{i}\omega\left(t-t_0\right)}\hat a^\dagger.
+\end{equation}
+\end{example}
+
+\subsection{相互作用绘景}
+设 Hamilton 算符分解为
+\begin{equation}
+\hat H\left(t\right)=\hat H_0+\hat V\left(t\right),
+\end{equation}
+其中 $\hat H_0$ 不含时且其演化可精确求解。令
+\begin{equation}
+\hat U_0\left(t,t_0\right)=
+\mathrm{e}^{-\mathrm{i}\hat H_0\left(t-t_0\right)/\hbar},
+\end{equation}
+并定义
+\begin{align}
+\Ket{\psi_{\mathrm{I}}\left(t\right)}
+&=\hat U_0^\dagger\left(t,t_0\right)\Ket{\psi_{\mathrm{S}}\left(t\right)},\\
+\hat A_{\mathrm{I}}\left(t\right)
+&=\hat U_0^\dagger\left(t,t_0\right)\hat A_{\mathrm{S}}\left(t\right)
+\hat U_0\left(t,t_0\right),\\
+\hat V_{\mathrm{I}}\left(t\right)
+&=\hat U_0^\dagger\left(t,t_0\right)\hat V\left(t\right)
+\hat U_0\left(t,t_0\right).
+\end{align}
+直接求导可得
+\begin{align}
+\mathrm{i}\hbar\frac{\mathrm{d}}{\mathrm{d}t}\Ket{\psi_{\mathrm{I}}\left(t\right)}
+&=\hat V_{\mathrm{I}}\left(t\right)\Ket{\psi_{\mathrm{I}}\left(t\right)},
+\label{eq:interaction-state}\\
+\frac{\mathrm{d}\hat A_{\mathrm{I}}}{\mathrm{d}t}
+&=\frac{1}{\mathrm{i}\hbar}\left[\hat A_{\mathrm{I}},\hat H_0\right]
++\left(\frac{\partial\hat A}{\partial t}\right)_{\mathrm{I}}.
+\label{eq:interaction-operator}
+\end{align}
+因此态由相互作用项 $\hat V_{\mathrm{I}}$ 驱动，算符的隐含时间演化由自由部分 $\hat H_0$ 驱动。期望值仍不变：
+\begin{equation}
+\Braket{\psi_{\mathrm{I}}\left(t\right)|\hat A_{\mathrm{I}}\left(t\right)|
+\psi_{\mathrm{I}}\left(t\right)}
+=\Braket{\psi_{\mathrm{S}}\left(t\right)|\hat A_{\mathrm{S}}\left(t\right)|
+\psi_{\mathrm{S}}\left(t\right)}.
+\end{equation}
+
+定义相互作用绘景演化算符
+\begin{equation}
+\Ket{\psi_{\mathrm{I}}\left(t\right)}=\hat U_{\mathrm{I}}\left(t,t_0\right)
+\Ket{\psi_{\mathrm{I}}\left(t_0\right)}.
+\end{equation}
+由式\eqref{eq:interaction-state}，
+\begin{align}
+\hat U_{\mathrm{I}}\left(t,t_0\right)
+&=\mathcal T\exp\left[-\frac{\mathrm{i}}{\hbar}
+\int_{t_0}^{t}\hat V_{\mathrm{I}}\left(t'\right)\,\mathrm{d}t'\right],
+\label{eq:interaction-U}\\
+\hat U_{\mathrm{I}}\left(t,t_0\right)
+&=\hat U_0^\dagger\left(t,t_0\right)\hat U\left(t,t_0\right).
+\end{align}
+更一般地，
+\begin{equation}
+\hat U_{\mathrm{I}}\left(t,t'\right)
+=\hat U_0^\dagger\left(t,t_0\right)\hat U\left(t,t'\right)
+\hat U_0\left(t',t_0\right).
+\end{equation}
+
+\subsection{一阶微扰与线性响应}
+把式\eqref{eq:interaction-U}保留到 $\hat V$ 的一阶：
+\begin{equation}
+\hat U_{\mathrm{I}}\left(t,t_0\right)
+=\hat I-\frac{\mathrm{i}}{\hbar}\int_{t_0}^{t}
+\hat V_{\mathrm{I}}\left(t'\right)\,\mathrm{d}t'+O\left(\hat V^2\right).
+\end{equation}
+若初态密度算符为 $\hat\rho_0$，则观测量的期望值到一阶为
+\begin{align}
+\Braket{\hat A\left(t\right)}
+&=\Tr\left[\hat\rho_0\hat A_{\mathrm{I}}\left(t\right)\right]
++\frac{\mathrm{i}}{\hbar}\int_{t_0}^{t}\mathrm{d}t'
+\Tr\left\{\hat\rho_0
+\left[\hat V_{\mathrm{I}}\left(t'\right),\hat A_{\mathrm{I}}\left(t\right)\right]\right\}
++O\left(\hat V^2\right).
+\end{align}
+这一对易子形式是一阶线性响应理论的出发点。

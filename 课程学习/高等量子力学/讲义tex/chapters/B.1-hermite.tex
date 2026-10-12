@@ -1,0 +1,180 @@
+\label{app:hermite}
+本附录采用物理学约定的 Hermite（厄米）多项式，整理谐振子波函数、相干态展开与传播子所需的性质。以下 $n,m$ 均为非负整数；证明中用到的 Gaussian 积分见附录\ref{app:gamma}。
+
+\section{物理学约定的 Hermite 多项式}
+\subsection{Rodrigues 公式与生成函数}
+定义
+\begin{equation}
+\boxed{H_n\left(\xi\right)
+=\left(-1\right)^n\mathrm{e}^{\xi^2}
+\frac{\mathrm{d}^n}{\mathrm{d}\xi^n}\mathrm{e}^{-\xi^2}.}
+\label{eq:app-hermite-rodrigues}
+\end{equation}
+对 $\mathrm{e}^{-\left(\xi-s\right)^2}$ 在 $s=0$ 处作 Taylor 展开，再乘以
+$\mathrm{e}^{\xi^2}$，得到生成函数
+\begin{equation}
+\boxed{G\left(\xi,s\right)
+=\mathrm{e}^{2\xi s-s^2}
+=\sum_{n=0}^{\infty}\frac{H_n\left(\xi\right)}{n!}s^n.}
+\label{eq:app-hermite-generating}
+\end{equation}
+该级数对任意有限复数 $\xi,s$ 收敛。分别展开
+$\mathrm{e}^{2\xi s}$ 与 $\mathrm{e}^{-s^2}$，比较 $s^n$ 的系数可得
+\begin{equation}
+H_n\left(\xi\right)
+=n!\sum_{k=0}^{\lfloor n/2\rfloor}
+\frac{\left(-1\right)^k\left(2\xi\right)^{n-2k}}{k!\left(n-2k\right)!}.
+\end{equation}
+因此 $H_n$ 的次数为 $n$，最高次项为 $2^n\xi^n$，且
+$H_n\left(-\xi\right)=\left(-1\right)^nH_n\left(\xi\right)$。前几项为
+\begin{align}
+H_0\left(\xi\right)&=1,& H_1\left(\xi\right)&=2\xi,\\
+H_2\left(\xi\right)&=4\xi^2-2,& H_3\left(\xi\right)&=8\xi^3-12\xi,\\
+H_4\left(\xi\right)&=16\xi^4-48\xi^2+12.
+\end{align}
+
+\subsection{导数、递推关系与微分方程}
+对生成函数求导：
+\begin{equation}
+\frac{\partial G}{\partial\xi}=2sG,
+\qquad
+\frac{\partial G}{\partial s}=\left(2\xi-2s\right)G.
+\end{equation}
+逐次比较 $s$ 的幂，得到
+\begin{equation}
+\boxed{H_n'\left(\xi\right)=2nH_{n-1}\left(\xi\right),\qquad
+H_{n+1}\left(\xi\right)=2\xi H_n\left(\xi\right)-2nH_{n-1}\left(\xi\right).}
+\label{eq:app-hermite-recurrence}
+\end{equation}
+第一式用于 $n\geq1$；初值为 $H_0=1$、$H_1=2\xi$。
+对递推式求导并再次使用导数公式，可以消去低阶多项式，得到
+\begin{equation}
+\boxed{H_n''\left(\xi\right)-2\xi H_n'\left(\xi\right)+2nH_n\left(\xi\right)=0.}
+\label{eq:app-hermite-ode}
+\end{equation}
+这也是把谐振子波函数中的 Gaussian 因子提出后所满足的方程。
+
+\subsection{正交性与归一化}
+定义带权内积
+\begin{equation}
+I_{mn}=\int_{\R}\mathrm{e}^{-\xi^2}H_m\left(\xi\right)H_n\left(\xi\right)\,\mathrm{d}\xi.
+\end{equation}
+用 Rodrigues 公式替换带权的 $H_n$，再分部积分 $n$ 次：
+\begin{equation}
+I_{mn}
+=\int_{\R}\frac{\mathrm{d}^nH_m\left(\xi\right)}{\mathrm{d}\xi^n}
+\mathrm{e}^{-\xi^2}\,\mathrm{d}\xi.
+\end{equation}
+边界项均为多项式乘 Gaussian，在无穷远处为零。
+若 $m<n$，多项式的 $n$ 阶导数为零；若 $m>n$，交换指标使用同一论证。
+若 $m=n$，最高次项给出 $H_n^{\left(n\right)}=2^n n!$，所以
+\begin{equation}
+\boxed{\int_{\R}\mathrm{e}^{-\xi^2}H_m\left(\xi\right)H_n\left(\xi\right)\,\mathrm{d}\xi
+=\sqrt\pi\,2^n n!\delta_{mn}.}
+\label{eq:app-hermite-orthogonality}
+\end{equation}
+
+\section{在谐振子与相干态中的应用}
+\subsection{谐振子波函数及阶梯关系}
+取振子长度 $x_0=\sqrt{\hbar/\left(m\omega\right)}$，令 $\xi=x/x_0$。
+归一化 Hermite 函数为
+\begin{equation}
+\varphi_n\left(\xi\right)=
+\frac{H_n\left(\xi\right)\mathrm{e}^{-\xi^2/2}}{\pi^{1/4}\sqrt{2^n n!}}.
+\end{equation}
+由式\eqref{eq:app-hermite-orthogonality}，
+$\int_{\R}\varphi_m^*\varphi_n\,\mathrm{d}\xi=\delta_{mn}$。
+实际坐标波函数还需补上长度因子：
+\begin{equation}
+\psi_n\left(x\right)=\frac{1}{\sqrt{x_0}}\varphi_n\left(\frac{x}{x_0}\right).
+\end{equation}
+因为 $\mathrm{d}x=x_0\,\mathrm{d}\xi$，它才满足
+$\int_{\R}\psi_m^*\psi_n\,\mathrm{d}x=\delta_{mn}$。
+
+对 $\varphi_n$ 求导，并使用式\eqref{eq:app-hermite-recurrence}，得到
+\begin{align}
+\frac{1}{\sqrt2}\left(\xi+\frac{\mathrm{d}}{\mathrm{d}\xi}\right)\varphi_n
+&=\sqrt n\,\varphi_{n-1},\\
+\frac{1}{\sqrt2}\left(\xi-\frac{\mathrm{d}}{\mathrm{d}\xi}\right)\varphi_n
+&=\sqrt{n+1}\,\varphi_{n+1}.
+\end{align}
+第一式在 $n=0$ 时右侧理解为零。这与正文的湮灭、产生算符完全一致。
+反复使用第二式，还得到正文所用的等价定义
+\begin{equation}
+H_n\left(\xi\right)=\mathrm{e}^{\xi^2/2}
+\left(\xi-\frac{\mathrm{d}}{\mathrm{d}\xi}\right)^n\mathrm{e}^{-\xi^2/2}.
+\end{equation}
+将 $\varphi_n=CH_n\mathrm{e}^{-\xi^2/2}$ 代入无量纲定态方程，
+式\eqref{eq:app-hermite-ode}给出
+\begin{equation}
+\left(-\frac12\frac{\mathrm{d}^2}{\mathrm{d}\xi^2}+\frac12\xi^2\right)\varphi_n
+=\left(n+\frac12\right)\varphi_n,
+\end{equation}
+即 $E_n=\hbar\omega\left(n+1/2\right)$。
+
+\subsection{相干态波函数的求和}
+把数态波函数代入相干态展开，
+\begin{align}
+\psi_\alpha\left(x\right)
+&=\frac{\mathrm{e}^{-\left|\alpha\right|^2/2-\xi^2/2}}{\pi^{1/4}\sqrt{x_0}}
+\sum_{n=0}^{\infty}\frac{H_n\left(\xi\right)}{n!}
+\left(\frac{\alpha}{\sqrt2}\right)^n\\
+&=\frac{1}{\pi^{1/4}\sqrt{x_0}}
+\exp\left[-\frac{\xi^2}{2}+\sqrt2\alpha\xi
+-\frac{\alpha^2}{2}-\frac{\left|\alpha\right|^2}{2}\right].
+\end{align}
+这里直接在生成函数中取 $s=\alpha/\sqrt2$。
+即使 $\alpha$ 是复数也可使用这一公式，且须区分 $\alpha^2$ 与
+$\left|\alpha\right|^2$；前者一般具有非零虚部。
+所得结果与正文式\eqref{eq:coherent-wavefunction}采用相同的整体相位约定。
+
+\subsection{Mehler 公式与谐振子传播子}
+对实数 $\xi,\eta$ 与 $\left|r\right|<1$，Mehler 公式为
+\begin{equation}
+\boxed{\sum_{n=0}^{\infty}\frac{r^n}{2^n n!}
+H_n\left(\xi\right)H_n\left(\eta\right)
+=\frac{1}{\sqrt{1-r^2}}
+\exp\left[\frac{2r\xi\eta-r^2\left(\xi^2+\eta^2\right)}{1-r^2}\right].}
+\label{eq:app-mehler}
+\end{equation}
+复数 $r$ 时，平方根取在 $r=0$ 等于 $1$ 的解析分支。
+下面给出一种由 Gaussian 积分得到的证明。
+由式\eqref{eq:app-shifted-gaussian}与生成函数比较系数，可得积分表示
+\begin{equation}
+H_n\left(\xi\right)
+=\frac{2^n}{\sqrt\pi}\int_{\R}
+\left(\xi+\mathrm{i}u\right)^n\mathrm{e}^{-u^2}\,\mathrm{d}u.
+\end{equation}
+将两个积分表示代入级数并求和，对于实数 $\left|r\right|<1$，得到
+\begin{align}
+\sum_{n=0}^{\infty}\frac{r^nH_n\left(\xi\right)H_n\left(\eta\right)}{2^n n!}
+&=\frac{\mathrm{e}^{2r\xi\eta}}{\pi}
+\int_{\R^2}\exp\left[-u^2-v^2-2ruv
++2\mathrm{i}r\eta u+2\mathrm{i}r\xi v\right]\,\mathrm{d}u\,\mathrm{d}v.
+\end{align}
+二次型的矩阵与逆矩阵为
+\begin{equation}
+M=\left(\begin{matrix}1&r\\r&1\end{matrix}\right),
+\qquad
+M^{-1}=\frac{1}{1-r^2}
+\left(\begin{matrix}1&-r\\-r&1\end{matrix}\right).
+\end{equation}
+对实数 $\left|r\right|<1$，$M$ 正定。依次完成平方并进行两个 Gaussian 积分，
+前因子为 $1/\sqrt{1-r^2}$，附加指数为
+$-r^2\left(\xi^2+\eta^2-2r\xi\eta\right)/\left(1-r^2\right)$。
+与原有 $2r\xi\eta$ 合并即得式\eqref{eq:app-mehler}；
+解析延拓给出单位圆盘内的复数情形。
+
+乘上 Hermite 函数的 Gaussian 因子后，公式变为
+\begin{equation}
+\sum_{n=0}^{\infty}r^n\varphi_n\left(\xi\right)\varphi_n\left(\eta\right)
+=\frac{1}{\sqrt{\pi\left(1-r^2\right)}}
+\exp\left[-\frac{\left(1+r^2\right)\left(\xi^2+\eta^2\right)-4r\xi\eta}
+{2\left(1-r^2\right)}\right].
+\end{equation}
+对谐振子传播子，令 $T=t-t_0$，先取
+$r=\mathrm{e}^{-\epsilon-\mathrm{i}\omega T}$、$\epsilon>0$，
+再令 $\epsilon\to0^+$，即可把上述求和用于定态谱展开。
+同时计入零点能的相位 $\mathrm{e}^{-\mathrm{i}\omega T/2}$ 和长度因子
+$1/x_0$，便得到正文式\eqref{eq:oscillator-propagator}。
+这一极限应按传播子核的分布意义理解；它也固定了跨越焦散时的相位延续。

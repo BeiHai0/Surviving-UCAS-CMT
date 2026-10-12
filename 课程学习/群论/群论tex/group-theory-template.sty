@@ -17,20 +17,18 @@
 \hypersetup{unicode=true,colorlinks=true,linkcolor=accent,urlcolor=accent, % 支持 Unicode 书签，链接以 accent 色文字显示，不使用彩色边框。
   pdftitle={群论},pdfauthor={}} % 设置 PDF 文档属性中的标题；作者暂留空。
 \ctexset{ % 集中设置 ctex 的各级标题格式。
-  chapter={format=\Huge\bfseries\sffamily\color{accent},name={第,章}, % 章标题用 Huge 字号、粗体、无衬线字体和强调色，章号前后加“第”“章”。
+  chapter={format=\Huge\bfseries\sffamily\color{black},name={,}, % 章标题用 Huge 字号、粗体、无衬线字体和黑色，章号只显示阿拉伯数字。
     number=\arabic{chapter},beforeskip=8pt,afterskip=28pt}, % 章号采用阿拉伯数字，章标题前后间距分别为 8pt 和 28pt。
-  section={format=\Large\bfseries\sffamily\color{accent},beforeskip=22pt,afterskip=10pt}, % 节标题用 Large 字号、粗体和强调色，前后间距为 22pt、10pt。
-  subsection={format=\large\bfseries\sffamily,beforeskip=16pt,afterskip=8pt}, % 小节标题用 large 字号及粗体，前后间距为 16pt、8pt。
-  subsubsection={format=\normalsize\bfseries\sffamily,beforeskip=12pt,afterskip=6pt}} % 次小节标题用正文字号及粗体，前后间距为 12pt、6pt。
+  section={format=\Large\bfseries\sffamily\color{black},beforeskip=22pt,afterskip=10pt}, % 节标题用 Large 字号、粗体和黑色，前后间距为 22pt、10pt。
+  subsection={format=\large\bfseries\sffamily\color{black},beforeskip=16pt,afterskip=8pt}, % 小节标题用 large 字号、粗体和黑色，前后间距为 16pt、8pt。
+  subsubsection={format=\normalsize\bfseries\sffamily\color{black},beforeskip=12pt,afterskip=6pt}} % 次小节标题用正文字号、粗体和黑色，前后间距为 12pt、6pt。
 \setcounter{secnumdepth}{2} % 正文标题编号到 subsection（例如 1.1.1），更低层级不编号。
-% 目录显示章、节和小节，涵盖 main.tex 引入的全部章节。
-\setcounter{tocdepth}{2} % 目录列出章、节和小节，不列出 subsubsection。
 \linespread{1.18} % 将基线间距的倍率设为 1.18。
 \setlength{\parskip}{3pt plus 1pt} % 段落间距设为 3pt，分页时允许额外拉伸 1pt。
 \setlist{topsep=5pt,itemsep=3pt,parsep=0pt,leftmargin=2em} % 统一列表前后间距、条目间距、条目内段距及左缩进。
 \setlist[enumerate,1]{label=（\arabic*）,leftmargin=3em} % 一级有序列表使用中文圆括号数字标签，左缩进为 3em。
 \newtheoremstyle{lecture}{8pt}{8pt}{\normalfont}{}{ % 定义 lecture 定理样式：上下间距均为 8pt，正文用直立字体且不额外缩进。
-  \bfseries\color{accent}}{\quad}{0pt}{} % 定理标题用粗体强调色，以 quad 留白分隔正文，其余采用默认标题结构。
+  \bfseries\color{black}}{\quad}{0pt}{} % 定理类环境标题用黑色粗体，以 quad 留白分隔正文，其余采用默认标题结构。
 \theoremstyle{lecture} % 让后续定义的定理类环境采用 lecture 样式。
 \newtheorem{definition}{定义}[section] % 定义“定义”环境，按节独立计数。
 \newtheorem{theorem}{定理}[section] % 定义“定理”环境，按节独立计数。
@@ -47,9 +45,5 @@
 \fancyfoot[C]{\small\thepage} % 页脚中央显示小号页码。
 \renewcommand{\headrulewidth}{0.3pt} % 设置正文页眉下方分隔线的粗细为 0.3pt。
 \fancypagestyle{plain}{\fancyhf{}\fancyhead[L]{\small\color{muted}群论}\fancyhead[R]{\small\color{muted}\nouppercase{\leftmark}}\fancyfoot[C]{\small\thepage}\renewcommand{\headrulewidth}{0.3pt}} % 章首页等 plain 页面也显示左右页眉，页码居中。
-\renewcommand{\chaptermark}[1]{\markboth{第\thechapter 章\quad #1}{}} % 为右侧页眉记录当前章号和章标题。
-\DeclareMathOperator{\Img}{Im} % 定义直立数学算符 Im，并使用算符间距。
-\DeclareMathOperator{\diag}{diag} % 定义直立数学算符 diag，用于对角矩阵记号。
-% 群直积沿用原稿的 \otimes；此处不表示向量空间的张量积。
-\newcommand{\gprod}{\otimes} % 将群直积命令展开为原稿采用的 \otimes。
+\renewcommand{\chaptermark}[1]{\markboth{\thechapter\quad #1}{}} % 为右侧页眉记录阿拉伯数字章号和章标题。
 \endinput % 结束宏包读取。

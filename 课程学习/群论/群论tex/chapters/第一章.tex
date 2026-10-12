@@ -624,8 +624,8 @@ $eC_2^1=C_2^1e=C_2^1$、$\left(C_2^1\right)^2=e$，所以 $\mathrm{D}_3/H\cong\m
 $\mathrm{V}_4=\left\{e,\tau,\sigma,\rho\right\}$ 不同构。
 在时空坐标基 $\left(t,x,y,z\right)$ 下，后者的矩阵为
 \begin{align}
-e&=\diag\left(1,1,1,1\right),&\tau&=\diag\left(-1,1,1,1\right),\\
-\sigma&=\diag\left(1,-1,-1,-1\right),&\rho&=\diag\left(-1,-1,-1,-1\right).
+e&=\operatorname{diag}\left(1,1,1,1\right),&\tau&=\operatorname{diag}\left(-1,1,1,1\right),\\
+\sigma&=\operatorname{diag}\left(1,-1,-1,-1\right),&\rho&=\operatorname{diag}\left(-1,-1,-1,-1\right).
 \end{align}
 这里 $\tau$ 反演时间，$\sigma$ 反演空间，$\rho=\tau\sigma$ 同时反演时空。
 这是坐标变换群的例子，未涉及量子态上的时间反演算符。
@@ -711,7 +711,7 @@ g_{im}g_{jn}\mapsto\left(s_iH\right)\left(s_jH\right).
 
 \section{直积群}
 \subsection{内直积及唯一分解}
-本节沿用原稿的 $H\gprod F$ 表示\textbf{群直积}，通常也记作 $H\times F$；
+本节沿用原稿的 $H\otimes F$ 表示\textbf{群直积}，通常也记作 $H\times F$；
 这里的 $\otimes$ 不表示向量空间的张量积。
 
 \begin{definition}[内直积]
@@ -720,7 +720,7 @@ g_{im}g_{jn}\mapsto\left(s_iH\right)\left(s_jH\right).
 H\cap F=\left\{e\right\},\qquad hf=fh\quad\left(\forall h\in H,\ f\in F\right).
 \end{equation}
 则 $K=HF=\left\{hf\mid h\in H,f\in F\right\}$ 是 $G$ 的子群，称为 $H,F$ 的内直积，
-记为 $K=H\gprod F$。$H,F$ 称为直积因子。
+记为 $K=H\otimes F$。$H,F$ 称为直积因子。
 \end{definition}
 先验证群结构：$e=ee\in K$，且由两个因子之间的对易性，
 \begin{equation}
@@ -745,13 +745,13 @@ $\mathrm{C}_6$ 的两个子群
 \end{equation}
 除恒元外没有公共元素，且元素相互对易。因此
 \begin{equation}
-\mathrm{C}_2\gprod\mathrm{C}_3
+\mathrm{C}_2\otimes\mathrm{C}_3
 =\left\{e,C_6^1,C_6^2,C_6^3,C_6^4,C_6^5\right\}=\mathrm{C}_6.
 \end{equation}
 \end{example}
 
 \begin{proposition}
-若 $K=H\gprod F$，则两个直积因子均为 $K$ 的不变子群。
+若 $K=H\otimes F$，则两个直积因子均为 $K$ 的不变子群。
 \end{proposition}
 \begin{proof}
 对 $h_\alpha f_\gamma\in K$、$f_\beta\in F$，
@@ -770,7 +770,7 @@ $\mathrm{C}_6$ 的两个子群
 
 \subsection{连续群的例子与共轭类}
 \begin{example}[$\mathrm{O}\left(3\right)$ 的分解]
-令 $E=I_3=\diag\left(1,1,1\right)$，$I=-I_3=\diag\left(-1,-1,-1\right)$。
+令 $E=I_3=\operatorname{diag}\left(1,1,1\right)$，$I=-I_3=\operatorname{diag}\left(-1,-1,-1\right)$。
 这里沿用 $E$ 表示恒等变换、$I$ 表示空间反演的记号；$I_3$ 专指三阶单位矩阵。
 $\left\{E,I\right\}$ 为二阶子群；$I$ 与所有矩阵对易，且 $\det I=-1$，
 所以它与 $\mathrm{SO}\left(3\right)$ 的交仅为 $E$。
@@ -778,12 +778,12 @@ $\left\{E,I\right\}$ 为二阶子群；$I$ 与所有矩阵对易，且 $\det I=-
 当行列式为 $-1$ 时，$R=AI\in\mathrm{SO}\left(3\right)$，且 $A=RI$。
 因此所有元素都被这两个因子的乘积覆盖，从而
 \begin{equation}
-\mathrm{O}\left(3\right)=\mathrm{SO}\left(3\right)\gprod\left\{E,I\right\}.
+\mathrm{O}\left(3\right)=\mathrm{SO}\left(3\right)\otimes\left\{E,I\right\}.
 \end{equation}
 这说明任意三维正交变换都能唯一写为一个正常转动与可选的空间反演之积。
 \end{example}
 
-对内直积 $K=H\gprod F$，记 $C_h^H$ 为 $h$ 在 $H$ 中的共轭类，
+对内直积 $K=H\otimes F$，记 $C_h^H$ 为 $h$ 在 $H$ 中的共轭类，
 $C_f^F$ 为 $f$ 在 $F$ 中的共轭类。由因子间对易性，
 \begin{align}
 C_{hf}^{K}
@@ -793,14 +793,14 @@ C_{hf}^{K}
        \mid h_\alpha\in H,f_\beta\in F\right\}\\
 &=\left\{xy\mid x\in C_h^H,y\in C_f^F\right\}.
 \end{align}
-沿用原稿，将此集合记为 $C_h^H\gprod C_f^F$。
+沿用原稿，将此集合记为 $C_h^H\otimes C_f^F$。
 这里共轭类一般不是子群，$\otimes$ 表示集合的乘积结构；在外直积中表示有序对的集合。
 
 \subsection{外直积及其推广}
 \begin{definition}[外直积]
 对任意两个群 $H,F$，在有序对集合
 \begin{equation}
-H\gprod F=\left\{\left(h,f\right)\mid h\in H,f\in F\right\}
+H\otimes F=\left\{\left(h,f\right)\mid h\in H,f\in F\right\}
 \end{equation}
 上定义逐分量乘法 $\left(h,f\right)\left(h',f'\right)=\left(hh',ff'\right)$，所得群称为外直积。
 \end{definition}
@@ -826,13 +826,13 @@ C_{\left(h,f\right)}
           \mid h_\alpha\in H,f_\beta\in F\right\}\\
 &=\left\{\left(h_\alpha h h_\alpha^{-1},f_\beta f f_\beta^{-1}\right)
           \mid h_\alpha\in H,f_\beta\in F\right\}\\
-&=C_h^H\gprod C_f^F.
+&=C_h^H\otimes C_f^F.
 \end{align}
 
 \Needspace{20\baselineskip}
 对任意有限个群 $H,F,\ldots,K$，定义
 \begin{equation}
-G=H\gprod F\gprod\cdots\gprod K
+G=H\otimes F\otimes\cdots\otimes K
 =\left\{\left(h,f,\ldots,k\right)\mid h\in H,f\in F,\ldots,k\in K\right\},
 \end{equation}
 乘法为
@@ -851,7 +851,65 @@ G=H\gprod F\gprod\cdots\gprod K
 均为不变子群，因为共轭不会改变其他坐标上的恒元。
 共轭类相应分解为
 \begin{equation}
-C_{\left(h,f,\ldots,k\right)}=C_h^H\gprod C_f^F\gprod\cdots\gprod C_k^K.
+C_{\left(h,f,\ldots,k\right)}=C_h^H\otimes C_f^F\otimes\cdots\otimes C_k^K.
 \end{equation}
 直积结构由此将群元的运算与共轭分类分解到各个独立因子中。
+
+\section{循环群、生成元与乘法表}
+\subsection{元素的周期、阶和循环群}
+对有限群中的元素 $R$，存在正整数 $n$ 使 $R^n=E$。满足此式的最小正整数称为元素 $R$ 的\textbf{阶}。由 $R$ 的全部不同幂组成的集合
+\begin{equation}
+\left\langle R\right\rangle=\left\{E,R,R^2,\ldots,R^{n-1}\right\}
+\end{equation}
+称为 $R$ 生成的周期，它是原群的循环子群。若整个群都等于这个周期，则称其为循环群：
+\begin{equation}
+\mathrm{C}_n=\left\langle R\mid R^n=E\right\rangle.
+\end{equation}
+循环群一定是 Abel 群。$R^k$ 能生成整个 $\mathrm{C}_n$ 的充要条件是
+\begin{equation}
+\gcd\left(k,n\right)=1.
+\end{equation}
+
+\subsection{有限群的生成元和秩}
+若 $G$ 中每个群元都能写成 $R_1,\ldots,R_s$ 及其逆元的有限乘积，则记为
+\begin{equation}
+G=\left\langle R_1,\ldots,R_s\right\rangle.
+\end{equation}
+所需生成元的最小数目称为有限群的秩。生成元的选择通常不唯一，但秩固定。循环群的秩为 $1$。采用课件的二面体群记号，
+\begin{equation}
+\mathrm{D}_N=\left\langle T,S\mid T^N=E,\ S^2=E,\ STS=T^{-1}\right\rangle
+\end{equation}
+的阶为 $2N$，秩为 $2$。其元素可唯一写成 $T^k$ 或 $T^kS$，其中 $0\leqslant k\leqslant N-1$。乘法为
+\begin{align}
+T^iT^j&=T^{i+j},&T^i\left(T^jS\right)&=T^{i+j}S,\\
+\left(T^iS\right)T^j&=T^{i-j}S,&\left(T^iS\right)\left(T^jS\right)&=T^{i-j},
+\end{align}
+其中指数均模 $N$ 计算。
+
+\subsection{有限群的乘法表}
+按固定顺序将有限群的群元列在表格的首行和首列，并把行元素左乘列元素所得的乘积填入对应位置，所得表格称为群的乘法表。重排定理说明每一行、每一列都恰好出现每个群元一次。
+
+以 $R^4=E$ 的四阶循环群为例：
+\begin{center}
+\begin{tabular}{c|cccc}
+\toprule
+$\mathrm{C}_4$ & $E$ & $R$ & $R^2$ & $R^3$\\ \midrule
+$E$ & $E$ & $R$ & $R^2$ & $R^3$\\
+$R$ & $R$ & $R^2$ & $R^3$ & $E$\\
+$R^2$ & $R^2$ & $R^3$ & $E$ & $R$\\
+$R^3$ & $R^3$ & $E$ & $R$ & $R^2$\\ \bottomrule
+\end{tabular}
+\end{center}
+乘法表关于主对角线对称当且仅当群是 Abel 群。
+
+在 $\mathrm{D}_N$ 中，转动子群
+\begin{equation}
+H=\left\langle T\right\rangle=\left\{E,T,\ldots,T^{N-1}\right\}
+\end{equation}
+是指数为 $2$ 的不变子群，另一个陪集为
+\begin{equation}
+HS=SH=\left\{S,TS,\ldots,T^{N-1}S\right\},
+\end{equation}
+故 $\mathrm{D}_N/H\cong\mathrm{C}_2$。在乘法表中，取出与 $H$ 中元素对应的若干列，每一行中出现的集合分别是左陪集；取出对应的若干行，则每一列给出右陪集。
+
 

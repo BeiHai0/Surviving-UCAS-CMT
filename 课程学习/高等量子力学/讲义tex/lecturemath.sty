@@ -17,10 +17,9 @@
 \RequirePackage{bookmark}             % 改善 PDF 书签的组织与生成。
 
 % 标题字号、字体和间距沿用群论讲义；正文标题统一黑色。
-\definecolor{accent}{HTML}{244C65} % 目录章、节条目的蓝色。
 \ifcsname c@chapter\endcsname
   \ctexset{
-    chapter={format=\Huge\bfseries\sffamily\color{black},name={第,章},
+    chapter={format=\Huge\bfseries\sffamily\color{black},name={,},
       number=\arabic{chapter},beforeskip=8pt,afterskip=28pt}
   }
 \fi
@@ -30,7 +29,6 @@
   subsubsection={format=\normalsize\bfseries\sffamily\color{black},beforeskip=12pt,afterskip=6pt}
 }
 \setcounter{secnumdepth}{2} % 正文编号到小节（1.1.1）。
-\setcounter{tocdepth}{2}    % 目录列出章、节和小节。
 
 % 项目专属的 pdftitle、pdfauthor 请在主文件中用 \hypersetup 设置。
 \hypersetup{
@@ -40,32 +38,8 @@
   urlcolor=blue!60!black
 }
 
-% 目录调参：各级字号及基线间距；配色、行距和留白集中在下方。
-\newcommand{\tocchaptersize}{\fontsize{16pt}{18pt}\selectfont}
-\newcommand{\tocsectionsize}{\fontsize{14pt}{16pt}\selectfont}
-\newcommand{\tocsubsectionsize}{\fontsize{12pt}{14.5pt}\selectfont}
-% 主文件用 \lecturetableofcontents 生成目录；设置仅在目录内生效。
-\newcommand{\lecturetableofcontents}{%
-  \begingroup
-  \renewcommand{\baselinestretch}{1.10}% 目录行距倍率。
-  \normalsize
-  \setlength{\parskip}{2pt}% 目录条目间距。
-  \ifcsname c@chapter\endcsname
-    \ctexset{chapter/beforeskip=0pt,chapter/afterskip=18pt}% “目录”标题上下留白。
-    \let\originaltocchapter\l@chapter
-    \renewcommand{\l@chapter}[2]{\begingroup\tocchaptersize\color{accent}\hypersetup{linkcolor=accent}\originaltocchapter{##1}{##2}\endgroup}%
-  \else
-    \ctexset{section/beforeskip=0pt,section/afterskip=18pt}% 兼容 ctexart。
-  \fi
-  % 章、节为 accent 蓝色，小节为黑色；链接颜色同步。
-  \let\originaltocsection\l@section
-  \let\originaltocsubsection\l@subsection
-  \renewcommand{\l@section}[2]{\begingroup\tocsectionsize\bfseries\color{accent}\hypersetup{linkcolor=accent}\originaltocsection{##1}{##2}\endgroup}%
-  \renewcommand{\l@subsection}[2]{\begingroup\tocsubsectionsize\color{black}\hypersetup{linkcolor=black}\originaltocsubsection{##1}{##2}\endgroup}%
-  \tableofcontents
-  \clearpage
-  \endgroup
-}
+% 保留主文件中的命令名，目录排版完全采用 ctexbook 默认设置。
+\newcommand{\lecturetableofcontents}{\tableofcontents}
 
 % 定理等共享计数器；书籍按章编号，文章按节编号。
 \theoremstyle{plain}

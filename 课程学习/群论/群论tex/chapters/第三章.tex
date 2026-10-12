@@ -1,491 +1,882 @@
 % !TeX root = ../main.tex
-% 来源：群论.md 第三章。保留原稿记号，修正明显错误并补齐未完成内容。
-% 晶体点群分类核对：IUCr, https://journals.iucr.org/j/issues/2010/05/02/kk5061/index.html
-\chapter{点群}
+% 来源：群论.md 原第二章及群论ppt第三章。沿用原稿术语、记号，修正明显笔误。
+% 原稿未完成的平移群 n 维表示及 D_4 例子在正文中标作补充。
+\chapter{群的线性表示理论}
 
-本章先讨论三维正交变换与转动，再介绍有限点群和晶体点群。
-沿用 $E$ 表示单位矩阵，$I=-E$ 表示空间反演，$\otimes$ 表示群直积。
-所有空间变换的乘积都按右侧先作用理解；转动方向遵循右手定则。
+本章沿用 $G\simeq D\left(G\right)$ 表示从群 $G$ 到其表示矩阵群的满同态，
+$E$ 表示单位矩阵，$I$ 表示同态核。除明确讨论实表示的地方外，
+表示空间均取有限维复向量空间；这一假设尤其用于舒尔定理和不可约表示的分类。
 
-\section{\texorpdfstring{实正交群 $\mathrm{O}\left(3\right)$}{实正交群 O(3)}}
-\subsection{实正交矩阵群}
-在 $\mathbb{R}^3$ 中取标准正交基 $\vec{\mathrm{e}}_1,\vec{\mathrm{e}}_2,\vec{\mathrm{e}}_3$，令
+\section{线性空间和线性算符预备}
+\subsection{线性空间、子空间与换基}
+设 $L$ 是复数域上的 $m$ 维线性空间，$\left\{e_1,\ldots,e_m\right\}$ 是一组基，每个矢量唯一写成 $a=a_\mu e_\mu$。若
 \begin{equation}
-\vec r=x_1\vec{\mathrm{e}}_1+x_2\vec{\mathrm{e}}_2+x_3\vec{\mathrm{e}}_3,
-\qquad x=\left(x_1,x_2,x_3\right)^{\mathrm{T}}.
+L=L_1+L_2,\qquad L_1\cap L_2=\left\{0\right\},
 \end{equation}
-实线性变换 $g:\vec r\mapsto\vec r'$ 在此基下写为 $x'=gx$。
-要求它保持任意矢量的模长，即
-\begin{equation}
-x'^{\mathrm{T}}x'=x^{\mathrm{T}}x,
-\qquad x^{\mathrm{T}}\left(g^{\mathrm{T}}g-E\right)x=0\quad\left(\forall x\in\mathbb{R}^3\right).
-\end{equation}
-矩阵 $g^{\mathrm{T}}g-E$ 为实对称矩阵。依次取 $x$ 为各坐标基矢及两基矢之和，
-可知其对角元和非对角元均为零，故保持模长等价于 $g^{\mathrm{T}}g=E$。
+则 $L=L_1\oplus L_2$。若线性算符 $A$ 满足 $AL_1\subseteq L_1$，则 $L_1$ 是 $A$ 的不变子空间。对群表示，要求它对所有 $D\left(g\right)$ 都不变。
 
-\begin{definition}[实正交矩阵群]
-\begin{equation}
-\mathrm{O}\left(3\right)=\left\{g\in M_3\left(\mathbb{R}\right)\mid g^{\mathrm{T}}g=E\right\}.
-\end{equation}
-其中 $M_3\left(\mathbb{R}\right)$ 为三阶实矩阵全体，群运算为矩阵乘法。
-\end{definition}
-正交矩阵满足 $g^{-1}=g^{\mathrm{T}}$。两边取行列式得
-\begin{equation}
-\left(\det g\right)^2=1,\qquad\det g=\pm1.
-\end{equation}
-前者保持空间定向，后者改变空间定向。
-
-\subsection{实特殊（幺模）正交群}
-\begin{definition}
-\begin{equation}
-\mathrm{SO}\left(3\right)=\left\{g\in\mathrm{O}\left(3\right)\mid\det g=1\right\}.
-\end{equation}
-\end{definition}
-若 $g\in\mathrm{SO}\left(3\right)$、$f\in\mathrm{O}\left(3\right)$，则 $fgf^{-1}$ 仍为正交矩阵，且
-\begin{equation}
-\det\left(fgf^{-1}\right)=\det f\det g\det\left(f^{-1}\right)=\det g=1.
-\end{equation}
-所以 $\mathrm{SO}\left(3\right)$ 是 $\mathrm{O}\left(3\right)$ 的不变子群。
-空间反演变换群 $\mathrm{V}_2=\left\{E,I\right\}$ 也是不变子群，其中
-\begin{equation}
-E=\begin{bmatrix}1&0&0\\0&1&0\\0&0&1\end{bmatrix},\qquad
-I=\begin{bmatrix}-1&0&0\\0&-1&0\\0&0&-1\end{bmatrix}.
-\end{equation}
-事实上，$I$ 与所有矩阵对易。任何 $\det g=-1$ 的正交矩阵均可唯一写为 $IR$，
-其中 $R=Ig\in\mathrm{SO}\left(3\right)$。因此
+设新旧基满足 $e'_\nu=e_\mu S_{\mu\nu}$，则同一矢量的分量和同一算符的矩阵满足
 \begin{align}
-\mathrm{O}\left(3\right)&=\mathrm{SO}\left(3\right)\sqcup I\mathrm{SO}\left(3\right),\\
-\mathrm{O}\left(3\right)/\mathrm{SO}\left(3\right)&=\left\{\mathrm{SO}\left(3\right),I\mathrm{SO}\left(3\right)\right\}\cong\left\{E,I\right\}.
+a'&=S^{-1}a,\\
+D'\left(A\right)&=S^{-1}D\left(A\right)S.
 \end{align}
-映射 $g\mapsto E$（$\det g=1$）或 $I$（$\det g=-1$）为满同态，核为 $\mathrm{SO}\left(3\right)$。
-由于两个因子相互对易且交仅为恒元，还可写成
-\begin{equation}
-\mathrm{O}\left(3\right)=\mathrm{SO}\left(3\right)\otimes\mathrm{V}_2.
-\end{equation}
+所以迹、行列式和特征多项式在换基下不变，等价表示正是同一组线性算符在不同基下的矩阵形式。
 
-\begin{theorem}[三维转动轴的存在]
-任意 $g\in\mathrm{SO}\left(3\right)$ 都存在非零实矢量 $\vec n$，使 $g\vec n=\vec n$。
-\end{theorem}
-\begin{proof}
-只需证明 $\det\left(g-E\right)=0$。利用 $gg^{\mathrm{T}}=E$ 和 $\det g=1$，有
+
+\section{群的线性表示}
+\subsection{群的线性表示的定义}
+\begin{definition}[线性表示]
+设 $G=\left\{g_i\right\}$ 为抽象群，给每个群元指定一个可逆的 $m$ 阶矩阵 $D\left(g_i\right)$，满足
+\begin{equation}
+D\left(g_i g_j\right)=D\left(g_i\right)D\left(g_j\right).
+\end{equation}
+则 $D\left(G\right)=\left\{D\left(g_i\right)\mid g_i\in G\right\}$ 构成矩阵群，且 $G\simeq D\left(G\right)$。
+称 $D\left(G\right)$ 为 $G$ 的一个 $m$ 维线性表示，$D\left(g_i\right)$ 为相应的表示矩阵。
+\end{definition}
+若对应 $g_i\mapsto D\left(g_i\right)$ 为一一对应，即由此对应给出 $G\cong D\left(G\right)$，
+则沿用原稿称其为\textbf{真实表示}；否则称为\textbf{非真实表示}。
+对非真实表示，同态核 $I=\left\{g\in G\mid D\left(g\right)=E\right\}$ 不仅含恒元，且
+\begin{equation}
+G/I\cong D\left(G\right).
+\end{equation}
+因此非真实表示反映的是这个商群的乘法结构。
+
+矩阵群通过 $g\mapsto g$ 得到\textbf{自身表示}。
+将全部群元映为单位矩阵，即 $D\left(G\right)=\left\{E\right\}$，得到\textbf{恒等表示}；
+一维恒等表示又称平庸表示。自身表示一般不能称为平庸表示。
+
+群元 $g_i$ 在表示中的\textbf{特征标}定义为
+\begin{equation}
+\chi\left(g_i\right)=\mathrm{Tr}\,D\left(g_i\right).
+\end{equation}
+若所有表示矩阵都满足 $D^\dagger\left(g_i\right)D\left(g_i\right)=E$，称为\textbf{幺正表示}。
+若所有表示矩阵为实矩阵并满足 $D^{\mathrm{T}}\left(g_i\right)D\left(g_i\right)=E$，称为\textbf{正交表示}。
+
+\subsection{线性表示的性质}
+恒元的表示矩阵是单位矩阵。由 $D\left(e\right)D\left(g_i\right)=D\left(g_i\right)$，利用 $D\left(g_i\right)$ 可逆可得
+$D\left(e\right)=E$。此外，
+\begin{equation}
+D\left(g_i\right)D\left(g_i^{-1}\right)=D\left(g_ig_i^{-1}\right)=D\left(e\right)=E,
+\end{equation}
+故 $D\left(g_i^{-1}\right)=D^{-1}\left(g_i\right)$。表示不仅保持乘法，也保持恒元和取逆。
+
+\subsection{等价表示}
+\begin{definition}[等价表示]
+若存在一个与 $g_i$ 无关的非奇异矩阵 $X$，使
+\begin{equation}
+\bar D\left(g_i\right)=X^{-1}D\left(g_i\right)X\qquad\left(\forall g_i\in G\right),
+\end{equation}
+则称 $D\left(G\right)$ 与 $\bar D\left(G\right)$ 等价。
+\end{definition}
+这里必须对所有群元使用\textbf{同一个} $X$。等价表示是同一个线性作用在不同基下的矩阵描述。
+
+先验证 $\bar D\left(G\right)$ 是表示：
 \begin{align}
-\det\left(g-E\right)&=\det\left(g-gg^{\mathrm{T}}\right)
-=\det g\det\left(E-g^{\mathrm{T}}\right)\\
-&=\det\left(E-g\right)=-\det\left(g-E\right).
+\bar D\left(g_i\right)\bar D\left(g_j\right)
+&=X^{-1}D\left(g_i\right)XX^{-1}D\left(g_j\right)X\\
+&=X^{-1}D\left(g_ig_j\right)X=\bar D\left(g_ig_j\right).
 \end{align}
-最后一个负号来自三维空间中 $\det\left(-A\right)=\left(-1\right)^3\det A$，故行列式为零。
-\end{proof}
-将 $\vec n$ 归一化，并在其垂直平面内选取两个正交基矢。
-该平面不变，因为 $g$ 保持内积，且 $g\vec n=\vec n$。
-在这组基下，$g$ 由一个二维正交块和轴向的 $1$ 组成；二维块行列式也为 $1$，
-故为平面转动。因此
+再考虑矩阵群间的对应 $A\mapsto X^{-1}AX$。
+它的逆映射为 $B\mapsto XBX^{-1}$，故是双射；
+且 $X^{-1}ABX=\left(X^{-1}AX\right)\left(X^{-1}BX\right)$，故保持乘法。
+因此 $D\left(G\right)\cong\bar D\left(G\right)$。但仅有像矩阵群抽象同构，并不足以推出两个表示等价。
+
+\subsection{可约表示和不可约表示}
+\begin{definition}[可约表示]
+设 $D\left(G\right)$ 为 $m$ 维表示。若存在非奇异矩阵 $X$，使所有表示矩阵同时化为
 \begin{equation}
-g=C_{\vec n}\left(\omega\right).
+\bar D\left(g_i\right)=X^{-1}D\left(g_i\right)X
+=\begin{bmatrix}D_1\left(g_i\right)&M\left(g_i\right)\\\bm{0}&D_2\left(g_i\right)\end{bmatrix},
 \end{equation}
-沿用球坐标表示单位转轴，可取 $0\leqslant\theta\leqslant\pi$、$0\leqslant\varphi<2\pi$、
-$0\leqslant\omega\leqslant\pi$。角度为 $0$ 时轴任意；角度为 $\pi$ 时轴的正负方向等价。
-“绕一根轴转动”是三维的特殊描述；高维转动通常按不变二维平面讨论。
+其中 $D_1$ 为 $k\times k$ 矩阵，$D_2$ 为 $l\times l$ 矩阵，
+$M$ 为 $k\times l$ 矩阵，$k,l>0$ 且 $k+l=m$，则称该表示可约；否则称为不可约表示。
+\end{definition}
+前 $k$ 个基矢张成一个非零真不变子空间，即任意 $D\left(g\right)$ 将这个子空间映回自身。
+反过来，先选取不变子空间的一组基，再补齐全空间的基，就得到上述分块上三角形式。
+\textbf{可约不一定意味着能够化成分块对角形式}；后者还要求存在不变的补空间。
 
-\subsection{\texorpdfstring{$\mathrm{SO}\left(3\right)$ 群的共轭类}{SO(3) 群的共轭类}}
-设 $\vec k$ 为单位转轴，$g\in\mathrm{SO}\left(3\right)$。由于
+两个对角块分别给出 $G$ 的表示。事实上，
+\begin{align}
+\bar D\left(g_i\right)\bar D\left(g_j\right)
+&=\begin{bmatrix}
+D_1\left(g_i\right)D_1\left(g_j\right)&D_1\left(g_i\right)M\left(g_j\right)+M\left(g_i\right)D_2\left(g_j\right)\\
+\bm{0}&D_2\left(g_i\right)D_2\left(g_j\right)
+\end{bmatrix}\\
+&=\bar D\left(g_ig_j\right).
+\end{align}
+比较对角块得到 $D_\alpha\left(g_ig_j\right)=D_\alpha\left(g_i\right)D_\alpha\left(g_j\right)$，$\alpha=1,2$。
+恒元对应单位矩阵，逆元也按块满足取逆关系，所以 $G\simeq D_\alpha\left(G\right)$。
+其中 $D_1$ 是不变子空间上的表示，$D_2$ 是相应商空间上的表示。
+
+\subsection{可约表示的约化}
+如果可以反复分出不变补空间，直到所有对角块不可约，则称表示\textbf{完全可约}。
+记不等价不可约表示为 $\tilde D_k\left(G\right)$，其重数为 $n_k$，则
 \begin{equation}
-\left(gC_{\vec k}\left(\omega\right)g^{-1}\right)\left(g\vec k\right)=g\vec k,
+X^{-1}D\left(g\right)X=\bigoplus_{k=1}^{r}n_k\tilde D_k\left(g\right),\qquad
+A\oplus B=\begin{bmatrix}A&0\\0&B\end{bmatrix}.
 \end{equation}
-共轭后的轴为 $g\vec k$。共轭相当于先用 $g^{-1}$ 将轴移回 $\vec k$，
-再绕 $\vec k$ 转动，最后用 $g$ 将轴移到 $g\vec k$。
-$g$ 保持定向，因此有
+这里 $n_k\tilde D_k$ 表示 $n_k$ 个相同矩阵块的直和，不是矩阵数乘；
+例如对角线上会连续出现 $n_1$ 个 $\tilde D_1\left(g\right)$，再出现 $n_2$ 个 $\tilde D_2\left(g\right)$。
+有限群的复表示总能完全约化，证明见第 2.3 节；一般无限群不能直接使用这一结论。
+
+\subsection{\texorpdfstring{$\mathrm{SO}\left(2\right)$}{SO(2)} 群的表示}
+一维表示为
 \begin{equation}
-gC_{\vec k}\left(\omega\right)g^{-1}=C_{g\vec k}\left(\omega\right).
+D_1\left(g\left(\theta\right)\right)\equiv D_1\left(\theta\right)=\mathrm{e}^{\mathrm{i}\theta}.
 \end{equation}
-转动角的主值也可由迹检验：$\mathrm{Tr}\,C_{\vec k}\left(\omega\right)=1+2\cos\omega$，
-而相似矩阵迹相同。在 $0\leqslant\omega\leqslant\pi$ 内，迹唯一确定 $\omega$。
-任意两单位轴之间都有一个正常转动，因此 $\mathrm{SO}\left(3\right)$ 的共轭类由主转角 $\omega$ 标记。
-
-对于有限子群 $G\subset\mathrm{SO}\left(3\right)$，还需共轭所用的 $g$ 属于 $G$。
-当 $0<\omega<\pi$ 时，两个转动共轭的充要条件是角度相同且存在 $g\in G$
-将第一根有向轴变为第二根有向轴；当 $\omega=\pi$ 时，只需把轴变为同一条无向直线，
-即允许 $g\vec k_1=\pm\vec k_2$。恒元则自成一类。
-
-\begin{example}[循环群与二面体群]
-设 $c_n=C_{\vec k}\left(2\pi/n\right)$，则
-$c_n^{n-1}=C_{-\vec k}\left(2\pi/n\right)$。
-当 $n>2$ 时，$\mathrm{C}_n$ 中没有元素将 $\vec k$ 变为 $-\vec k$，
-故这两个不同元素在该子群中不共轭。更一般地，$\mathrm{C}_n$ 为 Abel 群，每个群元自成一类。
-
-在 $\mathrm{D}_3$ 中，$d=C_{\vec k}\left(2\pi/3\right)$，
-$f=C_{\vec k}\left(4\pi/3\right)=C_{-\vec k}\left(2\pi/3\right)$。
-此处将 $a,b,c$ 实现为绕三角形平面内各对称轴的半周转动，
-它们都把法向 $\vec k$ 变为 $-\vec k$，所以 $d,f$ 同类。
-这与第二章把平面反射延拓为保持 $z$ 不变的实现不同；两者的抽象群相同，三维矩阵实现不同。
-\end{example}
-
-\begin{remark}[补充原稿中的 $\mathrm{D}_4$ 例子及奇偶规律]
-写 $\mathrm{D}_n=\left\{r^j,sr^j\mid0\leqslant j<n\right\}$，其中 $r^n=s^2=e$、$srs=r^{-1}$，
-$s$ 在本章为面内轴的半周转动。
-共轭关系 $sr^js^{-1}=r^{-j}$ 将非中心转动配成对，且
-$r\left(sr^j\right)r^{-1}=sr^{j-2}$。
-当 $n$ 为奇数时，所有 $sr^j$ 同类，总类数为 $\left(n+3\right)/2$；
-当 $n$ 为偶数时，$e,r^{n/2}$ 各自成类，$sr^j$ 按 $j$ 的奇偶分成两类，
-总类数为 $n/2+3$。
-特别地，$\mathrm{D}_4$ 的五个类为
+一维空间不存在非零真子空间，因此它不可约。
+二维表示为
 \begin{equation}
-\left\{e\right\},\quad\left\{r^2\right\},\quad\left\{r,r^3\right\},\quad\left\{s,sr^2\right\},\quad\left\{sr,sr^3\right\}.
+D_2\left(\theta\right)=\begin{bmatrix}\cos\theta&-\sin\theta\\\sin\theta&\cos\theta\end{bmatrix}.
 \end{equation}
+在复数域上，取基矢 $\left(1,-\mathrm{i}\right)^{\mathrm{T}}$、$\left(1,\mathrm{i}\right)^{\mathrm{T}}$，即取
+\begin{equation}
+X=\begin{bmatrix}1&1\\-\mathrm{i}&\mathrm{i}\end{bmatrix},\qquad
+X^{-1}D_2\left(\theta\right)X=\operatorname{diag}\left(\mathrm{e}^{\mathrm{i}\theta},\mathrm{e}^{-\mathrm{i}\theta}\right),
+\end{equation}
+可见它完全可约。若只允许实不变子空间，则该二维实表示不可约；可约性依赖所选数域。
+
+沿用 $\vec{\mathrm{i}},\vec{\mathrm{j}},\vec{\mathrm{k}}$ 表示三个坐标轴方向，三个三维表示为
+\begin{align}
+R_{\vec{\mathrm{k}}}\left(\theta\right)&=\begin{bmatrix}\cos\theta&-\sin\theta&0\\\sin\theta&\cos\theta&0\\0&0&1\end{bmatrix},\\
+R_{\vec{\mathrm{j}}}\left(\theta\right)&=\begin{bmatrix}\cos\theta&0&\sin\theta\\0&1&0\\-\sin\theta&0&\cos\theta\end{bmatrix},\\
+R_{\vec{\mathrm{i}}}\left(\theta\right)&=\begin{bmatrix}1&0&0\\0&\cos\theta&-\sin\theta\\0&\sin\theta&\cos\theta\end{bmatrix}.
+\end{align}
+每个表示都固定转轴方向，并保持垂直于转轴的平面，因而都是可约表示。
+
+\subsection{平移群的表示}
+一维平移群满足 $T\left(a\right)T\left(b\right)=T\left(a+b\right)$。沿用原稿的表示编号，一维表示有
+\begin{equation}
+D_1\left(a\right)=1,\qquad D_2\left(a\right)=\mathrm{e}^a,\qquad D_3\left(a\right)=\mathrm{e}^{ca},
+\end{equation}
+其中 $c$ 是固定复常数。它们都满足 $D_j\left(a+b\right)=D_j\left(a\right)D_j\left(b\right)$。
+二维表示为
+\begin{equation}
+D_5\left(a\right)=\begin{bmatrix}1&a\\0&1\end{bmatrix},\qquad
+D_5\left(a\right)D_5\left(b\right)=D_5\left(a+b\right).
+\end{equation}
+它有不变子空间 $\operatorname{span}\left\{\left(1,0\right)^{\mathrm{T}}\right\}$，但没有不变的补空间。
+若补空间由 $\left(u,v\right)^{\mathrm{T}}$ 张成，其中 $v\ne0$，则
+$\left(u+av,v\right)^{\mathrm{T}}$ 对所有 $a$ 都必须与 $\left(u,v\right)^{\mathrm{T}}$ 成比例。
+第二分量迫使比例为 $1$，第一分量却要求 $av=0$ 对所有 $a$ 成立，矛盾。
+因此该表示可约而不完全可约。
+
+\begin{remark}[补充原稿未完成的 $n$ 维例子]
+原稿的 $D_6\left(a\right)$ 矩阵为空。可取 $N$ 为上副对角线全为 $1$、其他元素为 $0$ 的
+$n\times n$ 矩阵，定义
+\begin{equation}
+D_6\left(a\right)=\mathrm{e}^{aN}=\sum_{j=0}^{n-1}\frac{a^jN^j}{j!},\qquad
+\left[D_6\left(a\right)\right]_{pq}=\begin{cases}a^{q-p}/\left(q-p\right)!,&q\ge p,\\0,&q<p.\end{cases}
+\end{equation}
+因为 $N^n=0$，指数级数在此截断；$aN$ 与 $bN$ 对易，故
+$D_6\left(a\right)D_6\left(b\right)=D_6\left(a+b\right)$。$n=2$ 时恰好回到 $D_5\left(a\right)$。
 \end{remark}
 
-\subsection{三维欧式空间中绕任意轴的转动}
-取坐标轴单位矢量 $\vec i,\vec j,\vec k$，令
+\subsection{有限循环群的表示}
+设 $\mathrm{C}_n=\left\{a,a^2,\ldots,a^n=e\right\}$。一维表示由生成元的像决定：
 \begin{equation}
-\hat n\left(\theta,\varphi\right)=\left(\sin\theta\cos\varphi,\sin\theta\sin\varphi,\cos\theta\right)^{\mathrm{T}}.
+D_k\left(a\right)=\mathrm{e}^{\mathrm{i} k2\pi/n},\qquad
+D_k\left(a^j\right)=\mathrm{e}^{\mathrm{i} kj2\pi/n}.
 \end{equation}
-先绕 $\vec j$ 转 $\theta$，再绕 $\vec k$ 转 $\varphi$，可将 $\vec k$ 变到 $\hat n$，故取
+$D_0\left(a\right)=1$ 为恒等表示，$D_1$ 为真实表示；一般 $D_k$ 为真实表示的条件是
+$\gcd\left(k,n\right)=1$。下标按模 $n$ 理解，$D_n=D_0$。
+
+原稿的 $n$ 维表示来自坐标循环。记 $S=\bar D_1\left(a\right)$，规定
+\begin{equation}
+S\left(P_1,P_2,\ldots,P_n\right)^{\mathrm{T}}
+=\left(P_n,P_1,\ldots,P_{n-1}\right)^{\mathrm{T}},
+\end{equation}
+即 $S_{1n}=1$、$S_{j+1,j}=1$（$1\leqslant j<n$），其余矩阵元为零。
+于是 $S^n=E$，并可定义
 \begin{align}
-g=S\left(\varphi,\theta\right)&=C_{\vec k}\left(\varphi\right)C_{\vec j}\left(\theta\right)\\
-&=\begin{bmatrix}\cos\varphi&-\sin\varphi&0\\\sin\varphi&\cos\varphi&0\\0&0&1\end{bmatrix}
-\begin{bmatrix}\cos\theta&0&\sin\theta\\0&1&0\\-\sin\theta&0&\cos\theta\end{bmatrix}.
+\bar D_1\left(a^i\right)&=S^i,\\
+\bar D_2\left(a\right)&=S^2,\qquad \bar D_2\left(a^i\right)=S^{2i},\\
+\bar D_k\left(a\right)&=S^k,\qquad \bar D_k\left(a^i\right)=S^{ki}.
 \end{align}
-直接作用于 $\vec k=\left(0,0,1\right)^{\mathrm{T}}$ 即得 $S\vec k=\hat n$。
-因此任意轴转动写为
+对 $1\leqslant k<n$，按前 $k$ 行与后 $n-k$ 行分块，有
 \begin{equation}
-C_{\hat n\left(\theta,\varphi\right)}\left(\omega\right)
-=S\left(\varphi,\theta\right)C_{\vec k}\left(\omega\right)S^{-1}\left(\varphi,\theta\right).
+S^k=\begin{bmatrix}
+\bm{0}_{k\times\left(n-k\right)}&E_{k\times k}\\
+E_{\left(n-k\right)\times\left(n-k\right)}&\bm{0}_{\left(n-k\right)\times k}
+\end{bmatrix}.
 \end{equation}
-这里第二个因子中的角度是 $\theta$，而不是 $\varphi$。
+$D_k\left(\mathrm{C}_n\right)$ 和 $\bar D_k\left(\mathrm{C}_n\right)$ 的像群均为
+$n/\gcd\left(n,k\right)$ 阶循环群，因此同构；但 $n>1$ 时二者维数不同，故不等价。
+$D_k$ 是不可约的一维表示，而 $\bar D_k$ 在复数域上可约。
+例如 $S$ 的不同特征值为全部 $n$ 次单位根，相应特征矢量也使 $S^k$ 对角化。
+$D_1,\ldots,D_n$ 恰好给出全部 $n$ 个不等价不可约复表示；完备性将在特征标理论中得到说明。
 
-\subsection{转动的指数表示}
-先引入 Pauli 矩阵
+\section{标量函数的变换算符与表示的构造}
+\subsection{标量函数与坐标变换}
+标量场为每个空间点赋予一个标量值，可用坐标函数 $\psi\left(x\right)$ 描述。
+标量性质意味着同一物理点的值不随坐标描述改变，即
 \begin{equation}
-\sigma_1=\begin{bmatrix}0&1\\1&0\end{bmatrix},\quad
-\sigma_2=\begin{bmatrix}0&-\mathrm{i}\\\mathrm{i}&0\end{bmatrix},\quad
-\sigma_3=\begin{bmatrix}1&0\\0&-1\end{bmatrix},\quad
-E=\begin{bmatrix}1&0\\0&1\end{bmatrix}.
+x'=Rx,\qquad \psi'\left(x'\right)=\psi\left(x\right).
 \end{equation}
-此处 $E$ 为二阶单位矩阵。它们满足
+这并不要求在同一个数值自变量处总有 $\psi'\left(x\right)=\psi\left(x\right)$。
+可以保持坐标轴不动而主动变换场，也可以保持场不动而被动变换坐标；
+两种描述使用互逆的坐标关系。本节用上述关系固定约定。
+
+\subsection{由线性坐标变换诱导的变换算符}
+设 $R$ 为可逆线性坐标变换，定义 $P_R\psi=\psi'$。由 $x=R^{-1}x'$ 得
+\begin{equation}
+\left(P_R\psi\right)\left(x\right)=\psi'\left(x\right)=\psi\left(R^{-1}x\right).
+\end{equation}
+这里先让算符作用于整个函数，再在 $x$ 处取值。特别地，
+\begin{equation}
+\left(P_R\psi\right)\left(Rx\right)=\psi\left(x\right),\qquad
+\left(P_{R^{-1}}P_R\psi\right)\left(x\right)=\left(P_R\psi\right)\left(Rx\right)=\psi\left(x\right).
+\end{equation}
+交换 $R$ 与 $R^{-1}$ 也成立，因此 $P_{R^{-1}}=P_R^{-1}$。
+求变换后的函数，就是将原函数的自变量替换为 $R^{-1}x$。
+
+\begin{example}[反射对标量函数的作用]
+取 $\psi\left(\vec r\right)=xy$，$R:\left(x,y,z\right)\mapsto\left(-x,y,z\right)$。
+这个变换满足 $R^{-1}=R$，故
+\begin{equation}
+\psi'\left(\vec r\right)=\left(P_R\psi\right)\left(\vec r\right)=\psi\left(R^{-1}\vec r\right)=\left(-x\right)y=-xy.
+\end{equation}
+\end{example}
+
+\subsection{坐标变换群与函数变换算符群的同构}
+首先，$P_R$ 为线性算符。对常数 $a,b$，
 \begin{align}
-\mathrm{Tr}\,\sigma_i&=0,&\det\sigma_i&=-1,\\
-\sigma_i\sigma_j&=E\delta_{ij}+\mathrm{i}\sum_{k=1}^3\varepsilon_{ijk}\sigma_k,&
-\mathrm{Tr}\left(\sigma_i\sigma_j\right)&=2\delta_{ij}.
+\left(P_R\left(a\psi+b\phi\right)\right)\left(x\right)
+&=a\psi\left(R^{-1}x\right)+b\phi\left(R^{-1}x\right)\\
+&=a\left(P_R\psi\right)\left(x\right)+b\left(P_R\phi\right)\left(x\right).
 \end{align}
-其中 $\varepsilon_{ijk}$ 为 Levi-Civita 符号，$\varepsilon_{123}=1$。
-利用矩阵指数 $\mathrm{e}^A=\sum_{p=0}^\infty A^p/p!$ 和 $\sigma_2^2=E$，将奇偶次幂分开：
+其次，乘法次序满足
 \begin{align}
-\mathrm{e}^{-\mathrm{i}\omega\sigma_2}
-&=E\sum_{p=0}^{\infty}\frac{\left(-1\right)^p\omega^{2p}}{\left(2p\right)!}
--\mathrm{i}\sigma_2\sum_{p=0}^{\infty}\frac{\left(-1\right)^p\omega^{2p+1}}{\left(2p+1\right)!}\\
-&=E\cos\omega-\mathrm{i}\sigma_2\sin\omega
-=\begin{bmatrix}\cos\omega&-\sin\omega\\\sin\omega&\cos\omega\end{bmatrix}.
+\left(P_SP_R\psi\right)\left(x\right)&=\left(P_R\psi\right)\left(S^{-1}x\right)\\
+&=\psi\left(R^{-1}S^{-1}x\right)=\psi\left(\left(SR\right)^{-1}x\right)=\left(P_{SR}\psi\right)\left(x\right).
 \end{align}
-这一步用于表示二维实转动，并未引入自旋表示。
+所以 $P_{SR}=P_SP_R$，即 $R\mapsto P_R$ 给出 $\left\{R\right\}\simeq\left\{P_R\right\}$。
 
-三维转动生成元沿用 $T_1,T_2,T_3$：
+若函数空间包含全部坐标函数，则此对应还是单射。
+假设 $P_R=P_S$，将等式作用于每个坐标函数 $x_j$，就有
+$\left(R^{-1}x\right)_j=\left(S^{-1}x\right)_j$ 对所有 $j,x$ 成立，故 $R^{-1}=S^{-1}$，即 $R=S$。
+因此在这样的函数空间上 $\left\{R\right\}\cong\left\{P_R\right\}$。
+只对某一个函数验证 $\psi\left(R^{-1}x\right)=\psi\left(S^{-1}x\right)$ 不足以推出 $R=S$；
+限制到某个子空间后，所得到的表示也可能是非真实表示。
+
+\subsection{利用基函数构造线性表示}
+取一个 $n$ 维函数空间，对所有 $P_R$ 都不变，基函数排为行矢量
+$\psi=\left(\psi_1,\ldots,\psi_n\right)$。定义矩阵元
+\begin{equation}
+P_R\psi_\mu=\sum_{\nu=1}^{n}\psi_\nu D_{\nu\mu}\left(R\right),\qquad
+P_R\psi=\psi D\left(R\right).
+\end{equation}
+矩阵 $D\left(R\right)$ 的第 $\mu$ 列就是 $P_R\psi_\mu$ 在所选基下的展开系数；
+例如其第二行第二列记为 $D_{22}\left(R\right)$。
+因为系数是常数，
+\begin{equation}
+P_SP_R\psi=P_S\left(\psi D\left(R\right)\right)=\left(P_S\psi\right)D\left(R\right)=\psi D\left(S\right)D\left(R\right).
+\end{equation}
+另一方面 $P_{SR}\psi=\psi D\left(SR\right)$。利用基函数线性无关，得到
+\begin{equation}
+D\left(SR\right)=D\left(S\right)D\left(R\right).
+\end{equation}
+因此 $\left\{P_R\right\}\simeq\left\{D\left(R\right)\right\}$，也得到 $\left\{R\right\}\simeq\left\{D\left(R\right)\right\}$。
+表示的维数就是基函数个数。
+
+若某个非零真子空间不变，则表示可约。若它存在不变补空间，则能分成两个对角块；
+进一步完全分解为不可约块时，表示完全可约。
+判断不完全可约时，必须确认\textbf{不存在}所需的不变补空间，
+而不是仅仅发现任选的某个补空间不变性不成立。
+
+\begin{example}[补充：$\mathrm{D}_4$ 在三维空间中的表示]
+原稿只指定表示空间为 $\mathbb{R}^3$。这里选取正方形位于 $xy$ 平面的平面对称群，
+令所有变换保持 $z$ 不变。取生成元 $r$ 为绕 $z$ 轴转动 $\pi/2$，$s$ 为关于 $xz$ 平面反射：
+\begin{equation}
+r=\begin{bmatrix}0&-1&0\\1&0&0\\0&0&1\end{bmatrix},\qquad
+s=\begin{bmatrix}1&0&0\\0&-1&0\\0&0&1\end{bmatrix}.
+\end{equation}
+它们满足 $r^4=s^2=e$、$srs=r^{-1}$，生成八个元素 $r^j,sr^j$（$0\leqslant j<4$）。
+在基函数 $\left(x,y,z\right)$ 下，$P_r\left(x,y,z\right)=\left(y,-x,z\right)$、$P_s\left(x,y,z\right)=\left(x,-y,z\right)$，
+所以 $D\left(r\right)=r$、$D\left(s\right)=s$。这相当于将上述三维坐标空间与线性函数空间对应起来。
+空间分解为 $\operatorname{span}\left\{x,y\right\}\oplus\operatorname{span}\left\{z\right\}$；
+后一项为一维恒等表示。前一项在复数域上也不可约：$r$ 的两个特征直线被 $s$ 互换，
+没有同时对两者不变的直线。
+\end{example}
+
+\section{有限群表示理论的基本定理}
+本节设 $G$ 为有限群，阶为 $n_G$，表示均为有限维复表示。
+
+\begin{theorem}[定理 1：幺正化]
+有限群的任意线性表示均等价于一个幺正表示。
+\end{theorem}
+\begin{proof}
+要使 $\bar D\left(g\right)=X^{-1}D\left(g\right)X$ 幺正，等价于要求
+\begin{equation}
+D^\dagger\left(g\right)\left(XX^\dagger\right)^{-1}D\left(g\right)=\left(XX^\dagger\right)^{-1}.
+\end{equation}
+定义 $H=\sum_{f\in G}D^\dagger\left(f\right)D\left(f\right)$。它是 Hermitian 矩阵，且任意非零列向量 $v$ 满足
+\begin{equation}
+v^\dagger Hv=\sum_{f\in G}\|D\left(f\right)v\|^2\geqslant\|D\left(e\right)v\|^2=\|v\|^2>0,
+\end{equation}
+所以 $H$ 正定。由重排定理，
 \begin{align}
-T_1&=\begin{bmatrix}0&0&0\\0&0&-\mathrm{i}\\0&\mathrm{i}&0\end{bmatrix},&
-T_2&=\begin{bmatrix}0&0&\mathrm{i}\\0&0&0\\-\mathrm{i}&0&0\end{bmatrix},&
-T_3&=\begin{bmatrix}0&-\mathrm{i}&0\\\mathrm{i}&0&0\\0&0&0\end{bmatrix}.
+D^\dagger\left(g\right)HD\left(g\right)
+&=\sum_{f\in G}\left[D\left(f\right)D\left(g\right)\right]^\dagger\left[D\left(f\right)D\left(g\right)\right]\\
+&=\sum_{f\in G}D^\dagger\left(fg\right)D\left(fg\right)=H.
 \end{align}
-在各自垂直于转轴的二维块内，指数求和与上式相同，轴向指数为 $1$，所以
-\begin{align}
-\mathrm{e}^{-\mathrm{i}\omega T_3}&=\begin{bmatrix}\cos\omega&-\sin\omega&0\\\sin\omega&\cos\omega&0\\0&0&1\end{bmatrix}=C_{\vec k}\left(\omega\right),\\
-\mathrm{e}^{-\mathrm{i}\omega T_2}&=\begin{bmatrix}\cos\omega&0&\sin\omega\\0&1&0\\-\sin\omega&0&\cos\omega\end{bmatrix}=C_{\vec j}\left(\omega\right),\\
-\mathrm{e}^{-\mathrm{i}\omega T_1}&=\begin{bmatrix}1&0&0\\0&\cos\omega&-\sin\omega\\0&\sin\omega&\cos\omega\end{bmatrix}=C_{\vec i}\left(\omega\right).
-\end{align}
-
-令 $T\left(\hat n\right)=n_1T_1+n_2T_2+n_3T_3$。由矩阵元可验证
-$-\mathrm{i}T\left(\hat n\right)x=\hat n\times x$。
-正常转动保持叉积，故对任意 $x$，
+用幺正矩阵 $U$ 对角化 $H$：
 \begin{equation}
--\mathrm{i}ST_3S^{-1}x=S\left(\vec k\times S^{-1}x\right)
-=\left(S\vec k\right)\times x=-\mathrm{i}T\left(\hat n\right)x.
+\Gamma=U^{-1}HU=\operatorname{diag}\left(\Gamma_{11},\ldots,\Gamma_{mm}\right),\qquad \Gamma_{jj}>0.
 \end{equation}
-于是 $ST_3S^{-1}=n_iT_i$，此处及以下重复指标 $i$ 表示从 $1$ 到 $3$ 求和。
-再利用 $\left(STS^{-1}\right)^p=ST^pS^{-1}$，有
-\begin{align}
-C_{\hat n}\left(\omega\right)&=S\mathrm{e}^{-\mathrm{i}\omega T_3}S^{-1}\\
-&=\sum_{p=0}^{\infty}\frac{S\left(-\mathrm{i}\omega T_3\right)^pS^{-1}}{p!}
-=\sum_{p=0}^{\infty}\frac{\left(-\mathrm{i}\omega ST_3S^{-1}\right)^p}{p!}\\
-&=\mathrm{e}^{-\mathrm{i}\omega n_iT_i}.
-\end{align}
-定义 $\omega_i=\omega n_i$，得到
+令 $\Gamma'=\operatorname{diag}\left(1/\sqrt{\Gamma_{11}},\ldots,1/\sqrt{\Gamma_{mm}}\right)$，
+取 $X=U\Gamma'U^{-1}$。由于 $U^{-1}=U^\dagger$，有 $X^\dagger=X$，从而
 \begin{equation}
-C_{\hat n\left(\theta,\varphi\right)}\left(\omega\right)=\mathrm{e}^{-\mathrm{i}\omega_iT_i},\qquad
-\begin{bmatrix}\omega_1\\\omega_2\\\omega_3\end{bmatrix}
-=\begin{bmatrix}\omega\sin\theta\cos\varphi\\\omega\sin\theta\sin\varphi\\\omega\cos\theta\end{bmatrix}.
+\left(XX^\dagger\right)^{-1}=U\left(\Gamma'\right)^{-2}U^{-1}=U\Gamma U^{-1}=H.
 \end{equation}
-参数矢量 $\bm\omega$ 可取在半径为 $\pi$ 的闭球中。
-球内不同点对应不同转动；球面上的对径点表示同一半周转动。
-球心对应恒等转动，球坐标中该点的 $\theta,\varphi$ 不再有独立意义。
+因此该 $X$ 满足所需条件，完成幺正化。
+\end{proof}
 
-\section{点群}
-\subsection{点群的定义}
-\begin{definition}
-本章将 $\mathrm{O}\left(3\right)$ 的有限子群称为点群。所有操作都固定同一个点，取其为坐标原点。
-\end{definition}
-第一类点群只包含正常转动，即所有元素的行列式均为 $1$。
-第二类点群还包含行列式为 $-1$ 的操作，如反射或转动反演；
-它不一定包含单独的空间反演 $I$。
-
-\subsection{对称操作和对称元素}
-使系统保持不变的空间操作称为对称操作；与之对应的点、轴或平面等几何对象称为对称元素。
-\begin{enumerate}
-\item \textbf{反演操作。} $I=-E$，$I\vec r=-\vec r$，对称元素为反演中心 $O$。
-\item \textbf{反射操作。} 例如关于 $xy$ 平面反射为
+\begin{proposition}[完全可约性]
+有限群的复表示完全可约。
+\end{proposition}
+\begin{proof}
+先将表示幺正化。设 $W$ 为不变子空间，$v\in W^\perp$、$w\in W$，则
 \begin{equation}
-\sigma_{\vec k}=\diag\left(1,1,-1\right),
+\langle w,D\left(g\right)v\rangle=\langle D\left(g\right)^{-1}w,v\rangle=0,
 \end{equation}
-对称元素为 $xy$ 平面，$\vec k$ 为该平面的法向。
-\item \textbf{转动操作。} $C_{\hat m}\left(2\pi/n\right)$ 的对称元素为 $n$ 重转动轴 $\hat m$。
-\item \textbf{转动反演操作。} $IC_{\hat m}\left(2\pi/n\right)$ 为先转动再反演，
-对称元素称为转动反演轴；反演中心取在轴上的原点。
-\end{enumerate}
-转动反演 $IC_{\hat m}\left(\omega\right)$ 与转动反射 $\sigma_hC_{\hat m}\left(\omega\right)$ 要区分，
-其中 $\sigma_h$ 是垂直于转轴的镜面反射。
-因为 $\sigma_h=IC_{\hat m}\left(\pi\right)$，两种操作对应的转角相差 $\pi$。
+因为 $D\left(g\right)^{-1}w\in W$。故 $W^\perp$ 也不变，表示可分为两个对角块。
+对各块重复此过程；维数有限保证最终终止于不可约块。
+\end{proof}
 
-\subsection{第一类点群}
-三维有限正常转动群分为循环群、二面体群和三种多面体转动群。
-以下 $\mathrm{T},\mathrm{O},\mathrm{Y}$ 只包含正常转动，不包含所有反射对称操作。
+\begin{theorem}[定理 2：等价幺正表示]
+若 $D\left(G\right)$、$\bar D\left(G\right)$ 为等价的幺正表示，则存在幺正矩阵 $U$，使
+$\bar D\left(g\right)=U^{-1}D\left(g\right)U$ 对所有 $g\in G$ 成立。
+\end{theorem}
+\begin{proof}
+设 $D\left(g\right)X=X\bar D\left(g\right)$。对 $g^{-1}$ 的等式取 Hermitian 共轭，得到
+$X^\dagger D\left(g\right)=\bar D\left(g\right)X^\dagger$。
+因此 $X^\dagger X$ 与所有 $\bar D\left(g\right)$ 对易，其正定平方根
+$A=\left(X^\dagger X\right)^{1/2}$ 也与它们对易；后者可由正定矩阵的谱分解得到。
+令 $U=XA^{-1}$，则 $U^\dagger U=A^{-1}X^\dagger XA^{-1}=E$，且
+$D\left(g\right)U=X\bar D\left(g\right)A^{-1}=U\bar D\left(g\right)$，所以得到所需幺正相似变换。
+\end{proof}
 
-\subsubsection*{（1）循环群 $\mathrm{C}_n$}
-令 $c_n=C_{\hat m}\left(2\pi/n\right)$，则 $\mathrm{C}_n=\left\{e,c_n,\ldots,c_n^{n-1}\right\}$。
-它是 $n$ 阶 Abel 群，每个元素自成一类，有 $n$ 个不等价不可约复表示。
-补齐原稿留空的公式：
+\subsection{定理 3：舒尔定理}
+\begin{theorem}[舒尔定理一]
+设 $D\left(G\right)$ 为不可约复表示。若 $D\left(g\right)X=XD\left(g\right)$ 对任意 $g\in G$ 成立，
+则 $X=cE$，其中 $c$ 为复常数。
+\end{theorem}
+\begin{proof}
+复矩阵 $X$ 至少有一个特征值 $c$。对应的非零特征子空间 $W$ 满足：
+若 $Xv=cv$，则 $X D\left(g\right)v=D\left(g\right)Xv=cD\left(g\right)v$，故 $W$ 不变。
+由不可约性，$W$ 必为全空间，因而 $X=cE$。
+\end{proof}
+
+\begin{theorem}[舒尔定理二]
+设 $D^{\left(1\right)}\left(G\right)$、$D^{\left(2\right)}\left(G\right)$ 为不等价不可约表示，维数为 $m_1,m_2$。
+若 $m_1\times m_2$ 矩阵 $X$ 满足
 \begin{equation}
-D^{\left(k\right)}\left(c_n^j\right)=\mathrm{e}^{\mathrm{i}2\pi kj/n},\qquad k=1,\ldots,n.
+D^{\left(1\right)}\left(g\right)X=XD^{\left(2\right)}\left(g\right)\qquad\left(\forall g\in G\right),
 \end{equation}
+则 $X=\bm{0}$。
+\end{theorem}
+\begin{proof}
+上式说明 $X$ 的核在第二个表示下不变，像在第一个表示下不变。
+若 $X\ne0$，不可约性迫使其核为零、像为全空间，故 $X$ 为可逆映射，
+进而给出两表示等价，与假设矛盾。
+\end{proof}
 
-\subsubsection*{（2）二面体群 $\mathrm{D}_n$}
-该群由一个 $n$ 重主轴转动和垂直于主轴的一个二重轴转动生成，群阶为 $2n$。
-例如 $\mathrm{D}_2=\left\{e,c_{2z},c_{2x},c_{2y}\right\}$。
-补齐原稿的 $\mathrm{D}_6$：取 $c_6=C_{\vec k}\left(\pi/3\right)$、$c_{2x}=C_{\vec i}\left(\pi\right)$，则
+\subsection{定理 4：正交性定理}
+\begin{theorem}[表示矩阵元的正交性]
+设 $D^{\left(u\right)}$ 为两两不等价的不可约幺正表示，维数为 $n_u$，则
 \begin{equation}
-\mathrm{D}_6=\left\{c_6^j,c_{2x}c_6^j\mid j=0,1,\ldots,5\right\}.
+\sum_{\alpha=1}^{n_G}D^{\left(u\right)*}_{\gamma\eta}\left(g_\alpha\right)
+D^{\left(v\right)}_{\lambda\rho}\left(g_\alpha\right)
+=\frac{n_G}{n_u}\delta^{uv}\delta_{\gamma\lambda}\delta_{\eta\rho}.
 \end{equation}
-其中包含六个绕主轴的转动和六个绕面内二重轴的半周转动。
-
-\subsubsection*{（3）正四面体转动群 $\mathrm{T}$}
-正四面体有三条二重轴（连接对边中点）和四条三重轴（连接顶点与对面中心）。
-每条三重轴提供两个非恒等转动，故共有 $1+3+4\cdot2=12$ 个元素。
-$c_3$ 与 $c_3^2$ 是同一条轴上的不同操作，不应计作两条不同的轴。
-
-沿用原稿的上标编号，三种二重转动记为 $c_2^{\left(2\right)},c_2^{\left(3\right)},c_2^{\left(4\right)}$。
-选择四条三重轴的有向生成元 $c_3^{\left(j\right)}$ 使它们彼此共轭，则四个类为
-\begin{align}
-&\left\{e\right\},\qquad\left\{c_2^{\left(2\right)},c_2^{\left(3\right)},c_2^{\left(4\right)}\right\},\\
-&\left\{c_3^{\left(1\right)},c_3^{\left(2\right)},c_3^{\left(3\right)},c_3^{\left(4\right)}\right\},\\
-&\left\{\left(c_3^{\left(1\right)}\right)^2,\left(c_3^{\left(2\right)}\right)^2,\left(c_3^{\left(3\right)}\right)^2,\left(c_3^{\left(4\right)}\right)^2\right\}.
-\end{align}
-这些类也可用顶点的偶置换验证：恒元一个，双换位三个，三循环八个在偶置换群中分成各四个的两类。
-子群 $\mathrm{D}_2=\left\{e,c_2^{\left(2\right)},c_2^{\left(3\right)},c_2^{\left(4\right)}\right\}$ 是完整共轭类之并，因而是不变子群。
-商群为
+\end{theorem}
+\begin{proof}
+取任意 $n_v\times n_u$ 矩阵 $A$，定义
 \begin{equation}
-\mathrm{T}/\mathrm{D}_2=\left\{\mathrm{D}_2,c_3^{\left(1\right)}\mathrm{D}_2,\left(c_3^{\left(1\right)}\right)^2\mathrm{D}_2\right\}
-\cong\mathrm{C}_3.
+B=\sum_{g\in G}D^{\left(v\right)}\left(g\right)A D^{\left(u\right)}\left(g\right)^{-1}.
 \end{equation}
-记 $\zeta=\mathrm{e}^{\mathrm{i}2\pi/3}$，有 $\zeta^*=\zeta^2$。
-商群特征标表沿用原稿的表示标签 $E,E',E''$；表中 $E$ 是表示名称，不是单位矩阵：
-\begin{center}
-\begin{tabular}{c|ccc}
-\toprule
- & $\mathrm{D}_2$ & $c_3^{\left(1\right)}\mathrm{D}_2$ & $\left(c_3^{\left(1\right)}\right)^2\mathrm{D}_2$\\\midrule
-$E$ & 1 & 1 & 1\\
-$E'$ & 1 & $\zeta$ & $\zeta^*$\\
-$E''$ & 1 & $\zeta^*$ & $\zeta$\\\bottomrule
-\end{tabular}
-\end{center}
-提升到原群后得到三个一维不可约表示。第四个表示的维数由
-$12=1^2+1^2+1^2+3^2$ 决定。
-三维空间的自然转动表示具有特征标 $1+2\cos\omega$，在四个类上的值为 $3,-1,0,0$。
-其加权模方为 $9+3=12$，故不可约。完整特征标表为
+由重排定理，$D^{\left(v\right)}\left(h\right)B D^{\left(u\right)}\left(h\right)^{-1}=B$。
+舒尔定理给出：$u\ne v$ 时 $B=0$；$u=v$ 时 $B=cE$。
+后一种情况下取迹得到 $n_uc=n_G\mathrm{Tr}\,A$，所以
+$B=\left(n_G/n_u\right)\left(\mathrm{Tr}\,A\right)E$。
+令 $A$ 仅在第 $\rho$ 行、第 $\eta$ 列取值 $1$，取 $B$ 的第 $\lambda$ 行、第 $\gamma$ 列，
+再利用 $D^{\left(u\right)}\left(g\right)^{-1}=D^{\left(u\right)}\left(g\right)^\dagger$，即得所需公式。
+\end{proof}
+
+\subsection{定理 5：不可约表示的个数}
+\begin{theorem}
+有限群不等价不可约复表示的个数，等于群的共轭类的个数。
+\end{theorem}
+本定理的证明将在第 2.5 节利用特征标的正交性与正则表示给出，
+以便先定义所需对象。记这一共同数目为 $r$。
+
+\section{群的正则表示}
+\subsection{群空间}
+设有限群 $G=\left\{g_1,\ldots,g_n\right\}$，其中 $n=n_G$。
+将群元视为\textbf{形式上的线性无关基矢}，它们张成的复线性空间称为群空间。
+记基矢行向量 $v=\left(g_1,\ldots,g_n\right)$，则一般矢量为
+\begin{equation}
+f=x_1g_1+\cdots+x_ng_n=vx,\qquad x=\left(x_1,\ldots,x_n\right)^{\mathrm{T}}.
+\end{equation}
+群元即使原本为矩阵，这里的线性组合也按形式基矢理解，不采用原矩阵之间可能存在的线性关系。
+
+\subsection{群的正则表示}
+让群元通过\textbf{左乘}作用于群空间：
+\begin{equation}
+g_\alpha f=\sum_{j=1}^{n}x_j\left(g_\alpha g_j\right).
+\end{equation}
+将结果重新在 $v$ 中展开，定义 $g_\alpha v=vD\left(g_\alpha\right)$。矩阵元为
+\begin{equation}
+D\left(g_\alpha\right)_{ij}=\begin{cases}1,&g_\alpha g_j=g_i,\\0,&\text{其他情形}.
+\end{cases}
+\end{equation}
+左乘的结合律保证 $D\left(g_\alpha g_\beta\right)=D\left(g_\alpha\right)D\left(g_\beta\right)$，这就是左正则表示。
+重排定理保证每行、每列恰有一个 $1$，所以它由置换矩阵组成。
+对于 $f'=g_\alpha f$，可以写成
+\begin{equation}
+f'=vD\left(g_\alpha\right)x=v'x=vx',\qquad
+v'=vD\left(g_\alpha\right),\quad x'=D\left(g_\alpha\right)x.
+\end{equation}
+第一种写法让各基矢随左乘变换而保持系数不变；第二种在固定基中重新展开，系数变为 $x'$。
+
+\begin{example}[四阶群的正则表示]
+取原稿的乘法表，行元在左、列元在右：
 \begin{center}
 \begin{tabular}{c|cccc}
 \toprule
- & $e$ & $3c_2^{\left(2\right)}$ & $4c_3^{\left(1\right)}$ & $4\left(c_3^{\left(1\right)}\right)^2$\\\midrule
-$D_1$ & 1 & 1 & 1 & 1\\
-$D_2$ & 1 & 1 & $\zeta$ & $\zeta^*$\\
-$D_3$ & 1 & 1 & $\zeta^*$ & $\zeta$\\
-$D_4$ & 3 & $-1$ & 0 & 0\\\bottomrule
+ & $g_1$ & $g_2$ & $g_3$ & $g_4$\\\midrule
+$g_1$ & $g_1$ & $g_2$ & $g_3$ & $g_4$\\
+$g_2$ & $g_2$ & $g_1$ & $g_4$ & $g_3$\\
+$g_3$ & $g_3$ & $g_4$ & $g_2$ & $g_1$\\
+$g_4$ & $g_4$ & $g_3$ & $g_1$ & $g_2$\\\bottomrule
 \end{tabular}
 \end{center}
-表头的数字表示类大小，$D_2$ 在此为表示标签，不是二面体群 $\mathrm{D}_2$。
+设 $f=x_1g_1+x_2g_2+x_3g_3+x_4g_4$，则
+\begin{align}
+g_2f&=x_1g_2g_1+x_2g_2g_2+x_3g_2g_3+x_4g_2g_4\\
+&=x_1g_2+x_2g_1+x_3g_4+x_4g_3\\
+&=x_2g_1+x_1g_2+x_4g_3+x_3g_4.
+\end{align}
+故 $x'=\left(x_2,x_1,x_4,x_3\right)^{\mathrm{T}}=D\left(g_2\right)x$。
+从基矢观点，$\left(g_2,g_1,g_4,g_3\right)=vD\left(g_2\right)$，得到同一个矩阵。
+四个矩阵为
+\begin{align}
+D\left(g_1\right)&=\begin{bmatrix}1&0&0&0\\0&1&0&0\\0&0&1&0\\0&0&0&1\end{bmatrix},&
+D\left(g_2\right)&=\begin{bmatrix}0&1&0&0\\1&0&0&0\\0&0&0&1\\0&0&1&0\end{bmatrix},\\
+D\left(g_3\right)&=\begin{bmatrix}0&0&0&1\\0&0&1&0\\1&0&0&0\\0&1&0&0\end{bmatrix},&
+D\left(g_4\right)&=\begin{bmatrix}0&0&1&0\\0&0&0&1\\0&1&0&0\\1&0&0&0\end{bmatrix}.
+\end{align}
+其中 $D\left(g_2\right)$ 的最后一行为 $\left(0,0,1,0\right)$，由上面的系数变换直接确定。
+\end{example}
 
-\subsubsection*{（4）正八面体转动群 $\mathrm{O}$}
-正八面体与其对偶立方体有相同的正常转动群，阶为 $24$。
-按立方体几何，其五个共轭类可列为
-\begin{center}
-\begin{tabular}{clc}
-\toprule
-类 & 转动轴与转角 & 元素数\\\midrule
-$\left\{e\right\}$ & 恒等操作 & 1\\
-$8c_3$ & 四条体对角线，转角 $\pm2\pi/3$ & 8\\
-$6c_4$ & 三条对面中心轴，转角 $\pm\pi/2$ & 6\\
-$3c_4^2$ & 同上三条轴，转角 $\pi$ & 3\\
-$6c_2$ & 六条对边中点轴，转角 $\pi$ & 6\\\bottomrule
-\end{tabular}
-\end{center}
-原稿所述由 $c_4$ 或 $c_3$ 联系的六条二重轴即最后一类。
-三条 $c_4^2$ 轴与这六条轴虽转角相同，但在有限群中不共轭。
-由五个类和维数平方和得到五个不可约表示的维数为 $1,1,2,3,3$：
+\subsection{正则表示的特点}
+\begin{enumerate}
+\item 若对角元 $D\left(g_\alpha\right)_{jj}=1$，则 $g_\alpha g_j=g_j$，从而 $g_\alpha=e$。
+所以正则表示的特征标为
 \begin{equation}
-24=1^2+1^2+2^2+3^2+3^2.
+\chi\left(g_\alpha\right)=\begin{cases}n_G,&g_\alpha=e,\\0,&g_\alpha\ne e.\end{cases}
 \end{equation}
-其中 $\mathrm{T}$ 是指数为 $2$ 的不变子群；
-$\left\{e\right\}\cup3c_4^2$ 构成另一个不变子群 $\mathrm{D}_2$。
+\item 正则表示的维数为 $n_G$，因为群空间有 $n_G$ 个形式基矢。
+\item 正则表示是真实表示：若 $D\left(g\right)=D\left(h\right)$，让它们作用于恒元基矢，得到 $g=h$。
+因此 $G\cong D\left(G\right)$。
+\item 任何有限群都有上述正则表示，不需要预先给出几何实现。
+\end{enumerate}
 
-\subsubsection*{（5）正十二面体（二十面体）转动群 $\mathrm{Y}$}
-两种互为对偶的正多面体具有相同的正常转动群，阶为 $60$。
-以正十二面体描述，有六条连接对面中心的五重轴、十条连接对顶点的三重轴、
-十五条连接对边中点的二重轴。各类轴上的非恒等转动数分别为 $4,2,1$，所以
-\begin{equation}
-1+6\cdot4+10\cdot2+15\cdot1=60.
-\end{equation}
-它含有五重转动，因此不属于三维周期晶体的点群。
+\section{特征标相关理论}
+本节仍讨论有限群的有限维复表示。$n_D$ 表示某个表示的维数，
+$n_u$ 表示第 $u$ 个不可约表示的维数，$n_{C_\alpha}$ 表示共轭类 $C_\alpha$ 的大小。
 
-\section{晶体点群}
-\subsection{理想晶体与晶体点群}
-理想周期晶体由相同结构单元在三个独立方向上重复排列而成。
-取三个线性无关的原始平移矢量 $\vec v_1,\vec v_2,\vec v_3$，晶格为
+\subsection{特征标是类的函数}
+特征标为
 \begin{equation}
-L=\left\{x_1\vec v_1+x_2\vec v_2+x_3\vec v_3\mid x_1,x_2,x_3\in\mathbb{Z}\right\}.
+\chi\left(g_\alpha\right)=\mathrm{Tr}\,D\left(g_\alpha\right)=\sum_{i=1}^{n_D}D_{ii}\left(g_\alpha\right).
 \end{equation}
-本章称保持某个三维晶格的有限点群为晶体点群。
-具体晶体结构还包含晶胞内的原子排列，因此其实际对称性可以低于仅由晶格决定的对称性。
+由表示保持乘法和迹的循环性质，
+\begin{align}
+\chi\left(f^{-1}g_\alpha f\right)
+&=\mathrm{Tr}\left(D\left(f\right)^{-1}D\left(g_\alpha\right)D\left(f\right)\right)\\
+&=\mathrm{Tr}\left(D\left(f\right)D\left(f\right)^{-1}D\left(g_\alpha\right)\right)=\chi\left(g_\alpha\right).
+\end{align}
+所以同类元素的特征标相同，特征标是类函数。
 
-群元对晶格基矢的作用可写为
-\begin{equation}
-g:\vec v_i\mapsto\vec v_i'=\sum_{k=1}^{3}\vec v_k g_{ki},\qquad g_{ki}\in\mathbb{Z}.
-\end{equation}
-沿用原稿的基矢行数组记号，
-\begin{equation}
-\vec v'=\vec v g,\qquad
-\left(\vec v_1',\vec v_2',\vec v_3'\right)=\left(\vec v_1,\vec v_2,\vec v_3\right)g.
-\end{equation}
-这里 $g_{ki}$ 是在晶格基下的矩阵元。晶格基一般不正交，因此该整数矩阵
-本身未必满足 $g^{\mathrm{T}}g=E$，但它与正交坐标基下的正交矩阵相似，二者迹相同。
-此外 $g^{-1}$ 也保持晶格，故其逆矩阵也为整数矩阵。
-
-\subsection{晶体制约定理}
-\begin{theorem}
-三维周期晶体的正常转动只能有 $1,2,3,4,6$ 重轴。
-转动反演操作可写为 $I$ 与这些允许转动的乘积。
+\begin{theorem}[定理 1]
+等价表示具有相同的特征标。
 \end{theorem}
 \begin{proof}
-在晶格基下 $g$ 的矩阵元为整数，所以
+若 $\bar D\left(g_\alpha\right)=X^{-1}D\left(g_\alpha\right)X$，则
 \begin{equation}
-\mathrm{Tr}\,g=\sum_{i=1}^{3}g_{ii}\in\mathbb{Z}.
+\bar\chi\left(g_\alpha\right)=\mathrm{Tr}\left(X^{-1}D\left(g_\alpha\right)X\right)
+=\mathrm{Tr}\,D\left(g_\alpha\right)=\chi\left(g_\alpha\right).
 \end{equation}
-在正交坐标基下，该操作可写为 $fC_{\vec k}\left(\omega\right)f^{-1}$ 或
-$fIC_{\vec k}\left(\omega\right)f^{-1}$。利用迹在相似变换下不变，得到
-\begin{equation}
-\mathrm{Tr}\,g=\pm\left(1+2\cos\omega\right)\in\mathbb{Z}.
-\end{equation}
-因 $-2\leq2\cos\omega\leq2$，只能有
-\begin{equation}
-2\cos\omega\in\left\{-2,-1,0,1,2\right\}.
-\end{equation}
-将转角取在 $\left[0,\pi\right]$，对应为
-\begin{center}
-\begin{tabular}{c|ccccc}
-\toprule
-$\omega$ & $0$ & $\pi$ & $2\pi/3$ & $\pi/2$ & $\pi/3$\\
-转动的阶 & 1 & 2 & 3 & 4 & 6\\\bottomrule
-\end{tabular}
-\end{center}
-这补齐了原稿中由整数迹推出允许转角的步骤。
-对非正常操作，写成 $IC_{\hat n}\left(\omega\right)$ 后同样得到上述转角限制。
 \end{proof}
-对晶格而言 $I$ 总满足 $IL=L$；但具体晶体的原子排列不一定具有反演对称性。
-制约定理是必要条件，完整点群分类还需考虑不同对称操作能否共同保持一个晶格。
 
-\subsection{32 种晶体点群}
-本节采用原稿的 Schoenflies 记号。分类与转动反射记号的含义可参照
-\href{https://journals.iucr.org/j/issues/2010/05/02/kk5061/index.html}{IUCr 的晶体学国际表入门资料}。
-
-第一类共有 $11$ 种：
+\subsection{定理 2：特征标正交关系}
+\begin{theorem}
+不等价不可约表示的特征标满足
 \begin{equation}
-\mathrm{C}_1,\mathrm{C}_2,\mathrm{C}_3,\mathrm{C}_4,\mathrm{C}_6,
-\mathrm{D}_2,\mathrm{D}_3,\mathrm{D}_4,\mathrm{D}_6,\mathrm{T},\mathrm{O}.
+\sum_{\alpha=1}^{n_G}\chi^{\left(u\right)*}\left(g_\alpha\right)\chi^{\left(v\right)}\left(g_\alpha\right)
+=n_G\delta^{uv}.
 \end{equation}
-原稿列表中重复的 $\mathrm{C}_2$ 应为 $\mathrm{D}_2$。
-第二类共有 $21$ 种，下面按原稿的群族逐一列出。
-
-\subsubsection*{（1）$\mathrm{C}_{nh}$：5 种}
-取 $n=1,2,3,4,6$，由主轴转动 $c_n$ 与垂直主轴的水平镜面 $\sigma_h$ 生成。
-两者对易，所以
+\end{theorem}
+\begin{proof}
+由幺正化及特征标在等价变换下不变，只需考虑幺正表示。
+在矩阵元正交关系中令两个矩阵元均取对角元，得到
 \begin{equation}
-\mathrm{C}_{nh}=\mathrm{C}_n\otimes\mathrm{C}_{1h},\qquad
-\mathrm{C}_{1h}=\left\{E,\sigma_h\right\}=\left\{E,Ic_2\right\}.
+\sum_{\alpha=1}^{n_G}D^{\left(u\right)*}_{\sigma\sigma}\left(g_\alpha\right)
+D^{\left(v\right)}_{\lambda\lambda}\left(g_\alpha\right)
+=\frac{n_G}{n_u}\delta^{uv}\delta_{\sigma\lambda}\delta_{\sigma\lambda}.
 \end{equation}
-它为 $2n$ 阶 Abel 群，含 $n$ 个正常与 $n$ 个非正常操作。
-沿用 $\mathrm{C}_i=\left\{E,I\right\}$，具体有
-\begin{align}
-\mathrm{C}_{2h}&=\left\{E,c_2,\sigma_h,c_2\sigma_h\right\}
-=\left\{E,c_2,Ic_2,I\right\}=\mathrm{C}_2\otimes\mathrm{C}_i,\\
-\mathrm{C}_{3h}&=\left\{E,c_3,c_3^2,\sigma_h,c_3\sigma_h,c_3^2\sigma_h\right\}
-=\mathrm{C}_3\otimes\mathrm{C}_{1h},\\
-\mathrm{C}_{4h}&=\mathrm{C}_4\otimes\mathrm{C}_{1h}=\mathrm{C}_4\otimes\mathrm{C}_i,\\
-\mathrm{C}_{6h}&=\mathrm{C}_6\otimes\mathrm{C}_{1h}=\mathrm{C}_6\otimes\mathrm{C}_i.
-\end{align}
-以 $\mathrm{C}_i$ 为因子的等式要求偶数 $n$，此时 $c_n^{n/2}=c_2$，
-由 $c_2\sigma_h=I$ 得到反演。$\mathrm{C}_{1h}$ 也常记作 $\mathrm{C}_s$。
+对 $\sigma,\lambda$ 求和，左侧成为特征标的内积。
+当 $u\ne v$ 时右侧为零；当 $u=v$ 时
+$\sum_{\sigma,\lambda}\delta_{\sigma\lambda}\delta_{\sigma\lambda}=n_u$，故得到结论。
+\end{proof}
 
-\subsubsection*{（2）$\mathrm{C}_{nv}$：4 种}
-取 $n=2,3,4,6$，由 $c_n$ 与包含主轴的垂直镜面 $\sigma_v$ 生成。
-关系为 $\sigma_vc_n\sigma_v=c_n^{-1}$，群阶为 $2n$。例如
-\begin{equation}
-\mathrm{C}_{2v}=\left\{E,c_2,\sigma_v,c_2\sigma_v\right\}.
-\end{equation}
-$n=1$ 时只得到一个镜面群，已计入 $\mathrm{C}_{1h}$，故不重复列出。
-
-\subsubsection*{（3）$\mathrm{S}_{2n}$：3 种}
-取 $n=1,2,3$。Schoenflies 记号中的 $s_m$ 是\textbf{转动反射}生成元，定义为
-\begin{equation}
-s_m=\sigma_hc_m=Ic_2c_m=IC_{\vec k}\left(\pi+2\pi/m\right).
-\end{equation}
-它可改写为一个转动反演，但角度不是原来的 $2\pi/m$。
-偶数 $m=2n$ 时，$s_{2n}=Ic_{2n}^{n+1}$，其生成的循环群阶为 $2n$。
-群中既有正常操作，也有非正常操作，并非所有元素都是转动反演。
-具体为
-\begin{align}
-s_2&=I,&\mathrm{S}_2&=\left\{E,I\right\}=\mathrm{C}_i,\\
-s_4&=Ic_4^3,&\mathrm{S}_4&=\left\{E,Ic_4^3,c_4^2,Ic_4\right\},\\
-s_6&=Ic_6^4=Ic_3^2,&\mathrm{S}_6&=\left\{E,c_3,c_3^2,I,Ic_3,Ic_3^2\right\}
-=\mathrm{C}_3\otimes\mathrm{C}_i.
-\end{align}
-其中 $s_4^2=c_4^2$、$s_4^3=Ic_4$，所以 $\mathrm{S}_4$ 不含 $I$；
-$s_6^3=I$，所以 $\mathrm{S}_6$ 含反演。
-
-\subsubsection*{（4）$\mathrm{D}_{nh}$：4 种}
-取 $n=2,3,4,6$，由第一类点群 $\mathrm{D}_n$ 和水平镜面 $\sigma_h$ 生成，阶为 $4n$。
-水平镜面与 $\mathrm{D}_n$ 的所有转动对易，且不属于 $\mathrm{D}_n$，故
-\begin{equation}
-\mathrm{D}_{nh}=\mathrm{D}_n\otimes\mathrm{C}_{1h}.
-\end{equation}
-当 $n$ 为偶数时，群内含主轴半周转动，因而也可写成
-$\mathrm{D}_{nh}=\mathrm{D}_n\otimes\mathrm{C}_i$。
-当 $n=3$ 时，$\mathrm{D}_{3h}$ 不含反演，不能将第二个因子直接换成 $\mathrm{C}_i$。
-
-\subsubsection*{（5）$\mathrm{D}_{nd}$：2 种}
-取 $n=2,3$，在 $\mathrm{D}_n$ 基础上加入包含主轴、并平分相邻面内二重轴夹角的
-对角镜面 $\sigma_d$，得到 $4n$ 阶群。
-镜面的具体方向很重要，不能将任意垂直镜面都视为这一构造。
-两种群为八阶的 $\mathrm{D}_{2d}$ 和十二阶的 $\mathrm{D}_{3d}$。
-
-\subsubsection*{（6）多面体第二类点群：3 种}
+按群元排列的特征标表为
 \begin{center}
-\begin{tabular}{cclc}
+\begin{tabular}{c|cccc}
 \toprule
-群 & 阶 $n_G$ & 构造或几何意义 & 类数 $r$\\\midrule
-$\mathrm{T}_h$ & 24 & $\mathrm{T}\otimes\mathrm{C}_i$ & 8\\
-$\mathrm{T}_d$ & 24 & 正四面体的完整点对称群 & 5\\
-$\mathrm{O}_h$ & 48 & $\mathrm{O}\otimes\mathrm{C}_i$ & 10\\\bottomrule
+ & $g_1$ & $g_2$ & $\cdots$ & $g_{n_G}$\\\midrule
+$D^{\left(1\right)}$ & $\chi^{\left(1\right)}\left(g_1\right)$ & $\chi^{\left(1\right)}\left(g_2\right)$ & $\cdots$ & $\chi^{\left(1\right)}\left(g_{n_G}\right)$\\
+$D^{\left(2\right)}$ & $\chi^{\left(2\right)}\left(g_1\right)$ & $\chi^{\left(2\right)}\left(g_2\right)$ & $\cdots$ & $\chi^{\left(2\right)}\left(g_{n_G}\right)$\\
+$\vdots$ & $\vdots$ & $\vdots$ & $\ddots$ & $\vdots$\\
+$D^{\left(r\right)}$ & $\chi^{\left(r\right)}\left(g_1\right)$ & $\chi^{\left(r\right)}\left(g_2\right)$ & $\cdots$ & $\chi^{\left(r\right)}\left(g_{n_G}\right)$\\\bottomrule
 \end{tabular}
 \end{center}
-直积的类数相乘，故 $\mathrm{T}_h$、$\mathrm{O}_h$ 的类数分别为 $4\cdot2$、$5\cdot2$。
-$\mathrm{T}_d$ 通过对四个顶点的置换同构于四阶置换群 $\mathrm{S}_4$；
-后者按循环类型分成五类。此处的置换群 $\mathrm{S}_4$ 与上文 Schoenflies 记号的
-四阶转动反射点群 $\mathrm{S}_4$ 同名，含义须由上下文区分。
-原稿 $\mathrm{T}_h$ 的阶数“4”应为 $24$。
+一行对应一个不可约表示，称为特征标行矢量；一列对应一个群元，称为特征标列矢量。
+任意不同行正交，每行的\textbf{模方}为 $n_G$，模长为 $\sqrt{n_G}$：
+\begin{equation}
+|\chi^{\left(u\right)}\left(G\right)|^2=\sum_{\alpha=1}^{n_G}|\chi^{\left(u\right)}\left(g_\alpha\right)|^2=n_G.
+\end{equation}
 
-上述第二类群的数量为 $5+4+3+4+2+3=21$，加上第一类的 $11$ 种，合计 $32$ 种。
-这里按空间中的点群类型计数，而不是仅按抽象群的同构类型计数；
-不同的空间对称实现可能具有相同的抽象乘法结构。
+\subsection{定理 3：唯一分解定理}
+\begin{theorem}
+设 $D^{\left(u\right)}$ 遍历全部不等价不可约表示，则任意表示可以分解为
+\begin{equation}
+X^{-1}D\left(g_\alpha\right)X=\bigoplus_{u=1}^{r}a_uD^{\left(u\right)}\left(g_\alpha\right),
+\end{equation}
+其中非负整数重数 $a_u$ 唯一确定，且
+\begin{equation}
+a_u=\frac1{n_G}\sum_{\alpha=1}^{n_G}\chi^{\left(u\right)*}\left(g_\alpha\right)\chi\left(g_\alpha\right)
+=\frac1{n_G}\sum_{\alpha=1}^{n_G}\chi^*\left(g_\alpha\right)\chi^{\left(u\right)}\left(g_\alpha\right).
+\end{equation}
+\end{theorem}
+\begin{proof}
+完全可约性保证存在上述直和分解。两侧取迹得
+$\chi\left(g_\alpha\right)=\sum_u a_u\chi^{\left(u\right)}\left(g_\alpha\right)$。
+乘以 $\chi^{\left(v\right)*}\left(g_\alpha\right)$ 后求和，利用正交性，
+\begin{align}
+\sum_\alpha\chi^{\left(v\right)*}\left(g_\alpha\right)\chi\left(g_\alpha\right)
+&=\sum_u a_u\sum_\alpha\chi^{\left(v\right)*}\left(g_\alpha\right)\chi^{\left(u\right)}\left(g_\alpha\right)\\
+&=n_Ga_v.
+\end{align}
+故得到第一种写法。重数是非负整数，因而等于自身复共轭；对公式取复共轭，
+即得原稿采用的第二种写法。重数由特征标确定，所以与约化过程无关。
+\end{proof}
+
+\subsubsection*{练习：可约表示特征标的模方}
+利用 $a_u$ 为实数及正交性，
+\begin{align}
+\sum_{\beta=1}^{n_G}\chi^*\left(g_\beta\right)\chi\left(g_\beta\right)
+&=\sum_{u,v}a_ua_v\sum_\beta\chi^{\left(u\right)*}\left(g_\beta\right)\chi^{\left(v\right)}\left(g_\beta\right)\\
+&=n_G\sum_u a_u^2.
+\end{align}
+非零表示不可约，当且仅当恰有一个 $a_u=1$、其余为零。
+若表示可约，则 $\sum_u a_u^2\geq2$，因而模方至少为 $2n_G$。
+
+\subsubsection*{应用于正则表示}
+正则表示仅在恒元处的特征标非零，故
+\begin{equation}
+a_u=\frac1{n_G}\chi^*\left(e\right)\chi^{\left(u\right)}\left(e\right)
+=\frac1{n_G}n_Gn_u=n_u.
+\end{equation}
+因此每个不可约表示都在正则表示中出现，重数等于其维数：
+\begin{equation}
+X^{-1}D_{\mathrm{regular}}\left(g_\alpha\right)X
+=\bigoplus_{u=1}^{r}n_uD^{\left(u\right)}\left(g_\alpha\right).
+\end{equation}
+在恒元处取迹得到
+\begin{equation}
+n_G=\sum_{u=1}^{r}n_u^2.
+\end{equation}
+在非恒元处则有
+\begin{equation}
+0=\sum_{u=1}^{r}n_u\chi^{\left(u\right)}\left(g_\alpha\right)
+=\sum_{u=1}^{r}n_u\chi^{\left(u\right)*}\left(g_\alpha\right),\qquad g_\alpha\ne e.
+\end{equation}
+因为 $n_u=\chi^{\left(u\right)}\left(e\right)$，特征标表的恒元列与其他列正交。
+
+\subsubsection*{补证：不可约表示的个数等于类数}
+为避免先使用结论，暂记类数为 $c$、不等价不可约表示个数为 $r$。
+类函数空间维数为 $c$，其内积取
+$\langle F_1,F_2\rangle=n_G^{-1}\sum_g F_1\left(g\right)^*F_2\left(g\right)$。
+不可约特征标为一组正交非零类函数，因此 $r\leqslant c$。
+
+若类函数 $F$ 与所有不可约特征标正交，则
+$\sum_g F\left(g\right)^*\chi^{\left(u\right)}\left(g\right)=0$。
+在群空间中引入形式线性组合 $z=\sum_g F\left(g\right)^*g$，并将表示按线性延拓作用于它。
+由于 $F$ 在共轭类上为常数，$z$ 与所有群元对易，所以
+$D^{\left(u\right)}\left(z\right)$ 与所有 $D^{\left(u\right)}\left(g\right)$ 对易。舒尔定理给出
+$D^{\left(u\right)}\left(z\right)=c_uE$，而其迹为零，故 $c_u=0$。
+正则表示完全可约，故 $z$ 在正则表示中也作用为零。
+让它左乘恒元基矢，得到 $ze=z=0$；由形式基矢线性无关，$F\left(g\right)=0$ 对所有 $g$ 成立。
+所以不可约特征标张成全部类函数空间，$r=c$，完成第 2.3 节定理 5 的证明。
+
+\subsection{以类为表头的特征标表}
+将同类群元的列合并，约定 $D^{\left(1\right)}$ 为一维恒等表示，$C_1=\left\{e\right\}$，则
+\begin{center}
+\begin{tabular}{c|cccc}
+\toprule
+ & $C_1=\left\{e\right\}$ & $C_2$ & $\cdots$ & $C_r$\\\midrule
+$D^{\left(1\right)}$ & $1$ & $1$ & $\cdots$ & $1$\\
+$D^{\left(2\right)}$ & $n_2$ & $\chi^{\left(2\right)}\left(C_2\right)$ & $\cdots$ & $\chi^{\left(2\right)}\left(C_r\right)$\\
+$\vdots$ & $\vdots$ & $\vdots$ & $\ddots$ & $\vdots$\\
+$D^{\left(r\right)}$ & $n_r$ & $\chi^{\left(r\right)}\left(C_2\right)$ & $\cdots$ & $\chi^{\left(r\right)}\left(C_r\right)$\\\bottomrule
+\end{tabular}
+\end{center}
+类 $C_k$ 有时在表头记作 $n_{C_k}g_k$，其中 $g_k\in C_k$ 是代表元。
+这里显式写 $n_{C_k}$，避免将类大小与不可约表示维数 $n_k$ 混淆。
+合并后的表为 $r\times r$ 方阵，行正交关系必须计入每类的大小：
+\begin{equation}
+\sum_{\alpha=1}^{r}n_{C_\alpha}\chi^{\left(u\right)*}\left(C_\alpha\right)\chi^{\left(v\right)}\left(C_\alpha\right)
+=n_G\delta^{uv}.
+\end{equation}
+
+定义归一化特征标
+\begin{equation}
+\hat\chi^{\left(u\right)}\left(C_\alpha\right)=\sqrt{\frac{n_{C_\alpha}}{n_G}}\chi^{\left(u\right)}\left(C_\alpha\right).
+\end{equation}
+归一化特征标组成方阵，其行正交且模长为 $1$，因而该方阵幺正，列也正交。
+因此
+\begin{align}
+\sum_{\alpha=1}^{r}\hat\chi^{\left(u\right)*}\left(C_\alpha\right)\hat\chi^{\left(v\right)}\left(C_\alpha\right)&=\delta^{uv},\\
+\sum_{u=1}^{r}\hat\chi^{\left(u\right)*}\left(C_\alpha\right)\hat\chi^{\left(u\right)}\left(C_\beta\right)&=\delta_{\alpha\beta}.
+\end{align}
+去掉归一化因子，得到列正交关系
+\begin{equation}
+\sum_{u=1}^{r}\chi^{\left(u\right)*}\left(C_\alpha\right)\chi^{\left(u\right)}\left(C_\beta\right)
+=\frac{n_G}{n_{C_\alpha}}\delta_{\alpha\beta}.
+\end{equation}
+若列用任意群元而非类标记，同一类的两个群元对应相同的列，不能声称它们正交。
+上述 Kronecker 符号区分的是\textbf{共轭类}。
+
+每个归一化不可约特征标行矢量和列矢量的模方均为 $1$：
+\begin{equation}
+\sum_\alpha|\hat\chi^{\left(u\right)}\left(C_\alpha\right)|^2=1,\qquad
+\sum_u|\hat\chi^{\left(u\right)}\left(C_\alpha\right)|^2=1.
+\end{equation}
+对于一个待判定的非零表示 $D$，定义其行矢量
+$\hat\chi\left(C_\alpha\right)=\sqrt{n_{C_\alpha}/n_G}\chi\left(C_\alpha\right)$，则
+\begin{equation}
+D\text{ 不可约}\quad\Longleftrightarrow\quad
+\sum_{\alpha=1}^{r}|\hat\chi\left(C_\alpha\right)|^2=1.
+\end{equation}
+若 $D$ 可约，则该模方为 $\sum_u a_u^2\geq2$。判据应对类指标 $\alpha$ 求和，
+不是对所有不可约表示指标 $u$ 求和。
+
+\begin{example}[$\mathrm{D}_3$ 的特征标表]
+$\mathrm{D}_3$ 有三个类：$\left\{e\right\}$、$\left\{d,f\right\}$、$\left\{a,b,c\right\}$，大小分别为 $1,2,3$。
+由 $r=3$ 及 $n_G=6$，维数满足 $6=1^2+1^2+2^2$。
+两个一维表示分别是恒等表示和将转动映为 $1$、反射映为 $-1$ 的表示。
+将二维表示的两个未知特征标记为 $x,y$，有
+\begin{center}
+\begin{tabular}{c|ccc}
+\toprule
+ & $\left\{e\right\}$ & $\left\{d,f\right\}$ & $\left\{a,b,c\right\}$\\\midrule
+$D^{\left(1\right)}$ & 1 & 1 & 1\\
+$D^{\left(2\right)}$ & 1 & 1 & $-1$\\
+$D^{\left(3\right)}$ & 2 & $x$ & $y$\\\bottomrule
+\end{tabular}
+\end{center}
+第一列与其余两列正交，给出 $1+1+2x=0$、$1-1+2y=0$，
+所以 $x=-1$、$y=0$。例如第三行的加权模方为
+$1\cdot2^2+2\cdot\left(-1\right)^2+3\cdot0^2=6$，符合正交关系。
+\end{example}
+
+\begin{example}[$\mathrm{D}_4$ 的不可约表示维数]
+用 $r_0,s_0$ 表示满足 $r_0^4=s_0^2=e$、$s_0r_0s_0=r_0^{-1}$ 的生成元。
+五个类为
+\begin{equation}
+\left\{e\right\},\quad\left\{r_0^2\right\},\quad\left\{r_0,r_0^3\right\},\quad
+\left\{s_0,s_0r_0^2\right\},\quad\left\{s_0r_0,s_0r_0^3\right\}.
+\end{equation}
+结合类数为 $5$ 与群阶为 $8$，得到
+$8=1^2+1^2+1^2+1^2+2^2$，即四个一维和一个二维不等价不可约表示。
+仅凭一个平方和分解，而不使用类数等信息，一般不足以确定不可约表示的维数。
+\end{example}
+
+\subsection{定理 4：特征标判定等价性}
+\begin{theorem}
+有限群的两个复表示等价，当且仅当它们对每个群元具有相同的特征标。
+\end{theorem}
+\begin{proof}
+等价推出特征标相同已在定理 1 中证明。
+反过来，设 $\bar\chi\left(g_\alpha\right)=\chi\left(g_\alpha\right)$。将两个表示完全约化：
+\begin{align}
+M^{-1}\bar D\left(g_\alpha\right)M&=\bigoplus_u\bar a_uD^{\left(u\right)}\left(g_\alpha\right),\\
+N^{-1}D\left(g_\alpha\right)N&=\bigoplus_u a_uD^{\left(u\right)}\left(g_\alpha\right).
+\end{align}
+唯一分解定理给出
+\begin{equation}
+\bar a_u=\frac1{n_G}\sum_\alpha\bar\chi^*\left(g_\alpha\right)\chi^{\left(u\right)}\left(g_\alpha\right)
+=\frac1{n_G}\sum_\alpha\chi^*\left(g_\alpha\right)\chi^{\left(u\right)}\left(g_\alpha\right)=a_u.
+\end{equation}
+按相同次序排列不可约块，则 $M^{-1}\bar D\left(g_\alpha\right)M=N^{-1}D\left(g_\alpha\right)N$。
+令 $X=NM^{-1}$，得到 $\bar D\left(g_\alpha\right)=X^{-1}D\left(g_\alpha\right)X$，所以两表示等价。
+\end{proof}
+
+\subsection{特征标表的性质与应用}
+\begin{enumerate}
+\item 以类为表头的不可约特征标表为 $r\times r$ 方阵。
+\item 归一化后任意两行正交：$\sum_\alpha\hat\chi^{\left(u\right)*}\left(C_\alpha\right)\hat\chi^{\left(v\right)}\left(C_\alpha\right)=\delta^{uv}$。
+\item 归一化后任意两列正交：$\sum_u\hat\chi^{\left(u\right)*}\left(C_\alpha\right)\hat\chi^{\left(u\right)}\left(C_\beta\right)=\delta_{\alpha\beta}$。
+\item 归一化后的每行、每列模方均为 $1$。
+\item 恒元列给出 $n_G^{-1}\sum_u n_u^2=1$。
+\item 商群的不可约表示可给出原群的不可约表示。
+设 $H$ 为 $G$ 的不变子群，$D'$ 为 $G/H$ 的不可约表示，令 $D\left(g\right)=D'\left(gH\right)$。
+因为 $gH$ 遍历整个商群，两表示的不变子空间相同，故 $D$ 不可约。
+因此可以先找不变子群与商群，再构造原群的一部分不可约表示。
+\item 一维非恒等表示与高维不可约表示逐群元相乘，仍得不可约表示。
+若一维表示为 $d\left(g\right)$，则 $\bar D\left(g\right)=d\left(g\right)D\left(g\right)$ 保持乘法。
+因 $d\left(g\right)\ne0$ 为标量，$\bar D$ 与 $D$ 的不变子空间相同，故不可约性不变。
+该结论对一维恒等表示也成立。
+\item 若 $G=H_1\otimes H_2$，则每个类是两个因子中相应类的乘积，
+所以 $G$ 的类数等于 $H_1$ 与 $H_2$ 类数之积。
+\end{enumerate}
+
+\begin{example}[循环群]
+沿用此处原稿的生成元记号，$\mathrm{C}_n=\left\{e,c_n,\ldots,c_n^{n-1}\right\}$。
+它是 Abel 群，每个群元自成一类，因此有 $n$ 个不等价不可约表示。
+由 $\sum_{u=1}^{n}n_u^2=n$ 及 $n_u\geq1$，它们全部为一维，具体为
+\begin{equation}
+D^{\left(k\right)}\left(c_n\right)=\mathrm{e}^{\mathrm{i}2\pi k/n},\qquad k=1,\ldots,n.
+\end{equation}
+这些数两两不同，故表示不等价；它们已经穷尽全部不可约表示。
+特别地，$\mathrm{C}_6=\mathrm{C}_3\otimes\mathrm{C}_2$，与第一章的直积分解一致。
+\end{example}
+
+\begin{example}[二面体群]
+沿用原稿的 $\mathrm{D}_n$ 表示 $2n$ 阶二面体群。
+在 $\mathrm{D}_2=\left\{e,c_2=\sigma_x,c_2'=\sigma_y,c_2''=\sigma_z\right\}$ 中，
+$\sigma_x,\sigma_y,\sigma_z$ 表示绕三个坐标轴的半周转动，分别为
+\begin{equation}
+\operatorname{diag}\left(1,-1,-1\right),\qquad\operatorname{diag}\left(-1,1,-1\right),\qquad\operatorname{diag}\left(-1,-1,1\right).
+\end{equation}
+此处这些符号不是 Pauli 矩阵。$\mathrm{D}_3=\left\{e,d,f,a,b,c\right\}$ 的类和表示已在前文讨论。
+
+原稿中的直积分解 $\mathrm{D}_{4n+2}=\mathrm{D}_{2n+1}\otimes\mathrm{C}_2$ 可如下验证。
+令 $m=2n+1$ 为奇数，取 $\mathrm{D}_{2m}$ 的生成元 $r_0,s_0$，满足
+$r_0^{2m}=s_0^2=e$、$s_0r_0s_0=r_0^{-1}$。
+子群 $H=\langle r_0^2,s_0\rangle$ 同构于 $\mathrm{D}_m$，
+而 $F=\left\{e,r_0^m\right\}$ 同构于 $\mathrm{C}_2$。
+由于 $s_0r_0^ms_0=r_0^{-m}=r_0^m$，$F$ 与所有群元对易；
+$m$ 为奇数，又保证 $r_0^m$ 不在 $H$ 中，所以 $H\cap F=\left\{e\right\}$。
+两子群的乘积有 $\left(2m\right)\cdot2=4m$ 个元素，等于全群阶，因此
+$\mathrm{D}_{2m}=H\otimes F$，给出所述分解。
+\end{example}
+
+\section{群函数、群代数与正则表示}
+\subsection{群函数和群代数}
+有限群 $G$ 上的复值函数 $F:G\to\mathbb{C}$ 称为群函数，其内积取为
+\begin{equation}
+\left\langle F_1,F_2\right\rangle=\frac{1}{\left|G\right|}\sum_{g\in G}F_1\left(g\right)^*F_2\left(g\right).
+\end{equation}
+在形式线性组合
+\begin{equation}
+x=\sum_{g\in G}x_g g
+\end{equation}
+上把群乘法双线性延拓，得到复群代数 $\mathbb{C}\left[G\right]$。它既是 $\left|G\right|$ 维线性空间，也是结合代数。
+
+\subsection{左正则表示和内禀正则表示}
+在群代数基 $\Ket{g}$ 上定义
+\begin{equation}
+L_s\Ket{g}=\Ket{sg},
+\end{equation}
+得到左正则表示，其矩阵元和特征标为
+\begin{align}
+\left[L_s\right]_{hg}&=\delta_{h,sg},\\
+\chi_{\mathrm{reg}}\left(s\right)&=\begin{cases}\left|G\right|,&s=E,\\0,&s\ne E.
+\end{cases}
+\end{align}
+右乘满足相反的乘法次序。定义
+\begin{equation}
+\widetilde R_s\Ket{g}=\Ket{gs^{-1}},
+\end{equation}
+则 $\widetilde R_s\widetilde R_t=\widetilde R_{st}$，称为内禀正则表示，并且
+\begin{equation}
+\left[L_s,\widetilde R_t\right]=0.
+\end{equation}
+
+\section{新表示的构成}
+\subsection{商群、直乘群与表示直乘}
+若 $N\trianglelefteq G$，$G/N$ 的表示 $D$ 可提升为
+\begin{equation}
+\widetilde D\left(g\right)=D\left(gN\right).
+\end{equation}
+反过来，$G$ 的表示能够下降到 $G/N$ 的充要条件是 $N$ 中每个元素都表示为单位矩阵。
+
+若 $D^{\left(i\right)},D^{\left(j\right)}$ 是 $G$ 的表示，则
+\begin{equation}
+D\left(g\right)=D^{\left(i\right)}\left(g\right)\otimes D^{\left(j\right)}\left(g\right)
+\end{equation}
+仍为表示，且
+\begin{equation}
+\chi\left(g\right)=\chi^{\left(i\right)}\left(g\right)\chi^{\left(j\right)}\left(g\right).
+\end{equation}
+不可约表示 $D^{\left(k\right)}$ 的重数为
+\begin{equation}
+a_k=\frac{1}{\left|G\right|}\sum_{g\in G}\chi^{\left(k\right)}\left(g\right)^*\chi^{\left(i\right)}\left(g\right)\chi^{\left(j\right)}\left(g\right).
+\end{equation}
+若 $G=H_1\otimes H_2$，则全部不可约表示为
+\begin{equation}
+D^{\left(i,j\right)}\left(h_1,h_2\right)=D^{\left(i\right)}_1\left(h_1\right)\otimes D^{\left(j\right)}_2\left(h_2\right).
+\end{equation}
+
+\subsection{限制表示、诱导表示与 Frobenius 互反律}
+设 $H\leq G$。把 $G$ 的表示限制在 $H$ 上，得到 $\operatorname{Res}^G_H D$。反过来，取左陪集代表元 $t_1,\ldots,t_q$，其中 $q=\left[G:H\right]$。若 $d$ 是 $H$ 的表示，且
+\begin{equation}
+g t_j=t_i h_{ij}\left(g\right),qquad h_{ij}\left(g\right)\in H,
+\end{equation}
+则诱导表示定义为
+\begin{equation}
+\left[\operatorname{Ind}_H^G d\left(g\right)\right]_{ij}=
+\begin{cases}d\left(h_{ij}\left(g\right)\right),&g t_jH=t_iH,\\0,&\text{其他情形}.
+\end{cases}
+\end{equation}
+它的维数为 $q\dim d$。Frobenius 互反律为
+\begin{equation}
+\left\langle \operatorname{Res}^G_H\chi_D,\chi_d\right\rangle_H
+=\left\langle \chi_D,\operatorname{Ind}_H^G\chi_d\right\rangle_G.
+\end{equation}
+
+\section{投影算符与群代数分解}
+设 $D^{\left(i\right)}$ 是 $m_i$ 维不可约幺正表示，$P_g$ 是空间上的群作用。矩阵元投影算符为
+\begin{equation}
+P^{\left(i\right)}_{\mu\nu}=\frac{m_i}{\left|G\right|}\sum_{g\in G}D^{\left(i\right)}_{\mu\nu}\left(g\right)^*P_g,
+\end{equation}
+并满足
+\begin{equation}
+P^{\left(i\right)}_{\mu\nu}P^{\left(j\right)}_{\rho\sigma}
+=\delta_{ij}\delta_{\nu\rho}P^{\left(i\right)}_{\mu\sigma}.
+\end{equation}
+特征标投影算符为
+\begin{equation}
+P^{\left(i\right)}=\frac{m_i}{\left|G\right|}\sum_{g\in G}\chi^{\left(i\right)}\left(g\right)^*P_g,
+\end{equation}
+它们满足
+\begin{align}
+P^{\left(i\right)}P^{\left(j\right)}&=\delta_{ij}P^{\left(i\right)},\\
+\sum_iP^{\left(i\right)}&=E.
+\end{align}
+在复数域上，有限群群代数分解为
+\begin{equation}
+\mathbb{C}\left[G\right]\cong\bigoplus_i M_{m_i}\left(\mathbb{C}\right),
+\qquad \left|G\right|=\sum_i m_i^2.
+\end{equation}
+中心本原幂等元为
+\begin{equation}
+e_i=\frac{m_i}{\left|G\right|}\sum_{g\in G}\chi^{\left(i\right)}\left(g^{-1}\right)g,
+\end{equation}
+且 $e_ie_j=\delta_{ij}e_i$、$\sum_i e_i=E$。因此左正则表示中，第 $i$ 个不可约表示出现 $m_i$ 次。
+
+

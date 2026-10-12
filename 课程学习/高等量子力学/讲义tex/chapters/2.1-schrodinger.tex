@@ -1,0 +1,68 @@
+\section{含时 Schr\"odinger 方程}
+\subsection{状态的时间演化}
+设 $t_0$ 时刻系统处于归一化态 $\Ket{\psi\left(t_0\right)}$。量子态随时间的演化由含时 Schr\"odinger 方程决定：
+\begin{equation}
+\boxed{\mathrm{i}\hbar\frac{\mathrm{d}}{\mathrm{d}t}\Ket{\psi\left(t\right)}
+=\hat H\left(t\right)\Ket{\psi\left(t\right)}.}
+\label{eq:tdse-ket}
+\end{equation}
+这里 $\hat H\left(t\right)$ 是 Hamilton 算符；以下假设它在所讨论的定义域上自伴，并且方程的初值问题存在唯一解。
+
+式\eqref{eq:tdse-ket}关于态矢量是线性的。若 $\Ket{\psi_1\left(t\right)}$ 与
+$\Ket{\psi_2\left(t\right)}$ 都是同一 Hamilton 算符对应的解，则对任意常数
+$c_1,c_2\in\C$，
+\begin{equation}
+\Ket{\psi\left(t\right)}=c_1\Ket{\psi_1\left(t\right)}
++c_2\Ket{\psi_2\left(t\right)}
+\end{equation}
+仍然是解。这是叠加原理在时间演化中的体现。
+
+对式\eqref{eq:tdse-ket}取伴随，得到
+\begin{equation}
+-\mathrm{i}\hbar\frac{\mathrm{d}}{\mathrm{d}t}\Bra{\psi\left(t\right)}
+=\Bra{\psi\left(t\right)}\hat H\left(t\right).
+\end{equation}
+因而
+\begin{align}
+\frac{\mathrm{d}}{\mathrm{d}t}\Braket{\psi\left(t\right)|\psi\left(t\right)}
+&=\Braket{\dot\psi\left(t\right)|\psi\left(t\right)}
++\Braket{\psi\left(t\right)|\dot\psi\left(t\right)}\notag\\
+&=\frac{\mathrm{i}}{\hbar}\Braket{\psi\left(t\right)|\hat H\left(t\right)|\psi\left(t\right)}
+-\frac{\mathrm{i}}{\hbar}\Braket{\psi\left(t\right)|\hat H\left(t\right)|\psi\left(t\right)}=0.
+\end{align}
+所以归一化在演化中保持不变，概率总和守恒。
+
+\subsection{坐标表象与连续性方程}
+对单粒子 Hamilton 算符
+\begin{equation}
+\hat H\left(t\right)=\frac{\hat p^2}{2m}+V\left(\hat x,t\right)
+\end{equation}
+取坐标表象，并使用 $\hat p=-\mathrm{i}\hbar\partial_x$，可得
+\begin{equation}
+\boxed{\mathrm{i}\hbar\frac{\partial}{\partial t}\psi\left(x,t\right)
+=\left[-\frac{\hbar^2}{2m}\frac{\partial^2}{\partial x^2}+V\left(x,t\right)\right]
+\psi\left(x,t\right).}
+\label{eq:tdse-position}
+\end{equation}
+当 $V$ 为实函数时，把该式与其复共轭分别乘以 $\psi^*$、$\psi$ 后相减，得到连续性方程
+\begin{equation}
+\frac{\partial\rho}{\partial t}+\frac{\partial j}{\partial x}=0,
+\qquad
+\rho=\left|\psi\right|^2,
+\qquad
+j=\frac{\hbar}{2m\mathrm{i}}
+\left(\psi^*\frac{\partial\psi}{\partial x}-\psi\frac{\partial\psi^*}{\partial x}\right).
+\end{equation}
+若波函数在无穷远处衰减，使边界概率流为零，则对全空间积分再次得到总概率守恒。
+
+\subsection{不含时 Hamilton 算符}
+若 $\hat H$ 不显含时间，取能量本征态
+\begin{equation}
+\hat H\Ket{n}=E_n\Ket{n},
+\end{equation}
+则初态 $\Ket{\psi\left(t_0\right)}=\sum_n c_n\Ket{n}$ 的演化为
+\begin{equation}
+\Ket{\psi\left(t\right)}
+=\sum_n c_n\mathrm{e}^{-\mathrm{i}E_n\left(t-t_0\right)/\hbar}\Ket{n}.
+\end{equation}
+能量本征态只获得相位，因此其能量概率分布不随时间改变；一般叠加态中不同能级的相对相位随时间变化，从而产生可观测的动力学。

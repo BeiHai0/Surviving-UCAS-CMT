@@ -22,3 +22,5 @@
 # 临时构建目录
 build/
 tmp/
+node_modules/
+.codex-build/

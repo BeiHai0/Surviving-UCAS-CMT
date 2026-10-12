@@ -1,0 +1,25 @@
+\chapter{附录}
+
+\section{高斯积分}
+
+本附录记录一个常用积分，便于在后续计算中查阅。以下参数 $a$ 为正实数。
+
+\subsection{一维积分}
+
+定义
+\begin{equation}
+  I(a)\coloneqq\int_{-\infty}^{\infty}\mathrm{e}^{-ax^{2}}\,\mathrm{d}x.
+\end{equation}
+被积函数为正且可积，因此可将积分的平方写为二维积分。再令
+$x=r\cos\theta$、$y=r\sin\theta$，利用极坐标的面积元，得到
+\begin{align}
+  I(a)^{2}
+  &=\int_{\mathbb{R}^{2}}\mathrm{e}^{-a(x^{2}+y^{2})}\,\mathrm{d}x\,\mathrm{d}y\\
+  &=\int_{0}^{2\pi}\mathrm{d}\theta\int_{0}^{\infty}
+    \mathrm{e}^{-ar^{2}}r\,\mathrm{d}r
+   =\frac{\pi}{a}.
+\end{align}
+由于 $I(a)>0$，取正平方根即得
+\begin{equation}
+  I(a)=\sqrt{\frac{\pi}{a}}.
+\end{equation}

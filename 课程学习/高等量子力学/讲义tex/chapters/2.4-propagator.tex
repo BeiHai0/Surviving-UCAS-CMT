@@ -1,0 +1,82 @@
+\section{传播子}
+\subsection{定义、演化与合成}
+在坐标表象中定义传播子
+\begin{equation}
+\boxed{K\left(x,t;x_0,t_0\right)
+=\Braket{x|\hat U\left(t,t_0\right)|x_0}.}
+\label{eq:propagator-definition}
+\end{equation}
+插入坐标完备性后，任意初始波函数按
+\begin{equation}
+\psi\left(x,t\right)=\int_{-\infty}^{\infty}
+K\left(x,t;x_0,t_0\right)\psi\left(x_0,t_0\right)\,\mathrm{d}x_0
+\label{eq:wavefunction-propagation}
+\end{equation}
+演化。由演化算符方程，传播子满足
+\begin{equation}
+\mathrm{i}\hbar\frac{\partial}{\partial t}K\left(x,t;x_0,t_0\right)
+=\hat H\left(x,-\mathrm{i}\hbar\frac{\partial}{\partial x},t\right)
+K\left(x,t;x_0,t_0\right),
+\end{equation}
+初值条件为
+\begin{equation}
+K\left(x,t_0;x_0,t_0\right)=\delta\left(x-x_0\right).
+\end{equation}
+演化算符的合成律对应传播子的卷积：对 $t_0<t_1<t_2$，
+\begin{equation}
+\boxed{K\left(x_2,t_2;x_0,t_0\right)=
+\int_{-\infty}^{\infty}K\left(x_2,t_2;x_1,t_1\right)
+K\left(x_1,t_1;x_0,t_0\right)\,\mathrm{d}x_1.}
+\label{eq:propagator-composition}
+\end{equation}
+
+\subsection{定态谱表示}
+若 Hamilton 算符不含时并具有一组离散正交完备本征态，插入能量本征态单位分解可得
+\begin{equation}
+\boxed{K\left(x,t;x_0,t_0\right)=
+\sum_n\mathrm{e}^{-\mathrm{i}E_n\left(t-t_0\right)/\hbar}
+\psi_n\left(x\right)\psi_n^*\left(x_0\right).}
+\label{eq:propagator-spectrum}
+\end{equation}
+若存在连续谱，还要加入相应的谱积分。沿对角线积分得到演化算符的迹：
+\begin{equation}
+\int_{-\infty}^{\infty}K\left(x,t;x,t_0\right)\,\mathrm{d}x
+=\Tr\,\hat U\left(t,t_0\right)
+=\sum_n\mathrm{e}^{-\mathrm{i}E_n\left(t-t_0\right)/\hbar}.
+\end{equation}
+
+\subsection{自由粒子传播子}
+对 $\hat H=\hat p^2/\left(2m\right)$，插入动量完备性，并令 $T=t-t_0>0$：
+\begin{align}
+K_0\left(x,t;x_0,t_0\right)
+&=\int_{-\infty}^{\infty}\frac{\mathrm{d}p}{2\pi\hbar}
+\exp\left[\frac{\mathrm{i}}{\hbar}p\left(x-x_0\right)
+-\frac{\mathrm{i}}{\hbar}\frac{p^2}{2m}T\right]\notag\\
+&=\boxed{\sqrt{\frac{m}{2\pi\mathrm{i}\hbar T}}
+\exp\left[\frac{\mathrm{i}m\left(x-x_0\right)^2}{2\hbar T}\right].}
+\label{eq:free-propagator}
+\end{align}
+平方根的分支由 $T\to0^+$ 时传播子趋于 $\delta\left(x-x_0\right)$ 的条件固定。
+
+\subsection{谐振子传播子}
+对一维谐振子，利用式\eqref{eq:propagator-spectrum}与 Hermite 多项式的 Mehler 求和公式可得
+\begin{equation}
+\boxed{
+K_{\mathrm{ho}}\left(x,t;x_0,t_0\right)
+=\sqrt{\frac{m\omega}{2\pi\mathrm{i}\hbar\sin\left(\omega T\right)}}
+\exp\left\{\frac{\mathrm{i}m\omega}{2\hbar\sin\left(\omega T\right)}
+\left[\left(x^2+x_0^2\right)\cos\left(\omega T\right)-2xx_0\right]\right\},
+}
+\label{eq:oscillator-propagator}
+\end{equation}
+其中 $T=t-t_0$，并暂避开 $\sin\left(\omega T\right)=0$ 的焦散时刻；跨过焦散时需要连续跟踪平方根的相位。
+
+当 $\omega\to0$ 时，使用 $\sin\left(\omega T\right)\sim\omega T$ 与
+$\cos\left(\omega T\right)\sim1$，式\eqref{eq:oscillator-propagator}回到自由粒子传播子。
+另一方面，对角线积分为
+\begin{equation}
+\int_{-\infty}^{\infty}K_{\mathrm{ho}}\left(x,t;x,t_0\right)\,\mathrm{d}x
+=\sum_{n=0}^{\infty}\mathrm{e}^{-\mathrm{i}\omega\left(n+1/2\right)T},
+\end{equation}
+从中可读出 $E_n=\hbar\omega\left(n+1/2\right)$。把传播子按
+$\mathrm{e}^{-\mathrm{i}E_n T/\hbar}$ 展开，还能逐项恢复谐振子的本征波函数。

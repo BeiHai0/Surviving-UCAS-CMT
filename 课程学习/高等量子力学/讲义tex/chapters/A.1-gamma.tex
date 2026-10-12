@@ -1,0 +1,101 @@
+\label{app:gamma}
+本附录整理 Gamma 函数及 Gaussian 积分，主要用于相干态的完备性证明与归一化计算。以下 $n,m$ 均为非负整数。
+
+\section{定义、递推关系与阶乘}
+对实数 $s>0$，定义
+\begin{equation}
+\Gamma\left(s\right)=\int_0^\infty u^{s-1}\mathrm{e}^{-u}\,\mathrm{d}u.
+\label{eq:app-gamma-definition}
+\end{equation}
+在原点附近，被积函数的主要行为为 $u^{s-1}$，故要求 $s>0$；
+在无穷远处，指数衰减保证收敛。本附录只需这一定义域，不涉及解析延拓。
+
+分部积分并利用 $u^s\mathrm{e}^{-u}$ 在两端趋于零，得到
+\begin{align}
+\Gamma\left(s+1\right)
+&=\left.-u^s\mathrm{e}^{-u}\right|_0^\infty
++s\int_0^\infty u^{s-1}\mathrm{e}^{-u}\,\mathrm{d}u
+=s\Gamma\left(s\right).
+\end{align}
+又因为 $\Gamma\left(1\right)=1$，所以
+\begin{equation}
+\boxed{\Gamma\left(n+1\right)=n!.}
+\label{eq:app-gamma-factorial}
+\end{equation}
+例如 $\Gamma\left(2\right)=1$、$\Gamma\left(3\right)=2$。
+应注意阶乘对应的是参数 $n+1$，而不是 $n$。
+
+\section{Gaussian 积分与半整数值}
+记 $I=\int_{-\infty}^{\infty}\mathrm{e}^{-x^2}\,\mathrm{d}x$。
+将 $I^2$ 写成二维积分，再使用极坐标：
+\begin{equation}
+I^2=\int_{\R^2}\mathrm{e}^{-x^2-y^2}\,\mathrm{d}x\,\mathrm{d}y
+=\int_0^{2\pi}\mathrm{d}\theta\int_0^\infty r\mathrm{e}^{-r^2}\,\mathrm{d}r
+=\pi.
+\end{equation}
+由于 $I>0$，有 $I=\sqrt\pi$。在 Gamma 积分中令 $u=x^2$，得到
+\begin{equation}
+\Gamma\left(\frac12\right)
+=2\int_0^\infty\mathrm{e}^{-x^2}\,\mathrm{d}x=\sqrt\pi.
+\end{equation}
+结合递推关系可得
+\begin{equation}
+\boxed{\Gamma\left(n+\frac12\right)
+=\frac{\left(2n\right)!}{4^n n!}\sqrt\pi
+=\frac{\left(2n-1\right)!!}{2^n}\sqrt\pi.}
+\end{equation}
+其中约定 $\left(-1\right)!!=1$。例如
+$\Gamma\left(3/2\right)=\sqrt\pi/2$、
+$\Gamma\left(5/2\right)=3\sqrt\pi/4$。
+
+更一般地，对 $a>0$、$q>-1$，令 $u=ax^2$ 得到
+\begin{equation}
+\boxed{\int_0^\infty x^q\mathrm{e}^{-ax^2}\,\mathrm{d}x
+=\frac{\Gamma\left(\frac{q+1}{2}\right)}{2a^{\left(q+1\right)/2}}.}
+\label{eq:app-gaussian-moment}
+\end{equation}
+因此全实轴上的奇次矩为零，偶次矩为
+\begin{equation}
+\int_{-\infty}^{\infty}x^{2n}\mathrm{e}^{-ax^2}\,\mathrm{d}x
+=\frac{\left(2n-1\right)!!}{2^n a^{n+1/2}}\sqrt\pi.
+\end{equation}
+特别地，
+\begin{equation}
+\int_{\R}\mathrm{e}^{-ax^2}\,\mathrm{d}x=\sqrt{\frac{\pi}{a}},
+\qquad
+\int_{\R}x^2\mathrm{e}^{-ax^2}\,\mathrm{d}x
+=\frac{\sqrt\pi}{2a^{3/2}}.
+\end{equation}
+对实数 $b$ 完成平方，还得到
+\begin{equation}
+\int_{\R}\mathrm{e}^{-ax^2+bx}\,\mathrm{d}x
+=\sqrt{\frac{\pi}{a}}\mathrm{e}^{b^2/\left(4a\right)}.
+\label{eq:app-shifted-gaussian}
+\end{equation}
+固定 $a>0$ 时，两端关于 $b$ 都是整函数，因此该式也适用于复数 $b$。
+
+\section{相干态完备性中的复平面积分}
+令 $\alpha=r\mathrm{e}^{\mathrm{i}\theta}$，
+$\mathrm{d}^2\alpha=r\,\mathrm{d}r\,\mathrm{d}\theta$。
+角向积分给出
+\begin{equation}
+\int_0^{2\pi}\mathrm{e}^{\mathrm{i}\left(n-m\right)\theta}\,\mathrm{d}\theta
+=2\pi\delta_{mn},
+\end{equation}
+径向积分则由式\eqref{eq:app-gaussian-moment}给出
+\begin{equation}
+\int_0^\infty r^{2n+1}\mathrm{e}^{-r^2}\,\mathrm{d}r
+=\frac12\Gamma\left(n+1\right)=\frac{n!}{2}.
+\end{equation}
+二者合并为
+\begin{equation}
+\boxed{\int_{\C}\frac{\mathrm{d}^2\alpha}{\pi}
+\mathrm{e}^{-\left|\alpha\right|^2}
+\alpha^n\left(\alpha^*\right)^m=n!\delta_{mn}.}
+\label{eq:app-complex-gaussian}
+\end{equation}
+把相干态的数态展开代入
+$\int_{\C}\mathrm{d}^2\alpha\,\Ket{\alpha}\Bra{\alpha}/\pi$，
+其数态矩阵元正是式\eqref{eq:app-complex-gaussian}除以 $\sqrt{n!m!}$，
+因而等于 $\delta_{mn}$。这就是正文相干态单位分解中 Gamma 函数的具体用途。
+
