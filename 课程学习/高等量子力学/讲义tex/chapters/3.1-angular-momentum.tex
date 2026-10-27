@@ -1,0 +1,92 @@
+% 来源：1020-12.pdf，第 1--6 页。沿用照片的 hbar=1 约定。
+\section{角动量算符}
+\subsection{角动量算符的定义}
+本章沿用照片中的 $\hbar=1$ 约定。若保留单位，则本章的 $\hat{\bm J}$ 对应物理角动量除以 $\hbar$，其本征值与阶梯系数均为无量纲量。
+
+角动量算符 $\hat{\bm J}=\left(\hat J_x,\hat J_y,\hat J_z\right)$ 是三个厄米算符组成的矢量算符，定义式为
+\begin{equation}
+\boxed{\hat{\bm J}\times\hat{\bm J}=\mathrm{i}\hat{\bm J}.}
+\end{equation}
+这里叉乘按固定算符次序定义；由于各分量不对易，它不必为零。分量式为
+\begin{equation}
+\left[\hat J_x,\hat J_y\right]=\mathrm{i}\hat J_z,\qquad
+\left[\hat J_y,\hat J_z\right]=\mathrm{i}\hat J_x,\qquad
+\left[\hat J_z,\hat J_x\right]=\mathrm{i}\hat J_y.
+\end{equation}
+即 $x,y,z$ 循环。用指标表示为
+\begin{equation}
+\boxed{\left[\hat J_i,\hat J_j\right]=\mathrm{i}\sum_k\epsilon_{ijk}\hat J_k,}
+\qquad i,j,k=x,y,z,
+\label{eq:angular-commutator}
+\end{equation}
+其中 Levi--Civita 符号为
+\begin{equation}
+\epsilon_{ijk}=\begin{cases}
+1,&ijk=xyz,yzx,zxy,\\
+-1,&ijk=xzy,yxz,zyx,\\
+0,&\text{其他情况，即至少两个指标相同。}
+\end{cases}
+\end{equation}
+
+\begin{example}[单粒子系统中的角动量]
+典型例子包括轨道角动量 $\hat{\bm L}=\hat{\bm r}\times\hat{\bm p}$、自旋角动量 $\hat{\bm S}$，以及总角动量 $\hat{\bm J}=\hat{\bm L}+\hat{\bm S}$。在本章单位约定下，它们均满足式\eqref{eq:angular-commutator}；总角动量的结论还利用了轨道与自旋自由度彼此对易。
+\end{example}
+
+\subsection{角动量平方算符}
+定义
+\begin{equation}
+\boxed{\hat J^2=\hat{\bm J}\cdot\hat{\bm J}
+=\hat J_x^2+\hat J_y^2+\hat J_z^2.}
+\end{equation}
+可证
+\begin{equation}
+\boxed{\left[\hat J^2,\hat J_i\right]=0,\qquad i=x,y,z.}
+\label{eq:angular-casimir-commutes}
+\end{equation}
+例如利用 $\left[AB,C\right]=A\left[B,C\right]+\left[A,C\right]B$，有
+\begin{align}
+\left[\hat J^2,\hat J_z\right]
+&=\left[\hat J_x^2,\hat J_z\right]+\left[\hat J_y^2,\hat J_z\right]\notag\\
+&=-\mathrm{i}\left(\hat J_x\hat J_y+\hat J_y\hat J_x\right)
++\mathrm{i}\left(\hat J_y\hat J_x+\hat J_x\hat J_y\right)=0.
+\end{align}
+其余两个分量由循环置换得到。
+
+\subsection{上升算符和下降算符}
+定义
+\begin{equation}
+\boxed{\hat J_+=\hat J_x+\mathrm{i}\hat J_y,\qquad
+\hat J_-=\hat J_x-\mathrm{i}\hat J_y.}
+\end{equation}
+$\hat J_+$、$\hat J_-$ 一般都不是厄米算符，而是互为厄米共轭：
+\begin{equation}
+\hat J_+^\dag=\hat J_-,\qquad\hat J_-^\dag=\hat J_+.
+\end{equation}
+由式\eqref{eq:angular-casimir-commutes}，有
+\begin{equation}
+\left[\hat J^2,\hat J_\pm\right]=0.
+\end{equation}
+乘积 $\hat J_+\hat J_-$ 和 $\hat J_-\hat J_+$ 都是厄米算符。三个算符的对易关系为
+\begin{equation}
+\boxed{\left[\hat J_z,\hat J_+\right]=\hat J_+,\qquad
+\left[\hat J_z,\hat J_-\right]=-\hat J_-,\qquad
+\left[\hat J_+,\hat J_-\right]=2\hat J_z.}
+\label{eq:angular-ladder-commutators}
+\end{equation}
+逆变换为
+\begin{equation}
+\hat J_x=\frac{\hat J_++\hat J_-}{2},\qquad
+\hat J_y=\frac{\hat J_+-\hat J_-}{2\mathrm{i}}.
+\end{equation}
+因此
+\begin{align}
+\hat J^2&=\frac12\left(\hat J_+\hat J_-+\hat J_-\hat J_+\right)+\hat J_z^2\notag\\
+&=\hat J_+\hat J_--\hat J_z+\hat J_z^2
+=\hat J_-\hat J_++\hat J_z+\hat J_z^2.
+\end{align}
+整理得到后面常用的恒等式
+\begin{equation}
+\boxed{\hat J_+\hat J_-=\hat J^2-\hat J_z\left(\hat J_z-1\right),\qquad
+\hat J_-\hat J_+=\hat J^2-\hat J_z\left(\hat J_z+1\right).}
+\label{eq:angular-ladder-products}
+\end{equation}

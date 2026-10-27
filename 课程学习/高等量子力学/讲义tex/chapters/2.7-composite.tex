@@ -1,0 +1,118 @@
+% 来源：1013-10.pdf 第 3--16 页。
+\section{复合系统的密度算符与密度矩阵}
+\subsection{张量积空间与算符}
+考虑两个可区分子系统 $A$、$B$，各自的正交归一基为
+$\left\{\Ket{u_i}_A\right\}_{i=1}^{d_A}$、$\left\{\Ket{v_\mu}_B\right\}_{\mu=1}^{d_B}$。
+复合系统的 Hilbert 空间为 $\mathcal H_A\otimes\mathcal H_B$，维数为 $d_Ad_B$，直积基满足
+\begin{align}
+\Braket{u_i,v_\mu|u_j,v_\nu}&=\delta_{ij}\delta_{\mu\nu},\\
+\sum_{i,\mu}\Ket{u_i,v_\mu}\Bra{u_i,v_\mu}
+&=\hat I_A\otimes\hat I_B,
+\end{align}
+其中 $\Ket{u_i,v_\mu}=\Ket{u_i}_A\otimes\Ket{v_\mu}_B$。外积可分解为
+\begin{equation}
+\Ket{u_i,v_\mu}\Bra{u_j,v_\nu}
+=\left(\Ket{u_i}\Bra{u_j}\right)_A\otimes
+\left(\Ket{v_\mu}\Bra{v_\nu}\right)_B.
+\end{equation}
+本节的自旋例子以两个可区分的自旋自由度为子系统；对全同电子，完整态还须包含空间部分并满足费米反对称性。
+
+乘积算符的作用及其矩阵元为
+\begin{align}
+\left(\hat F_A\otimes\hat G_B\right)\Ket{u_j,v_\nu}
+&=\left(\hat F_A\Ket{u_j}\right)\otimes\left(\hat G_B\Ket{v_\nu}\right),\\
+\Braket{u_i,v_\mu|\hat F_A\otimes\hat G_B|u_j,v_\nu}
+&=F_{ij}G_{\mu\nu}.
+\end{align}
+局域可观测量应嵌入为 $\hat F_A\otimes\hat I_B$ 或 $\hat I_A\otimes\hat G_B$。一般复合系统算符是乘积算符的线性组合，未必本身就是一个乘积。对乘积算符取部分迹，有
+\begin{equation}
+\mathrm{Tr}_A\left(\hat F_A\otimes\hat G_B\right)
+=\left(\mathrm{Tr}_A\hat F_A\right)\hat G_B,
+\qquad
+\mathrm{Tr}_B\left(\hat F_A\otimes\hat G_B\right)
+=\hat F_A\left(\mathrm{Tr}_B\hat G_B\right).
+\end{equation}
+例如第一式是在 $A$ 上插入 $\sum_i\Ket{u_i}\Bra{u_i}$，求和
+$\sum_i\Braket{u_i|\hat F_A|u_i}\hat G_B$ 的结果。
+
+\subsection{纯态展开、乘积态与纠缠态}
+一般归一化纯态可写为
+\begin{equation}
+\Ket{\Psi}=\sum_{i,\mu}C_{i\mu}\Ket{u_i,v_\mu},\qquad
+\sum_{i,\mu}\left|C_{i\mu}\right|^2=1.
+\end{equation}
+若存在 $a_i,b_\mu$ 使 $C_{i\mu}=a_ib_\mu$，则
+\begin{equation}
+\Ket{\Psi}=\left(\sum_i a_i\Ket{u_i}\right)_A\otimes
+\left(\sum_\mu b_\mu\Ket{v_\mu}\right)_B
+\end{equation}
+是乘积态，也称可分离纯态；否则为纠缠态。等价地，系数矩阵 $C$ 的秩为一时且仅当纯态可分离。
+此判据针对纯态；混合态可分离的定义是能表示为乘积密度算符的凸组合，不能用“不是单个张量积”代替纠缠的定义。
+
+整体纯态密度算符及局域乘积观测量的期望值为
+\begin{align}
+\hat\rho_{AB}&=\Ket{\Psi}\Bra{\Psi}
+=\sum_{i,j,\mu,\nu}C_{i\mu}C_{j\nu}^*
+\Ket{u_i,v_\mu}\Bra{u_j,v_\nu},\\
+\overline{F_AG_B}&=\mathrm{Tr}_{AB}\left[\hat\rho_{AB}
+\left(\hat F_A\otimes\hat G_B\right)\right].
+\end{align}
+混合整体态仍使用后一条迹公式。
+
+\subsection{两个自旋的基底与 Kronecker 积}
+采用有序直积基
+\begin{equation}
+\Ket{\chi_1}=\Ket{\uparrow\uparrow},\quad
+\Ket{\chi_2}=\Ket{\uparrow\downarrow},\quad
+\Ket{\chi_3}=\Ket{\downarrow\uparrow},\quad
+\Ket{\chi_4}=\Ket{\downarrow\downarrow},
+\end{equation}
+其中第二个子系统的指标变化更快。若两个态的列向量为 $a,b$，则直积态的列向量是
+\begin{equation}
+\left(\begin{matrix}a_1\\a_2\end{matrix}\right)\otimes
+\left(\begin{matrix}b_1\\b_2\end{matrix}\right)
+=\left(\begin{matrix}a_1b_1\\a_1b_2\\a_2b_1\\a_2b_2\end{matrix}\right).
+\end{equation}
+算符的矩阵表示为 Kronecker 积
+\begin{equation}
+F\otimes G=\left(\begin{matrix}F_{11}G&F_{12}G\\F_{21}G&F_{22}G\end{matrix}\right).
+\end{equation}
+例如
+\begin{equation}
+S_x\otimes S_y=\frac{\hbar^2}{4}
+\left(\begin{matrix}0&0&0&-\mathrm{i}\\0&0&\mathrm{i}&0\\
+0&-\mathrm{i}&0&0\\\mathrm{i}&0&0&0\end{matrix}\right).
+\end{equation}
+
+另一组正交归一基是自旋三重态和单态：
+\begin{align}
+\Ket{1,1}&=\Ket{\uparrow\uparrow},&\Ket{1,-1}&=\Ket{\downarrow\downarrow},\\
+\Ket{1,0}&=\frac{\Ket{\uparrow\downarrow}+\Ket{\downarrow\uparrow}}{\sqrt2},&
+\Ket{0,0}&=\frac{\Ket{\uparrow\downarrow}-\Ket{\downarrow\uparrow}}{\sqrt2}.
+\end{align}
+前两个为乘积态，后两个为纠缠态。四个 Bell 态也组成正交归一基：
+\begin{align}
+\Ket{\Phi_\pm}&=\frac{\Ket{\uparrow\uparrow}\pm\Ket{\downarrow\downarrow}}{\sqrt2},\\
+\Ket{\Psi_\pm}&=\frac{\Ket{\uparrow\downarrow}\pm\Ket{\downarrow\uparrow}}{\sqrt2}.
+\end{align}
+它们都是 $\sigma_x\otimes\sigma_x$、$\sigma_y\otimes\sigma_y$、$\sigma_z\otimes\sigma_z$ 的共同本征态，且均为纠缠态；其中 $\Ket{\Psi_-}$ 即自旋单态。
+
+\begin{example}[整体纯态的密度矩阵]
+在直积基 $\left\{\Ket{\chi_j}\right\}_{j=1}^4$ 中，取
+\begin{equation}
+\Ket{\Psi}=\frac1{\sqrt2}\Ket{\chi_1}+\frac12\Ket{\chi_2}+\frac12\Ket{\chi_4},
+\qquad c=\left(\begin{matrix}1/\sqrt2\\1/2\\0\\1/2\end{matrix}\right).
+\label{eq:composite-example-state}
+\end{equation}
+由 $M=cc^\dagger$，逐个矩阵元为 $M_{jk}=c_jc_k^*$，得到
+\begin{equation}
+M=\left(\begin{matrix}
+1/2&\sqrt2/4&0&\sqrt2/4\\
+\sqrt2/4&1/4&0&1/4\\
+0&0&0&0\\
+\sqrt2/4&1/4&0&1/4
+\end{matrix}\right).
+\label{eq:composite-example-density}
+\end{equation}
+$c^\dagger c=1$ 保证 $M^2=cc^\dagger cc^\dagger=M$，故整体为纯态。它能否分离，须检查系数矩阵的秩或约化态的纯度。
+\end{example}

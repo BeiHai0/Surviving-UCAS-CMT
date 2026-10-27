@@ -1,0 +1,125 @@
+% 来源：1020-12.pdf，第 32--39 页。
+\section{角动量的耦合}
+\subsection{子系统角动量}
+考虑两个相互独立的角动量 $\hat{\bm J}_1$、$\hat{\bm J}_2$，各自满足
+\begin{equation}
+\hat{\bm J}_a\times\hat{\bm J}_a=\mathrm{i}\hat{\bm J}_a,\qquad
+\left[\hat J_{ai},\hat J_a^2\right]=0,\qquad a=1,2,
+\end{equation}
+不同子系统之间满足
+\begin{equation}
+\left[\hat J_{1i},\hat J_{2k}\right]=0,\qquad i,k=x,y,z.
+\end{equation}
+“相互独立”在这里指它们作用于不同张量因子；Hamilton 算符仍可以包含二者的耦合。
+
+\subsection{复合系统的总角动量}
+定义总角动量
+\begin{equation}
+\boxed{\hat{\bm J}=\hat{\bm J}_1+\hat{\bm J}_2,}
+\qquad\hat J_i=\hat J_{1i}+\hat J_{2i}.
+\end{equation}
+严格地说，在复合空间 $\mathcal H_1\otimes\mathcal H_2$ 上，各分量为
+\begin{equation}
+\boxed{\hat J_i=\hat J_i^{\left(1\right)}\otimes\hat I_2
++\hat I_1\otimes\hat J_i^{\left(2\right)}.}
+\label{eq:coupled-angular-tensor-sum}
+\end{equation}
+其中 $\hat J_{1i}=\hat J_i^{\left(1\right)}\otimes\hat I_2$、
+$\hat J_{2i}=\hat I_1\otimes\hat J_i^{\left(2\right)}$。总角动量是这两个嵌入算符之和。
+利用不同因子的对易性，
+\begin{align}
+\left[\hat J_i,\hat J_k\right]
+&=\left[\hat J_{1i},\hat J_{1k}\right]+\left[\hat J_{2i},\hat J_{2k}\right]\notag\\
+&=\mathrm{i}\sum_\ell\epsilon_{ik\ell}\left(\hat J_{1\ell}+\hat J_{2\ell}\right)
+=\mathrm{i}\sum_\ell\epsilon_{ik\ell}\hat J_\ell.
+\end{align}
+因此总角动量也满足同样的角动量代数，且 $\left[\hat J^2,\hat J_i\right]=0$。
+总阶梯算符为
+\begin{equation}
+\hat J_\pm=\hat J_x\pm\mathrm{i}\hat J_y
+=\hat J_{1\pm}+\hat J_{2\pm}.
+\end{equation}
+$\hat J_i,\hat J_\pm,\hat J^2$ 之间的对易关系与单个子系统中相同。
+
+\subsection{复合系统的无耦合表象}
+固定 $j_1,j_2$。第一个子系统的基底为 $\left\{\Ket{j_1,m_1}\right\}$，维数为 $2j_1+1$；第二个为 $\left\{\Ket{j_2,m_2}\right\}$，维数为 $2j_2+1$。
+直积基是 $\hat J_1^2,\hat J_{1z},\hat J_2^2,\hat J_{2z}$ 的共同本征态，简记为
+\begin{equation}
+\Ket{j_1,m_1;j_2,m_2}
+=\Ket{j_1,m_1}\otimes\Ket{j_2,m_2}.
+\end{equation}
+空间维数为 $\left(2j_1+1\right)\left(2j_2+1\right)$。各算符的作用为
+\begin{align}
+\hat J_1^2\Ket{j_1,m_1;j_2,m_2}
+&=j_1\left(j_1+1\right)\Ket{j_1,m_1;j_2,m_2},\\
+\hat J_2^2\Ket{j_1,m_1;j_2,m_2}
+&=j_2\left(j_2+1\right)\Ket{j_1,m_1;j_2,m_2},\\
+\hat J_{1z}\Ket{j_1,m_1;j_2,m_2}
+&=m_1\Ket{j_1,m_1;j_2,m_2},\\
+\hat J_{2z}\Ket{j_1,m_1;j_2,m_2}
+&=m_2\Ket{j_1,m_1;j_2,m_2},\\
+\hat J_{1\pm}\Ket{j_1,m_1;j_2,m_2}
+&=\sqrt{\left(j_1\mp m_1\right)\left(j_1\pm m_1+1\right)}
+\Ket{j_1,m_1\pm1;j_2,m_2},\\
+\hat J_{2\pm}\Ket{j_1,m_1;j_2,m_2}
+&=\sqrt{\left(j_2\mp m_2\right)\left(j_2\pm m_2+1\right)}
+\Ket{j_1,m_1;j_2,m_2\pm1}.
+\end{align}
+它们满足正交性
+\begin{equation}
+\Braket{j_1,m_1';j_2,m_2'|j_1,m_1;j_2,m_2}
+=\delta_{m_1'm_1}\delta_{m_2'm_2},
+\end{equation}
+以及完备性
+\begin{equation}
+\sum_{m_1,m_2}\Ket{j_1,m_1;j_2,m_2}\Bra{j_1,m_1;j_2,m_2}=\hat I.
+\end{equation}
+因此任意态可展开为
+\begin{equation}
+\Ket{\psi}=\sum_{m_1,m_2}\Ket{j_1,m_1;j_2,m_2}
+\Braket{j_1,m_1;j_2,m_2|\psi}.
+\end{equation}
+这里 $\hat I$ 指固定 $j_1,j_2$ 的直积空间上的单位算符。
+
+\subsection{耦合表象}
+仍固定 $j_1,j_2$，改选 $\hat J^2,\hat J_z,\hat J_1^2,\hat J_2^2$ 的共同本征态
+$\Ket{j_1,j_2;j,m}$。这四个算符彼此对易：$\hat J_a^2$ 与各子系统分量均对易，因此也与总分量及其平方和对易。
+共同本征方程为
+\begin{align}
+\hat J^2\Ket{j_1,j_2;j,m}&=j\left(j+1\right)\Ket{j_1,j_2;j,m},\\
+\hat J_z\Ket{j_1,j_2;j,m}&=m\Ket{j_1,j_2;j,m},\\
+\hat J_1^2\Ket{j_1,j_2;j,m}&=j_1\left(j_1+1\right)\Ket{j_1,j_2;j,m},\\
+\hat J_2^2\Ket{j_1,j_2;j,m}&=j_2\left(j_2+1\right)\Ket{j_1,j_2;j,m}.
+\end{align}
+耦合基也组成同一个 $\left(2j_1+1\right)\left(2j_2+1\right)$ 维空间的正交归一完备基：
+\begin{align}
+\Braket{j_1,j_2;j',m'|j_1,j_2;j,m}&=\delta_{j'j}\delta_{m'm},\\
+\sum_{j,m}\Ket{j_1,j_2;j,m}\Bra{j_1,j_2;j,m}&=\hat I,\\
+\Ket{\psi}&=\sum_{j,m}\Ket{j_1,j_2;j,m}\Braket{j_1,j_2;j,m|\psi}.
+\end{align}
+这里 $j$ 对该直积空间中允许的总角动量取值求和，每个 $j$ 下 $m=-j,\ldots,j$；允许的 $j$ 范围留待后续讨论。
+
+\begin{example}[耦合表象的应用]
+设
+\begin{equation}
+\hat H=\lambda\hat{\bm J}_1\cdot\hat{\bm J}_2,
+\end{equation}
+其中实常数 $\lambda$ 为耦合强度。由
+\begin{equation}
+\hat J^2=\left(\hat{\bm J}_1+\hat{\bm J}_2\right)^2
+=\hat J_1^2+\hat J_2^2+2\hat{\bm J}_1\cdot\hat{\bm J}_2,
+\end{equation}
+得
+\begin{equation}
+\hat{\bm J}_1\cdot\hat{\bm J}_2
+=\frac12\left(\hat J^2-\hat J_1^2-\hat J_2^2\right).
+\end{equation}
+于是耦合基就是 $\hat H$ 的本征基：
+\begin{align}
+\hat H\Ket{j_1,j_2;j,m}
+&=\frac\lambda2\left(\hat J^2-\hat J_1^2-\hat J_2^2\right)\Ket{j_1,j_2;j,m}\notag\\
+&=\frac\lambda2\left[j\left(j+1\right)-j_1\left(j_1+1\right)-j_2\left(j_2+1\right)\right]
+\Ket{j_1,j_2;j,m}.
+\end{align}
+可见选择耦合表象能直接将这一相互作用对角化。
+\end{example}

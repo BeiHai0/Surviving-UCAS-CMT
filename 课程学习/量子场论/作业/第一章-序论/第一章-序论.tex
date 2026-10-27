@@ -1,0 +1,507 @@
+% !TeX program = xelatex
+\documentclass[11pt,a4paper]{ctexart}
+
+\usepackage[left=2.4cm,right=2.4cm,top=2.1cm,bottom=2.1cm]{geometry}
+\usepackage{amsmath,amssymb,mathtools,braket,bm}
+\usepackage{xcolor}
+% inline 选项用于启用 enumerate* 行内列表环境。
+\usepackage[inline]{enumitem}
+\usepackage{fancyhdr}
+
+% ============================================================
+% 基本信息：只需修改下面几项
+% ============================================================
+\newcommand{\coursename}{量子场论}
+\newcommand{\assignmentnumber}{第一章习题}
+\newcommand{\teachername}{\underline{乔从丰、刘泽茏}}
+\newcommand{\studentname}{\underline{林照翔}}
+\newcommand{\studentid}{\underline{202628001207046}}
+
+% ============================================================
+% 数学公式书写规范
+% ============================================================
+% 1. 行内公式使用一对美元符号。
+% 2. 独立成行的公式统一使用 equation 环境，不使用反斜杠方括号形式。
+% 3. 虚数单位 i、自然常数 e 和微分符号 d 均使用直立体 \mathrm。
+%
+
+% 独立公式的推荐写法：
+% \begin{equation}
+%   ...
+% \end{equation}
+%
+
+% ============================================================
+% 页面样式
+% ============================================================
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0.25em}
+\setlength{\headheight}{14pt}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\coursename}
+\rhead{\assignmentnumber}
+\cfoot{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% ============================================================
+% 列表参数
+% ============================================================
+% enumerate 是每个条目 另起一行 的普通编号列表。
+% label 决定编号格式：\arabic* 依次产生 1、2、3，外加括号后显示为 (1)、(2)、(3)。
+\setlist[enumerate,1]{
+  label=(\arabic*),
+  leftmargin=3.2em,
+  itemsep=0.55em,
+  topsep=0.45em
+}
+
+% inlineenum 是基于 enumerate* 定义的行内编号列表。
+% 所有格式均在此处统一设置，正文中不必为每一道题重复填写参数。
+% label 决定编号格式；labelsep 决定编号与本项正文之间的距离。
+% itemjoin 决定相邻条目之间插入的内容。
+% itemjoin* 决定最后两个条目之间插入的内容，通常与 itemjoin 保持一致。
+% 内容过长时，行内列表仍会自动换行。
+\newlist{inlineenum}{enumerate*}{1}
+\setlist[inlineenum,1]{
+  label=(\arabic*),
+  labelsep=0.5em,
+  itemjoin={；\quad},
+  itemjoin*={；\quad}
+}
+
+% 其他常用 label 写法：
+%   label=\arabic*.     -> 1. 2. 3.
+%   label=(\arabic*)   -> (1) (2) (3)
+%   label=\alph*)      -> a) b) c)
+%   label=(\roman*)    -> (i) (ii) (iii)
+%   label=\Alph*.      -> A. B. C.
+
+% ============================================================
+% 题目与回答环境
+% ============================================================
+% problem 的可选参数填写新版教材练习编号或同组编号范围。
+% \refstepcounter 使题目可以配合 \label 和 \ref 进行交叉引用。
+% 练习编号使用白底黑字描边框，与黑底白字的“回答”标签相区分。
+\newcounter{problem}
+\newenvironment{problem}[1][]
+  {\refstepcounter{problem}%
+   \par\medskip\noindent
+   \begingroup
+   \setlength{\fboxsep}{3pt}%
+   \setlength{\fboxrule}{0.8pt}%
+   \fbox{\bfseries 练习 #1}%
+   \endgroup
+   \quad\ignorespaces}
+  {\par\medskip}
+
+% answer 环境用于书写答案。
+% “回答”使用黑底白字标签，保证黑白打印时仍有醒目的视觉区分；
+% 答案结束处会自动添加一条黑色细分隔线。
+\newenvironment{answer}
+  {\par\smallskip\noindent
+   \begingroup
+   \setlength{\fboxsep}{4pt}%
+   \colorbox{black}{\textcolor{white}{\bfseries 回答}}%
+   \endgroup
+   \quad\ignorespaces}
+  {\par\smallskip\noindent\rule{\linewidth}{0.4pt}\medskip}
+
+\begin{document}
+
+\begin{center}
+  {\LARGE\bfseries \coursename\quad \assignmentnumber}\par
+  \vspace{0.7em}
+  \small
+  教师：\teachername\qquad
+  姓名：\studentname\qquad
+  学号：\studentid
+\end{center}
+\vspace{0.4em}
+
+\begin{problem}[1.1.1--1.1.2]\label{prob:ch1-blackbody-group}
+{\small\textnormal{（第 1.1 节，第 7 页，练习 1.1.1--1.1.2）}}\par
+\begin{enumerate}[label=1.1.\arabic*,ref=1.1.\arabic*,leftmargin=4.5em]
+\item\label{prob:ch1-blackbody-energy}
+推导任意简正模式的平均能量（教材式（1.10））：
+\begin{equation*}
+\begin{aligned}
+\langle E_n\rangle
+&=\frac{\displaystyle\sum_{j=0}^{\infty}(jE_n)\mathrm{e}^{-jE_n\beta}}
+{\displaystyle\sum_{j=0}^{\infty}\mathrm{e}^{-jE_n\beta}}
+=-\frac{\mathrm{d}}{\mathrm{d}\beta}\ln\frac{1}{1-\mathrm{e}^{-h\nu_n\beta}}\\
+&=\frac{h\nu_n}{\mathrm{e}^{h\nu_n\beta}-1}
+=\frac{\hbar\omega_n}{\mathrm{e}^{\hbar\omega_n\beta}-1}.
+\end{aligned}
+\end{equation*}
+其中 $E_n=h\nu_n$ 为该模式的能量量子，$j=0,1,2,\ldots$ 为激发数，$\beta=1/(k_{\mathrm B}T)$，$\omega_n=2\pi\nu_n$，$\hbar=h/(2\pi)$。
+\item\label{prob:ch1-blackbody-stefan}
+推导斯特藩--玻尔兹曼黑体辐射公式（教材式（1.13））：
+\begin{equation*}
+E(T)=\int_0^\infty I(\nu,T)\,\mathrm{d}\nu
+=\int_0^\infty\frac{\hbar}{\pi^2c^3}
+\frac{\omega^3}{\mathrm{e}^{\hbar\omega\beta}-1}\,\mathrm{d}\omega
+=a_{\mathrm B}T^4,
+\qquad a_{\mathrm B}=\frac{8\pi^5k_{\mathrm B}^4}{15h^3c^3}.
+\end{equation*}
+其中 $E(T)$ 为总辐射能量密度，$I(\nu,T)$ 为单位频率的辐射能量密度，$c$ 为光速。相应的辐射出射度满足
+\begin{equation*}
+M(T)=\sigma T^4,\qquad \sigma=\frac14a_{\mathrm B}c.
+\end{equation*}
+\end{enumerate}
+\end{problem}
+\begin{answer}
+  \begin{enumerate}[label=(1.1.\arabic*),ref=1.1.\arabic*,leftmargin=4.5em]
+    \item 
+     \begin{equation}
+       \begin{aligned}
+          \Braket{E_n }
+          &=\frac{\sum_{j=0}^{\infty} jE_n \mathrm{e}^{-j E_n\beta} }{\sum_{j=0}^{\infty} \mathrm{e}^{-j E_n \beta} }
+          =\frac{-\frac{\partial }{\partial \beta } \sum_{j=0}^{\infty} \mathrm{e}^{-j E_n\beta} }{\sum_{j=0}^{\infty} \mathrm{e}^{-j E_n \beta} } \\ 
+          &=-\left(1-\mathrm{e}^{-E_n \beta} \right) \frac{\partial }{\partial \beta } \frac{1 }{1-\mathrm{e}^{-E_n \beta} }
+          =-\frac{\partial }{\partial \beta } \ln\left(\frac{1 }{1-\mathrm{e}^{-E_n \beta} }  \right) \\
+          &=\frac{\partial }{\partial \beta } \ln\left(1-\mathrm{e}^{-E_n \beta} \right)
+          =\frac{E_n \mathrm{e}^{-E_n \beta} }{1-\mathrm{e}^{-E_n \beta} }
+          =\frac{E_n  }{\mathrm{e}^{E_n \beta} - 1 } \\
+          &=\frac{h\nu_n }{\mathrm{e}^{h\nu_n \beta}-1}
+          =\frac{\hbar\omega_n }{\mathrm{e}^{\hbar\omega_n\beta}-1 } .
+       \end{aligned}
+     \end{equation}
+    \item 构造无量纲变量 $x=\hbar\omega / (k_{\mathrm{B}}T) $，则有
+    \begin{equation}
+      \begin{aligned}
+        E(T)
+        &=\int_0^\infty I(\nu,T)\mathrm{d}\nu
+        =\int_0^\infty\frac{\hbar}{\pi^2c^3}
+        \frac{\omega^3}{\mathrm{e}^{\hbar\omega\beta}-1}\mathrm{d}\omega \\
+        &=\frac{k_{\mathrm{B}}^4 T^4 }{\pi^2 c^3 \hbar^3 } \int_{0}^{+\infty} \frac{x^3 }{\mathrm{e}^{x}-1 }\mathrm{d}x.
+      \end{aligned}
+    \end{equation}
+    利用积分公式
+    \begin{equation}
+      \int_{0}^{+\infty} \frac{x^3 }{\mathrm{e}^{x}-1 }\mathrm{d}x
+      =\frac{\pi^4 }{15 }, 
+    \end{equation}
+    可得黑体腔内电磁能量密度：
+    \begin{equation}
+      \begin{aligned}
+        E(T)
+        =\frac{k_{\mathrm{B}}^4 T^4 }{\pi^2 c^3 \hbar^3 } \int_{0}^{+\infty} \frac{x^3 }{\mathrm{e}^{x}-1 }\mathrm{d}x
+        =\frac{k_{\mathrm{B}}^4\pi^2 }{15 c^3 \hbar^3 } T^4 
+        =\frac{8\pi^5 k_{\mathrm{B}}^4 }{15 c^3 h^3 } T^4
+        =a_{\mathrm{B}} T^4.
+      \end{aligned}
+    \end{equation}
+    考虑 $\Delta t $ 时间内黑体表面 $\Delta A $ 面积上辐射的能量。只有以面元为球心，$c\Delta t$ 为半径的内半球中的光子才能通过面元跑出去。辐出度定义为单位时间单位表面积向外辐射的能量。采用球坐标，把面元放在坐标原点，球坐标极轴为 $z $ 轴，面元的内法线为 $y $ 轴。
+
+    考虑 $(r,\theta,\phi) $ 点处的体积元 $\mathrm{d}V= r^2\sin\theta\mathrm{d}r\mathrm{d}\theta\mathrm{d}\phi $，设面元内法线与体元半径的夹角为 $\alpha $，则 $\cos\alpha=\sin\theta\sin\phi $。$\Delta A$ 对体元张开的立体角为 $\mathrm{d}\Omega=\Delta A\cos\alpha/r^2 $，$\mathrm{d}V $ 在初始时刻有 $E(T)\mathrm{d}V $ 能量的光子，但辐射方向均匀。这些光子在 $\Delta t $ 时间后有 $E(T)\mathrm{d}V \mathrm{d}\Omega/(4\pi)  $ 穿过面元，积分就得到：
+    \begin{equation}
+      \begin{aligned}
+        M(T) \Delta t \Delta A
+        &=\int_{r=0}^{c\Delta t} \int_{\theta=0}^{\theta=\pi} \int_{\phi=0}^{\phi=\pi} E(T) \left(r^2\sin\theta\mathrm{d}r\mathrm{d}\theta\mathrm{d}\phi \right) \frac{ \Delta A \cos\alpha/r^2 }{4\pi } \\
+        &=\frac{c\Delta A \Delta t E(T)}{4\pi } \int_{0}^{\pi} \sin^2\theta \mathrm{d}\theta \int_{0}^{\pi}\sin\phi \mathrm{d}\phi \\
+        &=\frac{c\Delta A\Delta t E(T)}{4 }.
+      \end{aligned}
+    \end{equation}
+    于是：
+    \begin{equation}
+      \begin{aligned}
+        M(T)
+        =\frac{c }{4  } E(T)
+        =\frac{1 }{4 } a_{\mathrm{B}} c T^4 
+        =\sigma T^4.
+      \end{aligned}
+    \end{equation}
+  \end{enumerate}
+\end{answer}
+\clearpage
+\begin{problem}[1.3.1--1.3.5]\label{prob:ch1-1-group}
+{\small\textnormal{（第 1.3 节，第 13 页，练习 1.3.1--1.3.5）}}\par
+\begin{enumerate}[label=1.3.\arabic*,ref=1.3.\arabic*,leftmargin=4.5em]
+\item\label{prob:ch1-1}
+根据定义求 $\epsilon_{0123}$ 的值。
+\item\label{prob:ch1-2}
+证明：
+\begin{equation*}
+\epsilon^{\mu\nu\lambda\rho}\epsilon_{\mu'\nu'\lambda\rho}
+=2\bigl(\delta^\mu_{\nu'}\delta^\nu_{\mu'}-\delta^\mu_{\mu'}\delta^\nu_{\nu'}\bigr).
+\end{equation*}
+\item\label{prob:ch1-onshell-delta}
+证明
+\begin{equation*}
+\int_{-\infty}^{+\infty}\mathrm{d}k^0\,
+\delta\left(k^2-m^2\right)\theta\left(k^0\right)=\frac{1}{2\omega_{\bm{k}}},
+\qquad \omega_{\bm{k}}=\sqrt{\bm{k}^2+m^2}.
+\end{equation*}
+其中 $k^2=(k^0)^2-\bm{k}^2$，$\theta$ 为阶跃函数，$\delta$ 为狄拉克 $\delta$ 函数。
+\item\label{prob:ch1-invariant-four-measure}
+证明四维积分测度 $\mathrm{d}^4k$ 在洛伦兹变换下不变，即对于 $k'^\mu=\Lambda^\mu{}_{\nu}k^\nu$，有
+\begin{equation*}
+\mathrm{d}^4k'=\mathrm{d}^4k.
+\end{equation*}
+\item\label{prob:ch1-invariant-onshell-measure}
+证明正能量质量壳上的积分测度具有洛伦兹不变性：
+\begin{equation*}
+\frac{\mathrm{d}^3\bm{k}'}{2\omega_{\bm{k}'}}
+=\frac{\mathrm{d}^3\bm{k}}{2\omega_{\bm{k}}},
+\qquad \omega_{\bm{k}}=\sqrt{\bm{k}^2+m^2}.
+\end{equation*}
+这里取保持时间定向的洛伦兹变换，积分区域随变换相应映射；原题写作证明 $\displaystyle\int\frac{\mathrm{d}^3\bm{k}}{2\omega_{\bm{k}}}$ 为洛伦兹不变的。
+\end{enumerate}
+\end{problem}
+
+\begin{answer}
+  \begin{enumerate}[label=(1.3.\arabic*),ref=1.3.\arabic*,leftmargin=4.5em]
+    \item 由于 $\varepsilon^{0123}=1 $，利用度规有
+    \begin{equation}
+      \varepsilon_{0123}
+      =g_{0\mu}g_{1\nu}g_{2\lambda}g_{3\rho} \varepsilon^{\mu\nu\lambda\rho}
+      =g_{00}g_{11}g_{22}g_{33} \varepsilon^{0123}
+      =-1.
+    \end{equation}
+    \item 由于 $\varepsilon^{\mu\nu\lambda\rho}\varepsilon_{\mu'\nu'\lambda\rho} $ 关于 $\mu,\nu $ 反对称，关于 $\mu',\nu' $ 反对称，且两个 $\varepsilon $ 非零必有 $\left\{\mu,\nu \right\}=\left\{\mu',\nu' \right\} $，因此设
+    \begin{equation}
+      \varepsilon^{\mu\nu\lambda\rho}\varepsilon_{\mu'\nu'\lambda\rho}
+      =A \left(\delta^\mu_{\mu'}\delta^{\nu}_{\nu'} - \delta^{\mu}_{\nu'} \delta^{\nu}_{\mu'} \right),
+    \end{equation}
+    其中 $A $ 是待定系数。为了确定待定系数，取 $(\mu=\mu'=0,\nu=\nu'=1) $，有
+    \begin{equation}
+      \varepsilon^{01\lambda\rho}\varepsilon_{01\lambda\rho}
+      =A,\qquad
+      \Longrightarrow
+      A
+      =\varepsilon^{0123} \varepsilon_{0123} + \varepsilon^{0132}\varepsilon_{0132}
+      =-2,
+    \end{equation}
+    因此
+    \begin{equation}
+      \varepsilon^{\mu\nu\lambda\rho}\varepsilon_{\mu'\nu'\lambda\rho}
+      =-2 \left(\delta^\mu_{\mu'}\delta^{\nu}_{\nu'} - \delta^{\mu}_{\nu'} \delta^{\nu}_{\mu'} \right)      
+      =2\left(\delta^\mu_{\nu'}\delta^\nu_{\mu'}-\delta^\mu_{\mu'}\delta^\nu_{\nu'}\right).
+    \end{equation}
+    \item 利用 delta 函数复合函数公式
+    \begin{equation}
+      \delta\left(f(x) \right)
+      =\sum_{i} \frac{\delta(x-x_i) }{\left|f'(x_i) \right| }, 
+    \end{equation}
+    其中 $x_i $ 是 $f(x) $ 的单根，有：
+    \begin{equation}
+      \begin{aligned}
+        &\int_{-\infty}^{+\infty}\mathrm{d}k^0\delta\left(k^2-m^2\right)\theta\left(k^0\right) \\
+        =&\int_{-\infty}^{+\infty}\mathrm{d}k^0\delta\left[\left(k^0+\sqrt{\bm{k}^2+m^2} \right)\left(k^0-\sqrt{\bm{k}^2+m^2} \right)\right]\theta\left(k^0\right) \\
+        =&\int_{-\infty}^{+\infty}\mathrm{d}k^0 \left[\frac{\delta\left(k^0+\sqrt{\bm{k}^2+m^2} \right) }{2\sqrt{\bm{k}^2+m^2} } + \frac{\delta\left(k^0-\sqrt{\bm{k}^2+m^2} \right) }{2\sqrt{\bm{k}^2+m^2} }  \right] \theta\left(k^0 \right) \\
+        =&\int_{-\infty}^{+\infty}\mathrm{d}k^0 \frac{\delta\left(k^0-\sqrt{\bm{k}^2+m^2} \right) }{2\sqrt{\bm{k}^2+m^2} }
+        =\frac{1 }{2\sqrt{\bm{k}^2+m^2} } \\
+        =&\frac{1 }{2\omega_{\bm{k}} }. 
+      \end{aligned}
+    \end{equation}
+    \item 四维动量的变换规律为
+    \begin{equation}
+      k'^\mu = \Lambda^\mu{}_{\nu} k^\nu,\quad
+      \frac{\partial k'^\mu}{\partial k^\nu}
+      =\Lambda^\mu{}_\nu.
+    \end{equation}
+    由于 $\Lambda $ 保度规：
+    \begin{equation}
+      \Lambda^\top g \Lambda = g,
+    \end{equation}
+    两边取行列式可得：
+    \begin{equation}
+      \mathrm{det}\left(\Lambda^\top \Lambda \right)
+      =\mathrm{det}^2\left(\Lambda \right)
+      =1,\quad
+      \left|\mathrm{det}\left(\Lambda \right) \right|
+      =1.
+    \end{equation}
+    于是
+    \begin{equation}
+      \mathrm{d}^4k'
+      =\left|\mathrm{det}\left(\Lambda \right) \right|\mathrm{d}^4k
+      =\mathrm{d}^4k.
+    \end{equation}
+    \item 由\ref{prob:ch1-invariant-four-measure} 有：
+    \begin{equation}
+      \int \mathrm{d}^4k' \delta\left(k'^2-m^2 \right) \theta\left(k'^0 \right) F(k')
+      =\int \mathrm{d}^4k \delta\left(k^2-m^2 \right) \theta\left(k^0 \right) F(\Lambda k),
+    \end{equation}
+    再结合 \ref{prob:ch1-onshell-delta}，上式化为
+    \begin{equation}
+      \int\frac{\mathrm{d}^3\bm{k}' }{2\omega_{\bm{k}'} } F(\omega_{\bm{k}'},\bm{k}')
+      =\int \frac{\mathrm{d}^3\bm{k} }{2\omega_{\bm{k}} } F\left[\Lambda\left(\omega_{\bm{k}},\bm{k} \right) \right],\qquad
+      k'=\Lambda k.
+    \end{equation}
+    由 $F(k) $ 的任意性，就有
+    \begin{equation}
+      \frac{\mathrm{d}^3\bm{k}'}{2\omega_{\bm{k}'}}
+      =\frac{\mathrm{d}^3\bm{k}}{2\omega_{\bm{k}}}.
+    \end{equation}
+  \end{enumerate}
+\end{answer}
+\clearpage
+\begin{problem}[1.4.1--1.4.5]\label{prob:ch1-3-group}
+{\small\textnormal{（第 1.4 节，第 15 页，练习 1.4.1--1.4.5）}}\par
+\begin{enumerate}[label=1.4.\arabic*,ref=1.4.\arabic*,leftmargin=4.5em]
+\item\label{prob:ch1-3}
+根据相互作用的哈密顿原理，推导多自由度体系的拉格朗日方程（教材式（1.51））：
+\begin{equation*}
+\frac{\partial L}{\partial q_i}-\frac{\mathrm{d}}{\mathrm{d}t}\frac{\partial L}{\partial\dot q_i}=0,\qquad i=1,\ldots,n.
+\end{equation*}
+\item\label{prob:ch1-4}
+由拉格朗日运动方程和哈密顿量的定义 $H=\sum_{i=1}^n p_i\dot q_i-L$，推导经典动力系统的哈密顿正则运动方程（教材式（1.54））：
+\begin{equation*}
+\dot q_i=\frac{\partial H}{\partial p_i},\qquad \dot p_i=-\frac{\partial H}{\partial q_i},\qquad i=1,\ldots,n.
+\end{equation*}
+\item\label{prob:ch1-5}
+设经典力学量 $G=G(p,q)$ 不显含时间，推导教材式（1.55）：
+\begin{equation*}
+\dot G=\sum_{i=1}^n\left(\frac{\partial H}{\partial p_i}\frac{\partial G}{\partial q_i}-\frac{\partial H}{\partial q_i}\frac{\partial G}{\partial p_i}\right).
+\end{equation*}
+\item\label{prob:ch1-6}
+取 $\hbar=1$，由力学量的经典哈密顿正则运动方程及正则量子化关系，推导量子力学的正则运动方程（教材式（1.57））：
+\begin{equation*}
+\dot q_i=\mathrm{i}[H,q_i],\qquad \dot p_i=\mathrm{i}[H,p_i],\qquad i=1,\ldots,n.
+\end{equation*}
+\item\label{prob:ch1-7}
+取 $\hbar=1$，设海森堡绘景中的力学量算符 $G$ 不显含时间，推导教材式（1.58）：
+\begin{equation*}
+\dot G=\mathrm{i}[H,G].
+\end{equation*}
+\end{enumerate}
+\end{problem}
+
+\begin{answer}
+  \begin{enumerate}[label=(1.4.\arabic*),ref=1.4.\arabic*,leftmargin=4.5em]
+    \item 作用量为
+    \begin{equation}
+      S = \int_{t_1}^{t_2}\mathrm{d}t L\left(q,\dot{q} \right),
+    \end{equation}
+    采用爱因斯坦求和约定，作用量的变分为
+    \begin{equation}
+      \begin{aligned}
+        \delta S
+        &=\int_{t_1}^{t_2}\mathrm{d}t \left(\frac{\partial L }{\partial q_i }\delta q_i + \frac{\partial L }{\partial \dot{q}_i }\delta \dot{q}_i   \right) \\
+        &=\int_{t_1}^{t_2}\mathrm{d}t \left(\frac{\partial L }{\partial q_i }\delta q_i + \frac{\partial L }{\partial \dot{q}_i } \frac{\mathrm{d} }{\mathrm{d}t }  \delta q_i  \right) \\
+        &=\int_{t_1}^{t_2}\mathrm{d}t \left(\frac{\partial L }{\partial q_i }\delta q_i + \frac{\mathrm{d} }{\mathrm{d}t } \left(\frac{\partial L }{\partial \dot{q}_i } \delta q_i \right) - \left(\frac{\mathrm{d} }{\mathrm{d}t } \frac{\partial L }{\partial \dot{q}_i } \delta q_i  \right) \right) \\
+        &=\int_{t_1}^{t_2}\mathrm{d}t \left(\frac{\partial L }{\partial q_i } - \frac{\mathrm{d} }{\mathrm{d}t }\frac{\partial L }{\partial \dot{q}_i }    \right) \delta q_i,
+      \end{aligned}
+    \end{equation}
+    其中，由于要求边界上 $\delta q_i(t_1)=\delta q_i(t_2)=0 $，因此积分中全微分项为零。由 $\delta q_i $ 的任意性，得到：
+    \begin{equation}
+      \frac{\partial L }{\partial q_i } - \frac{\mathrm{d} }{\mathrm{d}t } \frac{\partial L }{\partial \dot{q}_i }
+      =0.  
+    \end{equation}
+    \item 广义动量定义为
+    \begin{equation}
+      p_i
+      =\frac{\partial L }{\partial \dot{q}_i }. 
+    \end{equation}
+    对哈密顿量微分：
+    \begin{equation}
+      \begin{aligned}
+        \mathrm{d}H
+        &=p_i\mathrm{d}\dot{q}_i + \dot{q}_i\mathrm{d}p_i - \frac{\partial L }{\partial q_i }\mathrm{d}q_i - \frac{\partial L }{\partial \dot{q}_i } \mathrm{d}\dot{q}_i \\
+        &=p_i\mathrm{d}\dot{q}_i + \dot{q}_i\mathrm{d}p_i - \frac{\partial L }{\partial q_i }\mathrm{d}q_i - p_i \mathrm{d}\dot{q}_i \\
+        &=-\frac{\partial L }{\partial q_i } \mathrm{d}q_i + \dot{q}_i \mathrm{d}p_i.
+      \end{aligned}
+    \end{equation}
+    结合拉格朗日方程，有：
+    \begin{equation}
+      \begin{aligned}
+        \mathrm{d}H
+        &=-\frac{\mathrm{d} }{\mathrm{d}t } \left(\frac{\partial L }{\partial \dot{q}_i } \right) \mathrm{d}q_i + \dot{q}_i \mathrm{d}p_i \\
+        &=-\dot{p}_i\mathrm{d}q_i + \dot{q}_i\mathrm{d}p_i,
+      \end{aligned}
+    \end{equation}
+    由上式，可得哈密顿量对自变量的偏微分为：
+    \begin{equation}
+      \frac{\partial H}{\partial q_i } = -\dot{p}_i,\qquad
+      \frac{\partial H }{\partial p_i } = \dot{q}_i, 
+    \end{equation}
+    也即
+    \begin{equation}
+      \dot q_i=\frac{\partial H}{\partial p_i},\qquad \dot p_i=-\frac{\partial H}{\partial q_i}.
+    \end{equation}
+    \item 由于 $G=G(q,p) $，于是：
+    \begin{equation}
+      \begin{aligned}
+        \dot{G}
+        &=\frac{\partial G }{\partial q_i }\dot{q}_i + \frac{\partial G }{\partial p_i }\dot{p}_i \\
+        &=\frac{\partial G }{\partial q_i }\frac{\partial H }{\partial p_i } - \frac{\partial G }{\partial p_i }\frac{\partial H }{\partial q_i } \\
+        &=\frac{\partial H}{\partial p_i}\frac{\partial G}{\partial q_i}-\frac{\partial H}{\partial q_i}\frac{\partial G}{\partial p_i}.   
+      \end{aligned}
+    \end{equation}
+    \item 经典力学中，利用泊松括号有
+    \begin{equation}
+      \dot{G}
+      =\left\{G,H \right\},\qquad
+      \dot{q}_i
+      =\left\{q_i,H \right\},\qquad
+      \dot{p}_i
+      =\left\{p_i,H \right\}.
+    \end{equation}
+    正则量子化规则为，把物理量变成算符，以及：
+    \begin{equation}
+      \left\{A,B \right\} \to \frac{1 }{\mathrm{i} }\left[A,B \right],\qquad
+      \left[q_i,p_j \right] = \mathrm{i}\delta_{ij},
+    \end{equation}
+    于是
+    \begin{equation}
+      \dot{q}_i
+      =\frac{1 }{\mathrm{i} }  \left[q_i,H \right]
+      =\mathrm{i} \left[H,q_i \right],\qquad
+      \dot{p}_i
+      =\frac{1 }{\mathrm{i} } \left[p_i,H \right]
+      =\mathrm{i} \left[H,p_i \right].
+    \end{equation}
+    \item 薛定谔方程为
+    \begin{equation}
+      \mathrm{i}\frac{\mathrm{d} }{\mathrm{d}t }\Ket{\psi_S(t) } = H_S \Ket{\psi_S(t) },
+    \end{equation}
+    引入时间演化算符满足 $\Ket{\psi_S(t) }=U(t,t_0)\Ket{\psi_S(t_0) } $，其时间演化满足：
+    \begin{equation}
+      \mathrm{i}\frac{\partial U(t,t_0)}{\partial t }
+      =H_S U(t,t_0).
+    \end{equation}
+    海森堡绘景中的算符定义为
+    \begin{equation}
+      G_H(t)
+      =U^\dag(t,t_0) G_S U(t,t_0),
+    \end{equation}
+    其时间演化满足：
+    \begin{equation}
+      \begin{aligned}
+        \dot{G}_H(t)
+        &=\frac{\partial U^\dag(t,t_0) }{\partial t } G_S U(t,t_0) + U^\dag(t,t_0) G_S \frac{\partial U(t,t_0)}{\partial t } \\
+        &=\mathrm{i} U^\dag(t,t_0) H_S G_S U(t,t_0) - \mathrm{i} U^\dag(t,t_0) G_S H_S U(t,t_0) \\
+        &=\mathrm{i} U^\dag(t,t_0) H_S U(t,t_0) U^\dag(t,t_0) G_S U(t,t_0) - \mathrm{i} U^\dag(t,t_0) G_S U(t,t_0) U^\dag(t,t_0) H_S U(t,t_0) \\
+        &=\mathrm{i} \left[H_H,G_H \right].
+      \end{aligned}
+    \end{equation}
+    省略海森堡绘景的下标就得到：
+    \begin{equation}
+      \dot{G}
+      =\mathrm{i} \left[H,G \right].
+    \end{equation}
+  \end{enumerate}
+\end{answer}
+\clearpage
+\begin{problem}[1.5.1]\label{prob:ch1-8}
+{\small\textnormal{（第 1.5 节，第 18 页，练习 1.5.1）}}\par
+由简谐振子的拉格朗日量 $L=\tfrac12m\dot q^{\,2}-\tfrac12\kappa q^2$，推导其运动方程（教材式（1.60））：
+\begin{equation*}
+m\ddot q=-\kappa q.
+\end{equation*}
+\end{problem}
+\begin{answer}
+  \begin{equation}
+    \frac{\partial L }{\partial q } = -\kappa q,\qquad
+    \frac{\partial L }{\partial \dot{q} } = m\dot{q},
+  \end{equation}
+  代入拉格朗日方程得到：
+  \begin{equation}
+    -\kappa q - m\ddot{q} = 0,\qquad
+    \ddot{q} + \frac{\kappa }{m } q = 0. 
+  \end{equation}
+\end{answer}
+
+\end{document}

@@ -24,7 +24,7 @@ F\left(x,x'\right)=\Braket{x|\hat F|x'},
 第二式使用 $\Braket{p|\hat x|p'}=\mathrm{i}\hbar\partial_p\delta\left(p-p'\right)$，而最右侧的 $\hat p$ 作用在 $\Ket{p'}$ 上产生本征值 $p'$。这些核应作为分布理解，只有放入对测试波函数的积分后，分部积分等操作才具有明确意义。
 
 \subsection{Schr\"odinger 绘景}
-Schr\"odinger 绘景中，态随时间演化，而没有显含时间的算符保持不变：
+Schr\"odinger 绘景中，体系物理态按 Schr\"odinger 方程随时间演化，而没有显含时间的算符保持不变：
 \begin{equation}
 \Ket{\psi_{\mathrm{S}}\left(t\right)}=\hat U\left(t,t_0\right)
 \Ket{\psi_{\mathrm{S}}\left(t_0\right)},
@@ -40,13 +40,65 @@ Schr\"odinger 绘景中，态随时间演化，而没有显含时间的算符保
 因此，若算符不显含时间且与 Hamilton 算符对易，它所代表的物理量守恒。
 
 \subsection{Heisenberg 绘景}
-把全部时间依赖转移到算符，定义
+先定义统一的绘景变换，再区分体系物理态与算符本征态。取 $t_0$ 为绘景参考时刻，令 $\hat U\left(t,t_0\right)$ 为体系 Hamilton 算符生成的演化算符，且 $\hat U\left(t_0,t_0\right)=\hat I$。任意态矢量及算符在两种绘景之间按如下规则对应：
 \begin{align}
-\Ket{\psi_{\mathrm{H}}}&=\Ket{\psi_{\mathrm{S}}\left(t_0\right)},\\
+\Ket{\phi_{\mathrm{H}}\left(t\right)}
+&=\hat U^\dag\left(t,t_0\right)\Ket{\phi_{\mathrm{S}}\left(t\right)},\\
 \hat A_{\mathrm{H}}\left(t\right)
-&=\hat U^\dagger\left(t,t_0\right)\hat A_{\mathrm{S}}\left(t\right)
+&=\hat U^\dag\left(t,t_0\right)\hat A_{\mathrm{S}}\left(t\right)
 \hat U\left(t,t_0\right).
 \end{align}
+第一式是态矢量的绘景变换，不要求任意给定的态矢量族都满足体系的 Schr\"odinger 方程。因此，“态不随时间变化”不是这个定义本身的结论，而是将它用于体系实际演化的物理态后得到的动力学结果。具体地，若
+\begin{equation}
+\Ket{\psi_{\mathrm{S}}\left(t\right)}
+=\hat U\left(t,t_0\right)\Ket{\psi_{\mathrm{S}}\left(t_0\right)},
+\end{equation}
+则
+\begin{equation}
+\Ket{\psi_{\mathrm{H}}\left(t\right)}
+=\hat U^\dag\left(t,t_0\right)\hat U\left(t,t_0\right)
+\Ket{\psi_{\mathrm{S}}\left(t_0\right)}
+=\Ket{\psi_{\mathrm{S}}\left(t_0\right)}
+\equiv\Ket{\psi_{\mathrm{H}}}.
+\end{equation}
+这说明体系物理态在海森堡绘景中固定，而不意味着该绘景中的每一个 ket 都与时间无关。
+
+对算符本征态也使用同一个变换。设不显含时间的 $\hat A$ 有一组离散正交完备本征态，满足 $\hat A\Ket{a_i}=a_i\Ket{a_i}$，选定其相位后定义
+\begin{equation}
+\Ket{a_i,t}_{\mathrm{H}}
+=\hat U^\dag\left(t,t_0\right)\Ket{a_i}.
+\end{equation}
+由此可验证
+\begin{equation}
+\hat A_{\mathrm{H}}\left(t\right)\Ket{a_i,t}_{\mathrm{H}}
+=\hat U^\dag\left(t,t_0\right)\hat A\Ket{a_i}
+=a_i\Ket{a_i,t}_{\mathrm{H}}.
+\end{equation}
+幺正变换保持正交性与完备性，故固定的体系物理态可在这组随时间变化的基中展开：
+\begin{equation}
+\Ket{\psi_{\mathrm{H}}}
+=\sum_i\Ket{a_i,t}_{\mathrm{H}}
+\,{}_{\mathrm{H}}\Braket{a_i,t|\psi_{\mathrm{H}}}.
+\end{equation}
+基矢和展开系数一般都随时间变化，它们的变化共同保证左侧态矢量不变。这里的本征态族并非同一个初态按体系 Hamilton 算符正向演化所得的物理态族，因此不适用上面的时间不变结论。这与课堂照片中先定义海森堡态矢量、再讨论 $A$ 表象的顺序一致。
+
+连续位置基按同样方式处理，所有等式按广义本征态的意义理解：
+\begin{equation}
+\Ket{x,t}_{\mathrm{H}}=\hat U^\dag\left(t,t_0\right)\Ket{x},
+\qquad
+\hat x_{\mathrm{H}}\left(t\right)\Ket{x,t}_{\mathrm{H}}
+=x\Ket{x,t}_{\mathrm{H}}.
+\end{equation}
+在参考时刻，由于 $\hat U\left(t_0,t_0\right)=\hat I$，有
+\begin{equation}
+\Ket{x_0,t_0}_{\mathrm{H}}=\Ket{x_0}.
+\end{equation}
+这个等式来自共同的参考时刻和上述相位约定；仅凭本征方程不能固定本征态的相位。位置波函数是固定物理态在变化的位置基中的分量：
+\begin{equation}
+\psi\left(x,t\right)
+={}_{\mathrm{H}}\Braket{x,t|\psi_{\mathrm{H}}}
+=\Braket{x|\hat U\left(t,t_0\right)|\psi_{\mathrm{S}}\left(t_0\right)}.
+\end{equation}
 两种绘景给出相同的物理预言：
 \begin{equation}
 \Braket{\psi_{\mathrm{S}}\left(t\right)|\hat A_{\mathrm{S}}\left(t\right)|

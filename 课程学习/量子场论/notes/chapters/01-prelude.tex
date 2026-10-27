@@ -1,38 +1,995 @@
 \chapter{序论}
+\label{chap:prelude}
 
-量子场论将场作为描述物理系统的基本对象。与有限个广义坐标描述的力学系统相比，场在空间的每一点都有相应的自由度。本章先约定常用符号，再介绍经典场的基本描述。
+量子场论把量子力学的状态与算符语言应用于具有连续空间自由度的系统。进入量子化之前，需要先回答三个经典问题：场的运动方程从哪里来，场的能量和动量如何定义，以及对称性为什么能够产生守恒律。本章以作用量为主线建立这些概念；量子化的具体计算留到下一章。
 
-\section{单位制与时空记号}
+本章主要讨论平直时空中的经典玻色场，拉格朗日密度至多依赖场的一阶导数。除明确写出的外源外，背景参数均视为固定常数。各推导所需的边界条件会分别说明；特别要区分推导运动方程时对变分的边界要求，与证明总荷守恒时对真实场构型的边界要求。
 
-\subsection{自然单位制}
+\section{单位制、时空与场的记号}
+\label{sec:prelude-conventions}
 
-本文采用自然单位制 $\hbar=c=1$，其中 $\hbar$ 为约化普朗克常数，$c$ 为真空光速。在这一约定下，能量、动量和质量具有相同的量纲，而时间与长度具有能量倒数的量纲。
+\subsection{自然单位制与质量量纲}
 
-对于质量为 $m$ 的自由粒子，能量 $E$ 与三维动量 $\bm{p}$ 满足
+本文采用自然单位制 $\hbar=c=1$，其中 $\hbar$ 为约化普朗克常数，$c$ 为真空光速。这是单位的选择，并不意味着物理量失去了量纲。能量、动量与质量具有相同的量纲，长度和时间则具有能量倒数的量纲。
+
+为避免把量纲与算符对易子混淆，本章用 $[X]_{\mathrm{M}}$ 表示物理量 $X$ 的\textbf{质量量纲指数}：若 $X$ 的单位可写成能量单位的 $d$ 次方，则 $[X]_{\mathrm{M}}=d$。因此
 \begin{equation}
-  E^{2}=\bm{p}^{2}+m^{2}.
+  [E]_{\mathrm{M}}=[p]_{\mathrm{M}}=[m]_{\mathrm{M}}=1,
+  \qquad [x]_{\mathrm{M}}=[t]_{\mathrm{M}}=-1,
+  \qquad [\partial_{\mu}]_{\mathrm{M}}=1.
 \end{equation}
-这一关系将用于后续讨论自由场的平面波解。
-
-\subsection{度规与指标}
-
-取时空坐标 $x^{\mu}=(t,\bm{x})$，指标 $\mu,\nu$ 遍历 $0,1,2,3$，并采用 Minkowski 度规
+作用量以 $\hbar$ 为单位时无量纲。在四维时空中，由
+$S=\int\mathrm{d}^{4}x\,\mathcal{L}$ 得到
 \begin{equation}
-  \eta_{\mu\nu}=\mathrm{diag}(1,-1,-1,-1).
+  [S]_{\mathrm{M}}=0,\qquad [\mathcal{L}]_{\mathrm{M}}=4.
 \end{equation}
-重复的上下指标默认求和。指标通过度规升降，例如 $x_{\mu}=\eta_{\mu\nu}x^{\nu}$，因此
+这些关系可以用来检查场和耦合常数的量纲。
+
+恢复普通单位时，要先辨认符号的物理含义。例如，对于质量为 $m$ 的自由粒子，
 \begin{equation}
-  x_{\mu}x^{\mu}=t^{2}-\bm{x}^{2}.
+  E^{2}=\bm{p}^{2}+m^{2}
+  \quad\longrightarrow\quad
+  E^{2}=c^{2}\bm{p}^{2}+m^{2}c^{4},
+  \qquad m^{-1}\quad\longrightarrow\quad\frac{\hbar}{mc}.
 \end{equation}
+右端的长度是约化康普顿波长。自然单位制简化了常数，却保留了不同物理尺度之间的关系。
 
-\section{经典场的基本描述}
+\subsection{度规、指标与微分算符}
 
-\subsection{作用量}
-
-对于实标量场 $\phi(x)$，设拉格朗日密度 $\mathcal{L}$ 仅依赖场及其一阶导数。作用量定义为
+取 $x^{\mu}=(t,\bm{x})$，度规约定为
 \begin{equation}
-  S[\phi]=\int\mathrm{d}^{4}x\,
-  \mathcal{L}\bigl(\phi,\partial_{\mu}\phi\bigr),
-  \qquad \partial_{\mu}\coloneqq\frac{\partial}{\partial x^{\mu}}.
+  \eta_{\mu\nu}=\eta^{\mu\nu}=\mathrm{diag}(1,-1,-1,-1).
 \end{equation}
-作用量是场构型的泛函。在边界处固定场的取值后，经典运动方程由驻值条件 $\delta S=0$ 决定；具体推导将在后续正文中展开。
+希腊指标 $\mu,\nu,\rho,\sigma$ 遍历 $0,1,2,3$，空间指标 $i,j,k$ 遍历 $1,2,3$。同一项中重复的上下时空指标求和。场分量用 $a,b$ 标记；它们不是时空指标，涉及这类分量时将显式写出求和号。
+
+四维指标用度规升降。例如
+\begin{equation}
+  x_{\mu}=\eta_{\mu\nu}x^{\nu}=(t,-\bm{x}),
+  \qquad p^{\mu}=(E,\bm{p}),
+  \qquad p\cdot x=p_{\mu}x^{\mu}=Et-\bm{p}\cdot\bm{x}.
+\end{equation}
+粗体 $\bm{x}$、$\bm{p}$ 表示三维欧氏矢量，三维点积中的 $\bm{p}^{2}$ 非负；它与四维平方 $p^{2}=p_{\mu}p^{\mu}=E^{2}-\bm{p}^{2}$ 不同。
+
+定义
+\begin{equation}
+  \partial_{\mu}\coloneqq\frac{\partial}{\partial x^{\mu}}
+  =(\partial_{t},\nabla),\qquad
+  \partial^{\mu}=(\partial_{t},-\nabla),\qquad
+  \Box\coloneqq\partial_{\mu}\partial^{\mu}=\partial_{t}^{2}-\nabla^{2}.
+\end{equation}
+于是 $\partial_{\mu}\mathrm{e}^{-\mathrm{i}p\cdot x}
+=-\mathrm{i}p_{\mu}\mathrm{e}^{-\mathrm{i}p\cdot x}$。
+特别地，$\partial^{i}=-\partial_{i}$；能量动量张量的空间分量中出现的负号往往来自这里。
+
+\subsection{场、场分量与洛伦兹变换}
+
+经典场是时空上的函数，例如实标量场 $\phi(x)$ 或矢量场 $A^{\mu}(x)$。对给定的时刻，整个函数 $\phi(t,\bm{x})$ 构成一个场构型。这里 $\bm{x}$ 是自由度的空间标签，场值才是动力学变量；它不同于粒子力学中的轨道 $\bm{x}(t)$。
+
+洛伦兹变换 $x'^{\mu}=\Lambda^{\mu}{}_{\nu}x^{\nu}$ 满足
+\begin{equation}
+  \eta_{\rho\sigma}\Lambda^{\rho}{}_{\mu}\Lambda^{\sigma}{}_{\nu}
+  =\eta_{\mu\nu}.
+\end{equation}
+标量场的定义是 $\phi'(x')=\phi(x)$，矢量场则满足
+$A'^{\mu}(x')=\Lambda^{\mu}{}_{\nu}A^{\nu}(x)$。
+因此，“标量”描述的是变换性质，并不表示场是常数。
+
+在恒等变换连通的洛伦兹群内，$\det\Lambda=1$，积分测度 $\mathrm{d}^{4}x$ 不变。如果 $\mathcal{L}$ 由洛伦兹标量构成，则作用量也具有洛伦兹不变性。例如 $\partial_{\mu}\phi\,\partial^{\mu}\phi$ 是标量。凝聚态中的有效场论通常还存在介质的优选静止系，因此未必具有这种时空对称性，但作用量与 Noether 定理仍然适用。
+
+\section{为什么引入场}
+\label{sec:prelude-why-fields}
+
+\subsection{可变粒子数与集体自由度}
+
+固定粒子数的量子力学把态限制在给定粒子数的空间中。相对论性相互作用可以改变粒子数，例如电子与正电子湮灭为两个光子；仅包含一个电子的状态空间无法容纳含有两个光子的末态。这里需要同时考虑运动学和相互作用：相对论能量关系允许相应能量尺度，真正的跃迁还取决于相互作用和守恒律。特别地，真空中一个实光子不能单独产生电子--正电子对，因为它的四动量平方为零，而末态总四动量平方至少为 $4m_{\mathrm{e}}^{2}$，其中 $m_{\mathrm{e}}$ 为电子质量。
+
+量子场论提供可以描述不同粒子数扇区的统一框架。对于自由场，或者存在合适渐近态的散射问题，粒子可理解为场模式的量子激发。这一解释需要量子化以后才能建立；经典场 $\phi(x)$ 本身并不是“找到一个粒子”的概率振幅。
+
+场的用途也不限于相对论。弹性位移、磁化方向和超流序参量都可以成为连续场。它们通常是微观多体自由度的长波描述。这使场论既能描述基本粒子，也能描述凝聚态中的集体运动。
+
+\subsection{从振子链到连续场}
+
+考虑一维链，格点间距为 $\ell$，第 $n$ 个质点的位移为 $q_{n}(t)$。质量与相邻弹簧的劲度系数分别记为 $M$ 和 $\kappa$，拉格朗日量为
+\begin{equation}
+  L_{\mathrm{chain}}=\sum_{n}\left[
+    \frac{M}{2}\dot q_{n}^{2}
+    -\frac{\kappa}{2}(q_{n+1}-q_{n})^{2}\right].
+\end{equation}
+在变化尺度远大于 $\ell$ 的情况下，令 $x_{n}=n\ell$、
+$q_{n}(t)=\phi(t,x_{n})$。保持线密度 $\rho=M/\ell$ 和弹性系数
+$\tau=\kappa\ell$ 有限，则
+\begin{equation}
+  q_{n+1}-q_{n}\simeq\ell\,\partial_{x}\phi,
+  \qquad \sum_{n}\ell\,f(x_{n})\longrightarrow\int f(x)\,\mathrm{d}x.
+\end{equation}
+将每一项改写为 $\ell$ 乘以密度，得到连续极限
+\begin{equation}
+  L=\int\mathrm{d}x\left[
+    \frac{\rho}{2}(\partial_{t}\phi)^{2}
+    -\frac{\tau}{2}(\partial_{x}\phi)^{2}\right].
+  \label{eq:prelude-chain-continuum}
+\end{equation}
+这说明梯度项来自相邻自由度之间的耦合。后面从作用量求得的方程将是
+$\rho\partial_{t}^{2}\phi-\tau\partial_{x}^{2}\phi=0$，其传播速度为
+$v=\sqrt{\tau/\rho}$。这个速度由材料决定，不必等于真空光速。
+
+\subsection{局域作用量及其适用范围}
+
+对于三维空间中的多分量场，定义
+\begin{equation}
+  L(t)=\int\mathrm{d}^{3}x\,\mathcal{L},\qquad
+  S[\phi]=\int_{t_{1}}^{t_{2}}L(t)\,\mathrm{d}t
+  =\int_{\Omega}\mathrm{d}^{4}x\,
+  \mathcal{L}\bigl(\phi_{a},\partial_{\mu}\phi_{a},x\bigr).
+  \label{eq:prelude-action}
+\end{equation}
+$\Omega$ 是所考虑的时空区域，$\mathcal{L}$、$L$ 和 $S$ 分别为拉格朗日密度、拉格朗日量和作用量。$S$ 的输入是整个场的历史，因此它是泛函。
+
+本章所说的局域性，是指 $\mathcal{L}(x)$ 只依赖同一时空点上的场及其导数。它不等同于已经证明了相对论因果性；后者还要求合适的动力学和量子理论结构。对长波有效理论，还可以加入更高阶导数，但那时变分边界条件和正则形式需要相应扩展，本章暂限于一阶导数拉格朗日密度。
+
+\section{最小作用量原理与变分法}
+\label{sec:prelude-variation}
+
+\subsection{固定端点的变分与欧拉--拉格朗日方程}
+
+先考虑有限个广义坐标 $q_{a}(t)$，$a=1,\ldots,N$。设
+\begin{equation}
+  S[q]=\int_{t_{1}}^{t_{2}}L(q_{a},\dot q_{a},t)\,\mathrm{d}t.
+\end{equation}
+用一族路径 $q_{a,\epsilon}(t)=q_{a}(t)+\epsilon\eta_{a}(t)$ 探测作用量，其中
+$\eta_{a}(t_{1})=\eta_{a}(t_{2})=0$，$\epsilon$ 为实参数。第一变分定义为
+\begin{equation}
+  \delta S\coloneqq
+  \left.\frac{\mathrm{d}}{\mathrm{d}\epsilon}S[q_{\epsilon}]\right|_{\epsilon=0}.
+\end{equation}
+于是 $\delta q_{a}=\eta_{a}$，并且
+$\delta\dot q_{a}=\mathrm{d}(\delta q_{a})/\mathrm{d}t$。
+这里的变分是在不同路径之间比较，不是沿同一条轨道作时间演化。
+
+对 $L$ 使用链式法则，再分部积分，得到
+\begin{align}
+  \delta S
+  &=\int_{t_{1}}^{t_{2}}\mathrm{d}t\sum_{a}
+    \left(\frac{\partial L}{\partial q_{a}}\delta q_{a}
+    +\frac{\partial L}{\partial\dot q_{a}}\frac{\mathrm{d}}{\mathrm{d}t}\delta q_{a}\right)
+    \notag\\
+  &=\left[\sum_{a}\frac{\partial L}{\partial\dot q_{a}}\delta q_{a}\right]_{t_{1}}^{t_{2}}
+    +\int_{t_{1}}^{t_{2}}\mathrm{d}t\sum_{a}
+    \left[\frac{\partial L}{\partial q_{a}}
+    -\frac{\mathrm{d}}{\mathrm{d}t}\frac{\partial L}{\partial\dot q_{a}}\right]\delta q_{a}.
+\end{align}
+端点固定消去了第一项。由变分法基本引理，若一个连续函数与任意光滑、紧支撑的试验函数的积分都为零，该函数就必须为零。对各个独立的 $\delta q_{a}$ 分别应用此结论，得到
+\begin{equation}
+  \boxed{\frac{\mathrm{d}}{\mathrm{d}t}\frac{\partial L}{\partial\dot q_{a}}
+  -\frac{\partial L}{\partial q_{a}}=0.}
+  \label{eq:prelude-particle-el}
+\end{equation}
+例如，$L=M\dot{\bm{q}}^{2}/2-V(\bm{q})$ 给出
+$M\ddot{\bm{q}}=-\nabla_{\bm{q}}V$，恢复牛顿方程。
+
+固定两个端点是推导的一种变分设置，不表示实际求解运动时必须在未来施加条件。对于适定的二阶运动方程，也可以给定初始位置和速度，解相应的初值问题。
+
+\subsection{为什么更准确地称为作用量驻值原理}
+
+所谓“最小作用量原理”的准确内容是：真实运动使第一变分为零。驻值点可能是局部极小值，也可能是鞍点；第一变分不能判定这一点。
+
+以谐振子为例，$L=M(\dot q^{2}-\omega^{2}q^{2})/2$。在一条经典运动路径附近，第二变分为
+\begin{equation}
+  \delta^{2}S=M\int_{t_{1}}^{t_{2}}
+  \left(\dot\eta^{2}-\omega^{2}\eta^{2}\right)\,\mathrm{d}t.
+\end{equation}
+令 $T=t_{2}-t_{1}$，取端点为零的试验函数
+$\eta(t)=A\sin[\pi(t-t_{1})/T]$，可直接积分得到
+\begin{equation}
+  \delta^{2}S=\frac{MA^{2}T}{2}
+  \left[\left(\frac{\pi}{T}\right)^{2}-\omega^{2}\right].
+\end{equation}
+当 $T>\pi/\omega$ 时，这一方向的二阶变分为负；而选取足够高频的正弦试验函数时它为正。因此该驻值并非极小值。后文统一使用\textbf{作用量驻值原理}这一表述。
+
+\subsection{边界项与等价的拉格朗日量}
+
+若作变换
+\begin{equation}
+  L\longrightarrow L+\frac{\mathrm{d}}{\mathrm{d}t}F(q,t),
+\end{equation}
+作用量只改变 $F(q(t_{2}),t_{2})-F(q(t_{1}),t_{1})$。在端点位置与端点时间固定时，这一项的变分为零，因此体内的运动方程不变。
+
+这个例子预告了 Noether 定理中的关键点：对称变换不一定使拉格朗日量逐点不变，只需使它改变一个适当的全导数。另一方面，边界项并非在所有问题中都能丢弃；它可能改变边界条件、共轭动量的表达式或边界荷。讨论边界自由度时，必须重新检查它们。
+
+\section{经典场的运动方程}
+\label{sec:prelude-field-equations}
+
+\subsection{多分量场的变分与边界条件}
+
+考虑式~\eqref{eq:prelude-action}，暂将 $\phi_{a}$ 视为独立实场。假设场足够光滑，变分在固定坐标处进行，因此
+$\delta(\partial_{\mu}\phi_{a})=\partial_{\mu}(\delta\phi_{a})$。
+为简化记号，定义
+\begin{equation}
+  \Pi_{a}^{\mu}\coloneqq
+  \frac{\partial\mathcal{L}}{\partial(\partial_{\mu}\phi_{a})},
+  \qquad
+  \mathcal{E}_{a}\coloneqq
+  \frac{\partial\mathcal{L}}{\partial\phi_{a}}-\partial_{\mu}\Pi_{a}^{\mu}.
+  \label{eq:prelude-euler-expression}
+\end{equation}
+求这些偏导时，把 $\phi_{a}$ 和各个 $\partial_{\mu}\phi_{a}$ 作为拉格朗日密度的独立自变量。$\Pi_{a}^{\mu}$ 是对所有时空导数的偏导；只有其时间分量稍后被定义为共轭动量密度。
+
+链式法则和乘积法则给出一个不需要运动方程的恒等式：
+\begin{align}
+  \delta\mathcal{L}
+  &=\sum_{a}\left[
+    \frac{\partial\mathcal{L}}{\partial\phi_{a}}\delta\phi_{a}
+    +\Pi_{a}^{\mu}\partial_{\mu}\delta\phi_{a}\right]\notag\\
+  &=\sum_{a}\mathcal{E}_{a}\delta\phi_{a}
+    +\partial_{\mu}\left(\sum_{a}\Pi_{a}^{\mu}\delta\phi_{a}\right).
+  \label{eq:prelude-variation-identity}
+\end{align}
+积分后，利用散度定理得到
+\begin{equation}
+  \delta S=\int_{\Omega}\mathrm{d}^{4}x\sum_{a}\mathcal{E}_{a}\delta\phi_{a}
+  +\int_{\partial\Omega}\mathrm{d}\Sigma_{\mu}
+    \sum_{a}\Pi_{a}^{\mu}\delta\phi_{a},
+  \label{eq:prelude-boundary-variation}
+\end{equation}
+其中 $\mathrm{d}\Sigma_{\mu}$ 为有向边界面元。
+
+可以选择在整个 $\partial\Omega$ 上令 $\delta\phi_{a}=0$，或者只使用区域内部的紧支撑变分。对无穷空间，也可固定初末时刻的场并令空间无穷远处的变分足够快地衰减。这些选择都能消去相应边界项。随后对区域内部任意的独立变分应用变分法基本引理，得到
+\begin{equation}
+  \boxed{\mathcal{E}_{a}=0
+  \quad\Longleftrightarrow\quad
+  \partial_{\mu}\frac{\partial\mathcal{L}}{\partial(\partial_{\mu}\phi_{a})}
+  -\frac{\partial\mathcal{L}}{\partial\phi_{a}}=0.}
+  \label{eq:prelude-field-el}
+\end{equation}
+这就是经典场的欧拉--拉格朗日方程。
+
+若边界上的场并未固定，式~\eqref{eq:prelude-boundary-variation} 的边界项就必须保留；在没有额外边界作用量且允许任意边界变分时，会产生相应的自然边界条件。因此“分部积分后丢掉边界项”总是需要假设。
+
+若 $\mathcal{L}$ 增加 $\partial_{\mu}B^{\mu}(\phi,x)$，则固定边界场时体内方程不变。若 $B^{\mu}$ 还依赖导数，边界变分可能含有 $\delta(\partial_{\mu}\phi)$，需要额外处理，不能仅凭 $\delta\phi=0$ 就一概删除。
+
+\subsection{实标量场：波动方程、质量与相互作用}
+
+取
+\begin{equation}
+  \mathcal{L}=\frac12\partial_{\mu}\phi\,\partial^{\mu}\phi-V(\phi).
+  \label{eq:prelude-real-lagrangian}
+\end{equation}
+其中 $V$ 是场的势能密度。利用度规的对称性，
+\begin{equation}
+  \frac{\partial}{\partial(\partial_{\mu}\phi)}
+  \left(\frac12\eta^{\rho\sigma}\partial_{\rho}\phi\,\partial_{\sigma}\phi\right)
+  =\frac12\left(\eta^{\mu\sigma}\partial_{\sigma}\phi
+    +\eta^{\rho\mu}\partial_{\rho}\phi\right)=\partial^{\mu}\phi.
+\end{equation}
+另一项为 $\partial\mathcal{L}/\partial\phi=-V'(\phi)$，故
+\begin{equation}
+  \boxed{\Box\phi+V'(\phi)=0.}
+  \label{eq:prelude-real-equation}
+\end{equation}
+这里撇号表示对 $\phi$ 求普通导数。
+
+对于 $V=m^{2}\phi^{2}/2$，得到 Klein--Gordon 方程
+\begin{equation}
+  (\Box+m^{2})\phi=0.
+\end{equation}
+代入复指数试探解 $\mathrm{e}^{-\mathrm{i}p\cdot x}$，得到
+$p^{2}=m^{2}$，即 $E_{\bm{p}}=\sqrt{\bm{p}^{2}+m^{2}}$。
+实场必须由复共轭成对的模式组成，例如
+\begin{equation}
+  \phi(x)=C\,\mathrm{e}^{-\mathrm{i}p\cdot x}
+  +C^{*}\mathrm{e}^{\mathrm{i}p\cdot x},\qquad p^{0}=E_{\bm{p}}.
+\end{equation}
+其中 $C$ 是复振幅。这里的正、负频率是描述实解所需的两个共轭部分，不意味着经典实场具有无下界的能量；能量的正定性需要由哈密顿量判断。
+
+若加入四次势能
+\begin{equation}
+  V(\phi)=\frac12m^{2}\phi^{2}+\frac{\lambda}{4!}\phi^{4},
+\end{equation}
+场方程变为
+\begin{equation}
+  (\Box+m^{2})\phi+\frac{\lambda}{3!}\phi^{3}=0.
+\end{equation}
+非线性项使不同波动模式不再独立。对这里的 $m^{2}\geq0$、$\lambda\geq0$，势能有下界；$\lambda=0$ 才退化为自由场。
+
+由动能项可知，在四维时空中 $[\phi]_{\mathrm{M}}=1$、$[\lambda]_{\mathrm{M}}=0$。若推广到 $D$ 维时空，则规范化的标量场具有
+$[\phi]_{\mathrm{M}}=(D-2)/2$。量纲关系说明同一种相互作用在不同时空维数中的尺度性质可以不同。
+
+式~\eqref{eq:prelude-chain-continuum} 也可用同一变分方法处理，只需对时间和一个空间坐标求导，便得到
+$\rho\partial_{t}^{2}\phi-\tau\partial_{x}^{2}\phi=0$。这给出了连续极限中波速的动力学依据。
+
+\subsection{复标量场与独立变分}
+
+令 $\phi=(\phi_{1}+\mathrm{i}\phi_{2})/\sqrt2$，其中 $\phi_{1},\phi_{2}$ 为实场。考虑
+\begin{equation}
+  \mathcal{L}=\partial_{\mu}\phi^{*}\partial^{\mu}\phi-U(s),
+  \qquad s\coloneqq\phi^{*}\phi.
+  \label{eq:prelude-complex-lagrangian}
+\end{equation}
+$U$ 为实函数，$U'(s)$ 表示对实变量 $s$ 求导。动能项等于两个实场动能项之和，
+$\partial_{\mu}\phi^{*}\partial^{\mu}\phi
+=\tfrac12\sum_{a=1}^{2}\partial_{\mu}\phi_{a}\partial^{\mu}\phi_{a}$。
+
+变分时可以把 $\phi$ 与 $\phi^{*}$ 形式上当作独立变量。这只是把对两个实分量的独立变分作可逆的线性组合，并没有增加物理自由度。分别计算得到
+\begin{align}
+  \frac{\partial\mathcal{L}}{\partial\phi^{*}}&=-U'(s)\phi,
+  &\frac{\partial\mathcal{L}}{\partial(\partial_{\mu}\phi^{*})}&=\partial^{\mu}\phi,\\
+  \frac{\partial\mathcal{L}}{\partial\phi}&=-U'(s)\phi^{*},
+  &\frac{\partial\mathcal{L}}{\partial(\partial_{\mu}\phi)}&=\partial^{\mu}\phi^{*}.
+\end{align}
+因此
+\begin{equation}
+  \Box\phi+U'(s)\phi=0,\qquad
+  \Box\phi^{*}+U'(s)\phi^{*}=0.
+  \label{eq:prelude-complex-equation}
+\end{equation}
+本章使用星号表示经典复共轭；量子化之后，场成为算符，才用 $\phi^{\dagger}$ 表示厄米共轭。
+
+\subsection{电磁场：带指标的变分示例}
+
+以下作为矢量场的示例，采用电磁学的有理化自然单位。定义四势与场强
+\begin{equation}
+  A^{\mu}=(\Phi,\bm{A}),\qquad
+  F_{\mu\nu}=\partial_{\mu}A_{\nu}-\partial_{\nu}A_{\mu},
+  \qquad F_{\mu\nu}=-F_{\nu\mu}.
+\end{equation}
+取给定的外部四电流 $J^{\mu}=(\rho_{\mathrm{e}},\bm{J})$，令
+\begin{equation}
+  \mathcal{L}_{\mathrm{EM}}=-\frac14F_{\mu\nu}F^{\mu\nu}-J^{\mu}A_{\mu}.
+\end{equation}
+对 $A_{\nu}$ 变分，外源保持固定。利用 $F^{\mu\nu}$ 的反对称性，
+\begin{align}
+  \delta\mathcal{L}_{\mathrm{EM}}
+  &=-\frac12F^{\mu\nu}(\partial_{\mu}\delta A_{\nu}
+    -\partial_{\nu}\delta A_{\mu})-J^{\nu}\delta A_{\nu}\notag\\
+  &=-F^{\mu\nu}\partial_{\mu}\delta A_{\nu}-J^{\nu}\delta A_{\nu}\notag\\
+  &=(\partial_{\mu}F^{\mu\nu}-J^{\nu})\delta A_{\nu}
+    -\partial_{\mu}(F^{\mu\nu}\delta A_{\nu}).
+\end{align}
+固定边界变分后，场方程为
+\begin{equation}
+  \partial_{\mu}F^{\mu\nu}=J^{\nu}.
+  \label{eq:prelude-maxwell}
+\end{equation}
+而由 $F$ 的定义和偏导数可交换性，还恒有
+\begin{equation}
+  \partial_{\lambda}F_{\mu\nu}
+  +\partial_{\mu}F_{\nu\lambda}
+  +\partial_{\nu}F_{\lambda\mu}=0.
+  \label{eq:prelude-bianchi}
+\end{equation}
+后一式是 Bianchi 恒等式，不是对作用量变分后额外得到的独立动力学方程。
+
+用 $\bm{E}=-\nabla\Phi-\partial_{t}\bm{A}$ 和
+$\bm{B}=\nabla\times\bm{A}$ 展开。由
+$A_{\mu}=(\Phi,-\bm{A})$，有 $F_{0i}=E_{i}$、$F^{0i}=-E_{i}$；
+这里 $E_{i}$ 表示三维欧氏矢量 $\bm{E}$ 的分量。
+上述两式分别给出
+\begin{align}
+  \nabla\cdot\bm{E}&=\rho_{\mathrm{e}},
+  &\nabla\times\bm{B}-\partial_{t}\bm{E}&=\bm{J},\\
+  \nabla\cdot\bm{B}&=0,
+  &\nabla\times\bm{E}+\partial_{t}\bm{B}&=0.
+\end{align}
+又因为 $\partial_{\nu}\partial_{\mu}F^{\mu\nu}=0$，式~\eqref{eq:prelude-maxwell} 要求 $\partial_{\nu}J^{\nu}=0$。因此允许的外部电流必须守恒；不能任意指定一个与此条件不相容的源。
+
+\section{场的哈密顿形式与量子化的准备}
+\label{sec:prelude-hamiltonian}
+
+\subsection{共轭动量与勒让德变换}
+
+选定时间坐标后，将各点上的 $\phi_{a}(t,\bm{x})$ 作为广义坐标，定义共轭动量密度
+\begin{equation}
+  \pi_{a}(t,\bm{x})\coloneqq
+  \frac{\partial\mathcal{L}}{\partial\dot\phi_{a}}=\Pi_{a}^{0},
+  \qquad \dot\phi_{a}\coloneqq\partial_{t}\phi_{a}.
+\end{equation}
+“共轭动量密度”描述的是正则结构，它一般不等于场在空间中的动量密度。后者来自空间平移，将在第~\ref{sec:prelude-examples} 节定义。
+
+若速度 Hessian 矩阵
+\begin{equation}
+  W_{ab}=\frac{\partial^{2}\mathcal{L}}
+  {\partial\dot\phi_{a}\,\partial\dot\phi_{b}}
+\end{equation}
+可逆，就能至少局部地将速度写成 $\phi_{a},\pi_{a},\nabla\phi_{a}$ 的函数。此时定义勒让德变换
+\begin{equation}
+  \mathcal{H}=\sum_{a}\pi_{a}\dot\phi_{a}-\mathcal{L},
+  \qquad H[\phi,\pi;t]=\int\mathrm{d}^{3}x\,\mathcal{H}.
+  \label{eq:prelude-hamiltonian-definition}
+\end{equation}
+右端所有速度都要用正则变量消去。拉格朗日形式使用场及其速度，哈密顿形式使用场及其共轭动量，两者在上述正则条件下描述同一动力学。
+
+\subsection{泛函导数与哈密顿方程}
+
+在某个固定时刻，泛函导数由一阶变化定义：
+\begin{equation}
+  \delta H=\int\mathrm{d}^{3}x\sum_{a}\left[
+    \frac{\delta H}{\delta\phi_{a}(\bm{x})}\delta\phi_{a}(\bm{x})
+    +\frac{\delta H}{\delta\pi_{a}(\bm{x})}\delta\pi_{a}(\bm{x})\right].
+\end{equation}
+为求它们，对式~\eqref{eq:prelude-hamiltonian-definition} 变分。由于
+$\partial\mathcal{L}/\partial\dot\phi_{a}=\pi_{a}$，含 $\delta\dot\phi_{a}$ 的项恰好相消，留下
+\begin{equation}
+  \delta H=\int\mathrm{d}^{3}x\sum_{a}\left[
+    \dot\phi_{a}\delta\pi_{a}
+    -\frac{\partial\mathcal{L}}{\partial\phi_{a}}\delta\phi_{a}
+    -\sum_{i=1}^{3}\Pi_{a}^{i}\partial_{i}\delta\phi_{a}\right].
+\end{equation}
+在空间边界项为零的条件下分部积分，可读出
+\begin{equation}
+  \frac{\delta H}{\delta\pi_{a}}=\dot\phi_{a},\qquad
+  \frac{\delta H}{\delta\phi_{a}}=-\frac{\partial\mathcal{L}}{\partial\phi_{a}}
+  +\sum_{i=1}^{3}\partial_{i}\Pi_{a}^{i}.
+\end{equation}
+另一方面，场的欧拉--拉格朗日方程给出
+$\dot\pi_{a}=\partial\mathcal{L}/\partial\phi_{a}-\sum_{i}\partial_{i}\Pi_{a}^{i}$。
+于是
+\begin{equation}
+  \boxed{\dot\phi_{a}(t,\bm{x})=\frac{\delta H}{\delta\pi_{a}(t,\bm{x})},
+  \qquad
+  \dot\pi_{a}(t,\bm{x})=-\frac{\delta H}{\delta\phi_{a}(t,\bm{x})}.}
+  \label{eq:prelude-hamilton-equations}
+\end{equation}
+与有限自由度系统相比，离散标签变成了连续空间坐标，普通偏导数相应变为泛函导数。
+
+对实标量场~\eqref{eq:prelude-real-lagrangian}，有
+\begin{equation}
+  \pi=\dot\phi,\qquad
+  \mathcal{H}=\frac12\pi^{2}+\frac12(\nabla\phi)^{2}+V(\phi).
+  \label{eq:prelude-scalar-hamiltonian}
+\end{equation}
+梯度项的变化尤其值得写出：
+\begin{equation}
+  \delta\int\mathrm{d}^{3}x\,\frac12(\nabla\phi)^{2}
+  =\int\mathrm{d}^{3}x\,\nabla\phi\cdot\nabla\delta\phi
+  =-\int\mathrm{d}^{3}x\,(\nabla^{2}\phi)\delta\phi,
+\end{equation}
+其中最后一步使用了空间边界条件。因此
+\begin{equation}
+  \dot\phi=\pi,\qquad
+  \dot\pi=\nabla^{2}\phi-V'(\phi),
+\end{equation}
+合并后正好恢复 $\Box\phi+V'(\phi)=0$。
+不能把 $\delta H/\delta\phi$ 简化为 $\partial\mathcal{H}/\partial\phi$，否则会漏掉空间梯度产生的项。
+
+对于自由实标量场 $V=m^{2}\phi^{2}/2$，取 $m^{2}\geq0$，哈密顿密度的三项均非负。这是自由场能量有下界的直接依据。
+
+\subsection{泊松括号与正则量子化的接口}
+
+对于两个等时泛函 $F[\phi,\pi]$ 和 $G[\phi,\pi]$，定义泊松括号
+\begin{equation}
+  \{F,G\}=\sum_{a}\int\mathrm{d}^{3}x\left[
+    \frac{\delta F}{\delta\phi_{a}(\bm{x})}\frac{\delta G}{\delta\pi_{a}(\bm{x})}
+    -\frac{\delta F}{\delta\pi_{a}(\bm{x})}\frac{\delta G}{\delta\phi_{a}(\bm{x})}\right].
+\end{equation}
+于是
+\begin{equation}
+  \{\phi_{a}(t,\bm{x}),\pi_{b}(t,\bm{y})\}
+  =\delta_{ab}\delta^{(3)}(\bm{x}-\bm{y}),
+  \qquad \{\phi_{a},\phi_{b}\}=\{\pi_{a},\pi_{b}\}=0.
+\end{equation}
+这里 $\delta_{ab}$ 为 Kronecker 符号，$\delta^{(3)}$ 为三维 Dirac 分布。连续空间中的分布替代了有限维正则关系中的离散单位矩阵。
+
+由哈密顿方程，任意这样的泛函沿运动的变化为
+\begin{equation}
+  \frac{\mathrm{d}F}{\mathrm{d}t}=\{F,H\}
+  +\left(\frac{\partial F}{\partial t}\right)_{\mathrm{explicit}}.
+\end{equation}
+其中最后一项仅指 $F$ 对时间的显式依赖。若不存在这类依赖且 $\{F,H\}=0$，则 $F$ 守恒。
+
+对于无约束的玻色场，正则量子化从基本关系
+\begin{equation}
+  [\hat\phi_{a}(t,\bm{x}),\hat\pi_{b}(t,\bm{y})]
+  =\mathrm{i}\delta_{ab}\delta^{(3)}(\bm{x}-\bm{y})
+\end{equation}
+出发。方括号表示算符对易子。这是基本正则变量的量子化规则，并非对任意复杂经典函数都能无条件进行的代换；算符排序、约束及正则化问题需要另外处理。
+量子态则是态空间中的向量 $\Ket{\Psi}$。对于满足
+$\Braket{\Psi|\Psi}=1$ 的归一化态，算符 $\hat O$ 的期望值为
+$\Braket{\Psi|\hat O|\Psi}$。量子态和场算符承担不同角色。
+
+\subsection{补充：电磁场为什么需要约束处理}
+
+Maxwell 拉格朗日密度不含 $\dot A_{0}$。以 $A_{\nu}$ 为配置变量，定义
+\begin{equation}
+  \pi_{A}^{\nu}\coloneqq
+  \frac{\partial\mathcal{L}_{\mathrm{EM}}}{\partial(\partial_{0}A_{\nu})}
+  =-F^{0\nu},\qquad \pi_{A}^{0}=0.
+\end{equation}
+因此速度 Hessian 退化，无法从共轭动量反解所有速度。这里 $\pi_{A}^{0}=0$ 是约束，而非普通的速度定义。
+
+在无源情况下，$\nu=0$ 的 Maxwell 方程给出
+$\sum_{i}\partial_{i}\pi_{A}^{i}=0$，即 Gauss 约束。它限制允许的初始数据（场与共轭动量），并不为 $A_{0}$ 提供独立的二阶时间演化方程。这与规范冗余有关，后续量子化电磁场时必须处理。不能把实标量场的无约束正则程序原封不动地用于四势的全部分量。
+
+\section{诺特定理：从对称变换到守恒流}
+\label{sec:prelude-noether}
+
+\subsection{连续对称性与作用量的准不变性}
+
+诺特（Noether）定理建立了连续对称性与守恒律之间的联系。对称性描述的是变换后的场与原来的场遵循同一组物理规律。这里讨论依赖常数连续参数、并在作用量层面成立的变换。连续性允许我们在恒等变换附近展开，从一阶变化提取守恒量。
+
+本节将包含无穷小参数的一阶场增量记为 $\delta\phi_{a}$；与前面定义第一变分时取参数方向导数的记法相比，这里把参数也包含在 $\delta$ 中。先固定时空坐标，写一个无穷小变换为
+\begin{equation}
+  \delta\phi_{a}(x)=\epsilon R_{a}(x).
+\end{equation}
+$\epsilon$ 与 $x$ 无关，$R_{a}$ 可依赖场、坐标及适当的场导数。若对任意场构型都有
+\begin{equation}
+  \delta\mathcal{L}=\epsilon\partial_{\mu}K^{\mu},
+  \label{eq:prelude-quasisymmetry}
+\end{equation}
+则变换仅使作用量改变边界项，称为作用量的准对称；严格不变是 $K^{\mu}=0$ 的特例。是否构成给定边值问题的对称性，还需要检查变换是否保留允许的边界条件。
+
+对称性条件必须在使用运动方程之前成立。若先令 $\mathcal{E}_{a}=0$，则由变分恒等式，任意变分的 $\delta\mathcal{L}$ 都能写成散度；这并不能说明任意变换都是对称变换。
+
+\subsection{Noether 流的逐步推导}
+
+将上述变换代入式~\eqref{eq:prelude-variation-identity}，并与
+式~\eqref{eq:prelude-quasisymmetry} 比较。约去常数参数后，得到
+\begin{equation}
+  \sum_{a}\mathcal{E}_{a}R_{a}
+  +\partial_{\mu}\left(\sum_{a}\Pi_{a}^{\mu}R_{a}-K^{\mu}\right)=0.
+\end{equation}
+定义 Noether 流
+\begin{equation}
+  \boxed{j^{\mu}\coloneqq\sum_{a}\Pi_{a}^{\mu}R_{a}-K^{\mu}.}
+  \label{eq:prelude-noether-current}
+\end{equation}
+便有
+\begin{equation}
+  \partial_{\mu}j^{\mu}=-\sum_{a}\mathcal{E}_{a}R_{a}.
+  \label{eq:prelude-offshell-noether}
+\end{equation}
+这是一个离壳恒等式：“离壳”指场尚未被要求满足运动方程。对于满足
+$\mathcal{E}_{a}=0$ 的场，即在壳场，得到
+\begin{equation}
+  \boxed{\partial_{\mu}j^{\mu}=0.}
+  \label{eq:prelude-continuity}
+\end{equation}
+因此，Noether 第一定理将连续的作用量对称性与运动方程共同转化为局域守恒律。若有多个独立参数，可分别取一阶系数，构造相应的流；但这些流是否独立、总荷是否非平凡，还要检查约束与边界。
+
+另一种有用的检验方式是把 $\epsilon$ 暂时替换为紧支撑函数 $\epsilon(x)$。对这里的变换，在一阶精度下乘积法则给出
+\begin{equation}
+  \delta\mathcal{L}
+  =\epsilon\partial_{\mu}K^{\mu}
+    +\sum_{a}\Pi_{a}^{\mu}R_{a}\partial_{\mu}\epsilon
+  =\partial_{\mu}(\epsilon K^{\mu})+j^{\mu}\partial_{\mu}\epsilon.
+\end{equation}
+在壳时 $\delta S=0$，消去边界项后对 $\epsilon$ 分部积分，便再次得到
+$\partial_{\mu}j^{\mu}=0$。把参数局域化在这里是一种计算方法，并不表示原理论已经具有局域规范对称性。
+
+\subsection{时空变换与同一点的场变分}
+
+对内部对称性，坐标可以保持不变；对平移或旋转，必须先分清在哪两个点比较场值。设
+\begin{equation}
+  x'^{\mu}=x^{\mu}+\epsilon\xi^{\mu}(x),\qquad
+  \phi'_{a}(x')=\phi_{a}(x)+\epsilon\Delta_{a}(x).
+\end{equation}
+$\xi^{\mu}$ 描述坐标变化，$\Delta_{a}$ 描述对应时空点处的场分量变化。把变换后的场拉回同一个坐标 $x$，得到
+\begin{equation}
+  \delta_{0}\phi_{a}(x)\coloneqq\phi'_{a}(x)-\phi_{a}(x)
+  =\epsilon\left(\Delta_{a}-\xi^{\nu}\partial_{\nu}\phi_{a}\right).
+\end{equation}
+前面公式中的 $R_{a}$ 正是 $\Delta_{a}-\xi^{\nu}\partial_{\nu}\phi_{a}$。
+
+若把密度与测度的总变化写成
+\begin{equation}
+  \delta_{0}\mathcal{L}
+  +\epsilon\partial_{\mu}(\mathcal{L}\xi^{\mu})
+  =\epsilon\partial_{\mu}B^{\mu},
+\end{equation}
+则 $K^{\mu}=B^{\mu}-\mathcal{L}\xi^{\mu}$，Noether 流为
+\begin{equation}
+  j^{\mu}=\sum_{a}\Pi_{a}^{\mu}
+  \left(\Delta_{a}-\xi^{\nu}\partial_{\nu}\phi_{a}\right)
+  +\mathcal{L}\xi^{\mu}-B^{\mu}.
+\end{equation}
+这解释了时空对称性中为什么会出现与 $\mathcal{L}$ 成正比的项。具体计算时也可以直接从固定坐标变换出发，两种方法必须使用一致的参数符号。
+
+\subsection{局域连续性方程与总荷守恒}
+
+写 $j^{\mu}=(j^{0},\bm{j})$，则
+\begin{equation}
+  \partial_{t}j^{0}+\nabla\cdot\bm{j}=0.
+\end{equation}
+对固定的空间区域 $V$，定义 $Q_{V}(t)=\int_{V}j^{0}\,\mathrm{d}^{3}x$。
+由散度定理，
+\begin{equation}
+  \frac{\mathrm{d}Q_{V}}{\mathrm{d}t}
+  =-\int_{\partial V}\bm{j}\cdot\bm{n}\,\mathrm{d}S,
+  \label{eq:prelude-flux-law}
+\end{equation}
+其中 $\bm{n}$ 是边界外法向单位矢量。局域守恒的含义是：区域内的荷改变可以全部归因于穿过边界的通量，并不要求任意有限区域内的荷都不变。
+
+只有在总荷存在且边界净通量为零时，才有
+\begin{equation}
+  Q=\int\mathrm{d}^{3}x\,j^{0},\qquad \frac{\mathrm{d}Q}{\mathrm{d}t}=0.
+\end{equation}
+常见情形包括空间无穷远处的流衰减足够快、封闭边界无通量，或者周期边界上相对两面的通量抵消。无限延展的单一平面波往往只有有限的荷密度，总荷则需要放在有限盒中或改用波包来讨论。
+
+\subsection{守恒流的非唯一性与定理的边界}
+
+若 $B^{\mu\nu}=-B^{\nu\mu}$ 为光滑的反对称张量，则
+\begin{equation}
+  \widetilde j^{\mu}=j^{\mu}+\partial_{\nu}B^{\mu\nu}
+\end{equation}
+具有相同的散度，因为 $\partial_{\mu}\partial_{\nu}B^{\mu\nu}=0$。
+但总荷之差是空间边界项，只有在相应边界项为零时才不改变总荷。
+因此局域流的表达式通常不是唯一的，能量动量张量也存在类似的改进自由度。
+
+Noether 第一定理直接处理连续全局对称性。离散变换没有无穷小连续参数，不能按上述方法逐个得到 Noether 流；它们仍然可以约束动力学并产生选择定则。以任意时空函数为参数的局域规范对称性则涉及运动方程之间的恒等关系和约束，将在后面的电磁场例子中说明。
+
+\section{对称性与守恒律的具体例子}
+\label{sec:prelude-examples}
+
+\subsection{时空平移与能量动量张量}
+
+设 $\mathcal{L}$ 不显含时空坐标。这里选择固定坐标处的变换约定
+\begin{equation}
+  \phi'_{a}(x)=\phi_{a}(x+\epsilon),\qquad
+  \delta\phi_{a}=\epsilon^{\nu}\partial_{\nu}\phi_{a},
+\end{equation}
+其中四个 $\epsilon^{\nu}$ 均为常数。选择 $x-\epsilon$ 也可以，但参数与生成元的整体符号要一起改变。
+
+由于没有显式的坐标依赖，拉格朗日密度在此变换下满足
+\begin{equation}
+  \delta\mathcal{L}=\epsilon^{\nu}\partial_{\nu}\mathcal{L}
+  =\partial_{\mu}(\epsilon^{\nu}\delta^{\mu}{}_{\nu}\mathcal{L}).
+\end{equation}
+这里 $\delta^{\mu}{}_{\nu}$ 为四维单位张量。
+分别提取各个平移参数的系数，由 Noether 定理得到四组流
+\begin{equation}
+  \boxed{T^{\mu}{}_{\nu}
+  =\sum_{a}\Pi_{a}^{\mu}\partial_{\nu}\phi_{a}
+  -\delta^{\mu}{}_{\nu}\mathcal{L},\qquad
+  \partial_{\mu}T^{\mu}{}_{\nu}=0.}
+  \label{eq:prelude-canonical-tensor}
+\end{equation}
+$T^{\mu}{}_{\nu}$ 称为正则能量动量张量。第一个指标标记流的方向，第二个指标标记所输运的能量或动量分量。令
+$T^{\mu\nu}=\eta^{\nu\rho}T^{\mu}{}_{\rho}$，在边界通量为零时定义
+\begin{equation}
+  P^{\nu}=\int\mathrm{d}^{3}x\,T^{0\nu},\qquad
+  E=P^{0}=\int\mathrm{d}^{3}x\,T^{00}.
+\end{equation}
+特别地，
+\begin{equation}
+  T^{00}=\sum_{a}\pi_{a}\dot\phi_{a}-\mathcal{L}=\mathcal{H}.
+\end{equation}
+于是时间平移的 Noether 荷就是正则哈密顿量。守恒量的定义与生成时间演化的动力学量在这里结合起来。
+
+对实标量场~\eqref{eq:prelude-real-lagrangian}，
+\begin{equation}
+  T^{\mu\nu}=\partial^{\mu}\phi\,\partial^{\nu}\phi
+  -\eta^{\mu\nu}\mathcal{L}.
+  \label{eq:prelude-scalar-tensor}
+\end{equation}
+它是对称张量。对其取散度，直接验证
+\begin{align}
+  \partial_{\mu}T^{\mu\nu}
+  &=(\Box\phi)\partial^{\nu}\phi
+    +\partial^{\mu}\phi\,\partial_{\mu}\partial^{\nu}\phi
+    -\partial^{\nu}\mathcal{L}\notag\\
+  &=[\Box\phi+V'(\phi)]\partial^{\nu}\phi=0.
+\end{align}
+中间两项相消使用了 $\partial^{\nu}\mathcal{L}
+=\partial^{\mu}\phi\,\partial^{\nu}\partial_{\mu}\phi
+-V'(\phi)\partial^{\nu}\phi$ 和偏导数可交换性。
+
+具体分量为
+\begin{align}
+  T^{00}&=\frac12\dot\phi^{2}
+    +\frac12(\nabla\phi)^{2}+V(\phi),\\
+  T^{0i}=T^{i0}&=-\dot\phi\,\partial_{i}\phi,\\
+  T^{ij}&=(\partial_{i}\phi)(\partial_{j}\phi)
+    +\delta^{ij}\mathcal{L}.
+\end{align}
+这里 $\delta^{ij}$ 是三维欧氏单位矩阵。
+因此总三维动量为
+\begin{equation}
+  \bm{P}=-\int\mathrm{d}^{3}x\,\dot\phi\,\nabla\phi.
+  \label{eq:prelude-scalar-momentum}
+\end{equation}
+负号来自 $\partial^{i}=-\partial_{i}$；若使用下指标 $P_{i}$，则其数值与 $P^{i}$ 相反。
+
+作为检验，取实振幅 $A$、波矢 $\bm{k}$ 和正频率 $\omega$，对满足场方程的实行波
+$\phi=A\cos(\bm{k}\cdot\bm{x}-\omega t)$，有
+$-\dot\phi\,\nabla\phi
+=A^{2}\omega\bm{k}\sin^{2}(\bm{k}\cdot\bm{x}-\omega t)$。
+取 $\omega>0$ 时，动量密度沿传播方向 $\bm{k}$。对于无穷平面波，这里比较的是密度而非无限空间上的总积分。
+
+\subsection{局域能量守恒与能流}
+
+上述结果也可以从场方程直接检验。对能量密度
+$\mathcal{H}=\tfrac12\dot\phi^{2}+\tfrac12(\nabla\phi)^{2}+V(\phi)$ 求时间导数，得到
+\begin{align}
+  \partial_{t}\mathcal{H}
+  &=\dot\phi\,[\ddot\phi+V'(\phi)]
+    +\nabla\phi\cdot\nabla\dot\phi\notag\\
+  &=\dot\phi\,\nabla^{2}\phi
+    +\nabla\phi\cdot\nabla\dot\phi
+   =\nabla\cdot(\dot\phi\,\nabla\phi).
+\end{align}
+第二行使用了运动方程。定义能流密度
+\begin{equation}
+  \bm{\mathcal{S}}\coloneqq-\dot\phi\,\nabla\phi,
+\end{equation}
+便有
+\begin{equation}
+  \partial_{t}\mathcal{H}+\nabla\cdot\bm{\mathcal{S}}=0.
+\end{equation}
+它就是 $\partial_{\mu}T^{\mu0}=0$ 的三维展开。场的能量可以在空间中流动；某处的能量密度下降，不必意味着能量不守恒。
+
+对振子链的连续场，能量密度和能流分别为
+\begin{equation}
+  \mathcal{H}_{\mathrm{chain}}=\frac{\rho}{2}\dot\phi^{2}
+  +\frac{\tau}{2}(\partial_{x}\phi)^{2},\qquad
+  \mathcal{S}_{\mathrm{chain}}=-\tau\dot\phi\,\partial_{x}\phi.
+\end{equation}
+用波动方程可验证 $\partial_{t}\mathcal{H}_{\mathrm{chain}}
++\partial_{x}\mathcal{S}_{\mathrm{chain}}=0$。这表明能量守恒并不依赖于系统具有真空中的洛伦兹对称性。
+
+\subsection{空间旋转与角动量}
+
+先考虑实标量场。绕 $z$ 轴的主动无穷小旋转可写为
+\begin{equation}
+  \delta\phi=\theta(y\partial_{x}-x\partial_{y})\phi,
+\end{equation}
+其中 $\theta$ 为常数。这个式子来自将旋转后的场写成
+$\phi'(\bm{x})=\phi(R^{-1}\bm{x})$；标量场没有额外的内部旋转指标。
+拉格朗日密度也作为标量变换，故
+\begin{equation}
+  \delta\mathcal{L}=\theta(y\partial_{x}-x\partial_{y})\mathcal{L}
+  =\theta\partial_{\lambda}
+  \left[(y\delta^{\lambda}{}_{1}-x\delta^{\lambda}{}_{2})\mathcal{L}\right].
+\end{equation}
+将这个全散度项代入 Noether 公式，得到旋转流
+\begin{equation}
+  M^{\lambda12}=xT^{\lambda2}-yT^{\lambda1}.
+\end{equation}
+于是守恒角动量的 $z$ 分量为
+\begin{equation}
+  J_{z}=\int\mathrm{d}^{3}x\,(xT^{02}-yT^{01}).
+\end{equation}
+设三维动量密度 $\bm{\mathcal{P}}$ 的分量为
+$\mathcal{P}^{i}=T^{0i}$，则三个转轴的结果合写为
+\begin{equation}
+  \bm{J}_{\mathrm{ang}}=\int\mathrm{d}^{3}x\,
+  \bm{x}\times\bm{\mathcal{P}}.
+\end{equation}
+其形式与质点的 $\bm{x}\times\bm{p}$ 一致，只是对连续分布的动量密度作积分。
+
+对于此处洛伦兹不变的标量场，可以进一步定义
+\begin{equation}
+  M^{\lambda\mu\nu}=x^{\mu}T^{\lambda\nu}-x^{\nu}T^{\lambda\mu}.
+  \label{eq:prelude-lorentz-current}
+\end{equation}
+显式求导，
+\begin{equation}
+  \partial_{\lambda}M^{\lambda\mu\nu}
+  =T^{\mu\nu}-T^{\nu\mu}
+  +x^{\mu}\partial_{\lambda}T^{\lambda\nu}
+  -x^{\nu}\partial_{\lambda}T^{\lambda\mu}=0.
+\end{equation}
+守恒既使用了能量动量守恒，也使用了 $T^{\mu\nu}$ 的对称性。
+其中空间指标对对应旋转；一个时间指标和一个空间指标对应 Lorentz boost，其荷可写为
+\begin{equation}
+  J^{0i}=tP^{i}-\int\mathrm{d}^{3}x\,x^{i}T^{00}.
+\end{equation}
+若能量一阶矩存在且边界条件允许，这个荷守恒意味着
+$\mathrm{d}\int x^{i}T^{00}\,\mathrm{d}^{3}x/\mathrm{d}t=P^{i}$，即能量中心作匀速运动。
+
+式~\eqref{eq:prelude-lorentz-current} 的纯轨道形式适用于这里的标量场。对矢量场或旋量场，分量本身还会变换；直接使用正则能量动量张量时，一般还需加入自旋流。不能仅靠写出 $xT-xT$ 就断言任意场的角动量流守恒。
+
+\subsection{复标量场的全局相位对称性}
+
+回到式~\eqref{eq:prelude-complex-lagrangian}。
+由于 $U$ 只依赖 $s=\phi^{*}\phi$，拉格朗日密度在全局
+$\mathrm{U}(1)$ 变换
+\begin{equation}
+  \phi\longrightarrow\mathrm{e}^{-\mathrm{i}\alpha}\phi,
+  \qquad \phi^{*}\longrightarrow\mathrm{e}^{\mathrm{i}\alpha}\phi^{*}
+\end{equation}
+下严格不变，$\alpha$ 为实常数。这一对称性作用于场的内部相位，不改变时空坐标。
+这里选择负号作为 $\phi$ 的相位约定，因此
+$R_{\phi}=-\mathrm{i}\phi$、$R_{\phi^{*}}=\mathrm{i}\phi^{*}$，且 $K^{\mu}=0$。
+
+分别计算两个形式上独立变量的贡献，得到
+\begin{align}
+  j^{\mu}
+  &=\frac{\partial\mathcal{L}}{\partial(\partial_{\mu}\phi)}(-\mathrm{i}\phi)
+    +\frac{\partial\mathcal{L}}{\partial(\partial_{\mu}\phi^{*})}(\mathrm{i}\phi^{*})\notag\\
+  &=\mathrm{i}\left(\phi^{*}\partial^{\mu}\phi
+    -\phi\partial^{\mu}\phi^{*}\right).
+  \label{eq:prelude-u1-current}
+\end{align}
+利用复场的运动方程直接检验：
+\begin{align}
+  \partial_{\mu}j^{\mu}
+  &=\mathrm{i}\left(\phi^{*}\Box\phi-\phi\Box\phi^{*}\right)\notag\\
+  &=\mathrm{i}\left[-U'(s)\phi^{*}\phi
+    +U'(s)\phi\phi^{*}\right]=0.
+\end{align}
+交叉的一阶导数项相消，剩余项因势能只依赖模平方而相消。因此相位对称性并不要求场一定是自由场，例如取实耦合常数 $\lambda_{\mathrm{c}}$，势能
+$U=m^{2}s+\lambda_{\mathrm{c}}s^{2}/2$ 仍有这个守恒流。
+
+守恒荷为
+\begin{equation}
+  Q=\int\mathrm{d}^{3}x\,
+  \mathrm{i}(\phi^{*}\dot\phi-\phi\dot\phi^{*}).
+\end{equation}
+对自由场的正频平面波 $\phi=C\mathrm{e}^{-\mathrm{i}p\cdot x}$、$p^{0}>0$，
+$j^{0}=2p^{0}|C|^{2}>0$；复共轭模式的 $j^{0}$ 则为负。
+这表明荷密度 $j^{0}$ 不正定，不能直接解释为概率密度。量子化以后，该守恒荷可与粒子和反粒子的净数目相联系；若将该对称性解释为电荷对称性，还需指定单位电荷。
+把相位约定改为 $\mathrm{e}^{\mathrm{i}\alpha}$ 会使由同一 Noether 公式定义的流整体反号，必须连同荷的符号约定一起说明。
+
+用两个实场也能看清这个对称性。由
+$\phi=(\phi_{1}+\mathrm{i}\phi_{2})/\sqrt2$，有
+\begin{equation}
+  \delta\phi_{1}=\alpha\phi_{2},\qquad
+  \delta\phi_{2}=-\alpha\phi_{1},\qquad
+  j^{\mu}=\phi_{2}\partial^{\mu}\phi_{1}
+  -\phi_{1}\partial^{\mu}\phi_{2}.
+\end{equation}
+它是二维场分量空间中的旋转，保持 $\phi_{1}^{2}+\phi_{2}^{2}$ 不变。
+这里的旋转作用于内部空间，因此其守恒荷与上一小节的空间角动量不同。
+
+\subsection{无质量实场的常数平移对称性}
+
+考虑没有势能的实场
+\begin{equation}
+  \mathcal{L}=\frac12\partial_{\mu}\phi\,\partial^{\mu}\phi.
+\end{equation}
+场值作常数平移 $\phi\longrightarrow\phi+\epsilon$ 时，导数不变，故这是严格对称性。
+这里 $\epsilon$ 具有与 $\phi$ 相同的量纲，$R=1$。Noether 流和荷为
+\begin{equation}
+  j^{\mu}_{\mathrm{shift}}=\partial^{\mu}\phi,
+  \qquad Q_{\mathrm{shift}}=\int\mathrm{d}^{3}x\,\dot\phi.
+\end{equation}
+其守恒条件 $\partial_{\mu}j^{\mu}_{\mathrm{shift}}=\Box\phi=0$
+正好就是场方程。若加入 $V(\phi)$，则
+\begin{equation}
+  \partial_{\mu}j^{\mu}_{\mathrm{shift}}=-V'(\phi),
+\end{equation}
+反映常数平移对称性一般被显式破坏。
+
+这个例子还说明必须检查边界。若规定场在空间无穷远趋于某个固定值，常数平移会改变该值，便不一定保持所选的边值问题。周期盒中的场则可容许这一变换；有限总荷的存在仍需另外检查。
+
+\subsection{非相对论复场与粒子数守恒}
+
+作为凝聚态应用的补充，考虑一个非相对论复场 $\psi(t,\bm{x})$，令
+$n=\psi^{*}\psi$，取
+\begin{equation}
+  \mathcal{L}_{\mathrm{NR}}=
+  \frac{\mathrm{i}}{2}(\psi^{*}\dot\psi-\dot\psi^{*}\psi)
+  -\frac{1}{2M}\nabla\psi^{*}\cdot\nabla\psi-W(n),
+  \label{eq:prelude-nr-lagrangian}
+\end{equation}
+其中 $M>0$ 是质量参数，$W$ 是实函数。它的一阶时间导数与二阶空间动力学体现了非相对论结构。
+
+对 $\psi^{*}$ 变分时，
+\begin{align}
+  \frac{\partial\mathcal{L}_{\mathrm{NR}}}{\partial\psi^{*}}
+  &=\frac{\mathrm{i}}{2}\dot\psi-W'(n)\psi,\\
+  \frac{\partial\mathcal{L}_{\mathrm{NR}}}{\partial\dot\psi^{*}}
+  &=-\frac{\mathrm{i}}{2}\psi,
+  \quad
+  \frac{\partial\mathcal{L}_{\mathrm{NR}}}{\partial(\partial_{i}\psi^{*})}
+  =-\frac{1}{2M}\partial_{i}\psi.
+\end{align}
+代入欧拉--拉格朗日方程后，两项时间导数相加，得到
+\begin{equation}
+  \mathrm{i}\partial_{t}\psi
+  =-\frac{\nabla^{2}}{2M}\psi+W'(n)\psi.
+  \label{eq:prelude-nonlinear-schrodinger}
+\end{equation}
+例如取实耦合常数 $g$，$W(n)=g n^{2}/2$ 产生三次非线性项 $g|\psi|^{2}\psi$。
+这里的 $\psi$ 是经典有效场；在何种近似下可把它解释为凝聚体序参量，需要结合具体多体体系。
+
+对全局变换 $\delta\psi=-\mathrm{i}\alpha\psi$、
+$\delta\psi^{*}=\mathrm{i}\alpha\psi^{*}$ 应用同一 Noether 公式，得到
+\begin{equation}
+  j^{0}=n,\qquad
+  \bm{j}=\frac{1}{2M\mathrm{i}}
+  (\psi^{*}\nabla\psi-\psi\nabla\psi^{*}),
+  \qquad \partial_{t}n+\nabla\cdot\bm{j}=0.
+\end{equation}
+因此在无边界通量时，$N=\int\mathrm{d}^{3}x\,|\psi|^{2}$ 守恒。
+在粒子数归一化的多体解释下，$N$ 是粒子数；在单粒子波函数解释下，归一化为 $1$ 的同一形式对应总概率。
+其正定密度与相对论复标量场的 $j^{0}$ 不同，源于两种拉格朗日密度的时间导数结构不同。
+
+若在 $\psi\neq0$ 的区域写 $\psi=\sqrt{n}\,\mathrm{e}^{\mathrm{i}\vartheta}$，则
+\begin{equation}
+  \bm{j}=\frac{n}{M}\nabla\vartheta.
+\end{equation}
+相位梯度由此与粒子流联系起来，是理解超流有效描述的一条入口。
+式~\eqref{eq:prelude-nr-lagrangian} 的速度 Hessian 同样退化；这里直接使用拉格朗日形式和 Noether 定理，未套用无约束的勒让德反演。
+
+\subsection{外源、显式破缺与能量交换}
+
+为了看清守恒律何时失效，引入给定的实外源 $J(x)$：
+\begin{equation}
+  \mathcal{L}=\frac12\partial_{\mu}\phi\,\partial^{\mu}\phi-V(\phi)+J(x)\phi.
+  \label{eq:prelude-source-lagrangian}
+\end{equation}
+这里 $J$ 是标量源，与前面的电磁四电流 $J^{\mu}$ 不同。变分时 $J$ 固定，场方程为
+\begin{equation}
+  \Box\phi+V'(\phi)=J.
+\end{equation}
+若 $J$ 随坐标变化，拉格朗日密度显含 $x$，单独平移动力学场通常不再是对称性。
+
+为看出正确的源项，先对一般拉格朗日密度求全导数：
+\begin{equation}
+  \partial_{\nu}\mathcal{L}
+  =\sum_{a}\left[
+    \frac{\partial\mathcal{L}}{\partial\phi_{a}}\partial_{\nu}\phi_{a}
+    +\Pi_{a}^{\mu}\partial_{\nu}\partial_{\mu}\phi_{a}\right]
+    +\left(\frac{\partial\mathcal{L}}{\partial x^{\nu}}\right)_{\mathrm{explicit}}.
+\end{equation}
+将它代入正则能量动量张量的散度，并消去相同的二阶导数项，得到
+\begin{equation}
+  \partial_{\mu}T^{\mu}{}_{\nu}
+  =-\sum_{a}\mathcal{E}_{a}\partial_{\nu}\phi_{a}
+    -\left(\frac{\partial\mathcal{L}}{\partial x^{\nu}}\right)_{\mathrm{explicit}}.
+\end{equation}
+在壳且取式~\eqref{eq:prelude-source-lagrangian} 时，因而有
+\begin{equation}
+  \partial_{\mu}T^{\mu}{}_{\nu}=-\phi\,\partial_{\nu}J.
+  \label{eq:prelude-source-balance}
+\end{equation}
+在没有边界能流时，包含耦合项的哈密顿量满足
+\begin{equation}
+  \frac{\mathrm{d}H}{\mathrm{d}t}
+  =-\int\mathrm{d}^{3}x\,\phi\,\partial_{t}J.
+\end{equation}
+因此静态但空间不均匀的源仍可保持时间平移对称性，能量守恒而某些动量分量不守恒；空间均匀但随时间变化的源则可保持空间平移对称性，同时向系统输入或取出能量。
+
+还必须说明如何划分能量。若只把无源部分记为场自身的张量
+\begin{equation}
+  T_{\mathrm{field}}^{\mu}{}_{\nu}
+  =\partial^{\mu}\phi\,\partial_{\nu}\phi
+  -\delta^{\mu}{}_{\nu}
+   \left[\frac12\partial_{\rho}\phi\,\partial^{\rho}\phi-V(\phi)\right],
+\end{equation}
+则
+\begin{equation}
+  T^{\mu}{}_{\nu}=T_{\mathrm{field}}^{\mu}{}_{\nu}
+    -\delta^{\mu}{}_{\nu}J\phi,\qquad
+  \partial_{\mu}T_{\mathrm{field}}^{\mu}{}_{\nu}=J\partial_{\nu}\phi.
+\end{equation}
+对应的场自身能量满足 $\mathrm{d}E_{\mathrm{field}}/\mathrm{d}t
+=\int J\dot\phi\,\mathrm{d}^{3}x$，这就是外源做功的速率。
+它与式~\eqref{eq:prelude-source-balance} 并不矛盾：两种定义相差耦合能
+$-\int J\phi\,\mathrm{d}^{3}x$。若将源也纳入动力学并要求完整系统平移不变，守恒的是包括源在内的总能量动量。
+
+\subsection{规范对称性：为什么不等于每点一个独立守恒荷}
+
+无源 Maxwell 作用量在
+\begin{equation}
+  A_{\mu}\longrightarrow A_{\mu}+\partial_{\mu}\alpha(x)
+\end{equation}
+下不变，因为
+$\delta F_{\mu\nu}=\partial_{\mu}\partial_{\nu}\alpha
+-\partial_{\nu}\partial_{\mu}\alpha=0$。
+这里参数可以是任意光滑函数，与全局相位变换的常数参数不同。
+
+令 $\mathcal{E}_{A}^{\nu}=\partial_{\mu}F^{\mu\nu}$。
+选择紧支撑的 $\alpha$，对作用量作规范变分并分部积分，得到
+\begin{equation}
+  0=\delta S=\int\mathrm{d}^{4}x\,
+  \mathcal{E}_{A}^{\nu}\partial_{\nu}\alpha
+  =-\int\mathrm{d}^{4}x\,\alpha\,\partial_{\nu}\mathcal{E}_{A}^{\nu}.
+\end{equation}
+由于 $\alpha$ 任意，必须有
+\begin{equation}
+  \partial_{\nu}\mathcal{E}_{A}^{\nu}\equiv0.
+\end{equation}
+它在不使用场方程时就成立，正是 $F^{\mu\nu}$ 反对称性的结果。
+这展示了 Noether 第二定理的核心现象：局域规范对称性联系着运动方程之间的恒等关系，并与哈密顿形式中的约束相伴随。
+
+若存在外部电流，耦合项的变化为
+\begin{equation}
+  \delta(-J^{\mu}A_{\mu})
+  =-\partial_{\mu}(J^{\mu}\alpha)+\alpha\partial_{\mu}J^{\mu}.
+\end{equation}
+因而外源守恒时，规范变换只改变边界项。这与 Maxwell 方程本身要求
+$\partial_{\mu}J^{\mu}=0$ 一致。
+对在边界处消失的规范参数，变换通常对应同一物理场强的不同描述；在边界不消失的变换可能涉及非平凡边界荷，需要单独讨论。
+
+本章由作用量得到运动方程，由勒让德变换得到正则结构，再由连续对称性得到局域守恒律。下一章将以这些经典结构为起点引入场算符与多粒子态。使用某一守恒量之前，仍应逐项辨认它所依赖的作用量对称性、运动方程和边界条件。

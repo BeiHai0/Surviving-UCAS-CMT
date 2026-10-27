@@ -55,7 +55,7 @@
 - nabla 直接写 `\nabla`，不使用任何加粗命令修饰它。
 - 虚数单位写 `\mathrm{i}`，自然指数底数写 `\mathrm{e}`。
 - 微分写 `\mathrm{d}`，积分中在微分前使用适当间距，如 `\,\mathrm{d}x`；模板中等价定义的 `\dd` 可按已有约定使用。
-- 厄米共轭写 `\dagger`；群名、迹及实虚部等使用正体，例如 `\mathrm{SU}\left(2\right)`、`\mathrm{Tr}\,A`、`\operatorname{Re}`。
+- 厄米共轭写 `\dag`；群名、迹及实虚部等使用正体，例如 `\mathrm{SU}\left(2\right)`、`\mathrm{Tr}\,A`、`\operatorname{Re}`。
 - 明确区分抽象算符、矩阵、本征值、态与展开系数，保持已定义的符号意义不变。
 
 例如：

@@ -1,0 +1,227 @@
+% 本节原有偏迹推导保留；课堂例题来源：1013-10.pdf 第 17--23 页。
+\section{偏迹与约化密度矩阵}
+\subsection{复合系统与偏迹的定义}
+考虑由两个子系统 $A$、$B$ 组成的有限维系统，其 Hilbert 空间为
+\begin{equation}
+\mathcal H_{AB}=\mathcal H_A\otimes\mathcal H_B,
+\qquad \dim\mathcal H_A=d_A,\qquad \dim\mathcal H_B=d_B.
+\end{equation}
+大系统的状态由密度算符 $\hat\rho_{AB}$ 描述，满足
+\begin{equation}
+\hat\rho_{AB}^\dagger=\hat\rho_{AB},\qquad
+\hat\rho_{AB}\geq0,\qquad \mathrm{Tr}_{AB}\,\hat\rho_{AB}=1.
+\end{equation}
+半正定是指对任意态 $\Ket{\Psi}$ 都有 $\Braket{\Psi|\hat\rho_{AB}|\Psi}\geq0$。
+纯态对应 $\hat\rho_{AB}=\Ket{\Psi}\Bra{\Psi}$；一般统计系综对应
+$\hat\rho_{AB}=\sum_s p_s\Ket{\Psi_s}\Bra{\Psi_s}$，其中各态归一化，$p_s\geq0$ 且 $\sum_s p_s=1$。
+以下计算同时适用于纯态和混合态，不要求大系统的状态能够分解为两个子系统状态的张量积。
+
+选取两个子系统的正交归一基底
+\begin{equation}
+\left\{\Ket{i}_A\right\}_{i=1}^{d_A},\qquad
+\left\{\Ket{\mu}_B\right\}_{\mu=1}^{d_B},\qquad
+\Ket{i,\mu}=\Ket{i}_A\otimes\Ket{\mu}_B.
+\end{equation}
+记 $\hat I_A$、$\hat I_B$ 为各子系统的单位算符。对子系统 $B$ 取偏迹，定义 $A$ 的约化密度算符为
+\begin{equation}
+\boxed{\hat\rho_A=\mathrm{Tr}_B\,\hat\rho_{AB}
+=\sum_{\mu=1}^{d_B}
+\left(\hat I_A\otimes\Bra{\mu}_B\right)
+\hat\rho_{AB}
+\left(\hat I_A\otimes\Ket{\mu}_B\right).}
+\label{eq:partial-trace-definition}
+\end{equation}
+这里 $\hat I_A\otimes\Ket{\mu}_B$ 将 $\mathcal H_A$ 映射到 $\mathcal H_{AB}$，其共轭转置将 $\mathcal H_{AB}$ 映射回 $\mathcal H_A$：
+\begin{align}
+\left(\hat I_A\otimes\Ket{\mu}_B\right)\Ket{j}_A
+&=\Ket{j}_A\otimes\Ket{\mu}_B=\Ket{j,\mu},\\
+\left(\hat I_A\otimes\Bra{\mu}_B\right)\Ket{j,\nu}
+&=\Braket{\mu|\nu}_B\Ket{j}_A=\delta_{\mu\nu}\Ket{j}_A.
+\end{align}
+所以式\eqref{eq:partial-trace-definition}中的每一项都是作用在 $\mathcal H_A$ 上的算符，求和后仍是 $A$ 的算符。
+
+\subsection{从狄拉克定义到矩阵元关系}
+在上述直积基底中，把大系统密度算符的矩阵表示记为 $M$；把约化密度算符在各自基底中的矩阵表示记为 $\rho_A$、$\rho_B$：
+\begin{align}
+M_{i\mu,j\nu}&=\Braket{i,\mu|\hat\rho_{AB}|j,\nu},\\
+\left(\rho_A\right)_{ij}&=\Braket{i|\hat\rho_A|j}_A,\qquad
+\left(\rho_B\right)_{\mu\nu}=\Braket{\mu|\hat\rho_B|\nu}_B.
+\end{align}
+这里 $i\mu$ 和 $j\nu$ 分别表示复合的行、列指标，不表示两个数的乘积。
+在式\eqref{eq:partial-trace-definition}两侧取 $A$ 基底中的矩阵元。利用
+\begin{equation}
+\Bra{i}_A\left(\hat I_A\otimes\Bra{\mu}_B\right)
+=\Bra{i}_A\otimes\Bra{\mu}_B=\Bra{i,\mu},
+\end{equation}
+以及前面右矢的映射关系，逐步得到
+\begin{align}
+\left(\rho_A\right)_{ij}
+&=\Bra{i}_A\hat\rho_A\Ket{j}_A\notag\\
+&=\sum_{\mu=1}^{d_B}
+\Bra{i}_A\left(\hat I_A\otimes\Bra{\mu}_B\right)
+\hat\rho_{AB}
+\left(\hat I_A\otimes\Ket{\mu}_B\right)\Ket{j}_A\notag\\
+&=\sum_{\mu=1}^{d_B}
+\left(\Bra{i}_A\otimes\Bra{\mu}_B\right)
+\hat\rho_{AB}
+\left(\Ket{j}_A\otimes\Ket{\mu}_B\right)\notag\\
+&=\sum_{\mu=1}^{d_B}\Braket{i,\mu|\hat\rho_{AB}|j,\mu}
+=\boxed{\sum_{\mu=1}^{d_B}M_{i\mu,j\mu}.}
+\label{eq:partial-trace-elements-A}
+\end{align}
+这就是偏迹的矩阵元关系：固定保留的子系统 $A$ 的行、列指标 $i,j$，对被取迹的子系统 $B$ 的相同行、列指标 $\mu$ 求和。
+取迹只要求 $B$ 的两个指标相同，不要求 $i=j$，因此 $\rho_A$ 的非对角元也由该公式计算。
+若保留 $B$，则对 $A$ 取偏迹：
+\begin{equation}
+\hat\rho_B=\sum_{i=1}^{d_A}
+\left(\Bra{i}_A\otimes\hat I_B\right)
+\hat\rho_{AB}
+\left(\Ket{i}_A\otimes\hat I_B\right).
+\end{equation}
+在 $B$ 的基底中取矩阵元，将左右的张量积分别合并为 $\Bra{i,\mu}$ 和 $\Ket{i,\nu}$，得到
+\begin{equation}
+\boxed{\left(\rho_B\right)_{\mu\nu}
+=\sum_{i=1}^{d_A}\Braket{i,\mu|\hat\rho_{AB}|i,\nu}
+=\sum_{i=1}^{d_A}M_{i\mu,i\nu}.}
+\label{eq:partial-trace-elements-B}
+\end{equation}
+
+\subsection{普通矩阵索引与分块计算}
+要把复合指标变为普通矩阵的行列编号，必须先规定基底排列。采用 $B$ 的指标变化更快的顺序：
+\begin{equation}
+\Ket{1,1},\ldots,\Ket{1,d_B},\quad
+\Ket{2,1},\ldots,\Ket{2,d_B},\quad\ldots,\quad
+\Ket{d_A,1},\ldots,\Ket{d_A,d_B}.
+\end{equation}
+所有矩阵编号从 $1$ 开始，复合指标对应的行列编号为
+\begin{equation}
+ r\left(i,\mu\right)=\left(i-1\right)d_B+\mu,
+\qquad M_{i\mu,j\nu}=M_{r\left(i,\mu\right),r\left(j,\nu\right)}.
+\end{equation}
+于是任意有限维数下的直接计算公式为
+\begin{equation}
+\boxed{\left(\rho_A\right)_{ij}
+=\sum_{\mu=1}^{d_B}M_{\left(i-1\right)d_B+\mu,\,\left(j-1\right)d_B+\mu},}
+\qquad i,j=1,\ldots,d_A,
+\end{equation}
+\begin{equation}
+\boxed{\left(\rho_B\right)_{\mu\nu}
+=\sum_{i=1}^{d_A}M_{\left(i-1\right)d_B+\mu,\,\left(i-1\right)d_B+\nu},}
+\qquad \mu,\nu=1,\ldots,d_B.
+\end{equation}
+按上述顺序，把 $M$ 分成 $d_A\times d_A$ 个矩阵块，每个块大小为 $d_B\times d_B$：
+\begin{equation}
+M=\left(\begin{matrix}
+R_{11}&\cdots&R_{1d_A}\\
+\vdots&\ddots&\vdots\\
+R_{d_A1}&\cdots&R_{d_Ad_A}
+\end{matrix}\right),\qquad
+\left(R_{ij}\right)_{\mu\nu}=M_{i\mu,j\nu}.
+\end{equation}
+由式\eqref{eq:partial-trace-elements-A}，固定 $i,j$ 后对 $\mu$ 求和恰好是对第 $\left(i,j\right)$ 个块取迹；
+由式\eqref{eq:partial-trace-elements-B}，固定 $\mu,\nu$ 后对 $i$ 求和恰好是对角块相加。因此
+\begin{equation}
+\boxed{\rho_A=\left(\begin{matrix}
+\mathrm{Tr}\,R_{11}&\cdots&\mathrm{Tr}\,R_{1d_A}\\
+\vdots&\ddots&\vdots\\
+\mathrm{Tr}\,R_{d_A1}&\cdots&\mathrm{Tr}\,R_{d_Ad_A}
+\end{matrix}\right),\qquad
+\rho_B=\sum_{i=1}^{d_A}R_{ii}.}
+\label{eq:partial-trace-blocks}
+\end{equation}
+即保留 $A$ 时对每个块取迹，保留 $B$ 时把对角块相加。这里的分块大小与求和规则适用于任意 $d_A,d_B$，并不限于二能级系统。
+
+\subsection{用矩阵乘法实现偏迹}
+令 $e_\mu\in\C^{d_B}$ 为 $B$ 的第 $\mu$ 个标准基列向量，其分量为 $\left(e_\mu\right)_\nu=\delta_{\mu\nu}$。
+记 $I_{d_A}$ 为 $d_A$ 阶单位矩阵，定义
+\begin{equation}
+P_\mu=I_{d_A}\otimes e_\mu^\dagger,
+\qquad P_\mu\in\C^{d_A\times d_Ad_B}.
+\end{equation}
+这是算符映射 $\hat I_A\otimes\Bra{\mu}_B$ 在所选基底中的矩阵表示；其共轭转置是 $\hat I_A\otimes\Ket{\mu}_B$ 的矩阵表示。
+所以偏迹定义直接变成普通矩阵乘法与求和：
+\begin{equation}
+\boxed{\rho_A=\sum_{\mu=1}^{d_B}P_\mu M P_\mu^\dagger
+=\sum_{\mu=1}^{d_B}
+\left(I_{d_A}\otimes e_\mu^\dagger\right)
+M\left(I_{d_A}\otimes e_\mu\right).}
+\end{equation}
+若 $f_i\in\C^{d_A}$ 为 $A$ 的第 $i$ 个标准基列向量，则保留 $B$ 的对应形式为
+\begin{equation}
+Q_i=f_i^\dagger\otimes I_{d_B},\qquad
+Q_i\in\C^{d_B\times d_Ad_B},\qquad
+\boxed{\rho_B=\sum_{i=1}^{d_A}Q_i M Q_i^\dagger.}
+\end{equation}
+矩阵元求和、分块计算和上述矩阵乘法是同一个偏迹操作的三种写法。
+若原矩阵采用了其他排列顺序，应先重排到已声明的顺序；若原矩阵是在非直积基底中给出的，例如大系统的某组能量本征基底，则须先利用基底间的变换矩阵转到直积基底。
+仅知道矩阵大小而不知道它所对应的基底及子系统划分，不能确定应如何取偏迹。
+
+\subsection{约化态的性质与物理意义}
+从矩阵乘法形式可直接检查约化态的半正定性。对任意 $v\in\C^{d_A}$，
+\begin{equation}
+v^\dagger\rho_Av
+=\sum_{\mu=1}^{d_B}
+\left(P_\mu^\dagger v\right)^\dagger M
+\left(P_\mu^\dagger v\right)\geq0.
+\end{equation}
+由于 $M^\dagger=M$，每项 $P_\mu M P_\mu^\dagger$ 都是厄米矩阵。归一化则由对角元求和得到
+\begin{equation}
+\mathrm{Tr}\,\rho_A
+=\sum_{i=1}^{d_A}\sum_{\mu=1}^{d_B}M_{i\mu,i\mu}
+=\mathrm{Tr}\,M=1.
+\end{equation}
+因此偏迹确实给出一个合法的子系统密度矩阵。
+设 $\hat O_A$ 是只作用于 $A$ 的可观测量，其矩阵元为 $O_{ij}=\Braket{i|\hat O_A|j}_A$。
+由于 $\hat I_B$ 的矩阵元为 $\delta_{\nu\mu}$，大系统中的期望值可写成
+\begin{align}
+\mathrm{Tr}_{AB}\left[\hat\rho_{AB}\left(\hat O_A\otimes\hat I_B\right)\right]
+&=\sum_{i,j=1}^{d_A}\sum_{\mu,\nu=1}^{d_B}
+M_{i\mu,j\nu}O_{ji}\delta_{\nu\mu}\notag\\
+&=\sum_{i,j=1}^{d_A}\left(\sum_{\mu=1}^{d_B}M_{i\mu,j\mu}\right)O_{ji}\notag\\
+&=\mathrm{Tr}_A\left(\hat\rho_A\hat O_A\right).
+\end{align}
+这说明约化态保留了对子系统 $A$ 单独进行测量所需的全部统计信息。
+偏迹对应忽略 $B$ 的自由度并求和，而不是将 $B$ 投影到某个指定态后再归一化；后者描述的是带有特定测量结果的条件态。
+即使整体处于纯态，约化态也可能是混合态，因此计算子系统状态时不能直接截取大矩阵的某个子块。
+
+\subsection{纯态系数与课堂例题}
+若 $\Ket{\Psi}=\sum_{i,\mu}C_{i\mu}\Ket{i,\mu}$，则
+$M_{i\mu,j\nu}=C_{i\mu}C_{j\nu}^*$。代入偏迹公式，得到
+\begin{align}
+\left(\rho_A\right)_{ij}&=\sum_\mu C_{i\mu}C_{j\mu}^*,\\
+\left(\rho_B\right)_{\mu\nu}&=\sum_i C_{i\mu}C_{i\nu}^*.
+\end{align}
+若把 $C$ 视作 $d_A\times d_B$ 矩阵，这意味着
+\begin{equation}
+\rho_A=CC^\dagger,\qquad\rho_B=C^{\mathsf T}C^*.
+\end{equation}
+第二式的转置与共轭由我们将 $B$ 的态系数写在右侧的约定决定，不应直接写成 $C^\dagger C$。
+
+\begin{example}[对整体纯态取偏迹]
+对式\eqref{eq:composite-example-state}，系数矩阵及两个约化矩阵为
+\begin{equation}
+C=\left(\begin{matrix}1/\sqrt2&1/2\\0&1/2\end{matrix}\right),\quad
+\rho_A=\left(\begin{matrix}3/4&1/4\\1/4&1/4\end{matrix}\right),\quad
+\rho_B=\left(\begin{matrix}1/2&\sqrt2/4\\\sqrt2/4&1/2\end{matrix}\right).
+\end{equation}
+例如 $\left(\rho_A\right)_{12}=M_{1,3}+M_{2,4}=0+1/4$。
+两个约化态的迹均为一，纯度均为 $3/4<1$，所以整体纯态是纠缠态。整体的纯度仍为一，不能与约化态的纯度混淆。
+\end{example}
+
+\begin{example}[自旋单态的约化态]
+取 $\Ket{\Psi_-}=\left(\Ket{\uparrow\downarrow}-\Ket{\downarrow\uparrow}\right)/\sqrt2$。其密度算符为
+\begin{align}
+\hat\rho_{AB}=\frac12\left[\vphantom{\Ket{\uparrow\downarrow}}\right.&
+\Ket{\uparrow\downarrow}\Bra{\uparrow\downarrow}
++\Ket{\downarrow\uparrow}\Bra{\downarrow\uparrow}\notag\\
+&\left.{}-\Ket{\uparrow\downarrow}\Bra{\downarrow\uparrow}
+-\Ket{\downarrow\uparrow}\Bra{\uparrow\downarrow}\right].
+\end{align}
+对 $B$ 取迹时，交叉项因 $\Braket{\uparrow|\downarrow}=0$ 消失，因此
+\begin{equation}
+\hat\rho_A=\frac12\left(\Ket{\uparrow}\Bra{\uparrow}+\Ket{\downarrow}\Bra{\downarrow}\right)=\frac{\hat I_A}{2},\qquad
+\hat\rho_B=\frac{\hat I_B}{2}.
+\end{equation}
+每个子系统单独看都是最大混合态，而整体是纯态。局域态无法显示完整的两体关联，例如单态满足
+$\Braket{\Psi_-|\hat S_z\otimes\hat S_z|\Psi_-}=-\hbar^2/4$，但各自的平均自旋为零。
+\end{example}

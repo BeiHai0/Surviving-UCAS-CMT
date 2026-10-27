@@ -1,0 +1,239 @@
+% 来源：1020-12.pdf，第 7--26 页。
+\section{角动量算符的本征值与本征态}
+\subsection{角动量平方与第三分量的共同表象}
+由于 $\left[\hat J^2,\hat J_z\right]=0$，取二者的归一化共同本征态 $\Ket{\lambda,m}$：
+\begin{equation}
+\hat J^2\Ket{\lambda,m}=\lambda\Ket{\lambda,m},\qquad
+\hat J_z\Ket{\lambda,m}=m\Ket{\lambda,m},
+\end{equation}
+其中 $\lambda,m$ 均为实数。在没有额外重数的角动量空间中，基矢满足
+\begin{equation}
+\Braket{\lambda',m'|\lambda,m}=\delta_{\lambda'\lambda}\delta_{m'm},\qquad
+\sum_{\lambda,m}\Ket{\lambda,m}\Bra{\lambda,m}=\hat I.
+\end{equation}
+若同一角动量表示出现多次，还需补充区分这些副本的量子数；以下省略该指标。涉及无穷维算符时，以下乘积与对易关系均在共同不变定义域上使用。
+
+\subsection{两个不等式}
+首先有 $\lambda\geq0$。利用各分量的厄米性，
+\begin{align}
+\lambda&=\Braket{\lambda,m|\hat J^2|\lambda,m}
+=\sum_{i=x,y,z}\Braket{\lambda,m|\hat J_i^\dag\hat J_i|\lambda,m}\notag\\
+&=\sum_{i=x,y,z}\left\|\hat J_i\Ket{\lambda,m}\right\|^2\geq0.
+\end{align}
+其次有 $\lambda\geq m^2$，因为
+\begin{equation}
+\lambda=\sum_{i=x,y}\left\|\hat J_i\Ket{\lambda,m}\right\|^2+m^2,
+\qquad\lambda-m^2\geq0.
+\label{eq:angular-eigenvalue-bound}
+\end{equation}
+这些不等式来自态的范数非负性。
+
+\subsection{用阶梯算符构造其他本征态}
+令 $\Ket{\psi}=\hat J_+\Ket{\lambda,m}$。由 $\left[\hat J^2,\hat J_+\right]=0$，
+\begin{equation}
+\hat J^2\Ket{\psi}=\hat J_+\hat J^2\Ket{\lambda,m}
+=\lambda\hat J_+\Ket{\lambda,m}=\lambda\Ket{\psi}.
+\end{equation}
+又由 $\left[\hat J_z,\hat J_+\right]=\hat J_+$，
+\begin{align}
+\hat J_z\Ket{\psi}
+&=\left(\left[\hat J_z,\hat J_+\right]+\hat J_+\hat J_z\right)\Ket{\lambda,m}\notag\\
+&=\left(\hat J_++m\hat J_+\right)\Ket{\lambda,m}
+=\left(m+1\right)\Ket{\psi}.
+\end{align}
+因此只要结果非零，$\hat J_+\Ket{\lambda,m}$ 就是本征值为 $\lambda,m+1$ 的共同本征态，
+\begin{equation}
+\hat J_+\Ket{\lambda,m}\propto\Ket{\lambda,m+1}.
+\end{equation}
+这就是“上升算符”这一名称的含义。重复作用 $p$ 次，归纳得到
+\begin{equation}
+\hat J_z\hat J_+^p\Ket{\lambda,m}
+=\left(m+p\right)\hat J_+^p\Ket{\lambda,m},\qquad
+\hat J_+^p\Ket{\lambda,m}\propto\Ket{\lambda,m+p},
+\end{equation}
+其中 $p$ 为正整数，仍要求所得向量非零。
+
+对 $\Ket{\varphi}=\hat J_-\Ket{\lambda,m}$，逐项计算为
+\begin{align}
+\hat J^2\Ket{\varphi}&=\hat J_-\hat J^2\Ket{\lambda,m}=\lambda\Ket{\varphi},\\
+\hat J_z\Ket{\varphi}
+&=\left(\left[\hat J_z,\hat J_-\right]+\hat J_-\hat J_z\right)\Ket{\lambda,m}\notag\\
+&=\left(-\hat J_-+m\hat J_-\right)\Ket{\lambda,m}
+=\left(m-1\right)\Ket{\varphi}.
+\end{align}
+所以 $\hat J_-$ 为下降算符，且对正整数 $q$，
+\begin{equation}
+\hat J_z\hat J_-^q\Ket{\lambda,m}
+=\left(m-q\right)\hat J_-^q\Ket{\lambda,m},\qquad
+\hat J_-^q\Ket{\lambda,m}\propto\Ket{\lambda,m-q}.
+\end{equation}
+非零阶梯态保持相同的 $\hat J^2$ 本征值。
+
+\subsection{确定比例系数}
+若 $\hat J_+\Ket{\lambda,m}\neq0$，令
+$C_m\hat J_+\Ket{\lambda,m}=\Ket{\lambda,m+1}$。归一化要求
+\begin{align}
+1&=\left|C_m\right|^2\Braket{\lambda,m|\hat J_-\hat J_+|\lambda,m}\notag\\
+&=\left|C_m\right|^2
+\Braket{\lambda,m|\hat J^2-\hat J_z\left(\hat J_z+1\right)|\lambda,m}\notag\\
+&=\left|C_m\right|^2\left[\lambda-m\left(m+1\right)\right].
+\end{align}
+选择同一阶梯内的相对相位，使 $C_m$ 为正实数，便有
+\begin{equation}
+\frac1{C_m}=\sqrt{\lambda-m\left(m+1\right)}.
+\end{equation}
+这里选择正号使用了相位约定，而非仅由归一化推出。取 $\lambda=j\left(j+1\right)$ 并选 $j\geq0$，把态改记为 $\Ket{j,m}$，则
+\begin{equation}
+\boxed{\hat J_+\Ket{j,m}=\sqrt{\left(j-m\right)\left(j+m+1\right)}\Ket{j,m+1}.}
+\label{eq:angular-raising-action}
+\end{equation}
+下降态的归一化由另一乘积给出：
+\begin{align}
+\left\|\hat J_-\Ket{j,m}\right\|^2
+&=\Braket{j,m|\hat J_+\hat J_-|j,m}\notag\\
+&=j\left(j+1\right)-m\left(m-1\right)
+=\left(j+m\right)\left(j-m+1\right).
+\end{align}
+因而在相同相位约定下，
+\begin{equation}
+\boxed{\hat J_-\Ket{j,m}=\sqrt{\left(j+m\right)\left(j-m+1\right)}\Ket{j,m-1}.}
+\label{eq:angular-lowering-action}
+\end{equation}
+在端点处直接用零系数理解作用结果，不再定义发散的归一化常数。特别地，$\hat J_+\Ket{j,j}=0$、$\hat J_-\Ket{j,-j}=0$。式\eqref{eq:angular-eigenvalue-bound}也变为 $m^2\leq j\left(j+1\right)$。
+
+\subsection{用 Schwinger 方法确定量子数的取值}
+引入两套彼此独立的玻色型产生、湮灭算符
+$\hat a_1,\hat a_1^\dag$ 和 $\hat a_2,\hat a_2^\dag$，满足
+\begin{equation}
+\left[\hat a_i,\hat a_j^\dag\right]=\delta_{ij},\qquad
+\left[\hat a_i,\hat a_j\right]=0,\qquad
+\left[\hat a_i^\dag,\hat a_j^\dag\right]=0,\qquad i,j=1,2.
+\end{equation}
+引入归一化双模真空 $\Ket{0}$，$\hat a_i\Ket{0}=0$。粒子数算符
+$\hat N_i=\hat a_i^\dag\hat a_i$ 为厄米算符，其单模数态满足
+\begin{equation}
+\hat N_i\Ket{n_i}=n_i\Ket{n_i},\qquad
+\Ket{n_i}=\frac{\left(\hat a_i^\dag\right)^{n_i}}{\sqrt{n_i!}}\Ket{0}_i,
+\qquad n_i=0,1,2,\ldots.
+\end{equation}
+其中单模真空记为 $\Ket{0}_i$，双模真空为二者的直积。每个单模基满足
+$\Braket{n_i'|n_i}=\delta_{n_i'n_i}$、$\sum_{n_i}\Ket{n_i}\Bra{n_i}=\hat I_i$。
+由于 $\left[\hat N_1,\hat N_2\right]=0$，共同本征态为
+\begin{equation}
+\Ket{n_1,n_2}=\Ket{n_1}\otimes\Ket{n_2}
+=\frac{\left(\hat a_1^\dag\right)^{n_1}\left(\hat a_2^\dag\right)^{n_2}}
+{\sqrt{n_1!n_2!}}\Ket{0}.
+\end{equation}
+
+用 Pauli 矩阵定义角动量算符：
+\begin{equation}
+\hat J_i=\frac12\left(\begin{matrix}\hat a_1^\dag&\hat a_2^\dag\end{matrix}\right)
+\sigma_i\left(\begin{matrix}\hat a_1\\\hat a_2\end{matrix}\right),\qquad i=x,y,z,
+\end{equation}
+其中
+\begin{equation}
+\sigma_x=\left(\begin{matrix}0&1\\1&0\end{matrix}\right),\quad
+\sigma_y=\left(\begin{matrix}0&-\mathrm{i}\\\mathrm{i}&0\end{matrix}\right),\quad
+\sigma_z=\left(\begin{matrix}1&0\\0&-1\end{matrix}\right).
+\end{equation}
+展开为
+\begin{align}
+\hat J_x&=\frac12\left(\hat a_1^\dag\hat a_2+\hat a_2^\dag\hat a_1\right),\\
+\hat J_y&=\frac1{2\mathrm{i}}\left(\hat a_1^\dag\hat a_2-\hat a_2^\dag\hat a_1\right),\\
+\hat J_z&=\frac12\left(\hat a_1^\dag\hat a_1-\hat a_2^\dag\hat a_2\right)
+=\frac12\left(\hat N_1-\hat N_2\right).
+\end{align}
+三个分量均为厄米算符，而且
+\begin{equation}
+\hat J_+=\hat a_1^\dag\hat a_2,\qquad
+\hat J_-=\hat a_2^\dag\hat a_1.
+\end{equation}
+可用玻色对易关系检验全部角动量对易关系。例如
+\begin{align}
+\left[\hat J_+,\hat J_-\right]
+&=\hat a_1^\dag\hat a_2\hat a_2^\dag\hat a_1
+-\hat a_2^\dag\hat a_1\hat a_1^\dag\hat a_2\notag\\
+&=\hat N_1\left(\hat N_2+1\right)-\hat N_2\left(\hat N_1+1\right)
+=2\hat J_z.
+\end{align}
+再由 $\left[\hat N_i,\hat a_j^\dag\right]=\delta_{ij}\hat a_j^\dag$ 和
+$\left[\hat N_i,\hat a_j\right]=-\delta_{ij}\hat a_j$，得到 $\left[\hat J_z,\hat J_\pm\right]=\pm\hat J_\pm$。
+
+令总粒子数算符为 $\hat N=\hat N_1+\hat N_2$，则
+\begin{align}
+\hat J^2
+&=\frac12\left(\hat J_+\hat J_-+\hat J_-\hat J_+\right)
++\frac14\left(\hat N_1-\hat N_2\right)^2\notag\\
+&=\frac12\left[\hat N_1\left(\hat N_2+1\right)+\hat N_2\left(\hat N_1+1\right)\right]
++\frac14\left(\hat N_1^2+\hat N_2^2-2\hat N_1\hat N_2\right)\notag\\
+&=\frac12\hat N+\frac14\hat N^2
+=\boxed{\frac{\hat N}{2}\left(\frac{\hat N}{2}+1\right).}
+\label{eq:schwinger-casimir}
+\end{align}
+$\hat J_z,\hat J^2,\hat N_1,\hat N_2$ 彼此对易，故数态也为 $\hat J_z$ 与 $\hat J^2$ 的共同本征态：
+\begin{align}
+\hat J_z\Ket{n_1,n_2}&=\frac{n_1-n_2}{2}\Ket{n_1,n_2},\\
+\hat J^2\Ket{n_1,n_2}&=\frac{n_1+n_2}{2}\left(\frac{n_1+n_2}{2}+1\right)\Ket{n_1,n_2}.
+\end{align}
+与 $\Ket{j,m}$ 比较，得到
+\begin{equation}
+\boxed{j=\frac{n_1+n_2}{2},\qquad m=\frac{n_1-n_2}{2},\qquad
+n_1=j+m,\qquad n_2=j-m.}
+\end{equation}
+因此 $n_1+n_2$ 为偶数时 $j$ 为非负整数，为奇数时 $j$ 为正半整数：
+\begin{equation}
+j=0,\frac12,1,\frac32,\ldots.
+\end{equation}
+$m$ 的整数或半整数性质与 $j$ 相同；二者不能独立选择。由 $n_1,n_2$ 都为非负整数，固定 $j$ 时
+\begin{equation}
+\boxed{m=-j,-j+1,\ldots,j-1,j,}
+\end{equation}
+共有 $2j+1$ 个取值。例如 $j=1$ 时，允许的占据数对为
+$\left(n_1,n_2\right)=\left(0,2\right),\left(1,1\right),\left(2,0\right)$，对应 $m=-1,0,1$；$m=\pm2$ 不满足非负占据数要求。
+
+Schwinger 构造给出每个允许 $j$ 的一个表示。一般角动量阶梯的取值也可由前面的范数关系确认：固定 $\lambda$ 时 $m$ 有界，阶梯必有上下端点；在上端点 $M$ 与下端点 $m_0$，分别有
+\begin{equation}
+\lambda=M\left(M+1\right)=m_0\left(m_0-1\right).
+\end{equation}
+两式相减得 $\left(M+m_0\right)\left(M-m_0+1\right)=0$。由于 $M\geq m_0$，第二因子非零，故 $m_0=-M$。端点相差非负整数步，所以 $2M$ 是非负整数，令 $j=M$ 即得到同样的取值范围。
+
+\subsection{本征态的显式构造与端点态}
+把 $n_1=j+m$、$n_2=j-m$ 代回数态，得到
+\begin{equation}
+\boxed{\Ket{j,m}=
+\frac{\left(\hat a_1^\dag\right)^{j+m}\left(\hat a_2^\dag\right)^{j-m}}
+{\sqrt{\left(j+m\right)!\left(j-m\right)!}}\Ket{0}.}
+\label{eq:schwinger-state}
+\end{equation}
+特别地，最高权态和最低权态为
+\begin{equation}
+\Ket{j,j}=\frac{\left(\hat a_1^\dag\right)^{2j}}{\sqrt{\left(2j\right)!}}\Ket{0},\qquad
+\Ket{j,-j}=\frac{\left(\hat a_2^\dag\right)^{2j}}{\sqrt{\left(2j\right)!}}\Ket{0}.
+\end{equation}
+利用不同模式的算符对易，可以直接检查
+\begin{align}
+\hat J_+\Ket{j,j}
+&=\frac{\hat a_1^\dag\left(\hat a_1^\dag\right)^{2j}}{\sqrt{\left(2j\right)!}}\hat a_2\Ket{0}=0,\\
+\hat J_-\Ket{j,-j}
+&=\frac{\hat a_2^\dag\left(\hat a_2^\dag\right)^{2j}}{\sqrt{\left(2j\right)!}}\hat a_1\Ket{0}=0.
+\end{align}
+这里右端的 $0$ 是零向量，不是真空态。
+
+重复使用阶梯公式，得
+\begin{align}
+\hat J_-^{j-m}\Ket{j,j}
+&=\sqrt{\frac{\left(2j\right)!\left(j-m\right)!}{\left(j+m\right)!}}\Ket{j,m},\\
+\hat J_+^{j-m}\Ket{j,m}
+&=\sqrt{\frac{\left(2j\right)!\left(j-m\right)!}{\left(j+m\right)!}}\Ket{j,j}.
+\end{align}
+所以从端点构造态或反求端点态的公式为
+\begin{align}
+\Ket{j,\pm m}
+&=\sqrt{\frac{\left(j+m\right)!}{\left(2j\right)!\left(j-m\right)!}}
+\hat J_\mp^{j-m}\Ket{j,\pm j},\\
+\Ket{j,\pm j}
+&=\sqrt{\frac{\left(j+m\right)!}{\left(2j\right)!\left(j-m\right)!}}
+\hat J_\pm^{j-m}\Ket{j,\pm m}.
+\label{eq:angular-extremal-construction}
+\end{align}
+两行分别按上号、下号成对使用，$m$ 取允许值，$j-m$ 为非负整数。

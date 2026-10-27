@@ -1,0 +1,107 @@
+% 来源：1013-10.pdf 第 24--29 页；1015-11.pdf 第 1--13 页。
+\section{复合系统纯态的 Schmidt 分解}
+\subsection{分解的构造与证明}
+对 $\mathcal H_A\otimes\mathcal H_B$ 中的任意归一化纯态，存在两组分别正交归一的态，使
+\begin{equation}
+\boxed{\Ket{\Psi}=\sum_{\alpha=1}^{r}\sqrt{p_\alpha}
+\Ket{a_\alpha}_A\otimes\Ket{b_\alpha}_B,}
+\qquad p_\alpha>0,\qquad\sum_\alpha p_\alpha=1,
+\label{eq:schmidt-decomposition}
+\end{equation}
+其中 $r\leq\min\left(d_A,d_B\right)$。$\sqrt{p_\alpha}$ 称为 Schmidt 系数，$p_\alpha$ 是约化密度算符的非零本征值；有时也把 $p_\alpha$ 称作 Schmidt 权重。非零项数 $r$ 称为 Schmidt 秩。
+
+下面从约化密度算符构造该分解。先在 $A$ 上选择 $\hat\rho_A$ 的完整正交归一本征基 $\left\{\Ket{a_\alpha}\right\}$，包括零本征值对应的态，并定义 $B$ 中未归一化的向量
+\begin{equation}
+\Ket{w_\alpha}_B=\left(\Bra{a_\alpha}_A\otimes\hat I_B\right)\Ket{\Psi}.
+\end{equation}
+由 $A$ 的完备性，$\Ket{\Psi}=\sum_\alpha\Ket{a_\alpha}_A\otimes\Ket{w_\alpha}_B$。
+在 $B$ 上插入任意正交归一基底 $\left\{\Ket{v_\mu}\right\}$，可得
+\begin{align}
+\Braket{w_\beta|w_\alpha}
+&=\sum_\mu\Braket{\Psi|a_\beta,v_\mu}\Braket{a_\alpha,v_\mu|\Psi}\notag\\
+&=\Braket{a_\alpha|\hat\rho_A|a_\beta}
+=p_\alpha\delta_{\alpha\beta}.
+\end{align}
+若 $p_\alpha=0$，则 $\Ket{w_\alpha}=0$，这一项不贡献整体态；若 $p_\alpha>0$，定义
+\begin{equation}
+\Ket{b_\alpha}=\frac{\Ket{w_\alpha}}{\sqrt{p_\alpha}}.
+\end{equation}
+上式立即给出 $\Braket{b_\beta|b_\alpha}=\delta_{\alpha\beta}$，从而证明式\eqref{eq:schmidt-decomposition}。$B$ 中最多存在 $d_B$ 个正交归一向量，故 $r\leq d_B$，同时 $r\leq d_A$。
+
+与照片中的系数变换相对应，若
+$\Ket{\Psi}=\sum_{i,\mu}C_{i\mu}\Ket{u_i,v_\mu}$，且
+$\Ket{a_\alpha}=\sum_iU_{i\alpha}\Ket{u_i}$，则
+\begin{equation}
+\Ket{w_\alpha}=\sum_\mu d_{\alpha\mu}\Ket{v_\mu},\qquad
+d_{\alpha\mu}=\sum_iU_{i\alpha}^*C_{i\mu}.
+\end{equation}
+这里 $U$ 的列是 $\rho_A$ 的本征向量，$U^\dagger\rho_AU$ 为对角矩阵；上述内积恒等式即
+$\sum_\mu d_{\alpha\mu}d_{\beta\mu}^*=p_\alpha\delta_{\alpha\beta}$。
+这也说明为什么只能对非零 $p_\alpha$ 作除法。
+
+\subsection{约化谱、纠缠判据与纠缠熵}
+对 Schmidt 形式取偏迹，正交性消去交叉项：
+\begin{equation}
+\hat\rho_A=\sum_\alpha p_\alpha\Ket{a_\alpha}\Bra{a_\alpha},\qquad
+\hat\rho_B=\sum_\alpha p_\alpha\Ket{b_\alpha}\Bra{b_\alpha}.
+\end{equation}
+两个约化态有相同的非零本征值及其重数；若维数不同，零本征值的数目可以不同。其纯度均为 $\sum_\alpha p_\alpha^2$。于是对于整体纯态，
+\begin{equation}
+\boxed{r=1\ \Longleftrightarrow\ \Ket{\Psi}\text{ 可分离}
+\ \Longleftrightarrow\ \hat\rho_A\text{ 为纯态}
+\ \Longleftrightarrow\ \hat\rho_B\text{ 为纯态}.}
+\end{equation}
+若 $r>1$，两个约化态均为混合态。这个判据不能直接推广到整体混合态。
+
+定义二分纯态的纠缠熵为任一约化态的 von Neumann 熵：
+\begin{equation}
+\boxed{S_A=-\mathrm{Tr}_A\left(\hat\rho_A\log_2\hat\rho_A\right)
+=-\sum_\alpha p_\alpha\log_2p_\alpha=S_B.}
+\end{equation}
+约定 $0\log_2 0=0$，单位为 bit。可分离纯态对应 $S_A=0$。对 $r$ 个非零权重，由对数的凹性和 Jensen 不等式，
+\begin{equation}
+S_A=\sum_{\alpha=1}^r p_\alpha\log_2\frac1{p_\alpha}
+\leq\log_2\left(\sum_{\alpha=1}^r p_\alpha\frac1{p_\alpha}\right)
+=\log_2r.
+\end{equation}
+令 $d=\min\left(d_A,d_B\right)$，便有
+\begin{equation}
+0\leq S_A\leq\log_2d,
+\end{equation}
+上界在 $d$ 个非零权重均为 $1/d$ 时达到，即较小子系统的约化态为 $\hat I/d$。对 Bell 态，两个权重均为 $1/2$，故纠缠熵为一。这里整体密度算符的熵为零，纠缠熵是约化态的熵。
+
+\subsection{两自旋的参数化例子}
+考虑实参数 $\theta$ 与归一化态
+\begin{align}
+\Ket{\Psi_\theta}=\frac1{\sqrt2}\left[\vphantom{\Ket{\uparrow\uparrow}}\right.&\sin\theta\Ket{\uparrow\uparrow}
++\cos\theta\Ket{\uparrow\downarrow}\notag\\
+&+\cos\theta\Ket{\downarrow\uparrow}
++\left.\sin\theta\Ket{\downarrow\downarrow}\right].
+\end{align}
+它的系数矩阵及约化矩阵为
+\begin{equation}
+C=\frac1{\sqrt2}\left(\begin{matrix}\sin\theta&\cos\theta\\\cos\theta&\sin\theta\end{matrix}\right),\qquad
+\rho_A=\rho_B=\frac12\left(\begin{matrix}1&\sin\left(2\theta\right)\\\sin\left(2\theta\right)&1\end{matrix}\right).
+\end{equation}
+记 $s=\sin\left(2\theta\right)$。特征方程为
+\begin{equation}
+\left(\frac12-p\right)^2-\frac{s^2}{4}=0.
+\end{equation}
+可按固定的 $x$ 基底标记本征值 $p_+=\left(1+s\right)/2$、$p_-=\left(1-s\right)/2$；若从大到小排序，则为 $\left(1\pm\left|s\right|\right)/2$，相应本征向量也须随 $s$ 的符号交换。
+
+用 $\Ket{\pm}_x=\left(\Ket{\uparrow}\pm\Ket{\downarrow}\right)/\sqrt2$ 展开，可直接得到
+\begin{equation}
+\Ket{\Psi_\theta}=A_+\Ket{+}_x\otimes\Ket{+}_x
++A_-\Ket{-}_x\otimes\Ket{-}_x,\qquad
+A_\pm=\frac{\sin\theta\pm\cos\theta}{\sqrt2}.
+\end{equation}
+由于 $\left|A_\pm\right|^2=p_\pm$，将 $A_\pm$ 的符号吸收到第二个子系统的基矢中，就是系数非负的 Schmidt 分解。零系数项应删去。
+这种写法也适用于 $s=0$，避免使用 $s/\left|s\right|$ 引起的除零问题。
+纯度及纠缠熵为
+\begin{equation}
+\mathcal P_A=\frac{1+s^2}{2},\qquad
+S_A=-p_+\log_2p_+-p_-\log_2p_-.
+\end{equation}
+当 $\left|s\right|=1$ 时态可分离；当 $s=0$ 时为最大纠缠态。因此仅要求 $\sin\theta\neq\cos\theta$ 并不足以保证纠缠，还须排除 $\sin\theta=-\cos\theta$。
+
+最后，Schmidt 基不总唯一：非零权重简并时可在相应子空间内作匹配的基底旋转；但 Schmidt 权重与秩不依赖这种选择。

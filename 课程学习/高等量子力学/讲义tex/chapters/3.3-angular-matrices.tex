@@ -1,0 +1,62 @@
+% 来源：1020-12.pdf，第 27--31 页。
+\section{角动量算符的矩阵元}
+\subsection{角动量基底的正交性与完备性}
+沿用上一节省略额外重数指标的约定，基底满足
+\begin{equation}
+\Braket{j',m'|j,m}=\delta_{j'j}\delta_{m'm},\qquad
+\sum_j\sum_{m=-j}^j\Ket{j,m}\Bra{j,m}=\hat I.
+\end{equation}
+对固定的 $j$ 子空间，
+\begin{equation}
+\Braket{j,m'|j,m}=\delta_{m'm},\qquad
+\sum_{m=-j}^j\Ket{j,m}\Bra{j,m}=\hat I_j.
+\end{equation}
+这里 $\hat I_j$ 是 $\left(2j+1\right)$ 维子空间中的单位算符；在更大的空间中，上述求和是投影到该子空间的投影算符。
+
+\subsection{各角动量算符的矩阵元}
+用 $\hat A$ 依次表示 $\hat J_x,\hat J_y,\hat J_z,\hat J_+,\hat J_-,\hat J^2$。
+它们都满足 $\left[\hat A,\hat J^2\right]=0$，所以
+\begin{align}
+0&=\Braket{j',m'|\left[\hat A,\hat J^2\right]|j,m}\notag\\
+&=\left[j\left(j+1\right)-j'\left(j'+1\right)\right]
+\Braket{j',m'|\hat A|j,m}.
+\end{align}
+由于 $j\geq0$，当 $j'\neq j$ 时，方括号非零，因此该矩阵元为零。也就是说，这些算符在不同 $j$ 子空间之间没有矩阵元，矩阵按 $j$ 分块。
+
+在固定 $j$ 子空间内，
+\begin{align}
+\Braket{j,m'|\hat J^2|j,m}&=j\left(j+1\right)\delta_{m'm},\\
+\Braket{j,m'|\hat J_z|j,m}&=m\delta_{m'm},\\
+\Braket{j,m'|\hat J_\pm|j,m}
+&=\sqrt{\left(j\mp m\right)\left(j\pm m+1\right)}\,\delta_{m',m\pm1}.
+\end{align}
+再用 $\hat J_x=\left(\hat J_++\hat J_-\right)/2$ 和
+$\hat J_y=\left(\hat J_+-\hat J_-\right)/\left(2\mathrm{i}\right)$，得到
+\begin{align}
+\Braket{j,m'|\hat J_x|j,m}
+&=\frac12\left[\sqrt{\left(j-m\right)\left(j+m+1\right)}\,\delta_{m',m+1}\right.\notag\\
+&\qquad\left.{}+\sqrt{\left(j+m\right)\left(j-m+1\right)}\,\delta_{m',m-1}\right],\\
+\Braket{j,m'|\hat J_y|j,m}
+&=\frac1{2\mathrm{i}}\left[\sqrt{\left(j-m\right)\left(j+m+1\right)}\,\delta_{m',m+1}\right.\notag\\
+&\qquad\left.{}-\sqrt{\left(j+m\right)\left(j-m+1\right)}\,\delta_{m',m-1}\right].
+\end{align}
+矩阵的行指标为 $m'$、列指标为 $m$。以下按 $m=j,j-1,\ldots,-j$ 排列基底，矩阵记为 $J_i$，以区别于抽象算符 $\hat J_i$。
+
+\begin{example}[$j=1/2$ 的矩阵表示]
+在有序基底 $\Ket{1/2,1/2},\Ket{1/2,-1/2}$ 中，
+\begin{equation}
+J_x=\frac12\left(\begin{matrix}0&1\\1&0\end{matrix}\right),\qquad
+J_y=\frac12\left(\begin{matrix}0&-\mathrm{i}\\\mathrm{i}&0\end{matrix}\right),\qquad
+J_z=\frac12\left(\begin{matrix}1&0\\0&-1\end{matrix}\right).
+\end{equation}
+即 $J_i=\sigma_i/2$，其中 $\sigma_i$ 为 Pauli 矩阵。
+\end{example}
+
+\begin{example}[$j=1$ 的矩阵表示]
+在有序基底 $\Ket{1,1},\Ket{1,0},\Ket{1,-1}$ 中，
+\begin{align}
+J_x&=\frac1{\sqrt2}\left(\begin{matrix}0&1&0\\1&0&1\\0&1&0\end{matrix}\right),\\
+J_y&=\frac{\mathrm{i}}{\sqrt2}\left(\begin{matrix}0&-1&0\\1&0&-1\\0&1&0\end{matrix}\right),\\
+J_z&=\left(\begin{matrix}1&0&0\\0&0&0\\0&0&-1\end{matrix}\right).
+\end{align}
+\end{example}

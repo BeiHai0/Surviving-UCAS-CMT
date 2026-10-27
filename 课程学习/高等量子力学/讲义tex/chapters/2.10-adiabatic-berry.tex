@@ -1,0 +1,234 @@
+% 来源：1015-11.pdf 第 14--48 页。
+\section{绝热近似与 Berry 相位}
+\subsection{瞬时本征态中的精确演化方程}
+若一维无限深势阱的右壁从 $a$ 缓慢移到 $2a$，初始基态可近似跟随瞬时基态演化；波函数形状随阱宽改变，而非保持初始形状。对宽度 $L$，瞬时本征函数为
+\begin{equation}
+\phi_n\left(x;L\right)=\sqrt{\frac2L}\sin\left(\frac{n\pi x}{L}\right),\qquad
+E_n\left(L\right)=\frac{n^2\pi^2\hbar^2}{2mL^2},\qquad 0<x<L.
+\end{equation}
+“缓慢”的含义应相对于能级间隔决定的时间尺度判断。下面推导一般形式，假设 $\hat H\left(t\right)$ 光滑依赖时间，具有可选为光滑函数的完整瞬时正交归一本征基，且所关注能级沿路径非简并并与其他能级保持非零能隙：
+\begin{equation}
+\hat H\left(t\right)\Ket{n,t}=E_n\left(t\right)\Ket{n,t},\quad
+\Braket{m,t|n,t}=\delta_{mn},\quad\sum_n\Ket{n,t}\Bra{n,t}=\hat I.
+\end{equation}
+以下以有限维或离散谱情形说明；移动硬壁涉及随时间改变的定义域，宜先映射至固定区间再应用一般论证。
+
+把动力学相位从系数中提出，定义
+\begin{equation}
+\Ket{\psi\left(t\right)}=\sum_n c_n\left(t\right)
+\mathrm{e}^{\mathrm{i}\vartheta_n\left(t\right)}\Ket{n,t},\qquad
+\vartheta_n\left(t\right)=-\frac1\hbar\int_0^t E_n\left(t'\right)\,\mathrm{d}t'.
+\end{equation}
+代入 Schr\"odinger 方程，利用 $-\hbar\dot\vartheta_n=E_n$ 消去能量项，剩下
+\begin{equation}
+\sum_n\mathrm{e}^{\mathrm{i}\vartheta_n}
+\left(\dot c_n\Ket{n,t}+c_n\frac{\partial}{\partial t}\Ket{n,t}\right)=0.
+\end{equation}
+左乘 $\Bra{m,t}$，得到精确的系数方程
+\begin{equation}
+\boxed{\dot c_m=-\sum_n c_n\mathrm{e}^{\mathrm{i}\left(\vartheta_n-\vartheta_m\right)}
+\Braket{m,t|\partial_t|n,t}.}
+\label{eq:instantaneous-coefficients}
+\end{equation}
+这里 $\Braket{m,t|\partial_t|n,t}$ 表示 $\Bra{m,t}\partial_t\Ket{n,t}$，导数只作用于右侧瞬时本征矢。
+
+对瞬时本征方程求导，并在左侧取 $\Bra{m,t}$，得到
+\begin{equation}
+\Braket{m,t|\dot{\hat H}|n,t}+E_m\Braket{m,t|\partial_t|n,t}
+=\dot E_n\delta_{mn}+E_n\Braket{m,t|\partial_t|n,t}.
+\end{equation}
+因此当 $m\neq n$ 时，
+\begin{equation}
+\boxed{\Braket{m,t|\partial_t|n,t}
+=\frac{\Braket{m,t|\dot{\hat H}|n,t}}{E_n-E_m}.}
+\label{eq:offdiagonal-adiabatic-coupling}
+\end{equation}
+式\eqref{eq:instantaneous-coefficients}中的非对角项正是瞬时能级间的跃迁耦合。
+
+\subsection{绝热近似、相位与适用条件}
+若可忽略非对角耦合，则
+\begin{equation}
+\dot c_m\simeq-c_m\Braket{m,t|\partial_t|m,t},\qquad
+c_m\left(t\right)\simeq c_m\left(0\right)\mathrm{e}^{\mathrm{i}\gamma_m\left(t\right)},
+\end{equation}
+其中
+\begin{equation}
+\gamma_m\left(t\right)=\mathrm{i}\int_0^t
+\Braket{m,t'|\partial_{t'}|m,t'}\,\mathrm{d}t'.
+\label{eq:adiabatic-geometric-phase}
+\end{equation}
+由归一化的导数
+\begin{equation}
+0=\partial_t\Braket{m,t|m,t}
+=2\operatorname{Re}\Braket{m,t|\partial_t|m,t}
+\end{equation}
+可知该矩阵元为纯虚数，所以 $\gamma_m$ 为实数。若初态是 $\Ket{n,0}$，则
+\begin{equation}
+\boxed{\Ket{\psi\left(t\right)}\simeq
+\mathrm{e}^{\mathrm{i}\vartheta_n\left(t\right)}
+\mathrm{e}^{\mathrm{i}\gamma_n\left(t\right)}\Ket{n,t}.}
+\label{eq:adiabatic-state}
+\end{equation}
+系统近似保持在同一瞬时本征态分支上，另积累动力学相位与几何相位；这不是说态矢量不随时间变化。
+
+为估计忽略跃迁的条件，可先沿各分支选取平行输运规范，使对角耦合为零。初态为 $\Ket{k,0}$ 时，一阶跃迁振幅为
+\begin{equation}
+c_m\left(t\right)\simeq-\int_0^t
+\frac{\Braket{m,t'|\dot{\hat H}\left(t'\right)|k,t'}}{E_k\left(t'\right)-E_m\left(t'\right)}
+\mathrm{e}^{-\frac{\mathrm{i}}\hbar\int_0^{t'}\left[E_k\left(\tau\right)-E_m\left(\tau\right)\right]\mathrm{d}\tau}
+\,\mathrm{d}t',\qquad m\neq k.
+\end{equation}
+若短区间内能隙 $\Delta_{km}=E_k-E_m$ 与分子 $h_{mk}=\Braket{m|\dot{\hat H}|k}$ 近似不变，则
+\begin{equation}
+c_m\left(t\right)\simeq
+\frac{\mathrm{i}\hbar h_{mk}}{\Delta_{km}^2}
+\left(1-\mathrm{e}^{-\mathrm{i}\Delta_{km}t/\hbar}\right).
+\end{equation}
+于是常用的局域小参数为
+\begin{equation}
+\boxed{\epsilon_{mk}\left(t\right)=
+\frac{\hbar\left|\Braket{m,t|\dot{\hat H}|k,t}\right|}
+{\left|E_k-E_m\right|^2}\ll1.}
+\end{equation}
+这个估计说明小能隙附近更难绝热，但它本身不是任意长时间、任意驱动下的充分条件。标准绝热极限是固定一条光滑且有隙的路径 $\hat H\left(s\right)$，令 $s=t/T$，再使总时间 $T$ 增大；还需控制端点与导数，使整个跃迁积分保持小量。能级简并时不能在式\eqref{eq:offdiagonal-adiabatic-coupling}中除以零，需另行处理简并子空间的演化。
+
+\subsection{旋转磁场中的自旋：精确解与绝热极限}
+考虑质量为 $m_{\mathrm e}$、电荷为 $-e$ 的电子，$e>0$。忽略轨道运动并采用 $g=2$ 的自旋磁矩，令
+\begin{equation}
+\bm B\left(t\right)=B_0\left(\sin\alpha\cos\omega t,\sin\alpha\sin\omega t,\cos\alpha\right),\qquad
+\omega_0=\frac{eB_0}{m_{\mathrm e}}.
+\end{equation}
+Hamilton 算符是 $\hat H=e\bm B\cdot\hat{\bm S}/m_{\mathrm e}$。在 $S_z$ 基底中，
+\begin{equation}
+H\left(t\right)=\frac{\hbar\omega_0}{2}
+\left(\begin{matrix}\cos\alpha&\mathrm{e}^{-\mathrm{i}\omega t}\sin\alpha\\
+\mathrm{e}^{\mathrm{i}\omega t}\sin\alpha&-\cos\alpha\end{matrix}\right).
+\end{equation}
+取瞬时本征态的列向量
+\begin{equation}
+\chi_+\left(t\right)=\left(\begin{matrix}\cos\left(\alpha/2\right)\\
+\mathrm{e}^{\mathrm{i}\omega t}\sin\left(\alpha/2\right)\end{matrix}\right),\quad
+\chi_-\left(t\right)=\left(\begin{matrix}\mathrm{e}^{-\mathrm{i}\omega t}\sin\left(\alpha/2\right)\\
+-\cos\left(\alpha/2\right)\end{matrix}\right),
+\end{equation}
+对应 $E_\pm=\pm\hbar\omega_0/2$，初态取 $\psi\left(0\right)=\chi_+\left(0\right)$。
+为求精确解，令
+\begin{equation}
+R\left(t\right)=\mathrm{e}^{-\mathrm{i}\omega t\sigma_z/2},\qquad
+\psi\left(t\right)=R\left(t\right)\varphi\left(t\right).
+\end{equation}
+代入方程可得旋转系中的常矩阵
+\begin{equation}
+\mathrm{i}\hbar\dot\varphi=H_{\mathrm{rot}}\varphi,\qquad
+H_{\mathrm{rot}}=\frac\hbar2\left[\omega_0\sin\alpha\,\sigma_x+
+\left(\omega_0\cos\alpha-\omega\right)\sigma_z\right].
+\end{equation}
+定义
+\begin{equation}
+\lambda=\sqrt{\omega_0^2+\omega^2-2\omega\omega_0\cos\alpha}.
+\end{equation}
+由于 $H_{\mathrm{rot}}^2=\hbar^2\lambda^2I/4$，矩阵指数化为
+\begin{equation}
+\mathrm{e}^{-\mathrm{i}H_{\mathrm{rot}}t/\hbar}
+=I\cos\left(\frac{\lambda t}{2}\right)
+-\frac{2\mathrm{i}H_{\mathrm{rot}}}{\hbar\lambda}\sin\left(\frac{\lambda t}{2}\right).
+\end{equation}
+将精确解写成 $\psi=c_+\mathrm{e}^{-\mathrm{i}\omega_0t/2}\chi_+
++c_-\mathrm{e}^{\mathrm{i}\omega_0t/2}\chi_-$，投影到这两个瞬时态，得到
+\begin{align}
+c_+\left(t\right)&=\left[\cos\left(\frac{\lambda t}{2}\right)
+-\mathrm{i}\frac{\omega_0-\omega\cos\alpha}{\lambda}\sin\left(\frac{\lambda t}{2}\right)\right]
+\mathrm{e}^{-\mathrm{i}\left(\omega-\omega_0\right)t/2},\\
+c_-\left(t\right)&=\mathrm{i}\frac{\omega\sin\alpha}{\lambda}
+\sin\left(\frac{\lambda t}{2}\right)
+\mathrm{e}^{\mathrm{i}\left(\omega-\omega_0\right)t/2}.
+\end{align}
+例如 $\left|c_-\right|^2\leq\omega^2\sin^2\alpha/\lambda^2$ 直接量化了跃迁。
+局域绝热参数为 $\left|\omega\sin\alpha\right|/\left(2\omega_0\right)$，故 $\left|\omega\right|\ll\omega_0$ 是简单的充分尺度要求。在该极限下
+\begin{equation}
+\lambda=\omega_0-\omega\cos\alpha+O\left(\omega^2/\omega_0\right),\quad
+c_-\simeq0,\quad
+c_+\simeq\mathrm{e}^{\mathrm{i}\left(\cos\alpha-1\right)\omega t/2}.
+\end{equation}
+独立地，从瞬时本征态计算可得
+\begin{equation}
+\gamma_+\left(t\right)=\mathrm{i}\int_0^t\chi_+^\dagger\dot\chi_+\,\mathrm{d}t'
+=-\omega t\sin^2\left(\frac\alpha2\right)
+=\frac{\cos\alpha-1}{2}\omega t,
+\end{equation}
+与精确解的绝热极限一致；动力学相位为 $\vartheta_+=-\omega_0t/2$。近似的相位展开也有时间范围：忽略的高阶能量修正不能在任意长时间内无限积累。
+
+\subsection{相位规范与闭合路径的 Berry 相位}
+瞬时本征矢可作相位变换 $\Ket{n,t}'=\mathrm{e}^{\mathrm{i}\eta_n\left(t\right)}\Ket{n,t}$。直接求导，
+\begin{equation}
+\Braket{n,t|\partial_t|n,t}'=
+\mathrm{i}\dot\eta_n+\Braket{n,t|\partial_t|n,t},\qquad
+\gamma_n'\left(t\right)=\gamma_n\left(t\right)-\eta_n\left(t\right)+\eta_n\left(0\right).
+\end{equation}
+所以开路径的积分 $\gamma_n$ 本身依赖规范，沿一条时间路径甚至可以选规范使其为零；相应本征矢的端点相位会补偿这一改变。
+
+设 $\hat H=\hat H\left(\bm R\right)$，外参量沿闭合曲线 $C$ 缓慢演化，$\bm R\left(T\right)=\bm R\left(0\right)$，所关注能级沿曲线非简并。在沿曲线光滑且周期的本征矢规范中，定义 Berry 联络及 Berry 相位
+\begin{equation}
+\bm{\mathcal A}_n\left(\bm R\right)=\mathrm{i}\Braket{n,\bm R|\nabla_{\bm R}|n,\bm R},\qquad
+\boxed{\gamma_n\left(C\right)=\oint_C\bm{\mathcal A}_n\cdot\mathrm{d}\bm R
+\pmod{2\pi}.}
+\end{equation}
+这里 $\nabla_{\bm R}$ 作用于右侧本征矢的参数依赖。由链式法则，这个线积分等于式\eqref{eq:adiabatic-geometric-phase}的闭合周期积分。它取决于有向路径，重新参数化路径的运动速度不改变其值，只要仍满足绝热条件。
+
+规范变换 $\Ket{n,\bm R}'=\mathrm{e}^{\mathrm{i}\eta_n\left(\bm R\right)}\Ket{n,\bm R}$ 导致
+\begin{equation}
+\bm{\mathcal A}_n'=\bm{\mathcal A}_n-\nabla_{\bm R}\eta_n.
+\end{equation}
+对沿闭合曲线单值的相位因子，端点的 $\eta_n$ 只可相差 $2\pi$ 的整数倍，故 $\mathrm{e}^{\mathrm{i}\gamma_n\left(C\right)}$ 规范不变。若没有采用周期规范，一般的规范不变写法是
+\begin{equation}
+\gamma_n\left(C\right)=\mathrm{i}\int_0^T\Braket{n,t|\partial_t|n,t}\,\mathrm{d}t
++\arg\Braket{n,0|n,T}\pmod{2\pi}.
+\end{equation}
+端点重叠的相位恰好抵消积分的规范变化。因此不能同时要求任意相位规范和 $\Ket{n,T}=\Ket{n,0}$。
+
+在三维参数空间中，定义 Berry 曲率向量
+\begin{equation}
+\bm{\mathcal B}_n=\nabla_{\bm R}\times\bm{\mathcal A}_n.
+\end{equation}
+它在光滑规范变换下不变，联络与曲率均为实量。如果 $C=\partial\Sigma$，且曲面上可选光滑规范并避开简并点，Stokes 定理给出
+\begin{equation}
+\gamma_n\left(C\right)=\int_\Sigma\bm{\mathcal B}_n\cdot\mathrm{d}\bm\Sigma\pmod{2\pi}.
+\end{equation}
+若需多个规范片，应计入片间相位变换，不能跨越规范奇点直接使用单片公式。Berry 相位因而可类比为参数空间的“磁通量”。物理上可通过与参考路径比较的干涉相位检测它，而非测量孤立态的整体相位。
+
+对前述旋转磁场，取 $\omega>0$、$T=2\pi/\omega$，有
+\begin{equation}
+\gamma_+\left(C\right)=\pi\left(\cos\alpha-1\right)=-\frac\Omega2,\qquad
+\Omega=\int_0^{2\pi}\!\mathrm{d}\varphi\int_0^\alpha\sin\theta\,\mathrm{d}\theta
+=2\pi\left(1-\cos\alpha\right).
+\end{equation}
+$\Omega$ 是磁场方向围成的有向立体角。绝热范围内，改变 $B_0$ 或遍历速度不改变该几何相位；反向遍历会改变它的符号。
+
+\subsection{用 Hamilton 算符的导数表示 Berry 曲率}
+以下在光滑、非简并区域推导。省略参数标记，记 $\Ket{n}=\Ket{n,\bm R}$。联络的旋度可写成
+\begin{equation}
+\bm{\mathcal B}_n=\mathrm{i}\left(\nabla\Bra{n}\right)\times\left(\nabla\Ket{n}\right)
+=\mathrm{i}\sum_m\left[\left(\nabla\Bra{n}\right)\Ket{m}\right]
+\times\left[\Bra{m}\nabla\Ket{n}\right].
+\end{equation}
+这里叉乘作用在参数空间的分量上；混合偏导交换使 $\Bra{n}\nabla\times\nabla\Ket{n}$ 为零。由本征方程求参数导数，并在左侧取 $\Bra{m}$，当 $m\neq n$ 时有
+\begin{equation}
+\Braket{m|\nabla\hat H|n}=\left(E_n-E_m\right)\Bra{m}\nabla\Ket{n}.
+\end{equation}
+另一方面，对 $\Braket{n|m}=0$ 求导，得到
+\begin{equation}
+\left(\nabla\Bra{n}\right)\Ket{m}=-\Bra{n}\nabla\Ket{m}
+=\frac{\Braket{n|\nabla\hat H|m}}{E_n-E_m}.
+\end{equation}
+当 $m=n$ 时，归一化导数给出 $\left(\nabla\Bra{n}\right)\Ket{n}=-\Bra{n}\nabla\Ket{n}$，该项是同一向量与自身的叉乘，故为零。将非对角项代回即得
+\begin{equation}
+\boxed{\bm{\mathcal B}_n\left(\bm R\right)=\mathrm{i}\sum_{m\neq n}
+\frac{\Braket{n,\bm R|\nabla_{\bm R}\hat H|m,\bm R}
+\times\Braket{m,\bm R|\nabla_{\bm R}\hat H|n,\bm R}}
+{\left[E_n\left(\bm R\right)-E_m\left(\bm R\right)\right]^2}.}
+\end{equation}
+分子中两个向量由厄米性互为复共轭，叉乘为纯虚量，乘以 $\mathrm{i}$ 后为实量。此式使曲率可直接由能量与 Hamilton 算符的导数计算，也显示能级简并附近可能出现曲率奇点。对磁场参数 $\bm R=\bm B$，有 $\nabla_{\bm B}\hat H=e\hat{\bm S}/m_{\mathrm e}$。
+
+\begin{remark}[课堂延伸阅读]
+照片列出 Berry 相位的实验文献线索：\emph{Physical Review Letters} \textbf{59}, 251--254（1987）和 \textbf{61}, 2030--2033（1988），以及 David Vanderbilt 的专著 \emph{Berry Phases in Electronic Structure Theory}（Cambridge University Press, 2018）。此处仅保留课堂提供的阅读线索，不以这些文献代替本节推导。
+\end{remark}

@@ -1,0 +1,129 @@
+% 来源：1008-9.pdf 全部；1013-10.pdf 第 1--2 页。
+\section{密度矩阵方法}
+\subsection{纯态、混合态与密度算符}
+纯态可由一个归一化态矢量 $\Ket{\psi}$ 描述。若只知道系统以概率 $p_s$ 制备在归一化态 $\Ket{\psi_s}$ 中，则用统计系综
+\begin{equation}
+\left\{p_s,\Ket{\psi_s}\right\},\qquad p_s\geq0,\qquad\sum_s p_s=1
+\end{equation}
+描述。参与态不必正交，参与态数目也可超过 Hilbert 空间维数。相干叠加 $\sum_s c_s\Ket{\psi_s}$ 保留振幅的相对相位，统计混合则对各次制备的测量结果作概率平均。定义密度算符
+\begin{equation}
+\boxed{\hat\rho=\sum_s p_s\Ket{\psi_s}\Bra{\psi_s}.}
+\label{eq:density-ensemble}
+\end{equation}
+纯态对应 $\hat\rho=\Ket{\psi}\Bra{\psi}$。有多个非零权重并不足以保证混合态：若参与态仅相差整体相位，仍得到同一个纯态投影。以下主要讨论有限维系统；无穷维情形要求密度算符为正的迹类算符，所用期望值存在。
+
+在正交归一基底 $\left\{\Ket{a_n}\right\}$ 中插入两次完备性，得到
+\begin{align}
+\hat\rho&=\sum_{n,m}\Ket{a_n}\rho_{nm}\Bra{a_m},\\
+\rho_{nm}&=\Braket{a_n|\hat\rho|a_m}
+=\sum_s p_s\Braket{a_n|\psi_s}\Braket{\psi_s|a_m}.
+\end{align}
+$\hat\rho$ 是抽象算符，$\rho$ 是选定基底中的密度矩阵。若纯态的系数列向量为 $c$，则 $\rho=cc^\dagger$。非简并可观测量 $\hat A$ 的本征基中，$\rho_{nn}$ 是测得 $a_n$ 的概率；若简并，应对相应本征子空间内的对角元求和。非对角元描述相对于所选基底的相干性，不能直接当作概率。
+
+\subsection{基本性质与纯度判据}
+由定义取共轭、求迹，并对任意 $\Ket{\phi}$ 取矩阵元，可得
+\begin{align}
+\hat\rho^\dagger&=\hat\rho,\\
+\mathrm{Tr}\,\hat\rho&=\sum_s p_s\Braket{\psi_s|\psi_s}=1,\\
+\Braket{\phi|\hat\rho|\phi}&=\sum_s p_s\left|\Braket{\phi|\psi_s}\right|^2\geq0.
+\end{align}
+密度算符是迹为一的半正定厄米算符。反之，满足这些条件的算符可谱分解为
+\begin{equation}
+\hat\rho=\sum_\alpha\lambda_\alpha\Ket{r_\alpha}\Bra{r_\alpha},\qquad
+\lambda_\alpha\geq0,\qquad\sum_\alpha\lambda_\alpha=1,
+\end{equation}
+因而能描述一个统计系综，且 $0\leq\lambda_\alpha\leq1$。定义纯度 $\mathcal P=\mathrm{Tr}\,\hat\rho^2$，在 $d$ 维空间中有
+\begin{equation}
+\boxed{\frac1d\leq\mathcal P=\sum_\alpha\lambda_\alpha^2\leq1.}
+\end{equation}
+上界来自 $\lambda_\alpha^2\leq\lambda_\alpha$；下界来自 Cauchy--Schwarz 不等式
+$\left(\sum_\alpha\lambda_\alpha\right)^2\leq d\sum_\alpha\lambda_\alpha^2$。
+上界取等号要求本征值均为零或一，由归一化知恰有一个本征值为一。因此
+\begin{equation}
+\boxed{\text{纯态}\ \Longleftrightarrow\ \hat\rho^2=\hat\rho
+\ \Longleftrightarrow\ \mathrm{Tr}\,\hat\rho^2=1.}
+\end{equation}
+混合态满足 $\mathcal P<1$，其所有本征值均小于一；最大混合态为 $\hat I/d$。对任意系综分解也可直接计算
+\begin{equation}
+\mathcal P=\sum_{s,r}p_sp_r\left|\Braket{\psi_s|\psi_r}\right|^2.
+\end{equation}
+若非零权重的参与态中至少有两条不同射线，对应内积的模严格小于一，才可据此推出严格不等式。
+
+\subsection{期望值与时间演化}
+令 $\hat B$ 为可观测量，在系综平均中插入完备性，
+\begin{align}
+\overline B&=\sum_s p_s\Braket{\psi_s|\hat B|\psi_s}\notag\\
+&=\sum_{s,n}p_s\Braket{a_n|\psi_s}\Braket{\psi_s|\hat B|a_n}
+=\boxed{\mathrm{Tr}\left(\hat\rho\hat B\right).}
+\end{align}
+这个表达式与表象无关。两个制备系综只要给出相同的密度算符，就给出相同的全部单次测量统计。
+
+对封闭系统，假设各参与态服从同一个 Schr\"odinger 方程且 $p_s$ 不随时间改变。由
+\begin{equation}
+\mathrm{i}\hbar\frac{\mathrm{d}}{\mathrm{d}t}\Ket{\psi_s}=\hat H\Ket{\psi_s},\qquad
+\mathrm{i}\hbar\frac{\mathrm{d}}{\mathrm{d}t}\Bra{\psi_s}=-\Bra{\psi_s}\hat H
+\end{equation}
+和投影算符的乘积求导，得到 von Neumann 方程及其解
+\begin{equation}
+\boxed{\mathrm{i}\hbar\frac{\mathrm{d}\hat\rho}{\mathrm{d}t}=\left[\hat H,\hat\rho\right],}
+\qquad
+\hat\rho\left(t\right)=\hat U\left(t,t_0\right)\hat\rho\left(t_0\right)\hat U^\dagger\left(t,t_0\right).
+\end{equation}
+由幺正性及迹的循环性，
+\begin{equation}
+\mathrm{Tr}\,\hat\rho^2\left(t\right)
+=\mathrm{Tr}\left[\hat U\hat\rho^2\left(t_0\right)\hat U^\dagger\right]
+=\mathrm{Tr}\,\hat\rho^2\left(t_0\right).
+\end{equation}
+封闭系统的幺正演化保持密度算符的谱与纯度；子系统的约化态一般不满足这个封闭演化方程。
+
+\subsection{自旋二分之一的例子}
+取 $\hat S_z$ 的有序本征基 $\Ket{\uparrow},\Ket{\downarrow}$，自旋算符的矩阵表示为
+\begin{equation}
+S_x=\frac\hbar2\left(\begin{matrix}0&1\\1&0\end{matrix}\right),\quad
+S_y=\frac\hbar2\left(\begin{matrix}0&-\mathrm{i}\\\mathrm{i}&0\end{matrix}\right),\quad
+S_z=\frac\hbar2\left(\begin{matrix}1&0\\0&-1\end{matrix}\right).
+\end{equation}
+例如 $\hat S_x=\hbar\left(\Ket{\uparrow}\Bra{\downarrow}+\Ket{\downarrow}\Bra{\uparrow}\right)/2$。对纯态
+\begin{equation}
+\Ket{\psi_\phi}=\frac1{\sqrt2}\left(\mathrm{e}^{\mathrm{i}\phi}\Ket{\uparrow}+\Ket{\downarrow}\right),\qquad
+\rho_\phi=\frac12\left(\begin{matrix}1&\mathrm{e}^{\mathrm{i}\phi}\\\mathrm{e}^{-\mathrm{i}\phi}&1\end{matrix}\right),
+\end{equation}
+矩阵乘法给出
+\begin{equation}
+\rho_\phi S_x=\frac\hbar4\left(\begin{matrix}\mathrm{e}^{\mathrm{i}\phi}&1\\1&\mathrm{e}^{-\mathrm{i}\phi}\end{matrix}\right),\qquad
+\overline S_x=\frac\hbar2\cos\phi.
+\end{equation}
+另有 $\overline S_y=-\hbar\sin\phi/2$、$\overline S_z=0$。等概率制备上下自旋的混合态则为
+\begin{equation}
+\hat\rho_{\mathrm m}=\frac12\Ket{\uparrow}\Bra{\uparrow}+\frac12\Ket{\downarrow}\Bra{\downarrow}=\frac{\hat I}{2}.
+\end{equation}
+其三个自旋分量平均值均为零，纯度为 $1/2$。在 $\phi=0$ 时，两者测量 $S_z$ 的分布相同，测量 $S_x$ 却能区分它们，原因是纯态中的相干交叉项仍存在。
+
+\subsection{系综分解不唯一与表象依赖}
+记 $\Ket{\pm}_x=\left(\Ket{\uparrow}\pm\Ket{\downarrow}\right)/\sqrt2$，
+$\Ket{\pm}_y=\left(\Ket{\uparrow}\pm\mathrm{i}\Ket{\downarrow}\right)/\sqrt2$。任意一组正交归一的二能级基底都给出 $\hat I/2$ 的等权分解，特别是 $x$、$y$、$z$ 三组自旋基底。
+即使本征值不简并，非正交参与态的分解仍不唯一。例如
+\begin{align}
+\hat\rho&=\frac13\Ket{\uparrow}\Bra{\uparrow}+\frac23\Ket{\downarrow}\Bra{\downarrow}\notag\\
+&=\frac12\Ket{\psi_+}\Bra{\psi_+}+\frac12\Ket{\psi_-}\Bra{\psi_-}\notag\\
+&=\frac49\Ket{\varphi_1}\Bra{\varphi_1}+\frac59\Ket{\varphi_2}\Bra{\varphi_2},
+\end{align}
+其中
+\begin{align}
+\Ket{\psi_\pm}&=\frac{\Ket{\uparrow}\pm\sqrt2\Ket{\downarrow}}{\sqrt3},\\
+\Ket{\varphi_1}&=\frac{\Ket{\uparrow}+\Ket{\downarrow}}{\sqrt2},\qquad
+\Ket{\varphi_2}=\frac{\Ket{\uparrow}-2\Ket{\downarrow}}{\sqrt5}.
+\end{align}
+展开投影算符可见交叉项相消，三式相同。因此不能从 $\hat\rho$ 唯一反推出制备过程。
+密度矩阵是否对角也取决于基底：上述例子在 $z$、$x$ 基底分别给出
+\begin{equation}
+\rho_z=\left(\begin{matrix}1/3&0\\0&2/3\end{matrix}\right),\qquad
+\rho_x=\left(\begin{matrix}1/2&-1/6\\-1/6&1/2\end{matrix}\right).
+\end{equation}
+混合态并非在任意表象下都没有非对角元。另一个课堂例子是
+\begin{equation}
+\hat\rho=\frac12\Ket{\uparrow}\Bra{\uparrow}+\frac14\Ket{\downarrow}\Bra{\downarrow}+\frac14\Ket{+}_x\Bra{+}_x
+\ \Longrightarrow\ 
+\rho_z=\left(\begin{matrix}5/8&1/8\\1/8&3/8\end{matrix}\right).
+\end{equation}

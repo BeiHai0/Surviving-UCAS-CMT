@@ -1,0 +1,78 @@
+% !TeX program = xelatex
+\documentclass[UTF8,12pt,a4paper,fontset=fandol]{ctexart}
+\usepackage{lecturemath}
+\title{讲义照片 1020-12 勘误}
+\author{}
+\date{}
+\begin{document}
+\maketitle
+
+本文件记录整理 \texttt{1020-12.pdf} 时发现并已在第三章正文中修正的笔误，以及为避免误解所补充的条件。页码均为 PDF 文件页序，不是照片上的手写页码。以下沿用照片的 $\hbar=1$ 约定。
+
+\section*{一、确认并修正的笔误}
+\begin{enumerate}
+\item \textbf{第 34 页：总角动量的直积空间表达式。}
+
+照片在“复合系统的角动量算符的直积表示”中写成
+\begin{equation}
+\hat{\bm J}_{\left(1,2\right)}
+=\hat{\bm J}^{\left(1\right)}\otimes\hat{\bm J}^{\left(2\right)}.
+\end{equation}
+这与第 33 页的总角动量定义 $\hat{\bm J}=\hat{\bm J}_1+\hat{\bm J}_2$ 不符。正确的逐分量表达式是
+\begin{equation}
+\boxed{\hat J_i=\hat J_i^{\left(1\right)}\otimes\hat I_2
++\hat I_1\otimes\hat J_i^{\left(2\right)},\qquad i=x,y,z.}
+\end{equation}
+两个子系统的分量分别嵌入复合空间后相加，才是总角动量；两算符的张量积表示乘积观测量，不能代替这一和。
+正文已在“复合系统的总角动量”中修正。
+
+\item \textbf{第 35 页：第二个子系统平方算符的本征值下标。}
+
+照片第 \textup{(b)} 式将 $\hat J_2^2$ 的本征值写成 $j_2\left(j_1+1\right)$。应为
+\begin{equation}
+\hat J_2^2\Ket{j_1,m_1;j_2,m_2}
+=j_2\left(j_2+1\right)\Ket{j_1,m_1;j_2,m_2}.
+\end{equation}
+第二个子系统的平方角动量本征值只由 $j_2$ 决定。正文已修正为 $j_2\left(j_2+1\right)$。
+\end{enumerate}
+
+\section*{二、必要条件与记号说明（不作为笔误）}
+\begin{enumerate}
+\item \textbf{第 1 页：单位约定。}
+照片已明确写出 $\hbar=1$，故后续对易子和阶梯系数未含 $\hbar$ 并非漏写。本次保留此约定，在第三章开头说明与前面保留 $\hbar$ 的公式如何对应。
+
+\item \textbf{第 7、27 页：基底的额外重数与子空间单位算符。}
+$\Ket{j,m}$ 能完整标记态需没有额外重数，或已固定其他量子数。固定 $j$ 后，
+\begin{equation}
+\sum_{m=-j}^j\Ket{j,m}\Bra{j,m}=\hat I_j
+\end{equation}
+中的单位算符只作用于该 $j$ 子空间，在更大空间中此和是投影算符。正文已明确作用空间及省略指标的约定。
+
+\item \textbf{第 9--14 页：非零阶梯态与相对相位。}
+阶梯算符作用后，只有所得向量非零才能称其为本征态；到达端点时得到零向量。归一化先确定比例系数的模，选择同一阶梯内的相对相位后才能取正实系数。正文保留原阶梯公式并明确这些条件。
+
+\item \textbf{第 22--24 页：$j,m$ 的取值须关联。}
+整数、半整数的 $m$ 不能对固定 $j$ 任意选取，应同时满足
+\begin{equation}
+j+m,j-m\in\left\{0,1,2,\ldots\right\},\qquad
+m=-j,-j+1,\ldots,j.
+\end{equation}
+正文保留 Schwinger 构造，并补充由有界阶梯端点得到一般取值范围的论证。
+
+\item \textbf{第 26 页：端点态构造公式复核。}
+该页的两条阶梯构造公式均正确，不需修改归一化因子。上号对应的一对关系是
+\begin{align}
+\Ket{j,m}&=A_{jm}\hat J_-^{j-m}\Ket{j,j},\\
+\Ket{j,j}&=A_{jm}\hat J_+^{j-m}\Ket{j,m},\\
+A_{jm}&=\sqrt{\frac{\left(j+m\right)!}{\left(2j\right)!\left(j-m\right)!}}.
+\end{align}
+两次相反方向的阶梯作用具有相同的正实矩阵元，所以两行使用相同归一化系数。正文原样保留其数学内容。
+
+\item \textbf{第 32 页：两个子系统“相互独立”的含义。}
+这里指子系统算符作用于不同张量因子、彼此对易，并不排除 Hamilton 算符中的相互作用；第 39 页的 $\lambda\hat{\bm J}_1\cdot\hat{\bm J}_2$ 正是这种耦合。
+
+\item \textbf{第 40 页：两个方向的 C--G 系数。}
+照片给出的两组完备性展开均正确。若统一用一个符号表示 C--G 系数，则反向重叠是其复共轭；采用实系数相位约定时才可省去共轭。正文在保留两组展开后补充了这一点。
+\end{enumerate}
+
+\end{document}

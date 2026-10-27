@@ -1,0 +1,222 @@
+% !TeX program = xelatex
+\documentclass[11pt,a4paper]{ctexart}
+
+\usepackage[left=2.4cm,right=2.4cm,top=2.1cm,bottom=2.1cm]{geometry}
+\usepackage{amsmath,amssymb,mathtools,braket,bm}
+\usepackage{xcolor}
+% inline 选项用于启用 enumerate* 行内列表环境。
+\usepackage[inline]{enumitem}
+\usepackage{fancyhdr}
+
+% ============================================================
+% 基本信息：只需修改下面几项
+% ============================================================
+\newcommand{\coursename}{量子场论}
+\newcommand{\assignmentnumber}{第二章习题}
+\newcommand{\teachername}{\underline{乔从丰、刘泽茏}}
+\newcommand{\studentname}{\underline{林照翔}}
+\newcommand{\studentid}{\underline{202628001207046}}
+
+% ============================================================
+% 数学公式书写规范
+% ============================================================
+% 1. 行内公式使用一对美元符号。
+% 2. 独立成行的公式统一使用 equation 环境，不使用反斜杠方括号形式。
+% 3. 虚数单位 i、自然常数 e 和微分符号 d 均使用直立体 \mathrm。
+%
+
+% 独立公式的推荐写法：
+% \begin{equation}
+%   ...
+% \end{equation}
+%
+
+% ============================================================
+% 页面样式
+% ============================================================
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0.25em}
+\setlength{\headheight}{14pt}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\coursename}
+\rhead{\assignmentnumber}
+\cfoot{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% ============================================================
+% 列表参数
+% ============================================================
+% enumerate 是每个条目 另起一行 的普通编号列表。
+% label 决定编号格式：\arabic* 依次产生 1、2、3，外加括号后显示为 (1)、(2)、(3)。
+\setlist[enumerate,1]{
+  label=(\arabic*),
+  leftmargin=3.2em,
+  itemsep=0.55em,
+  topsep=0.45em
+}
+
+% inlineenum 是基于 enumerate* 定义的行内编号列表。
+% 所有格式均在此处统一设置，正文中不必为每一道题重复填写参数。
+% label 决定编号格式；labelsep 决定编号与本项正文之间的距离。
+% itemjoin 决定相邻条目之间插入的内容。
+% itemjoin* 决定最后两个条目之间插入的内容，通常与 itemjoin 保持一致。
+% 内容过长时，行内列表仍会自动换行。
+\newlist{inlineenum}{enumerate*}{1}
+\setlist[inlineenum,1]{
+  label=(\arabic*),
+  labelsep=0.5em,
+  itemjoin={；\quad},
+  itemjoin*={；\quad}
+}
+
+% 其他常用 label 写法：
+%   label=\arabic*.     -> 1. 2. 3.
+%   label=(\arabic*)   -> (1) (2) (3)
+%   label=\alph*)      -> a) b) c)
+%   label=(\roman*)    -> (i) (ii) (iii)
+%   label=\Alph*.      -> A. B. C.
+
+% ============================================================
+% 题目与回答环境
+% ============================================================
+% problem 的可选参数填写新版教材练习编号。
+% \refstepcounter 使题目可以配合 \label 和 \ref 进行交叉引用。
+% “题目一”等题目标识使用白底黑字描边框，与黑底白字的“回答”标签相区分。
+\newcounter{problem}
+\newenvironment{problem}[1][]
+  {\refstepcounter{problem}%
+   \par\medskip\noindent
+   \begingroup
+   \setlength{\fboxsep}{3pt}%
+   \setlength{\fboxrule}{0.8pt}%
+   \fbox{\bfseries 练习 #1}%
+   \endgroup
+   \quad\ignorespaces}
+  {\par\medskip}
+
+% answer 环境用于书写答案。
+% “回答”使用黑底白字标签，保证黑白打印时仍有醒目的视觉区分；
+% 答案结束处会自动添加一条黑色细分隔线。
+\newenvironment{answer}
+  {\par\smallskip\noindent
+   \begingroup
+   \setlength{\fboxsep}{4pt}%
+   \colorbox{black}{\textcolor{white}{\bfseries 回答}}%
+   \endgroup
+   \quad\ignorespaces}
+  {\par\smallskip\noindent\rule{\linewidth}{0.4pt}\medskip}
+
+\begin{document}
+
+\begin{center}
+  {\LARGE\bfseries \coursename\quad \assignmentnumber}\par
+  \vspace{0.7em}
+  \small
+  教师：\teachername\qquad
+  姓名：\studentname\qquad
+  学号：\studentid
+\end{center}
+\vspace{0.4em}
+
+\begin{problem}[2.1.1]\label{prob:ch2-1}
+{\small\textnormal{（第 2.1 节，第 22 页）}}\par
+设拉格朗日密度为 $\mathcal L(\phi_a,\partial_\mu\phi_a)$，由最小作用量原理推导场的运动方程（教材式（2.16））：
+\begin{equation}
+\frac{\partial\mathcal L}{\partial\phi_a}-\partial_\mu\left(\frac{\partial\mathcal L}{\partial(\partial_\mu\phi_a)}\right)=0.
+\end{equation}
+\end{problem}
+\begin{answer}
+  作用量为
+  \begin{equation}
+    S = \int \mathrm{d}^4x L(\phi_a,\partial_\mu\phi_a),
+  \end{equation}
+  作用量的变分为
+  \begin{equation}
+    \begin{aligned}
+      \delta S
+      &=\int \mathrm{d}^4x\left(\frac{\partial \mathcal{L} }{\partial \phi_a } \delta\phi_a + \frac{\partial \mathcal{L} }{\partial \left(\partial_\mu \phi_a \right) }  \partial_\mu\left(\delta\phi_a \right) \right) \\
+      &=\int \mathrm{d}^4x \left(\frac{\partial \mathcal{L} }{\partial \phi_a } - \partial_\mu \frac{\partial \mathcal{L} }{\partial\left(\partial_\mu\phi_a \right) }  \right) \delta \phi_a + \int \mathrm{d}^4x \partial_\mu \left(\frac{\partial \mathcal{L} }{\partial\left(\partial_\mu\phi_a \right) } \delta \phi_a \right),
+    \end{aligned}
+  \end{equation}
+  上式中散度项的四维体积分可化为边界上的三维积分，应为零。由最小作用量原理，$\delta S=0 $，再由 $\delta\phi_a $ 的任意性，得到：
+  \begin{equation}
+    \frac{\partial \mathcal{L} }{\partial \phi_a } - \partial_\mu \frac{\partial \mathcal{L} }{\partial\left(\partial_\mu\phi_a \right) }
+    =0.
+  \end{equation} 
+\end{answer}
+\clearpage
+\begin{problem}[2.2.1]\label{prob:ch2-2}
+{\small\textnormal{（第 2.2 节，第 28 页）}}\par
+查找文献阅读关于庞加莱（Poincar\'e）变换与相应的守恒量部分。
+\end{problem}
+\begin{answer}
+% 在此填写答案；当前保持空白。
+
+\end{answer}
+\clearpage
+\begin{problem}[2.3.1]\label{prob:ch2-3}
+{\small\textnormal{（第 2.3 节，第 30 页）}}\par
+推导场的哈密顿正则运动方程（教材式（2.67）中的两个方程）：
+\begin{equation}
+\begin{aligned}
+\dot\phi_a&=\frac{\partial\mathcal H}{\partial\pi_a}
+-\nabla\cdot\frac{\partial\mathcal H}{\partial(\nabla\pi_a)},\\
+\dot\pi_a&=-\frac{\partial\mathcal H}{\partial\phi_a}
++\nabla\cdot\frac{\partial\mathcal H}{\partial(\nabla\phi_a)}.
+\end{aligned}
+\end{equation}
+其中 $\phi_a$ 为场分量，$\pi_a=\partial\mathcal L/\partial\dot\phi_a$ 为正则共轭动量，$\mathcal H$ 为哈密顿量密度；空间梯度项取决于 $\mathcal H$ 对 $\nabla\pi_a$、$\nabla\phi_a$ 的依赖。可参考教材式（2.10）的积分形式。
+\end{problem}
+\begin{answer}
+  \begin{equation}
+    \frac{\partial \mathcal{L} }{\partial \phi_a } - \partial_\mu \frac{\partial \mathcal{L} }{\partial\left(\partial_\mu\phi_a \right) }
+    =0,\quad
+    \pi_a
+    =\frac{\partial \mathcal{L} }{\partial\dot{\phi}_a },\quad
+    \frac{\partial \mathcal{L} }{\partial \phi_a } - \dot{\pi}_a - \partial_i\frac{\partial\mathcal{L} }{\partial\left(\partial_i\phi_a \right) }
+    =0. 
+  \end{equation}
+  一方面，哈密顿量是拉格朗日量的勒让德变换 ：
+  \begin{equation}
+    \begin{aligned}
+      H
+      &=\int \mathrm{d}^3\bm{x} \pi_a \dot{\phi}_a - L,
+    \end{aligned}
+  \end{equation}
+  \begin{equation}
+    \begin{aligned}
+      \delta H
+      &=\int \mathrm{d}^3\bm{x} \left(\pi_a \delta\dot{\phi}_a + \dot{\phi}_a\delta \pi_a - \frac{\partial \mathcal{L} }{\partial \phi_a }\delta\phi_a - \frac{\partial \mathcal{L} }{\partial \dot{\phi}_a }\delta\dot{\phi}_a - \frac{\partial \mathcal{L} }{\partial \left(\partial_i \phi_a \right) } \delta\left(\partial_i \phi_a \right)  \right) \\
+      &=\int \mathrm{d}^3\bm{x} \left(\dot{\phi}_a\delta \pi_a - \frac{\partial \mathcal{L} }{\partial \phi_a }\delta\phi_a - \frac{\partial \mathcal{L} }{\partial \left(\partial_i \phi_a \right) } \partial_i\left( \delta\phi_a \right)  \right) \\
+      &=\int \mathrm{d}^3\bm{x} \left(\dot{\phi}_a\delta \pi_a - \frac{\partial \mathcal{L} }{\partial \phi_a }\delta\phi_a + \partial_i\frac{\partial \mathcal{L} }{\partial \left(\partial_i \phi_a \right) } \left( \delta\phi_a \right)  \right) \\
+      &=\int \mathrm{d}^3\bm{x} \left(\dot{\phi}_a\delta \pi_a + \left(\partial_i\frac{\partial \mathcal{L} }{\partial \left(\partial_i \phi_a \right) } - \frac{\partial \mathcal{L} }{\partial \phi_a } \right)\delta\phi_a \right) \\
+      &=\int \mathrm{d}^3\bm{x} \left(\dot{\phi}_a\delta \pi_a - \dot{\pi}_a\delta\phi_a \right), \\
+    \end{aligned}
+  \end{equation}
+  其中，分部积分后舍去了边界项。另一方面，$\mathcal{H}=\mathcal{H}(\phi_a,\pi_a,\nabla\phi_a,\nabla\pi_a) $，于是
+  \begin{equation}
+    \begin{aligned}
+      \delta H
+      &=\int \mathrm{d}^3\bm{x} \left(\frac{\partial\mathcal{H} }{\partial \phi_a }\delta\phi_a + \frac{\partial\mathcal{H} }{\partial \pi_a }\delta\pi_a + \frac{\partial\mathcal{H} }{\partial (\partial_i \phi_a) }\delta(\partial_i \phi_a) + \frac{\partial\mathcal{H} }{\partial (\partial_i \pi_a) }\delta(\partial_i \pi_a) \right) \\
+      &=\int \mathrm{d}^3\bm{x} \left(\frac{\partial\mathcal{H} }{\partial \phi_a }\delta\phi_a + \frac{\partial\mathcal{H} }{\partial \pi_a }\delta\pi_a + \frac{\partial\mathcal{H} }{\partial (\partial_i \phi_a) }\partial_i(\delta \phi_a) + \frac{\partial\mathcal{H} }{\partial (\partial_i \pi_a) }\partial_i(\delta \pi_a) \right) \\
+      &=\int \mathrm{d}^3\bm{x} \left(\frac{\partial\mathcal{H} }{\partial \phi_a }\delta\phi_a + \frac{\partial\mathcal{H} }{\partial \pi_a }\delta\pi_a - \partial_i\frac{\partial\mathcal{H} }{\partial (\partial_i \phi_a) }(\delta \phi_a) - \partial_i\frac{\partial\mathcal{H} }{\partial (\partial_i \pi_a) }(\delta \pi_a) \right) \\
+      &=\int \mathrm{d}^3\bm{x} \left(\left(\frac{\partial\mathcal{H} }{\partial\phi_a }-\partial_i\frac{\partial\mathcal{H} }{\partial\left(\partial_i\phi_a \right) } \right)\delta\phi_a + \left(\frac{\partial\mathcal{H} }{\partial\pi_a } - \partial_i\frac{\partial\mathcal{H} }{\partial\left(\partial_i\pi_a \right) }   \right)\delta\pi_a   \right),
+    \end{aligned}
+  \end{equation}
+  其中分部积分后也舍去了边界项。二者对比可得：
+  \begin{equation}
+    \frac{\partial\mathcal{H} }{\partial\pi_a } - \partial_i\frac{\partial\mathcal{H} }{\partial\left(\partial_i\pi_a \right) }
+    =\dot{\phi}_a,\quad
+    \frac{\partial\mathcal{H} }{\partial\phi_a }-\partial_i\frac{\partial\mathcal{H} }{\partial\left(\partial_i\phi_a \right) }
+    =-\dot{\pi}_a,
+  \end{equation}
+  也即
+  \begin{equation}
+    \dot{\phi}_a
+    =\frac{\partial\mathcal{H} }{\partial\pi_a } - \nabla\cdot\frac{\partial\mathcal{H} }{\partial\left(\nabla\pi_a \right) },\quad
+    \dot{\pi}_a
+    =-\frac{\partial\mathcal{H} }{\partial\pi_a } + \nabla\cdot\frac{\partial\mathcal{H} }{\partial\left(\nabla\phi_a \right) }. 
+  \end{equation}
+\end{answer}
+\end{document}

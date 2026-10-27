@@ -1,0 +1,201 @@
+% !TeX program = xelatex
+\documentclass[11pt,a4paper]{ctexart}
+
+\usepackage[left=2.4cm,right=2.4cm,top=2.1cm,bottom=2.1cm]{geometry}
+\usepackage{amsmath,amssymb,mathtools,braket}
+\usepackage{xcolor}
+\usepackage[inline]{enumitem}
+\usepackage{fancyhdr}
+\usepackage[hidelinks]{hyperref}
+
+% ============================================================
+% 基本信息
+% ============================================================
+\newcommand{\coursename}{高等量子力学}
+\newcommand{\assignmentnumber}{第 4 次作业}
+\newcommand{\teachername}{\underline{\makebox[2.8cm][c]{金彪}}}
+\newcommand{\studentname}{\underline{\makebox[2.8cm][c]{林照翔}}}
+\newcommand{\studentid}{\underline{\makebox[3.0cm][c]{202628001207046}}}
+
+% ============================================================
+% 页面样式
+% ============================================================
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0.25em}
+\setlength{\headheight}{14pt}
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{\coursename}
+\rhead{\assignmentnumber}
+\cfoot{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+
+% ============================================================
+% 列表参数
+% ============================================================
+\setlist[enumerate,1]{
+  label=(\alph*),
+  leftmargin=3.2em,
+  itemsep=0.55em,
+  topsep=0.45em
+}
+
+\newlist{inlineenum}{enumerate*}{1}
+\setlist[inlineenum,1]{
+  label=(\alph*),
+  labelsep=0.5em,
+  itemjoin={；\quad},
+  itemjoin*={；\quad}
+}
+
+% ============================================================
+% 题目与回答空间
+% ============================================================
+\newcounter{problem}
+\newenvironment{problem}
+  {\refstepcounter{problem}%
+   \par\medskip\noindent
+   \begingroup
+   \setlength{\fboxsep}{3pt}%
+   \setlength{\fboxrule}{0.8pt}%
+   \fbox{\bfseries 题目\chinese{problem}}%
+   \endgroup
+   \quad\ignorespaces}
+  {\par\medskip}
+
+\newenvironment{answer}
+  {\par\smallskip\noindent
+   \begingroup
+   \setlength{\fboxsep}{4pt}%
+   \colorbox{black}{\textcolor{white}{\bfseries 回答}}%
+   \endgroup
+   \quad\ignorespaces}
+  {\par\smallskip\noindent\rule{\linewidth}{0.4pt}\medskip}
+
+\newcommand{\answerspace}[1]{\par\vspace*{#1}}
+
+\begin{document}
+
+\begin{center}
+  {\LARGE\bfseries \coursename\quad \assignmentnumber}\par
+  \vspace{0.7em}
+  \small
+  教师：\teachername\qquad
+  姓名：\studentname\qquad
+  学号：\studentid
+\end{center}
+\vspace{0.4em}
+
+% 本份作业承接原题前二十题，题号从二十一开始。
+\setcounter{problem}{20}
+
+\begin{problem}
+课堂笔记内容：Schmidt 分解部分。
+\begin{equation}
+  \hat\rho_{\mathrm{R}}(1)
+  =\sum_{i=1}^{N}\rho_i\Ket{\tilde u_i(1)}\Bra{\tilde u_i(1)},
+  \qquad
+  \hat\rho_{\mathrm{R}}(2)
+  =\sum_{i=1}^{N}\rho_i\Ket{\tilde v_i(2)}\Bra{\tilde v_i(2)}.
+\end{equation}
+证明当 $N\geq 2$ 时，约化密度算符 $\hat\rho_{\mathrm{R}}(1)$ 及
+$\hat\rho_{\mathrm{R}}(2)$ 皆为混合态密度算符。
+\end{problem}
+
+\begin{answer}
+\answerspace{13cm}
+\end{answer}
+\clearpage
+
+\begin{problem}
+\begin{enumerate}[label=(\arabic*)]
+  \item 试判断以下密度矩阵描述的是纯态还是混合态。
+  \begin{equation}
+    \rho_1=\frac12\begin{pmatrix}1&0\\0&1\end{pmatrix};\quad
+    \rho_2=\begin{pmatrix}1&0\\0&0\end{pmatrix};\quad
+    \rho_3=\frac12\begin{pmatrix}1&1\\1&1\end{pmatrix};\quad
+    \rho_4=\frac13\begin{pmatrix}2&1\\1&1\end{pmatrix}.
+  \end{equation}
+  \item 求算符
+  $A=\begin{pmatrix}1&1-\mathrm{i}\\1+\mathrm{i}&-1\end{pmatrix}$
+  在这些态上的平均值。
+  \item 求这些密度矩阵的 von Neumann 熵。
+\end{enumerate}
+\end{problem}
+
+\begin{answer}
+\answerspace{15cm}
+\end{answer}
+\clearpage
+
+\begin{problem}
+设两电子自旋系统状态为
+\begin{equation}
+  \begin{aligned}
+    \Ket{\psi(1,2)}
+    ={}&\frac{1}{\sqrt2}\Ket{\uparrow}_1\otimes
+    \left(\frac12\Ket{\uparrow}_2+\frac{\sqrt3}{2}\Ket{\downarrow}_2\right)\\
+    &+\frac{1}{\sqrt2}\Ket{\downarrow}_1\otimes
+    \left(\frac{\sqrt3}{2}\Ket{\uparrow}_2+\frac12\Ket{\downarrow}_2\right).
+  \end{aligned}
+\end{equation}
+\begin{enumerate}[label=(\arabic*)]
+  \item 进行 Schmidt 分解。
+  \item 求约化密度矩阵 $\rho_1,\rho_2$。
+\end{enumerate}
+\end{problem}
+
+\begin{answer}
+\answerspace{15cm}
+\end{answer}
+\clearpage
+
+\begin{problem}
+取两电子自旋系统基矢为
+\begin{equation}
+  \begin{aligned}
+    \Ket{\chi_1}&=\Ket{\uparrow}_1\otimes\Ket{\uparrow}_2,&
+    \Ket{\chi_2}&=\Ket{\uparrow}_1\otimes\Ket{\downarrow}_2,\\
+    \Ket{\chi_3}&=\Ket{\downarrow}_1\otimes\Ket{\uparrow}_2,&
+    \Ket{\chi_4}&=\Ket{\downarrow}_1\otimes\Ket{\downarrow}_2.
+  \end{aligned}
+\end{equation}
+设纯态密度矩阵为
+\begin{equation}
+  \rho(1,2)=
+  \begin{pmatrix}
+    \dfrac12&\dfrac{\sqrt2}{4}&0&\dfrac{\sqrt2}{4}\\[0.5em]
+    \dfrac{\sqrt2}{4}&\dfrac14&0&\dfrac14\\[0.5em]
+    0&0&0&0\\[0.5em]
+    \dfrac{\sqrt2}{4}&\dfrac14&0&\dfrac14
+  \end{pmatrix}.
+\end{equation}
+求约化密度矩阵 $\rho_1,\rho_2$。
+\end{problem}
+
+\begin{answer}
+\answerspace{13cm}
+\end{answer}
+\clearpage
+
+\begin{problem}
+课堂例题（绝热近似部分）。求：
+\begin{enumerate}
+  \item $\nabla_B H\bigl(\vec B(t)\bigr)$；
+  \item $\hat A_+\bigl(\vec B(t)\bigr)
+    =\mathrm{i}\Braket{\chi_+,\vec B(t)|\nabla_B|\chi_+,\vec B(t)}$；
+  \item $\hat B_+\bigl(\vec B(t)\bigr)
+    =\nabla_B\times\hat A_+\bigl(\vec B(t)\bigr)$；
+  \item Berry 相位
+  \begin{equation}
+    \gamma_+(T)=\iint_S\hat B_+\bigl(\vec B(T)\bigr)\cdot\mathrm{d}\vec S,
+    \qquad T=\frac{2\pi}{\omega}.
+  \end{equation}
+\end{enumerate}
+\end{problem}
+
+\begin{answer}
+\answerspace{15cm}
+\end{answer}
+
+\end{document}
